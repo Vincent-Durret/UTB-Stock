@@ -1,11 +1,10 @@
 <template>
-  <main class="home-page">
-    <h1>Accueil</h1>
+  <main class="login-page">
+    <h1>Login</h1>
   </main>
 </template>
 
 <script>
-
 </script>
 
 <style>

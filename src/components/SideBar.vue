@@ -1,7 +1,10 @@
 <template>
     <aside :class="`${is_expanded && 'is-expanded'}`">
         <div class="logo">
-            <img src="../assets/logo.png" alt="Vue">
+            <router-link to="/">
+                <img src="../assets/logo.png" alt="Vue">
+            </router-link>
+
         </div>
 
         <div class="menu-toggle-wrap">
@@ -12,7 +15,7 @@
 
         <h3>Menu</h3>
         <div class="menu">
-            <router-link class="button" to="/">
+            <router-link class="button" to="/bois">
                 <span class="material-icons">forest</span>
                 <span class="text">Bois</span>
             </router-link>
@@ -20,11 +23,11 @@
                 <span class="material-icons">construction</span>
                 <span class="text">Quincailleries</span>
             </router-link>
-            <router-link class="button" to="/team">
+            <router-link class="button" to="/produits">
                 <span class="material-icons">inventory</span>
                 <span class="text">Produits</span>
             </router-link>
-            <router-link class="button" to="/contact">
+            <router-link class="button" to="/autres">
                 <span class="material-icons">widgets</span>
                 <span class="text">Autres</span>
             </router-link>
@@ -33,7 +36,7 @@
         <div class="flex"></div>
 
         <div class="menu">
-            <router-link class="button" to="/settings">
+            <router-link class="button" to="/login">
                 <span class="material-icons">logout</span>
                 <span class="text">Se déconecter</span>
             </router-link>
