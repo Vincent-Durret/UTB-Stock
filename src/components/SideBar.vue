@@ -2,7 +2,7 @@
     <aside :class="`${is_expanded && 'is-expanded'}`">
         <div class="logo">
             <router-link to="/">
-                <img src="../assets/logo.png" alt="Vue">
+                <img src="../assets/Logo/logo.png" alt="UTB">
             </router-link>
 
         </div>

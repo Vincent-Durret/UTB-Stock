@@ -14,7 +14,19 @@ const router = createRouter({
     },
     {
       path: "/bois/itauba",
-      component: () => import("../views/Itauba.vue"),
+      component: () => import("../views/Bois/Itauba.vue"),
+    },
+    {
+      path: "/bois/ipe",
+      component: () => import("../views/Bois/Ipe.vue"),
+    },
+    {
+      path: "/bois/cumaru",
+      component: () => import("../views/Bois/Cumaru.vue"),
+    },
+    {
+      path: "/bois/structures",
+      component: () => import("../views/Bois/Structures.vue"),
     },
     {
       path: "/quicailleries",
