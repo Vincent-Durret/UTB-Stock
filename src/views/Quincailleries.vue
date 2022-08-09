@@ -3,28 +3,33 @@
         <h1>Quincailleries</h1>
         <div class="card">
             <router-link class="button" to="/bois/itauba">
-                <!-- <img src="../assets/Bois/itauba.jpg" alt=""> -->
-                <span class="text">Visserie terrasses</span>
+                <img src="../assets/Quincaillerie/Vis/vis-terrasse.jpg" alt="">
+                <span class="text">Terrasses</span>
             </router-link>
             <router-link class="button" to="/bois/ipe">
                 <img src="../assets/Quincaillerie/Vis/vis.jpg" alt="">
 
-                <span class="text">visseries structure</span>
+                <span class="text">Structure</span>
             </router-link>
             <router-link class="button" to="/bois/cumaru">
-                <!-- <img src="../assets/Bois/cumaru.jpg" alt=""> -->
-                <span class="text">??</span>
+                <img src="../assets/Quincaillerie/Plot-béton/plot-beton.jpg" alt="">
+                <span class="text">Plot Béton</span>
             </router-link>
-            <router-link class="button" to="/bois/structures">
-                <!-- <img src="../assets/Bois/structure.jpg" alt=""> -->
+            <!-- <router-link class="button" to="/bois/structures">
+                <img src="../assets/Bois/structure.jpg" alt="">
                 <span class="text">??</span>
-            </router-link>
+            </router-link> -->
         </div>
     </main>
 
 </template>
 
 <style lang="scss" scoped>
+main {
+    background: #f0f7ee;
+    min-height: 100vh;
+}
+
 .quicailleries-page {
 
     .card {
@@ -55,7 +60,6 @@
     .text {
         background: var(--dark);
         border-radius: 5px;
-        opacity: 0.7;
         padding: 5px;
         position: relative;
         font-size: 1.2rem;
@@ -70,7 +74,7 @@
 }
 
 @media (max-width: 760px) {
-    .bois-page {
+    .quicailleries-page {
         .card {
             display: flex;
             flex-direction: column;

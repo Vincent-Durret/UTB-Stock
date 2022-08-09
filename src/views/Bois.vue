@@ -1,5 +1,6 @@
 <template>
     <main class="bois-page">
+
         <div class="card">
             <router-link class="button" to="/bois/itauba">
                 <img src="../assets/Bois/itauba.jpg" alt="">
@@ -25,9 +26,6 @@
 <style lang="scss" scoped>
 main {
     background: #f0f7ee;
-
-    display: flex;
-    flex-direction: row;
     min-height: 100vh;
 }
 
@@ -61,7 +59,6 @@ main {
     .text {
         background: var(--dark);
         border-radius: 5px;
-        opacity: 0.7;
         padding: 5px;
         position: relative;
         font-size: 1.2rem;
