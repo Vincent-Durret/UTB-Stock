@@ -7,7 +7,7 @@
                 <span class="text">Visserie terrasses</span>
             </router-link>
             <router-link class="button" to="/bois/ipe">
-                <!-- <img src="../assets/Bois/ipe.jpg" alt=""> -->
+                <img src="../assets/Quincaillerie/Vis/vis.jpg" alt="">
 
                 <span class="text">visseries structure</span>
             </router-link>
