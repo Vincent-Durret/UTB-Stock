@@ -38,15 +38,15 @@
         <div class="menu">
             <router-link class="button" to="/">
                 <span class="material-icons">logout</span>
-                <span @click="handleSignOut" v-if="isLoggedIn" class="text">Se déconecter</span>
+                <span  class="text">Se déconecter</span>
             </router-link>
         </div>
     </aside>
 </template>
 
 <script setup>
-import { onMounted, ref } from 'vue'
-import { getAuth, onAuthStateChanged, signOut } from "firebase/auth"
+import {  ref } from 'vue'
+// import { getAuth, onAuthStateChanged, signOut } from "firebase/auth"
 import router from '../router';
 
 
@@ -58,25 +58,25 @@ const ToggleMenu = () => {
     localStorage.getItem("is_expanded", is_expanded.value)
 }   
 
-const isLoggedIn = ref(false)
+// const isLoggedIn = ref(false)
 
-let auth
-onMounted(() => {
-    auth = getAuth();
-    onAuthStateChanged(auth, (user) => {
-        if (user) {
-            isLoggedIn.value = true
-        } else {
-            isLoggedIn.value = false
-        }
-    })
-})
+// let auth
+// onMounted(() => {
+//     auth = getAuth();
+//     onAuthStateChanged(auth, (user) => {
+//         if (user) {
+//             isLoggedIn.value = true
+//         } else {
+//             isLoggedIn.value = false
+//         }
+//     })
+// })
 
-const handleSignOut = () => {
-    signOut(auth).then(() => {
-        router.push("/")
-    })
-}
+// const handleSignOut = () => {
+//     signOut(auth).then(() => {
+//         router.push("/")
+//     })
+// }
 </script>
 
 <style lang="scss" scoped>
