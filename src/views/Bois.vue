@@ -46,6 +46,11 @@ main {
         height: 250px;
         border-radius: 25px;
 
+        &:hover {
+            background: var(--primary);
+
+        }
+
     }
 
     img {
@@ -68,9 +73,6 @@ main {
 
 }
 
-.button:hover {
-    background: var(--primary);
-}
 
 @media (max-width: 760px) {
     .bois-page {
