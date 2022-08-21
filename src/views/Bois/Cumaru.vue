@@ -1,13 +1,10 @@
 <template>
-  <main class="cumaru-page">
     <h1>Cumaru</h1>
-  </main>
+    <SubPage />
 </template>
 
 <script>
-export default {
-
-}
+import SubPage from '../../components/SubPage.vue'
 </script>
 
 <style>

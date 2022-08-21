@@ -1,6 +1,5 @@
 <template>
     <main class="page">
-        <h1>Itauba :</h1>
         <div class="card">
             <div class="wrap">
                 <p>95 : <input type="number" placeholder="Nombre de lames" /> <button>Envoyer</button> Nombre de
@@ -36,11 +35,6 @@
 </script>
 
 <style lang="scss" scoped>
-* {
-    display: flex;
-    
-}
-
 main {
     background: #f0f7ee;
     min-height: 100vh;
@@ -90,16 +84,22 @@ main {
         background-color: var(--dark);
         padding: 10px;
         color: var(--light);
+        transition: 0.2s;
+
+        &:hover {
+            box-shadow: rgb(38, 57, 77) 0px 10px 15px -10px;
+        }
     }
 
 }
 
 @media (max-width: 760px) {
-    .itauba-page {
+    .page {
         .card {
             display: flex;
             flex-direction: column;
             transition: 0.5s;
+            margin-left: -10px;
         }
 
         .wrap {

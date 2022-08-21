@@ -23,15 +23,16 @@ const router = createRouter({
     },
     {
       path: "/bois/itauba",
-      component: () => import("../views/Bois/Itauba.vue"),
+      name: "Itauba",
+      component: () => import("../components/SubPage.vue"),
     },
     {
       path: "/bois/ipe",
-      component: () => import("../views/Bois/Ipe.vue"),
+      component: () => import("../components/SubPage.vue"),
     },
     {
       path: "/bois/cumaru",
-      component: () => import("../views/Bois/Cumaru.vue"),
+      component: () => import("../components/SubPage.vue"),
     },
     {
       path: "/bois/structures",

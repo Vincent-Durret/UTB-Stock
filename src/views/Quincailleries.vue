@@ -15,10 +15,6 @@
                 <img src="../assets/Quincaillerie/Plot-béton/plot-beton.jpg" alt="">
                 <span class="text">Plot Béton</span>
             </router-link>
-            <!-- <router-link class="button" to="/bois/structures">
-                <img src="../assets/Bois/structure.jpg" alt="">
-                <span class="text">??</span>
-            </router-link> -->
         </div>
     </main>
 
