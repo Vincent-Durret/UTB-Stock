@@ -45,10 +45,11 @@ main {
         width: 250px;
         height: 250px;
         border-radius: 25px;
+        transition: 0.3s;
 
         &:hover {
             background: var(--primary);
-
+            transform: scale(0.9, 0.9);
         }
 
     }

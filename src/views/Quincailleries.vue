@@ -8,12 +8,103 @@
             </router-link>
             <router-link class="button" to="/bois/ipe">
                 <img src="../assets/Quincaillerie/Vis/vis.jpg" alt="">
-
                 <span class="text">Structure</span>
             </router-link>
             <router-link class="button" to="/bois/cumaru">
                 <img src="../assets/Quincaillerie/Plot-béton/plot-beton.jpg" alt="">
                 <span class="text">Plot Béton</span>
+            </router-link>
+            <router-link class="button" to="/bois/cumaru">
+                <img src="../assets/Quincaillerie/Plot-béton/plot-beton.jpg" alt="">
+                <span class="text">Lames de Scie</span>
+            </router-link>
+            <router-link class="button" to="/bois/cumaru">
+                <img src="../assets/Quincaillerie/cheville.jpg" alt="">
+                <span class="text">Chevilles</span>
+            </router-link>
+
+            <router-link class="button" to="/bois/cumaru">
+                <img src="../assets/Quincaillerie/boulon-charpente.jpg" alt="">
+                <span class="text">Boulon <br> Charpente</span>
+            </router-link>
+        </div>
+        <div class="card">
+            <router-link class="button" to="/bois/cumaru">
+                <img src="../assets/Quincaillerie/Plot-béton/plot-beton.jpg" alt="">
+                <span class="text">Equerre de <br> fixation</span>
+            </router-link>
+            <router-link class="button" to="/bois/cumaru">
+                <img src="../assets/Quincaillerie/Plot-béton/plot-beton.jpg" alt="">
+                <span class="text">tige Filete</span>
+            </router-link>
+            <router-link class="button" to="/bois/cumaru">
+                <img src="../assets/Quincaillerie/Plot-béton/plot-beton.jpg" alt="">
+                <span class="text">ecrou m14</span>
+            </router-link>
+            <router-link class="button" to="/bois/cumaru">
+                <img src="../assets/Quincaillerie/Plot-béton/plot-beton.jpg" alt="">
+                <span class="text">Rondelle <br> plate</span>
+            </router-link>
+            <router-link class="button" to="/bois/cumaru">
+                <img src="../assets/Quincaillerie/Plot-béton/plot-beton.jpg" alt="">
+                <span class="text">Pied de <br> poteau</span>
+            </router-link>
+            <router-link class="button" to="/bois/cumaru">
+                <img src="../assets/Quincaillerie/Plot-béton/plot-beton.jpg" alt="">
+                <span class="text">Vis de <br> Fondtation</span>
+            </router-link>
+        </div>
+        <div class="card">
+            <router-link class="button" to="/bois/cumaru">
+                <img src="../assets/Quincaillerie/Plot-béton/plot-beton.jpg" alt="">
+                <span class="text">Feutre <br> geotextile</span>
+            </router-link>
+            <router-link class="button" to="/bois/cumaru">
+                <img src="../assets/Quincaillerie/Plot-béton/plot-beton.jpg" alt="">
+                <span class="text">Disque a <br> tronçonner</span>
+            </router-link>
+            <router-link class="button" to="/bois/cumaru">
+                <img src="../assets/Quincaillerie/Plot-béton/plot-beton.jpg" alt="">
+                <span class="text">disque a <br> ebarbe</span>
+            </router-link>
+            <router-link class="button" to="/bois/cumaru">
+                <img src="../assets/Quincaillerie/Plot-béton/plot-beton.jpg" alt="">
+                <span class="text">Disque de <br> pollissage</span>
+            </router-link>
+            <router-link class="button" to="/bois/cumaru">
+                <img src="../assets/Quincaillerie/Plot-béton/plot-beton.jpg" alt="">
+                <span class="text">Agraffe</span>
+            </router-link>
+            <router-link class="button" to="/bois/cumaru">
+                <img src="../assets/Quincaillerie/Plot-béton/plot-beton.jpg" alt="">
+                <span class="text">Sangle <br> d'arrimage</span>
+            </router-link>
+        </div>
+
+                <div class="card">
+            <router-link class="button" to="/bois/cumaru">
+                <img src="../assets/Quincaillerie/Plot-béton/plot-beton.jpg" alt="">
+                <span class="text">masque ffp3</span>
+            </router-link>
+            <router-link class="button" to="/bois/cumaru">
+                <img src="../assets/Quincaillerie/Plot-béton/plot-beton.jpg" alt="">
+                <span class="text">crayon</span>
+            </router-link>
+            <router-link class="button" to="/bois/cumaru">
+                <img src="../assets/Quincaillerie/Plot-béton/plot-beton.jpg" alt="">
+                <span class="text">gant de <br> protection</span>
+            </router-link>
+            <router-link class="button" to="/bois/cumaru">
+                <img src="../assets/Quincaillerie/Plot-béton/plot-beton.jpg" alt="">
+                <span class="text">ruban <br> signaletique</span>
+            </router-link>
+            <router-link class="button" to="/bois/cumaru">
+                <img src="../assets/Quincaillerie/Plot-béton/plot-beton.jpg" alt="">
+                <span class="text">lingette main</span>
+            </router-link>
+            <router-link class="button" to="/bois/cumaru">
+                <img src="../assets/Quincaillerie/Plot-béton/plot-beton.jpg" alt="">
+                <span class="text">degripant <br> universel</span>
             </router-link>
         </div>
     </main>
@@ -42,6 +133,7 @@ main {
         width: 250px;
         height: 250px;
         border-radius: 25px;
+        transition: 0.2s;
 
     }
 
@@ -67,6 +159,7 @@ main {
 
 .button:hover {
     background: var(--primary);
+    transform: scale(0.9, 0.9);
 }
 
 @media (max-width: 760px) {

@@ -7,7 +7,6 @@
             </router-link>
             <router-link class="button" to="/bois/ipe">
                 <img src="../../assets/Bois/solive.jpg" alt="">
-
                 <span class="text">Solives</span>
             </router-link>
             <router-link class="button" to="/bois/cumaru">
@@ -44,10 +43,12 @@ main {
         width: 250px;
         height: 250px;
         border-radius: 25px;
+        transition: 0.3s;
+
 
         &:hover {
             background: var(--primary);
-
+            transform: scale(0.9, 0.9);
         }
 
     }
