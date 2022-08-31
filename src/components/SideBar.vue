@@ -38,14 +38,14 @@
         <div class="menu">
             <router-link class="button" to="/">
                 <span class="material-icons">logout</span>
-                <span  class="text">Se déconecter</span>
+                <span class="text">Se déconecter</span>
             </router-link>
         </div>
     </aside>
 </template>
 
 <script setup>
-import {  ref } from 'vue'
+import { ref } from 'vue'
 // import { getAuth, onAuthStateChanged, signOut } from "firebase/auth"
 import router from '../router';
 
@@ -56,7 +56,7 @@ const ToggleMenu = () => {
     is_expanded.value = !is_expanded.value
 
     localStorage.getItem("is_expanded", is_expanded.value)
-}   
+}
 
 // const isLoggedIn = ref(false)
 

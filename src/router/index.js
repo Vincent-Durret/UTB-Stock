@@ -1,10 +1,10 @@
-import { createRouter, createWebHistory } from "vue-router";
+import { createRouter, createWebHashHistory } from "vue-router";
 // import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 import Login from "../views/Login.vue";
 
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHashHistory(),
   routes: [
     {
       path: "/",
@@ -41,6 +41,10 @@ const router = createRouter({
     {
       path: "/quicailleries",
       component: () => import("../views/Quincailleries.vue"),
+    },
+    {
+      path: "/quicailleries/terrasses",
+      component: () => import("../../src/components/SubPageHardwareStore.vue"),
     },
     {
       path: "/produits",

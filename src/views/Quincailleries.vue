@@ -1,8 +1,13 @@
 <template>
     <main class="quicailleries-page">
+
+        <div class="return">
+            <span @click="goHome()" class="material-icons">arrow_back</span>
+        </div>
+
         <h1>Quincailleries</h1>
         <div class="card">
-            <router-link class="button" to="/bois/itauba">
+            <router-link class="button" to="/quicailleries/terrasses">
                 <img src="../assets/Quincaillerie/Vis/vis-terrasse.jpg" alt="">
                 <span class="text">Terrasses</span>
             </router-link>
@@ -15,7 +20,7 @@
                 <span class="text">Plot Béton</span>
             </router-link>
             <router-link class="button" to="/bois/cumaru">
-                <img src="../assets/Quincaillerie/Plot-béton/plot-beton.jpg" alt="">
+                <img src="../assets/Quincaillerie/lame-scie-sauteuse.jpg" alt="">
                 <span class="text">Lames de Scie</span>
             </router-link>
             <router-link class="button" to="/bois/cumaru">
@@ -30,86 +35,96 @@
         </div>
         <div class="card">
             <router-link class="button" to="/bois/cumaru">
-                <img src="../assets/Quincaillerie/Plot-béton/plot-beton.jpg" alt="">
+                <img src="../assets/Quincaillerie/equerre-de-fixation-renforcee.jpg" alt="">
                 <span class="text">Equerre de <br> fixation</span>
             </router-link>
             <router-link class="button" to="/bois/cumaru">
-                <img src="../assets/Quincaillerie/Plot-béton/plot-beton.jpg" alt="">
+                <img src="../assets/Quincaillerie/tige-filleté.jpg" alt="">
                 <span class="text">tige Filete</span>
             </router-link>
             <router-link class="button" to="/bois/cumaru">
-                <img src="../assets/Quincaillerie/Plot-béton/plot-beton.jpg" alt="">
+                <img src="../assets/Quincaillerie/ecrou-m14.jpg" alt="">
                 <span class="text">ecrou m14</span>
             </router-link>
             <router-link class="button" to="/bois/cumaru">
-                <img src="../assets/Quincaillerie/Plot-béton/plot-beton.jpg" alt="">
+                <img src="../assets/Quincaillerie/rondelle.jpg" alt="">
                 <span class="text">Rondelle <br> plate</span>
             </router-link>
             <router-link class="button" to="/bois/cumaru">
-                <img src="../assets/Quincaillerie/Plot-béton/plot-beton.jpg" alt="">
+                <img src="../assets/Quincaillerie/pied-de-poteau.jpg" alt="">
                 <span class="text">Pied de <br> poteau</span>
             </router-link>
             <router-link class="button" to="/bois/cumaru">
-                <img src="../assets/Quincaillerie/Plot-béton/plot-beton.jpg" alt="">
+                <img src="../assets/Quincaillerie/vis-de-fondation.jpg" alt="">
                 <span class="text">Vis de <br> Fondtation</span>
             </router-link>
         </div>
         <div class="card">
             <router-link class="button" to="/bois/cumaru">
-                <img src="../assets/Quincaillerie/Plot-béton/plot-beton.jpg" alt="">
+                <img src="../assets/Quincaillerie/feutre-geotextile.jpg" alt="">
                 <span class="text">Feutre <br> geotextile</span>
             </router-link>
             <router-link class="button" to="/bois/cumaru">
-                <img src="../assets/Quincaillerie/Plot-béton/plot-beton.jpg" alt="">
+                <img src="../assets/Quincaillerie/disque-a-tronconner.jpg" alt="">
                 <span class="text">Disque a <br> tronçonner</span>
             </router-link>
             <router-link class="button" to="/bois/cumaru">
-                <img src="../assets/Quincaillerie/Plot-béton/plot-beton.jpg" alt="">
+                <img src="../assets/Quincaillerie/disque-a-ebarber.jpg" alt="">
                 <span class="text">disque a <br> ebarbe</span>
             </router-link>
             <router-link class="button" to="/bois/cumaru">
-                <img src="../assets/Quincaillerie/Plot-béton/plot-beton.jpg" alt="">
+                <img src="../assets/Quincaillerie/disque-pollissage.jpg" alt="">
                 <span class="text">Disque de <br> pollissage</span>
             </router-link>
             <router-link class="button" to="/bois/cumaru">
-                <img src="../assets/Quincaillerie/Plot-béton/plot-beton.jpg" alt="">
+                <img src="../assets/Quincaillerie/agraffe.jpg" alt="">
                 <span class="text">Agraffe</span>
             </router-link>
             <router-link class="button" to="/bois/cumaru">
-                <img src="../assets/Quincaillerie/Plot-béton/plot-beton.jpg" alt="">
+                <img src="../assets/Quincaillerie/sangle.jpg" alt="">
                 <span class="text">Sangle <br> d'arrimage</span>
             </router-link>
         </div>
 
                 <div class="card">
             <router-link class="button" to="/bois/cumaru">
-                <img src="../assets/Quincaillerie/Plot-béton/plot-beton.jpg" alt="">
+                <img src="../assets/Quincaillerie/masque-ffp3.jpg" alt="">
                 <span class="text">masque ffp3</span>
             </router-link>
             <router-link class="button" to="/bois/cumaru">
-                <img src="../assets/Quincaillerie/Plot-béton/plot-beton.jpg" alt="">
+                <img src="../assets/Quincaillerie/crayon.jpg" alt="">
                 <span class="text">crayon</span>
             </router-link>
             <router-link class="button" to="/bois/cumaru">
-                <img src="../assets/Quincaillerie/Plot-béton/plot-beton.jpg" alt="">
+                <img src="../assets/Quincaillerie/gant-chantier.jpg" alt="">
                 <span class="text">gant de <br> protection</span>
             </router-link>
             <router-link class="button" to="/bois/cumaru">
-                <img src="../assets/Quincaillerie/Plot-béton/plot-beton.jpg" alt="">
+                <img src="../assets/Quincaillerie/ruban-signalisation.jpg" alt="">
                 <span class="text">ruban <br> signaletique</span>
             </router-link>
             <router-link class="button" to="/bois/cumaru">
-                <img src="../assets/Quincaillerie/Plot-béton/plot-beton.jpg" alt="">
+                <img src="../assets/Quincaillerie/lingette-main.jpg" alt="">
                 <span class="text">lingette main</span>
             </router-link>
             <router-link class="button" to="/bois/cumaru">
-                <img src="../assets/Quincaillerie/Plot-béton/plot-beton.jpg" alt="">
+                <img src="../assets/Quincaillerie/degripant.jpg" alt="">
                 <span class="text">degripant <br> universel</span>
             </router-link>
         </div>
     </main>
 
 </template>
+
+<script>
+    export default {
+        methods: {
+            goHome () {
+                this.$router.push('/home')
+            }
+        }
+    }
+</script>
 
 <style lang="scss" scoped>
 main {
@@ -118,6 +133,28 @@ main {
 }
 
 .quicailleries-page {
+
+    .return {
+        margin-bottom: 1rem;
+    }
+
+    .material-icons {
+        font-size: 2.5rem;
+        color: var((--dark));
+        cursor: pointer;
+        transition: 0.2s;
+
+        &:hover {
+            color: var(--dark-alt);
+            transform: translateX(-0.5rem);
+            transition: 0.2s ease-out;
+        }
+    }
+
+    h1 {
+        font-size: 3rem;
+        margin: 20px;
+    }
 
     .card {
         display: flex;

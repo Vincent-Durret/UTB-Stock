@@ -1,5 +1,8 @@
 <template>
   <main class="produit-page">
+    <div class="return">
+      <span @click="goHome()" class="material-icons">arrow_back</span>
+    </div>
     <h1>Produits</h1>
     <div class="card">
       <router-link class="button" to="/bois/itauba">
@@ -37,6 +40,13 @@
 </template>
 
 <script>
+      export default {
+        methods: {
+            goHome () {
+                this.$router.push('/home')
+            }
+        }
+    }
 </script>
 
 <style lang="scss" scoped>
@@ -46,7 +56,28 @@ main {
 }
 
 .produit-page {
-  width: 50vw;
+
+  .return {
+        margin-bottom: 1rem;
+    }
+
+    .material-icons {
+        font-size: 2.5rem;
+        color: var((--dark));
+        cursor: pointer;
+        transition: 0.2s;
+
+        &:hover {
+            color: var(--dark-alt);
+            transform: translateX(-0.5rem);
+            transition: 0.2s ease-out;
+        }
+    }
+
+    h1 {
+        font-size: 3rem;
+        margin: 20px;
+    }
 
   .card {
     display: flex;
