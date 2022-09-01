@@ -12,33 +12,15 @@
                     lames restants
                 </p>
             </div>
-            <div class="wrap">
-
-                <p>125 : <input type="number" placeholder="Nombre de lames" /> <button>Envoyer</button> Nombre de
-                    lames restants
-                </p>
-            </div>
-            <div class="wrap">
-
-                <p>155 : <input type="number" placeholder="Nombre de lames" /> <button>Envoyer</button> Nombre de
-                    lames restants
-                </p>
-            </div>
-            <div class="wrap">
-
-                <p>185 : <input type="number" placeholder="Nombre de lames" /> <button>Envoyer</button> Nombre de
-                    lames restants
-                </p>
-            </div>
         </div>
-
-
     </main>
 
 </template>
 
 <script>
 export default {
+    name: 'SubPage',
+
     methods: {
         goBack() {
             this.$router.push('/bois')
