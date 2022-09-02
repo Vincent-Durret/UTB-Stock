@@ -45,9 +45,9 @@ $porcent-html: 70;
 
 .container {
   display: flex;
-  justify-content: center;
+  // justify-content: center;
   align-items: center;
-  min-height: 100vh;
+  min-height: 30vh;
   // background-color: $color-black;
 }
 
@@ -60,10 +60,10 @@ $porcent-html: 70;
   // width: 100%;
   min-height: 100%;
   transition: 0.2s ease-out;
-  transform: scale(2, 2);
+  transform: scale(1.5, 1.5);
 
   &:hover {
-    transform: scale(1.5, 1.5);
+    transform: scale(1.2, 1.2);
     transition: 0.2s ease-in;
   }
 }
