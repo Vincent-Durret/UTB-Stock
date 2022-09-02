@@ -22,7 +22,7 @@ export default {
 
         const changeBackground = computed(() => {
             return {
-                backgroundImage: `url(${props.info_card.image})`
+                backgroundImage: `url($'props.info_card.image')`
             }
         })
 
@@ -60,7 +60,7 @@ export default {
 
         .image {
             // position: absolute;
-            background-image: url(../assets/Bois/ipe.jpg);
+            background-image: url(../assets/Bois/itauba.jpg);
             width: 200px;
             border-radius: 20px;
             box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
@@ -83,6 +83,7 @@ export default {
             bottom: -4rem;
             writing-mode: horizontal-tb !important;
             appearance: none;
+            -moz-appearance: none;
             box-sizing: border-box;
             display: inline-block;
             height: 1em;
@@ -94,6 +95,22 @@ export default {
             background-color: var(--primary);
             border-radius: 5px;
         }
+
+        progress[value]::-moz-progress-bar {
+            background-color: #52D017;
+            // border-radius: 5px;
+        }
+
+        progress[value="20"]::-moz-progress-bar {
+            background-color: #FF8C00;
+            // border-radius: 5px;
+        }
+
+        progress[value="10"]::-moz-progress-bar {
+            background-color: #E42217;
+            // border-radius: 5px;
+        }
+
 
         progress[value]::-webkit-progress-value {
             background-color: #52D017;
