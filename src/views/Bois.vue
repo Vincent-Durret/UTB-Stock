@@ -8,6 +8,7 @@
 
 <script>
 import  info_bois  from '../DB/db.js'
+
 import { onMounted, ref } from 'vue';
 
 import WoodCardRow from '../components/WoodCardRow.vue';

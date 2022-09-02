@@ -2,7 +2,7 @@
     <div class="wood-card">
         <div class="card">
             <div class="button">
-                <div :style="changeBackground" class="image"></div>
+                <div :style="{ backgroundImage: `url(${info_card.image})` }" class="image"></div>
                 <span class="text">{{ info_card.name }}</span>
                 <progress id="file" max="100" :value="info_card.total"> {{ info_card.total }} % </progress>
             </div>
@@ -11,25 +11,12 @@
 </template>
 
 <script>
-import { computed } from 'vue'
-
 export default {
     name: "WoodCard",
     props: {
         info_card: Object,
     },
-    setup(props) {
 
-        const changeBackground = computed(() => {
-            return {
-                backgroundImage: `url($'props.info_card.image')`
-            }
-        })
-
-        return {
-            changeBackground
-        }
-    }
 }
 </script>
 
@@ -40,6 +27,7 @@ export default {
         display: flex;
         flex-direction: row;
         transition: 0.5s;
+        margin: 15px;
     }
 
     .button {
@@ -48,6 +36,7 @@ export default {
         align-items: center;
         text-decoration: none;
         flex-direction: column;
+        box-sizing: border-box;
         width: 250px;
         height: 250px;
         border-radius: 25px;
@@ -59,15 +48,21 @@ export default {
         }
 
         .image {
-            // position: absolute;
+            position: absolute;
             background-image: url(../assets/Bois/itauba.jpg);
+            background-position: center;
+            background-size: cover;
             width: 200px;
+            height: 200px;
             border-radius: 20px;
             box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+            z-index: 0;
+            
         }
 
 
         .text {
+            position: relative;
             background: var(--dark);
             border-radius: 5px;
             padding: 5px;
@@ -75,6 +70,7 @@ export default {
             font-size: 1.2rem;
             text-transform: uppercase;
             color: var(--light);
+            z-index: 1;
 
         }
 
