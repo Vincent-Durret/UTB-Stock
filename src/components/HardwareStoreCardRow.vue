@@ -1,26 +1,26 @@
 <template>
-    <div class="card-row">
+    <div class="hardwarestorecard-row">
         <div class="return">
             <span @click="goHome()" class="material-icons">arrow_back</span>
         </div>
 
-        <h1>Bois : </h1>
+        <h1>Quicailleries :</h1>
 
         <div class="wrapper-card">
-            <WoodCard v-for="(card, index) in info_wood_card" :info_card="card" :key="index" />
+            <HardwareStoreCard v-for="(card, index) in info_hardware_store_card" :info_card="card" :key="index" />
         </div>
     </div>
 </template>
 
 <script>
-import WoodCard from './WoodCard.vue';
+import HardwareStoreCard from './HardwareStoreCard.vue';
 export default {
-    name: "WoodCardRow",
+    name: "HardwareStoreCardRow",
     props: {
-        info_wood_card: Array
+        info_hardware_store_card: Array
     },
     components: {
-        WoodCard,
+        HardwareStoreCard,
     },
     methods: {
         goHome() {
@@ -32,7 +32,7 @@ export default {
 </script>
 
 <style lang="scss">
-.card-row {
+.hardwarestorecard-row {
     background: #f0f7ee;
     min-height: 100vh;
 

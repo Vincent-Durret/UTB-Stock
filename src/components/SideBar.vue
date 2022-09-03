@@ -219,7 +219,8 @@ aside {
     }
 
     @media (max-width: 768px) {
-        position: fixed;
+        position:fixed;
+        height: 100%;
         z-index: 99;
     }
 }

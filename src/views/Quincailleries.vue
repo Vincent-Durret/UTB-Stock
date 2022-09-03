@@ -1,211 +1,58 @@
 <template>
-    <main class="quicailleries-page">
-
-        <div class="return">
-            <span @click="goHome()" class="material-icons">arrow_back</span>
-        </div>
-
-        <h1>Quincailleries</h1>
-        <div class="card">
-            <router-link class="button" to="/quicailleries/terrasses">
-                <img src="../assets/Quincaillerie/Vis/vis-terrasse.jpg" alt="">
-                <span class="text">Terrasses</span>
-            </router-link>
-            <router-link class="button" to="/bois/ipe">
-                <img src="../assets/Quincaillerie/Vis/vis.jpg" alt="">
-                <span class="text">Structure</span>
-            </router-link>
-            <router-link class="button" to="/bois/cumaru">
-                <img src="../assets/Quincaillerie/Plot-béton/plot-beton.jpg" alt="">
-                <span class="text">Plot Béton</span>
-            </router-link>
-            <router-link class="button" to="/bois/cumaru">
-                <img src="../assets/Quincaillerie/lame-scie-sauteuse.jpg" alt="">
-                <span class="text">Lames de Scie</span>
-            </router-link>
-            <router-link class="button" to="/bois/cumaru">
-                <img src="../assets/Quincaillerie/cheville.jpg" alt="">
-                <span class="text">Chevilles</span>
-            </router-link>
-
-            <router-link class="button" to="/bois/cumaru">
-                <img src="../assets/Quincaillerie/boulon-charpente.jpg" alt="">
-                <span class="text">Boulon <br> Charpente</span>
-            </router-link>
-        </div>
-        <div class="card">
-            <router-link class="button" to="/bois/cumaru">
-                <img src="../assets/Quincaillerie/equerre-de-fixation-renforcee.jpg" alt="">
-                <span class="text">Equerre de <br> fixation</span>
-            </router-link>
-            <router-link class="button" to="/bois/cumaru">
-                <img src="../assets/Quincaillerie/tige-filleté.jpg" alt="">
-                <span class="text">tige Filete</span>
-            </router-link>
-            <router-link class="button" to="/bois/cumaru">
-                <img src="../assets/Quincaillerie/ecrou-m14.jpg" alt="">
-                <span class="text">ecrou m14</span>
-            </router-link>
-            <router-link class="button" to="/bois/cumaru">
-                <img src="../assets/Quincaillerie/rondelle.jpg" alt="">
-                <span class="text">Rondelle <br> plate</span>
-            </router-link>
-            <router-link class="button" to="/bois/cumaru">
-                <img src="../assets/Quincaillerie/pied-de-poteau.jpg" alt="">
-                <span class="text">Pied de <br> poteau</span>
-            </router-link>
-            <router-link class="button" to="/bois/cumaru">
-                <img src="../assets/Quincaillerie/vis-de-fondation.jpg" alt="">
-                <span class="text">Vis de <br> Fondtation</span>
-            </router-link>
-        </div>
-        <div class="card">
-            <router-link class="button" to="/bois/cumaru">
-                <img src="../assets/Quincaillerie/feutre-geotextile.jpg" alt="">
-                <span class="text">Feutre <br> geotextile</span>
-            </router-link>
-            <router-link class="button" to="/bois/cumaru">
-                <img src="../assets/Quincaillerie/disque-a-tronconner.jpg" alt="">
-                <span class="text">Disque a <br> tronçonner</span>
-            </router-link>
-            <router-link class="button" to="/bois/cumaru">
-                <img src="../assets/Quincaillerie/disque-a-ebarber.jpg" alt="">
-                <span class="text">disque a <br> ebarbe</span>
-            </router-link>
-            <router-link class="button" to="/bois/cumaru">
-                <img src="../assets/Quincaillerie/disque-pollissage.jpg" alt="">
-                <span class="text">Disque de <br> pollissage</span>
-            </router-link>
-            <router-link class="button" to="/bois/cumaru">
-                <img src="../assets/Quincaillerie/agraffe.jpg" alt="">
-                <span class="text">Agraffe</span>
-            </router-link>
-            <router-link class="button" to="/bois/cumaru">
-                <img src="../assets/Quincaillerie/sangle.jpg" alt="">
-                <span class="text">Sangle <br> d'arrimage</span>
-            </router-link>
-        </div>
-
-                <div class="card">
-            <router-link class="button" to="/bois/cumaru">
-                <img src="../assets/Quincaillerie/masque-ffp3.jpg" alt="">
-                <span class="text">masque ffp3</span>
-            </router-link>
-            <router-link class="button" to="/bois/cumaru">
-                <img src="../assets/Quincaillerie/crayon.jpg" alt="">
-                <span class="text">crayon</span>
-            </router-link>
-            <router-link class="button" to="/bois/cumaru">
-                <img src="../assets/Quincaillerie/gant-chantier.jpg" alt="">
-                <span class="text">gant de <br> protection</span>
-            </router-link>
-            <router-link class="button" to="/bois/cumaru">
-                <img src="../assets/Quincaillerie/ruban-signalisation.jpg" alt="">
-                <span class="text">ruban <br> signaletique</span>
-            </router-link>
-            <router-link class="button" to="/bois/cumaru">
-                <img src="../assets/Quincaillerie/lingette-main.jpg" alt="">
-                <span class="text">lingette main</span>
-            </router-link>
-            <router-link class="button" to="/bois/cumaru">
-                <img src="../assets/Quincaillerie/degripant.jpg" alt="">
-                <span class="text">degripant <br> universel</span>
-            </router-link>
-        </div>
+    <main class="bois-page">
+        <HardwareStoreCardRow v-for="(data, i) in data_hardware_store_card" :info_hardware_store_card="data" :key="i" />
     </main>
+
 
 </template>
 
 <script>
-    export default {
-        methods: {
-            goHome () {
-                this.$router.push('/home')
+import info_quicaillerie_1 from '../DB/dbQuin.js'
+
+import { onMounted, ref } from 'vue';
+
+import HardwareStoreCardRow from '../components/HardwareStoreCardRow.vue';
+
+export default {
+    name: 'Quicaillerie',
+    components: {
+        HardwareStoreCardRow,
+    },
+    setup() {
+        class Hardware_Store {
+            constructor(name, image, total) {
+                this.name = name
+                this.image = image
+                this.total = total
             }
         }
-    }
+
+        let data_hardware_store_card = ref([]);
+
+        const makeDataHardwareStore = () => {
+            let info_hardware_store_card = [];
+
+            for (const hardware_store of info_quicaillerie_1) {
+                const new_hardware_store_card = new Hardware_Store(hardware_store.name, hardware_store.image, hardware_store.total)
+
+                if (info_hardware_store_card.length === 23) {
+                    info_hardware_store_card.push(new_hardware_store_card);
+                    data_hardware_store_card.value.push(info_hardware_store_card);
+                    info_hardware_store_card = [];
+                } else {
+                    info_hardware_store_card.push(new_hardware_store_card);
+                }
+            }
+        };
+
+        onMounted(makeDataHardwareStore,);
+
+        return {
+            data_hardware_store_card,
+        }
+    },
+}
 </script>
 
-<style lang="scss" scoped>
-main {
-    background: #f0f7ee;
-    min-height: 100vh;
-}
-
-.quicailleries-page {
-
-    .return {
-        margin-bottom: 1rem;
-    }
-
-    .material-icons {
-        font-size: 2.5rem;
-        color: var((--dark));
-        cursor: pointer;
-        transition: 0.2s;
-
-        &:hover {
-            color: var(--dark-alt);
-            transform: translateX(-0.5rem);
-            transition: 0.2s ease-out;
-        }
-    }
-
-    h1 {
-        font-size: 3rem;
-        margin: 20px;
-    }
-
-    .card {
-        display: flex;
-        flex-direction: row;
-        transition: 0.5s;
-    }
-
-    .button {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        text-decoration: none;
-        width: 250px;
-        height: 250px;
-        border-radius: 25px;
-        transition: 0.2s;
-
-    }
-
-    img {
-        position: absolute;
-        width: 200px;
-        border-radius: 20px;
-        box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
-    }
-
-
-    .text {
-        background: var(--dark);
-        border-radius: 5px;
-        padding: 5px;
-        position: relative;
-        font-size: 1.2rem;
-        text-transform: uppercase;
-        color: var(--light);
-    }
-
-}
-
-.button:hover {
-    background: var(--primary);
-    transform: scale(0.9, 0.9);
-}
-
-@media (max-width: 760px) {
-    .quicailleries-page {
-        .card {
-            display: flex;
-            flex-direction: column;
-            transition: 0.5s;
-        }
-    }
-}
+<style lang="scss">
 </style>
