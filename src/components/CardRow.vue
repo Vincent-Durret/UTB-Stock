@@ -7,20 +7,20 @@
         <h1>Bois : </h1>
 
         <div class="wrapper-card">
-            <WoodCard v-for="(card, index) in info_wood_card" :info_card="card" :key="index" />
+            <Card v-for="(card, index) in info_card" :card="card" :key="index" />
         </div>
     </div>
 </template>
 
 <script>
-import WoodCard from './WoodCard.vue';
+import Card from './Card.vue';
 export default {
-    name: "WoodCardRow",
+    name: "CardRow",
     props: {
-        info_wood_card: Array
+        info_card: Array
     },
     components: {
-        WoodCard,
+        Card,
     },
     methods: {
         goHome() {

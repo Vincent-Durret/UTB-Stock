@@ -1,134 +1,58 @@
 <template>
-  <main class="produit-page">
-    <div class="return">
-      <span @click="goHome()" class="material-icons">arrow_back</span>
-    </div>
-    <h1>Produits</h1>
-    <div class="card">
-      <router-link class="button" to="/bois/itauba">
-        <img src="../assets/Produits/silicone.jpg" alt="">
-        <span class="text">Silicone</span>
-      </router-link>
-      <router-link class="button" to="/bois/ipe">
-        <img src="../assets/Produits/mastic.jpg" alt="">
-        <span class="text">Mastic</span>
-      </router-link>
-      <router-link class="button" to="/bois/cumaru">
-        <img src="../assets/Produits/hbs200.jpg" alt="">
-        <span class="text">Caoutchouc <br> liquide</span>
-      </router-link>
-      <router-link class="button" to="/bois/structures">
-        <img src="../assets/Produits/saturateur.jpg" alt="">
-        <span class="text">Saturateur</span>
-      </router-link>
-    </div>
-    <div class="card">
-      <router-link class="button" to="/bois/structures">
-        <img src="../assets/Produits/degriseur.jpg" alt="">
-        <span class="text">Degriseur</span>
-      </router-link>
-      <router-link class="button" to="/bois/structures">
-        <img src="../assets/Produits/tracage.jpg" alt="">
-        <span class="text">Bombe de <br> traçage</span>
-      </router-link>
-      <router-link class="button" to="/bois/structures">
-        <img src="../assets/Produits/craie.jpg" alt="">
-        <span class="text">Craie <br> Cordex</span>
-      </router-link>
-    </div>
+  <main class="product-page">
+      <CardRow v-for="(data, i) in data_product_card" :info_card="data" :key="i" />
   </main>
+
+
 </template>
 
 <script>
-      export default {
-        methods: {
-            goHome () {
-                this.$router.push('/home')
-            }
-        }
-    }
+import { info_product } from '../DB/dbProd.js'
+
+import { onMounted, ref } from 'vue';
+
+import CardRow from '../components/CardRow.vue';
+
+export default {
+  name: 'Produits',
+  components: {
+      CardRow
+  },
+  setup() {
+      class Product {
+          constructor(name, image, total) {
+              this.name = name
+              this.image = image
+              this.total = total
+          }
+      }
+
+      let data_product_card = ref([]);
+
+      const makeDataProduct = () => {
+          let info_card = [];
+
+          for (const product of info_product) {
+              const new_product_card = new Product(product.name, product.image, product.total)
+
+              if (info_card.length == 6) {
+                  info_card.push(new_product_card);
+                  data_product_card.value.push(info_card);
+                  info_card = [];
+              } else {
+                  info_card.push(new_product_card);
+              }
+          }
+      };
+
+      onMounted(makeDataProduct,);
+
+      return {
+          data_product_card,
+      }
+  },
+}
 </script>
 
-<style lang="scss" scoped>
-main {
-  background: #f0f7ee;
-  min-height: 100vh;
-}
-
-.produit-page {
-
-  .return {
-        margin-bottom: 1rem;
-    }
-
-    .material-icons {
-        font-size: 2.5rem;
-        color: var((--dark));
-        cursor: pointer;
-        transition: 0.2s;
-
-        &:hover {
-            color: var(--dark-alt);
-            transform: translateX(-0.5rem);
-            transition: 0.2s ease-out;
-        }
-    }
-
-    h1 {
-        font-size: 3rem;
-        margin: 20px;
-    }
-
-  .card {
-    display: flex;
-    flex-direction: row;
-    transition: 0.5s;
-  }
-
-  .button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-decoration: none;
-    width: 250px;
-    height: 250px;
-    border-radius: 25px;
-    transition: 0.3s;
-
-  }
-
-  img {
-    position: absolute;
-    width: 200px;
-    border-radius: 20px;
-    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
-  }
-
-
-  .text {
-    background: var(--dark);
-    border-radius: 5px;
-    padding: 5px;
-    position: relative;
-    font-size: 1.2rem;
-    text-transform: uppercase;
-    color: var(--light);
-  }
-
-}
-
-.button:hover {
-  background: var(--primary);
-  transform: scale(0.9, 0.9);
-}
-
-@media (max-width: 760px) {
-  .produit-page {
-    .card {
-      display: flex;
-      flex-direction: column;
-      transition: 0.5s;
-    }
-  }
-}
+<style lang="scss">
 </style>

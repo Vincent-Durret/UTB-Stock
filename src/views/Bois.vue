@@ -1,25 +1,25 @@
 <template>
-    <main class="bois-page">
-        <WoodCardRow v-for="(data, i) in data_wood_card" :info_wood_card="data" :key="i"/>
-    </main>
+  <main class="bois-page">
+    <CardRow v-for="(data, i) in data_card" :info_card="data" :key="i" />
+  </main>
 
 
 </template>
 
 <script>
-import  info_bois  from '../DB/db.js'
+import  { info_bois } from '../DB/db.js'
 
 import { onMounted, ref } from 'vue';
 
-import WoodCardRow from '../components/WoodCardRow.vue';
+import CardRow from '../components/CardRow.vue';
 
 export default {
   name: 'Bois',
   components: {
-    WoodCardRow,
+    CardRow,
   },
   setup() {
-    class Wood {
+    class Card {
       constructor(name, image, total) {
         this.name = name
         this.image = image
@@ -27,28 +27,28 @@ export default {
       }
     }
 
-    let data_wood_card = ref([]);
+    let data_card = ref([]);
 
-    const makeDataWood = () => {
-      let info_wood_card = [];
+    const makeDataCard = () => {
+      let info_card = [];
 
-      for (const wood of info_bois) {
-        const new_wood_card = new Wood(wood.name, wood.image, wood.total)
+      for (const card of info_bois) {
+        const new_card = new Card(card.name, card.image, card.total)
 
-        if (info_wood_card.length === 3) {
-            info_wood_card.push(new_wood_card);
-            data_wood_card.value.push(info_wood_card);
-          info_wood_card = [];
+        if (info_card.length === 3) {
+          info_card.push(new_card);
+          data_card.value.push(info_card);
+          info_card = [];
         } else {
-          info_wood_card.push(new_wood_card);
+          info_card.push(new_card);
         }
       }
     };
-  
-    onMounted(makeDataWood,);
-    
+
+    onMounted(makeDataCard,);
+
     return {
-        data_wood_card,
+      data_card,
     }
   },
 }

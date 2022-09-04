@@ -2,9 +2,9 @@
     <div class="wood-card">
         <div class="card">
             <div class="button">
-                <div :style="{ backgroundImage: `url(${info_card.image})` }" class="image"></div>
-                <span class="text">{{ info_card.name }}</span>
-                <progress id="file" max="100" :value="info_card.total"> {{ info_card.total }} % </progress>
+                <div :style="{ backgroundImage: `url(${card.image})` }" class="image"></div>
+                <span class="text">{{ card.name }}</span>
+                <progress id="file" max="100" :value="card.total"> {{ card.total }} % </progress>
             </div>
         </div>
     </div>
@@ -12,9 +12,9 @@
 
 <script>
 export default {
-    name: "WoodCard",
+    name: "Card",
     props: {
-        info_card: Object,
+        card: Object,
     },
 
 }
@@ -71,6 +71,8 @@ export default {
             text-transform: uppercase;
             color: var(--light);
             z-index: 1;
+            margin-left: 25px;
+            margin-right: 25px;
 
         }
 
