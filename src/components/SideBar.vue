@@ -1,52 +1,57 @@
 <template>
-    <aside :class="`${is_expanded && 'is-expanded'}`">
-        <div class="logo">
-            <router-link to="/home">
-                <img src="../assets/Logo/logo.png" alt="UTB">
-            </router-link>
+    <div v-if="store.state.user">
+        <aside :class="`${is_expanded && 'is-expanded'}`">
+            <div class="logo">
+                <router-link to="/">
+                    <img src="../assets/Logo/logo.png" alt="UTB">
+                </router-link>
 
-        </div>
+            </div>
 
-        <div class="menu-toggle-wrap">
-            <button class="menu-toggle" @click="ToggleMenu">
-                <span class="material-icons">keyboard_double_arrow_right</span>
-            </button>
-        </div>
+            <div class="menu-toggle-wrap">
+                <button class="menu-toggle" @click="ToggleMenu">
+                    <span class="material-icons">keyboard_double_arrow_right</span>
+                </button>
+            </div>
 
-        <h3>Menu</h3>
-        <div class="menu">
-            <router-link class="button" to="/bois">
-                <span class="material-icons">forest</span>
-                <span class="text">Bois</span>
-            </router-link>
-            <router-link class="button" to="/quicailleries">
-                <span class="material-icons">construction</span>
-                <span class="text">Quincailleries</span>
-            </router-link>
-            <router-link class="button" to="/produits">
-                <span class="material-icons">inventory</span>
-                <span class="text">Produits</span>
-            </router-link>
-            <router-link class="button" to="/autres">
-                <span class="material-icons">widgets</span>
-                <span class="text">Autres</span>
-            </router-link>
-        </div>
+            <h3>Menu</h3>
+            <div class="menu">
+                <router-link class="button" to="/bois">
+                    <span class="material-icons">forest</span>
+                    <span class="text">Bois</span>
+                </router-link>
+                <router-link class="button" to="/quicailleries">
+                    <span class="material-icons">construction</span>
+                    <span class="text">Quincailleries</span>
+                </router-link>
+                <router-link class="button" to="/produits">
+                    <span class="material-icons">inventory</span>
+                    <span class="text">Produits</span>
+                </router-link>
+                <router-link class="button" to="/autres">
+                    <span class="material-icons">widgets</span>
+                    <span class="text">Autres</span>
+                </router-link>
+            </div>
 
-        <div class="flex"></div>
+            <div class="flex"></div>
 
-        <div class="menu">
-            <router-link class="button" to="/">
-                <span class="material-icons">logout</span>
-                <span class="text">Se déconecter</span>
-            </router-link>
-        </div>
-    </aside>
+            <div class="menu">
+                <div class="button" @click="store.dispatch('logout')">
+                    <span class="material-icons">logout</span>
+                    <span class="text">Se déconecter</span>
+                </div>
+            </div>
+        </aside>
+
+    </div>
+
 </template>
 
 <script setup>
 import { ref } from 'vue';
-import router from '../router';
+import { onBeforeMount } from 'vue'
+import { useStore } from 'vuex'
 
 
 const is_expanded = ref(localStorage.getItem("is_expanded") === "true")
@@ -56,6 +61,13 @@ const ToggleMenu = () => {
 
     localStorage.getItem("is_expanded", is_expanded.value)
 }
+
+const store = useStore()
+
+onBeforeMount(() => {
+    store.dispatch('fetchUser')
+})
+
 
 </script>
 
@@ -199,7 +211,7 @@ aside {
     }
 
     @media (max-width: 768px) {
-        position:fixed;
+        position: fixed;
         height: 100%;
         z-index: 99;
     }

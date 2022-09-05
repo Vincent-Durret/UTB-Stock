@@ -1,43 +1,79 @@
-import { createRouter, createWebHistory } from "vue-router";
 
-import Login from "../views/Connexion.vue";
+import { createRouter, createWebHistory } from 'vue-router'
+import Home from '../views/Home.vue'
+import Connexion from '../views/Connexion.vue'
+import { auth } from '../Firebase/firebase.js'
+
+const routes = [
+  {
+    path: "/",
+    component: Home,
+    meta: {
+      requiresAuth: true,
+    },
+  },
+
+  {
+    path: "/bois",
+    component: () => import("../views/Bois.vue"),
+    name: "Bois",
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: "/quicailleries",
+    component: () => import("../views/Quincailleries.vue"),
+    name: "Quicailleries",
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: "/quicailleries/terrasses",
+    component: () => import("../../src/components/SubPageHardwareStore.vue"),
+  },
+  {
+    path: "/produits",
+    name: "Produits",
+    component: () => import("../views/Produits.vue"),
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: "/autres",
+    name: "Autres",
+    component: () => import("../views/Autres.vue"),
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: "/login",
+    name: "Connexion",
+    component: Connexion
+  },
+]
 
 const router = createRouter({
   history: createWebHistory(),
-  routes: [
-    {
-      path: "/",
-      component: Login,
-    },
-    {
-      path: "/home",
-      component: () => import("../views/Home.vue"),
-      // meta: {
-      //   requiresAuth: true,
-      // },
-    },
-    {
-      path: "/bois",
-      component: () => import("../views/Bois.vue"),
-    },
-    {
-      path: "/quicailleries",
-      component: () => import("../views/Quincailleries.vue"),
-    },
-    {
-      path: "/quicailleries/terrasses",
-      component: () => import("../../src/components/SubPageHardwareStore.vue"),
-    },
-    {
-      path: "/produits",
-      component: () => import("../views/Produits.vue"),
-    },
-    {
-      path: "/autres",
-      component: () => import("../views/Autres.vue"),
-    },
-  ],
-});
+  routes
+})
 
+router.beforeEach((to, from, next) => {
+  if (to.path === '/login' && auth.currentUser) {
+    next('/')
+    return;
+  }
 
-export default router;
+  if (to.matched.some(record => record.meta.requiresAuth) && !auth.currentUser) {
+    next('/login')
+    return;
+  }
+
+  next();
+})
+
+export default router
+
