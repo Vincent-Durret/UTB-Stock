@@ -1,5 +1,10 @@
 <template>
   <main class="bois-page">
+    <div class="return">
+      <span @click="goHome()" class="material-icons">arrow_back</span>
+    </div>
+
+    <h1>Bois : </h1>
     <CardRow v-for="(data, i) in data_card" :info_card="data" :key="i" />
   </main>
 
@@ -7,7 +12,7 @@
 </template>
 
 <script>
-import  { info_bois } from '../DB/db.js'
+import { info_bois } from '../DB/db.js'
 
 import { onMounted, ref } from 'vue';
 
@@ -18,6 +23,11 @@ export default {
   components: {
     CardRow,
   },
+  methods: {
+        goHome() {
+            this.$router.push('/home')
+        }
+    },
   setup() {
     class Card {
       constructor(name, image, total) {
@@ -55,4 +65,27 @@ export default {
 </script>
 
 <style lang="scss">
+.bois-page {
+  .return {
+    margin-bottom: 1rem;
+  }
+
+  .material-icons {
+    font-size: 2.5rem;
+    color: var((--dark));
+    cursor: pointer;
+    transition: 0.2s;
+
+    &:hover {
+      color: var(--dark-alt);
+      transform: translateX(-0.5rem);
+      transition: 0.2s ease-out;
+    }
+  }
+
+  h1 {
+    font-size: 2rem;
+    margin: 20px;
+  }
+}
 </style>

@@ -5,9 +5,13 @@
   </div>
 </template>
 
-<script setup>
-import SideBar from '../src/components/SideBar.vue';
-
+<script>
+  import SideBar from '../src/components/SideBar.vue';
+  export default {
+    components: {
+    SideBar,
+}
+  }
 
 </script>
 

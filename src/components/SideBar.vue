@@ -45,8 +45,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
-// import { getAuth, onAuthStateChanged, signOut } from "firebase/auth"
+import { ref } from 'vue';
 import router from '../router';
 
 
@@ -58,25 +57,6 @@ const ToggleMenu = () => {
     localStorage.getItem("is_expanded", is_expanded.value)
 }
 
-// const isLoggedIn = ref(false)
-
-// let auth
-// onMounted(() => {
-//     auth = getAuth();
-//     onAuthStateChanged(auth, (user) => {
-//         if (user) {
-//             isLoggedIn.value = true
-//         } else {
-//             isLoggedIn.value = false
-//         }
-//     })
-// })
-
-// const handleSignOut = () => {
-//     signOut(auth).then(() => {
-//         router.push("/")
-//     })
-// }
 </script>
 
 <style lang="scss" scoped>
