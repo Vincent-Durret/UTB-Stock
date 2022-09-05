@@ -73,6 +73,7 @@ onBeforeMount(() => {
 
 <style lang="scss" scoped>
 aside {
+    position: fixed;
     display: flex;
     flex-direction: column;
     width: calc(2rem + 32px);
@@ -84,6 +85,7 @@ aside {
     color: var(--light);
 
     transition: 0.2s ease-out;
+    z-index: 2;
 
     .flex {
         flex: 1;

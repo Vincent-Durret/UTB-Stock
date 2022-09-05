@@ -82,7 +82,7 @@ export default createStore({
 
       commit("CLEAR_USER");
 
-      router.push("/login");
+      router.push("/connexion");
     },
 
     fetchUser({ commit }) {
@@ -92,7 +92,7 @@ export default createStore({
         } else {
           commit("SET_USER", user);
 
-          if (router.isReady() && router.currentRoute.value.path === "/login") {
+          if (router.isReady() && router.currentRoute.value.path === "/connexion") {
             router.push("/");
           }
         }

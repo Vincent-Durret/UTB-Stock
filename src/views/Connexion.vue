@@ -44,9 +44,10 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 main {
   background: #F1F5F9;
+  padding: 0;
 }
 
 .forms {
@@ -57,6 +58,7 @@ main {
 form {
   flex: 1 1 0%;
   padding: 8rem 1rem 1rem;
+  display: block;
 }
 
 form.register {
@@ -154,6 +156,12 @@ form.register input[type="submit"] {
     align-items: center;
     flex-direction: column;
   }
+
+  form {
+  flex: 1 1 0%;
+  padding: 8rem 1rem 1rem;
+  display:contents;
+}
 
   
 }

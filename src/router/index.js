@@ -30,10 +30,6 @@ const routes = [
     },
   },
   {
-    path: "/quicailleries/terrasses",
-    component: () => import("../../src/components/SubPageHardwareStore.vue"),
-  },
-  {
     path: "/produits",
     name: "Produits",
     component: () => import("../views/Produits.vue"),
@@ -50,7 +46,7 @@ const routes = [
     },
   },
   {
-    path: "/login",
+    path: "/connexion",
     name: "Connexion",
     component: Connexion
   },
@@ -62,13 +58,13 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  if (to.path === '/login' && auth.currentUser) {
+  if (to.path === '/connexion' && auth.currentUser) {
     next('/')
     return;
   }
 
   if (to.matched.some(record => record.meta.requiresAuth) && !auth.currentUser) {
-    next('/login')
+    next('/connexion')
     return;
   }
 

@@ -51,13 +51,16 @@ button {
 .app {
   display: flex;
 
+
   main {
     flex: 1 1 0;
-    padding: 2rem;
+    padding-left: 6rem;
+    padding-top: 2rem;
 
 
     @media (max-width: 760px) {
       padding-left: 6rem;
+      padding-top: 2rem;
     }
   }
 }
