@@ -1,7 +1,9 @@
 <template>
   <div class="app">
     <SideBar />
-    <router-view />
+    <transition name="fade" mode="out-in">
+      <router-view />
+    </transition>
   </div>
 
 
@@ -63,5 +65,17 @@ button {
       padding-top: 2rem;
     }
   }
+
+  .fade-enter,
+  .fade-leave-to {
+    opacity: 0;
+    transform: translateX(-5rem);
+  }
+
+  .fade-enter-active,
+  .fade-leave-active {
+    transition: all 0.5s ease;
+  }
+
 }
 </style>
