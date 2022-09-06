@@ -1,9 +1,12 @@
 <template>
   <div class="app">
     <SideBar />
-    <transition name="fade" mode="out-in">
-      <router-view />
-    </transition>
+    <router-view v-slot="{ Component }">
+      <transition name="fade" mode="out-in">
+        <Component :is="Component" />
+      </transition>
+    </router-view>
+
   </div>
 
 
@@ -27,7 +30,7 @@ export default {
   --grey: #64748b;
   --dark: #1e293b;
   --dark-alt: #334155;
-  --light: #f1f5f9;
+  --light: #F0F7EE;
   --sidebar-width: 300px;
 }
 
@@ -66,7 +69,7 @@ button {
     }
   }
 
-  .fade-enter,
+  .fade-enter-from,
   .fade-leave-to {
     opacity: 0;
     transform: translateX(-5rem);
@@ -74,7 +77,7 @@ button {
 
   .fade-enter-active,
   .fade-leave-active {
-    transition: all 0.5s ease;
+    transition: all 0.5s ease-out;
   }
 
 }

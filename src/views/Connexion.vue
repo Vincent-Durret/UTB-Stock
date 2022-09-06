@@ -46,7 +46,7 @@ export default {
 
 <style scoped>
 main {
-  background: #F1F5F9;
+  background: #F0F7EE;
   padding: 0;
 }
 
@@ -78,7 +78,7 @@ form.register {
 }
 
 .logo-login {
-  background-image: url(../assets/Logo/logo.png);
+  background-image: url(../assets/Logo/logo-UTB-stock.png);
   background-size: cover;
   background-position: center;
   width: 350px;

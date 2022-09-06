@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import { info_product } from '../DB/dbProd.js'
+import { info_product } from '../DB/db.js'
 
 import { onMounted, ref } from 'vue';
 

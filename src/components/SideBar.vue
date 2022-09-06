@@ -3,7 +3,7 @@
         <aside :class="`${is_expanded && 'is-expanded'}`">
             <div class="logo">
                 <router-link to="/">
-                    <img src="../assets/Logo/logo.png" alt="UTB">
+                    <img :src="this.imgSrc" alt="UTB">
                 </router-link>
 
             </div>
@@ -56,11 +56,23 @@ import { useStore } from 'vuex'
 
 const is_expanded = ref(localStorage.getItem("is_expanded") === "true")
 
+const imgSrc = ref('./assets/Logo/logo2.png')
+
+
 const ToggleMenu = () => {
     is_expanded.value = !is_expanded.value
 
+    if (is_expanded.value == true) {
+        imgSrc.value = './assets/Logo/logo-UTB-stock.png'
+    } else {
+        imgSrc.value = './assets/Logo/logo2.png'
+    }
+
+
     localStorage.getItem("is_expanded", is_expanded.value)
+
 }
+
 
 const store = useStore()
 
@@ -95,7 +107,7 @@ aside {
         margin-bottom: 1rem;
 
         img {
-            width: 100px;
+            width: 5rem;
             transition: 0.3s;
         }
     }
@@ -188,6 +200,7 @@ aside {
 
             img {
                 width: 15rem;
+                transition: 0.3s;
             }
         }
 

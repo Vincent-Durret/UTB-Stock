@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import { info_other } from '../DB/dbOther.js'
+import { info_other } from '../DB/db.js'
 
 import { onMounted, ref } from 'vue';
 

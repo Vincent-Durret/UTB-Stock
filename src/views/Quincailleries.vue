@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import { info_quincaillerie } from '../DB/dbQuin.js'
+import { info_quincaillerie } from '../DB/db.js'
 
 import { onMounted, ref } from 'vue';
 

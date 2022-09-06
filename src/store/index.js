@@ -35,7 +35,7 @@ export default createStore({
             alert("Mot de passe inconnue !");
             break;
           default:
-            alert("veuillez remplire tous les champs");
+            alert("Veuillez remplire tous les champs");
         }
 
         return;
