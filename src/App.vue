@@ -14,7 +14,6 @@
 
 <script>
 import SideBar from '../src/components/SideBar.vue';
-import { useStore } from 'vuex'
 export default {
   components: {
     SideBar,
