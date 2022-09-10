@@ -1,11 +1,14 @@
 <template>
   <main class="home-page">
-    <h1>UTB-Stock</h1>
+    <h1>Bienvenue sur UTB-Stock ! </h1>
+    <div>
+      <h2>Condition d'utilisation a lire avant de commencer :</h2>
+    </div>
     
   </main>
 </template>
 
-<script>
+<script setup>
 
 </script>
 
