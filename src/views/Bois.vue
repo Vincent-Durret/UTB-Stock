@@ -5,7 +5,9 @@
     </div>
 
     <h1>Bois : </h1>
-    <CardRow v-for="(data, i) in data_card" :info_card="data" :key="i" />
+    <router-link to="/bois/itauba">
+      <CardRow v-for="(data, i) in data_card" :info_card="data" :key="i" />
+    </router-link>
   </main>
 
 
@@ -24,10 +26,10 @@ export default {
     CardRow,
   },
   methods: {
-        goHome() {
-            this.$router.push('/')
-        }
-    },
+    goHome() {
+      this.$router.push('/')
+    }
+  },
   setup() {
     class Card {
       constructor(name, image, total) {

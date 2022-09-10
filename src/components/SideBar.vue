@@ -20,7 +20,7 @@
                     <span class="material-icons">forest</span>
                     <span class="text">Bois</span>
                 </router-link>
-                <router-link class="button" to="/quicailleries">
+                <router-link class="button" to="/quincailleries">
                     <span class="material-icons">construction</span>
                     <span class="text">Quincailleries</span>
                 </router-link>

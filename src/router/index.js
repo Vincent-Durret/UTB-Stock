@@ -22,9 +22,17 @@ const routes = [
     },
   },
   {
-    path: "/quicailleries",
+    path: "/bois/itauba",
+    component: () => import("../../src/components/SubPage.vue"),
+    name: "Itauba",
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: "/quincailleries",
     component: () => import("../views/Quincailleries.vue"),
-    name: "Quicailleries",
+    name: "Quincailleries",
     meta: {
       requiresAuth: true,
     },

@@ -1,6 +1,7 @@
 <template>
   <main class="home-page">
-    <h1>Accueil</h1>
+    <h1>UTB-Stock</h1>
+    
   </main>
 </template>
 

@@ -1,4 +1,3 @@
-
 // Partie BOIS-----------------------------
 const info_bois = [
   {
@@ -35,25 +34,23 @@ const info_quincaillerie = [
     name: "Structure",
     image: "./assets/Quincaillerie/vis.jpg",
 
-    total: "10",
+    total: "14",
   },
   {
     name: "Plot Béton",
     image: "./assets/Quincaillerie/plot-beton.jpg",
 
-    total: "20",
+    total: "15",
   },
   {
     name: "Lames de scie",
     image: "./assets/Quincaillerie/lame-scie-sauteuse.jpg",
-
-    total: "50",
+    total: "25",
   },
   {
     name: "Chevilles",
     image: "./assets/Quincaillerie/cheville.jpg",
-
-    total: "50",
+    total: "100",
   },
   {
     name: "Boulon Charpente",
@@ -65,13 +62,13 @@ const info_quincaillerie = [
     name: "Equerre de Fixation",
     image: "./assets/Quincaillerie/equerre-de-fixation-renforcee.jpg",
 
-    total: "50",
+    total: "25",
   },
   {
     name: "Tige Filete",
     image: "./assets/Quincaillerie/tige-filleté.jpg",
 
-    total: "50",
+    total: "5",
   },
   {
     name: "Ecrou m14",
@@ -83,13 +80,13 @@ const info_quincaillerie = [
     name: "Rondelle plate",
     image: "./assets/Quincaillerie/rondelle.jpg",
 
-    total: "50",
+    total: "90",
   },
   {
     name: "Pied de poteau",
     image: "./assets/Quincaillerie/pied-de-poteau.jpg",
 
-    total: "50",
+    total: "8",
   },
   {
     name: "Vis de fondation",
@@ -101,7 +98,7 @@ const info_quincaillerie = [
     name: "Feutre geotextile",
     image: "./assets/Quincaillerie/feutre-geotextile.jpg",
 
-    total: "50",
+    total: "100",
   },
   {
     name: "Disaue a tronconner",
@@ -113,7 +110,7 @@ const info_quincaillerie = [
     name: "Disaue a ebarbe",
     image: "./assets/Quincaillerie/disque-a-ebarber.jpg",
 
-    total: "50",
+    total: "80",
   },
   {
     name: "Disaue de pollissage",
@@ -131,19 +128,19 @@ const info_quincaillerie = [
     name: "sangle darrimage",
     image: "./assets/Quincaillerie/sangle.jpg",
 
-    total: "50",
+    total: "100",
   },
   {
     name: "Masque FFP3 ",
     image: "./assets/Quincaillerie/masque-ffp3.jpg",
 
-    total: "50",
+    total: "5",
   },
   {
     name: "Crayon",
     image: "./assets/Quincaillerie/crayon.jpg",
 
-    total: "50",
+    total: "100",
   },
   {
     name: "Gant de protection",
@@ -155,7 +152,7 @@ const info_quincaillerie = [
     name: "Ruban signaletique",
     image: "./assets/Quincaillerie/ruban-signalisation.jpg",
 
-    total: "50",
+    total: "100",
   },
   {
     name: "Lingette main",
@@ -171,7 +168,7 @@ const info_quincaillerie = [
   {
     name: "Cale PVC",
     image: "./assets/Quincaillerie/cales.jpg",
-    total: "50",
+    total: "80",
   },
   {
     name: "Plot PVC",
@@ -193,7 +190,7 @@ const info_quincaillerie = [
     image: "./assets/Quincaillerie/cale-caoutchouc.jpg",
     total: "50",
   },
-]
+];
 
 // Partie Produits-----------------------------
 
@@ -298,7 +295,7 @@ const info_product = [
     image: "/assets/Produits/joint-epdm.jpg",
     total: "50",
   },
-]
+];
 
 // Partie Autres-----------------------------
 
@@ -363,8 +360,6 @@ const info_other = [
     image: "/assets/Autres/terreau.jpg",
     total: "20",
   },
-]
-
-
+];
 
 export { info_bois, info_quincaillerie, info_product, info_other };
