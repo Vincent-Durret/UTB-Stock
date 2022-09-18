@@ -5,7 +5,7 @@
     </div>
 
     <h1>Bois : </h1>
-    <router-link to="/bois/itauba">
+    <router-link class="button" to="/bois/itauba">
       <CardRow v-for="(data, i) in data_card" :info_card="data" :key="i" />
     </router-link>
   </main>
@@ -82,6 +82,10 @@ export default {
       color: var(--dark-alt);
       transform: translateX(-0.5rem);
       transition: 0.2s ease-out;
+    }
+
+    .button {
+      text-decoration: none;
     }
   }
 

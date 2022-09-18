@@ -4,7 +4,7 @@
             <div class="button">
                 <div :style="{ backgroundImage: `url(${card.image})` }" class="image"></div>
                 <span class="text">{{ card.name }}</span>
-                <progress id="file" max="100" :value="card.total"> {{ card.total }} % </progress>
+                <progress id="file" max="6000" :value="card.total"> {{ card.total }} </progress>
             </div>
         </div>
     </div>

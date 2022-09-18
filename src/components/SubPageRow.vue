@@ -1,7 +1,7 @@
 <template>
     <div class="subpage-row">
         <div class="wrapper-sub">
-            <SubPage v-for="(sub, index) in info_sub" :card="sub" :key="index" />
+            <SubPage v-for="(sub, index) in info_sub" :sub="sub" :key="index" />
         </div>
     </div>
 </template>
@@ -9,25 +9,25 @@
 <script>
 import SubPage from './SubPage.vue';
 export default {
-    name: "SubPage",
+    name: "SubPageRow",
     props: {
         info_sub: Array
     },
     components: {
-    SubPage
-},
+        SubPage,
+    },
 
 
 }
 </script>
 
 <style lang="scss">
-.card-row {
+.subpage-row {
     background: #f0f7ee;
     min-height: 100vh;
 
 
-    .wrapper-card {
+    .wrapper-sub {
         display: flex;
         flex-wrap: wrap;
         column-gap: 1rem;
@@ -35,7 +35,7 @@ export default {
 }
 
 @media (max-width: 760px) {
-    .wrapper-card {
+    .wrapper-sub {
         flex-direction: column;
     }
 }

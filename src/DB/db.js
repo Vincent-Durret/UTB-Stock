@@ -3,22 +3,22 @@ const info_bois = [
   {
     name: "Itauba",
     image: "/assets/Bois/itauba.jpg",
-    total: "65",
+    total: "4000",
   },
   {
     name: "Ipé",
     image: "./assets/Bois/ipe.jpg",
-    total: "90",
+    total: "100",
   },
   {
     name: "Cumaru",
     image: "./assets/Bois/cumaru.jpg",
-    total: "20",
+    total: "55",
   },
   {
     name: "Structure",
     image: "./assets/Bois/Structure.jpg",
-    total: "50",
+    total: "3500",
   },
 ];
 

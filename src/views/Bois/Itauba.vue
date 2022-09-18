@@ -1,14 +1,18 @@
 <template>
-  <SubPageRow v-for="(data, i) in data_sub" :info_sub="data" :key="i" />
+  <main class="itauba-page">
+    <div class="return">
+      <span @click="goHome()" class="material-icons">arrow_back</span>
+    </div>
+    <h1>Itauba</h1>
+    <SubPageRow v-for="(data, i) in data_sub" :info_sub="data" :key="i" />
+  </main>
+
 </template>
 
 <script>
-import SubPageRow from '../../components/SubPageRow.vue'
 import { info_itauba } from '../../DB/db.js'
-
+import SubPageRow from '../../components/SubPageRow.vue';
 import { onMounted, ref } from 'vue';
-
-
 export default {
   name: 'Itauba',
   components: {
@@ -20,8 +24,8 @@ export default {
     }
   },
   setup() {
-    class SubPage {
-      constructor(name, image, total) {
+    class SubCard {
+      constructor(name, total) {
         this.name = name
         this.total = total
       }
@@ -33,9 +37,9 @@ export default {
       let info_sub = [];
 
       for (const sub of info_itauba) {
-        const new_sub = new SubPage(sub.name, sub.total)
+        const new_sub = new SubCard(sub.name, sub.total)
 
-        if (info_sub.length === 4) {
+        if (info_sub.length === 3) {
           info_sub.push(new_sub);
           data_sub.value.push(info_sub);
           info_sub = [];
@@ -45,16 +49,38 @@ export default {
       }
     };
 
-    onMounted(makeDataSub);
+    onMounted(makeDataSub,);
 
     return {
       data_sub,
     }
   },
-}
 
+}
 </script>
 
-<style lang="sass">
+<style lang="scss" scoped>
+.itauba-page {
+  .return {
+    margin-bottom: 1rem;
+  }
 
+  .material-icons {
+    font-size: 2.5rem;
+    color: var((--dark));
+    cursor: pointer;
+    transition: 0.2s;
+
+    &:hover {
+      color: var(--dark-alt);
+      transform: translateX(-0.5rem);
+      transition: 0.2s ease-out;
+    }
+  }
+
+  h1 {
+    font-size: 2rem;
+    margin: 20px;
+  }
+}
 </style>
