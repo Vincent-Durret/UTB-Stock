@@ -23,7 +23,7 @@ const routes = [
   },
   {
     path: "/bois/itauba",
-    component: () => import("../../src/components/SubPage.vue"),
+    component: () => import("../../src/views/Bois/Itauba.vue"),
     name: "Itauba",
     meta: {
       requiresAuth: true,

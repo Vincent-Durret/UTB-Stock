@@ -20,6 +20,9 @@
 <script>
 export default {
     name: 'SubPage',
+    props: {
+        sub: Object,
+    },
 
     methods: {
         goBack() {

@@ -8,7 +8,7 @@ const info_bois = [
   {
     name: "Ipé",
     image: "./assets/Bois/ipe.jpg",
-    total: "10",
+    total: "90",
   },
   {
     name: "Cumaru",
@@ -362,4 +362,23 @@ const info_other = [
   },
 ];
 
-export { info_bois, info_quincaillerie, info_product, info_other };
+const info_itauba = [
+  {
+    name: "95",
+    total: "2000",
+  },
+  {
+    name: "120",
+    total: "2000",
+  },
+  {
+    name: "150",
+    total: "2000",
+  },
+  {
+    name: "180",
+    total: "2000",
+  },
+];
+
+export { info_bois, info_quincaillerie, info_product, info_other, info_itauba };

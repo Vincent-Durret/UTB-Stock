@@ -58,11 +58,12 @@ const is_expanded = ref(localStorage.getItem("is_expanded") === "true")
 
 const imgSrc = ref('./assets/Logo/logo2.png')
 
+// $: imgSrc = is_expanded ? './assets/Logo/logo-UTB-stock.png' : './assets/Logo/logo2.png'
 
 const ToggleMenu = () => {
     is_expanded.value = !is_expanded.value
 
-    if (is_expanded.value == true) {
+    if (is_expanded.value) {
         imgSrc.value = './assets/Logo/logo-UTB-stock.png'
     } else {
         imgSrc.value = './assets/Logo/logo2.png'
