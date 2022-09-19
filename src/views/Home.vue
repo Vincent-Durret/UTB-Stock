@@ -1,17 +1,27 @@
 <template>
   <main class="home-page">
-    <h1>Bienvenue sur UTB-Stock ! </h1>
-    <div>
-      <h2>Condition d'utilisation a lire avant de commencer :</h2>
-    </div>
-    
+    <h1 class="titre-home">Bienvenue sur UTB-Stock ! </h1>
+    <Search />
   </main>
 </template>
 
-<script setup>
+<script>
+  import Search from '../components/Search.vue'
+export default {
+  name: 'Home',
+  components: {
+    Search,
+  }
 
+}
 </script>
 
-<style>
+<style lang="scss">
+main {
 
+  .titre-home {
+    font-size: 3rem;
+  }
+
+}
 </style>

@@ -31,6 +31,7 @@ export default {
   --dark-alt: #334155;
   --light: #F0F7EE;
   --sidebar-width: 300px;
+  --logo-color: #D08B00;
 }
 
 * {
@@ -71,13 +72,14 @@ button {
   .fade-enter-from,
   .fade-leave-to {
     opacity: 0;
-    transform: translateX(-5rem) scaleX(-0.8);
+    transform: translateX(-5rem);
   }
 
   .fade-enter-active,
   .fade-leave-active {
     transition: all 0.4s ease-out;
   }
+
 
 }
 </style>

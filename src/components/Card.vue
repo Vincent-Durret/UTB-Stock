@@ -1,11 +1,11 @@
 <template>
     <div class="wood-card">
         <div class="card">
-            <div class="button">
+            <router-link class="button" :to="{name: 'SubCard', params: {name: card.name }}">
                 <div :style="{ backgroundImage: `url(${card.image})` }" class="image"></div>
                 <span class="text">{{ card.name }}</span>
                 <progress id="file" max="6000" :value="card.total"> {{ card.total }} </progress>
-            </div>
+            </router-link>
         </div>
     </div>
 </template>
@@ -69,10 +69,11 @@ export default {
             position: relative;
             font-size: 1.2rem;
             text-transform: uppercase;
-            color: var(--light);
+            color: var(--logo-color);
             z-index: 1;
             margin-left: 25px;
             margin-right: 25px;
+            font-weight: 550;
 
         }
 

@@ -3,9 +3,10 @@
     <div class="return">
       <span @click="goHome()" class="material-icons">arrow_back</span>
     </div>
-
-    <h1>Bois : </h1>
-      <CardRow v-for="(data, i) in data_card" :info_card="data" :key="i" />
+    <div class="wrap-title">
+      <h1>Bois</h1>
+    </div>
+    <CardRow v-for="(data, i) in data_card" :info_card="data" :key="i" />
   </main>
 
 
@@ -87,9 +88,20 @@ export default {
     }
   }
 
-  h1 {
-    font-size: 2rem;
-    margin: 20px;
+  .wrap-title {
+    display: flex;
+    width: 100%;
+
+    h1 {
+      font-size: 2rem;
+      color: var(--logo-color);
+      background-color: var(--dark);
+      padding: 1rem;
+      border-radius: 5px;
+      margin: 1rem;
+    }
   }
+
+
 }
 </style>
