@@ -5,9 +5,7 @@
     </div>
 
     <h1>Bois : </h1>
-    <router-link class="button" to="/bois/itauba">
       <CardRow v-for="(data, i) in data_card" :info_card="data" :key="i" />
-    </router-link>
   </main>
 
 
