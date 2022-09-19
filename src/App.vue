@@ -6,7 +6,6 @@
         <Component :is="Component" />
       </transition>
     </router-view>
-
   </div>
 
 
