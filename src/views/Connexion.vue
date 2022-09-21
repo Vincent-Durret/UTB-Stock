@@ -7,7 +7,7 @@
           <div class="logo-login"></div>
         </div>
 
-        <input type="email" placeholder="Email" v-model="login_form.email" />
+        <input type="email" placeholder="Email" v-model="login_form.email" autofocus />
         <input type="password" placeholder="Mot de passe" v-model="login_form.password" />
         <input type="submit" value="Connexion" />
       </form>

@@ -434,19 +434,23 @@ const info_other = [
 const info_itauba = [
   {
     name: "95",
-    total: "2000",
+    total: "800",
+    stock: "1000 m2"
   },
   {
     name: "120",
-    total: "2000",
+    total: "600",
+    stock: "1000 m2"
   },
   {
     name: "150",
-    total: "2000",
+    total: "500",
+    stock: "1000 m2"
   },
   {
     name: "180",
-    total: "2000",
+    total: "500",
+    stock: "1000 m2"
   },
 ];
 

@@ -19,9 +19,10 @@ export default {
 
     setup() {
         class SubCard {
-            constructor(name, total) {
+            constructor(name, total, stock) {
                 this.name = name
                 this.total = total
+                this.stock = stock
             }
         }
 
@@ -31,7 +32,7 @@ export default {
             let info_sub = [];
 
             for (const sub of info_itauba) {
-                const new_sub = new SubCard(sub.name, sub.total)
+                const new_sub = new SubCard(sub.name, sub.total, sub.stock)
 
                 if (info_sub.length === 3) {
                     info_sub.push(new_sub);

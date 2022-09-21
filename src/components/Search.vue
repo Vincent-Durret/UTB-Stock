@@ -1,9 +1,9 @@
 <template>
     <div class="wrapper--input">
-        <input v-model="user_search_item" type="text" placeholder="Rechercher">
-        <span class="material-icons">
+        <input v-model="user_search_item" type="search" placeholder="Rechercher">
+        <!-- <span class="material-icons">
             search
-        </span>
+        </span> -->
         <div class="search">
             <router-link class="link" v-for="(allitem, i) in search_item" :key="i"
                 :to="{name: 'SubCard', params: {name: allitem.name }}">
@@ -72,6 +72,35 @@ export default {
 </script>
 
 <style lang="scss">
+@mixin magic-border($width, $color, $duration, $direction) {
+    position: relative;
+
+    &:before {
+        content: '';
+        position: absolute;
+        width:calc(100% + #{$width * 2});
+        height:calc(100% + #{$width * 2});
+        top:calc(#{$width}/-1);
+        left:calc(#{$width}/-1);
+        background: linear-gradient(to right, $color 0%, $color 100%), linear-gradient(to top, $color 50%, transparent 50%), linear-gradient(to top, $color 50%, transparent 50%), linear-gradient(to right, $color 0%, $color 100%), linear-gradient(to left, $color 0%, $color 100%);
+        background-size: 100% $width, $width 200%, $width 200%, 0% $width, 0% $width;
+        background-position: 50% 100%, 0% 0%, 100% 0%, 100% 0%, 0% 0%;
+        background-repeat: no-repeat, no-repeat;
+        transition: transform $duration ease-in-out, background-position $duration ease-in-out, background-size $duration ease-in-out;
+        transform: scaleX(0) rotate(180deg * $direction);
+        transition-delay: $duration*2, $duration, 0s;
+    }
+
+    &:hover {
+        &:before {
+            background-size: 200% $width, $width 400%, $width 400%, 55% $width, 55% $width;
+            background-position: 50% 100%, 0% 100%, 100% 100%, 100% 0%, 0% 0%;
+            transform: scaleX(1) rotate(180deg * $direction);
+            transition-delay: 0s, $duration, $duration*2;
+        }
+    }
+}
+
 .wrapper--input {
     position: relative;
     margin: 1rem;
@@ -97,7 +126,7 @@ export default {
         right: 0.2rem;
     }
 
-    input[type=text]:focus {
+    input[type=search]:focus {
         border: 5px solid var(--dark);
         border-bottom: none;
     }
@@ -118,20 +147,32 @@ export default {
             color: black;
 
             .container--restaurant--search {
-                padding: 10px;
                 display: flex;
                 flex-direction: column;
 
-                &:hover .lh {
-                    background: var(--dark);
-                    color: black;
-                }
+                // &:hover .lh {
+                //     background: var(--dark);
+                //     color: black;
+                // }
 
                 .lh {
-                    display: flex;
-                    flex-direction: column;
-                    padding: 1rem;
-                    font-weight: 600;
+                    text-decoration: none;
+                    color: #222;
+                    font-size: 1.2rem;
+                    padding: 20px;
+                    // background: #efefef;
+                    // text-transform: uppercase;
+                    text-align: center;
+                    @include magic-border(3px, var(--dark), 0.2s, 0);
+                    margin: 10px;
+                    flex-grow: 1;
+                    cursor: pointer;
+                    transition: background 2s ease;
+
+                    &:hover {
+                        color: black;
+                        background: var(--dark);
+                    }
                 }
 
                 .trait {
@@ -147,7 +188,6 @@ export default {
     .wrapper--input {
         margin: 1.5rem;
         align-items: center;
-        justify-content: center;
 
         input {
             width: 300px;

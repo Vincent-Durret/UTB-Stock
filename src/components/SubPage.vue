@@ -6,7 +6,7 @@
                 <input type="number" placeholder="Nombre de lames" />
                 <button class="bouton-subpage">Envoyer</button>
                 <h3 class="restant-stock">Stock :</h3>
-                <p class="total-stock">{{ sub.total }}</p>
+                <p class="total-stock">{{ sub.total }} / {{ sub.stock }}</p>
             </div>
         </div>
     </div>
@@ -39,7 +39,7 @@ main {
         box-sizing: border-box;
         width: 16rem;
         height: 15rem;
-        background: var(--primary);
+        background: var(--dark-alt);
         border-radius: 5%;
         display: flex;
         justify-content: center;
