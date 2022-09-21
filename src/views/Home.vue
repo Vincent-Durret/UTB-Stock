@@ -26,10 +26,11 @@ export default {
 
   setup() {
     class Item {
-      constructor(name, image, total) {
+      constructor(name, image, total, stock) {
         this.name = name
         this.image = image
         this.total = total
+        this.stock = stock
       }
     }
 
@@ -39,7 +40,7 @@ export default {
       let info_card = [];
 
       for (const item of info_all_item) {
-        const new_item_card = new Item(item.name, item.image, item.total)
+        const new_item_card = new Item(item.name, item.image, item.total, item.stock)
 
         if (info_card.length == 58) {
           info_card.push(new_item_card);
@@ -68,7 +69,7 @@ main {
 
 
   header {
-    background: rgb(206,172,103);
+    // background: white;
 
     .wrap-header-img {
       padding: 1rem;

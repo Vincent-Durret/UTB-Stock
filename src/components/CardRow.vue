@@ -32,15 +32,14 @@ export default {
     .wrapper-card {
         display: flex;
         flex-wrap: wrap;
-        column-gap: 2rem;
-        row-gap: 1rem;
+        column-gap: 3.1rem;
+        row-gap: 3.1rem;
     }
 }
 
 @media (max-width: 760px) {
     .wrapper-card {
         flex-direction: column;
-        align-items: center;
     }
 }
 </style>

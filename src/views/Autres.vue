@@ -7,6 +7,7 @@
         <div class="wrap-title">
             <h1>Autres</h1>
         </div>
+        <Search />
         <CardRow v-for="(data, i) in data_other_card" :info_card="data" :key="i" />
     </main>
 
@@ -19,11 +20,13 @@ import { info_other } from '../DB/db.js'
 import { onMounted, ref } from 'vue';
 
 import CardRow from '../components/CardRow.vue';
+import Search from '../components/Search.vue';
 
 export default {
     name: 'Produits',
     components: {
-        CardRow
+        CardRow,
+        Search
     },
     methods: {
         goHome() {
@@ -32,10 +35,11 @@ export default {
     },
     setup() {
         class Other {
-            constructor(name, image, total) {
+            constructor(name, image, total, stock) {
                 this.name = name
                 this.image = image
                 this.total = total
+                this.stock = stock
             }
         }
 
@@ -45,7 +49,7 @@ export default {
             let info_card = [];
 
             for (const other of info_other) {
-                const new_other_card = new Other(other.name, other.image, other.total)
+                const new_other_card = new Other(other.name, other.image, other.total, other.stock)
 
                 if (info_card.length == 11) {
                     info_card.push(new_other_card);
@@ -73,14 +77,17 @@ export default {
     }
 
     .material-icons {
+        background: var(--dark);
+        padding: 0.4rem;
+        border-radius: 5px;
         font-size: 2.5rem;
-        color: var((--dark));
+        color: var((--logo-color));
         cursor: pointer;
         transition: 0.2s;
 
         &:hover {
-            color: var(--dark-alt);
-            transform: translateX(-0.5rem);
+            color: var(--brown);
+            transform: translateX(-0.5rem) scale(1.1, 1.1);
             transition: 0.2s ease-out;
         }
     }

@@ -14,7 +14,6 @@
                 </button>
             </div>
 
-            <h3>Menu</h3>
             <div class="menu">
                 <router-link class="button" to="/bois">
                     <span class="material-icons">forest</span>
@@ -58,17 +57,11 @@ const is_expanded = ref(localStorage.getItem("is_expanded") === "true")
 
 const imgSrc = ref('../assets/Logo/logo2.png')
 
-// $: imgSrc = is_expanded ? './assets/Logo/logo-UTB-stock.png' : './assets/Logo/logo2.png'
 
 const ToggleMenu = () => {
     is_expanded.value = !is_expanded.value
 
-    if (is_expanded.value) {
-        imgSrc.value = '../assets/Logo/logo-UTB-stock.png'
-    } else {
-        imgSrc.value = '../assets/Logo/logo2.png'
-    }
-
+    imgSrc.value = is_expanded.value ?  '../assets/Logo/logo-UTB-stock.png' : '../assets/Logo/logo2.png'
 
     localStorage.getItem("is_expanded", is_expanded.value)
 
@@ -127,14 +120,16 @@ aside {
 
             .material-icons {
                 font-size: 2rem;
-                color: var(--light);
+                color: black;
+                cursor: pointer;
             }
 
             &:hover {
                 .material-icons {
-                    color: var(--primary);
+                    color: var(--brown);
                     transform: translateX(0.5rem);
                     transition: 0.2s ease-out;
+                    cursor: pointer;
 
                 }
             }
@@ -145,14 +140,9 @@ aside {
     .button .text {
         opacity: 0;
         transition: 0.3s ease-out;
+        cursor: pointer;
     }
 
-    h3 {
-        color: var(--grey);
-        font-size: 0.875rem;
-        margin-bottom: 0.5rem;
-        text-transform: uppercase;
-    }
 
     .menu {
         margin: 0 -1rem;
@@ -167,27 +157,27 @@ aside {
 
             .material-icons {
                 font-size: 2rem;
-                color: var(--light);
+                color: black;
                 transition: 0.2s ease-out;
             }
 
             .text {
-                color: var(--light);
+                color: black;
+                font-weight: 600;
                 transition: 0.2s ease-out;
             }
 
             &:hover,
             &.router-link-exact-active {
-                background-color: var(--dark-alt);
 
                 .material-icons,
                 .text {
-                    color: var(--primary);
+                    color: var(--brown);
                 }
             }
 
             &.router-link-exact-active {
-                border-right: 5px solid var(--primary);
+                border-right: 5px solid var(--brown);
 
             }
         }

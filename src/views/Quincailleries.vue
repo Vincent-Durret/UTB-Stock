@@ -6,6 +6,7 @@
         <div class="wrap-title">
             <h1>Quincailleries</h1>
         </div>
+        <Search />
         <CardRow v-for="(data, i) in data_hardware_store_card" :info_card="data" :key="i" />
     </main>
 
@@ -18,11 +19,13 @@ import { info_quincaillerie } from '../DB/db.js'
 import { onMounted, ref } from 'vue';
 
 import CardRow from '../components/CardRow.vue';
+import Search from '../components/Search.vue';
 
 export default {
     name: 'Quincaillerie',
     components: {
-        CardRow
+        CardRow,
+        Search
     },
     methods: {
         goHome() {
@@ -31,10 +34,11 @@ export default {
     },
     setup() {
         class Hardware_Store {
-            constructor(name, image, total) {
+            constructor(name, image, total, stock) {
                 this.name = name
                 this.image = image
                 this.total = total
+                this.stock = stock
             }
         }
 
@@ -44,7 +48,7 @@ export default {
             let info_card = [];
 
             for (const hardware_store of info_quincaillerie) {
-                const new_hardware_store_card = new Hardware_Store(hardware_store.name, hardware_store.image, hardware_store.total)
+                const new_hardware_store_card = new Hardware_Store(hardware_store.name, hardware_store.image, hardware_store.total, hardware_store.stock)
 
                 if (info_card.length === 28) {
                     info_card.push(new_hardware_store_card);
@@ -72,14 +76,18 @@ export default {
     }
 
     .material-icons {
+        background: var(--dark);
+        padding: 0.4rem;
+        border-radius: 5px;
         font-size: 2.5rem;
-        color: var((--dark));
+        color: black;
         cursor: pointer;
-        transition: 0.2s;
+        transition: transform 0.2s;
 
         &:hover {
-            color: var(--dark-alt);
-            transform: translateX(-0.5rem);
+
+            color: var(--brown);
+            transform: translateX(-0.5rem) scale(1.1, 1.1);
             transition: 0.2s ease-out;
         }
     }

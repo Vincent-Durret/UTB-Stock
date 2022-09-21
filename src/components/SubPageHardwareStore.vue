@@ -40,7 +40,7 @@
     
         .material-icons {
             font-size: 2.5rem;
-            color: var((--dark));
+            color: var((--dore));
             cursor: pointer;
             transition: 0.2s;
     
@@ -85,7 +85,7 @@
     
         input[type=number]:focus {
             border-radius: 10px;
-            border: 1px solid var(--dark); 
+            border: 1px solid var(--dore); 
             transition: 0.2s;
             border-radius: 2px;
     
@@ -94,7 +94,7 @@
         button {
             margin-top: 10px;
             border-radius: 15px;
-            background-color: var(--dark);
+            background-color: var(--dore);
             padding: 10px;
             color: var(--light);
             transition: 0.2s;

@@ -6,10 +6,9 @@
     <div class="wrap-title">
       <h1>Bois</h1>
     </div>
+    <SearchVue />
     <CardRow v-for="(data, i) in data_card" :info_card="data" :key="i" />
   </main>
-
-
 </template>
 
 <script>
@@ -18,11 +17,13 @@ import { info_bois } from '../DB/db.js'
 import { onMounted, ref } from 'vue';
 
 import CardRow from '../components/CardRow.vue';
+import SearchVue from '../components/Search.vue';
 
 export default {
   name: 'Bois',
   components: {
     CardRow,
+    SearchVue,
   },
   methods: {
     goHome() {
@@ -31,10 +32,11 @@ export default {
   },
   setup() {
     class Card {
-      constructor(name, image, total) {
+      constructor(name, image, total, stock) {
         this.name = name
         this.image = image
         this.total = total
+        this.stock = stock
       }
     }
 
@@ -44,7 +46,7 @@ export default {
       let info_card = [];
 
       for (const card of info_bois) {
-        const new_card = new Card(card.name, card.image, card.total)
+        const new_card = new Card(card.name, card.image, card.total, card.stock)
 
         if (info_card.length === 3) {
           info_card.push(new_card);
@@ -67,19 +69,24 @@ export default {
 
 <style lang="scss">
 .bois-page {
+
   .return {
     margin-bottom: 1rem;
   }
 
   .material-icons {
+    background: var(--dark);
+    padding: 0.4rem;
+    border-radius: 5px;
     font-size: 2.5rem;
-    color: var((--dark));
+    color: var((--logo-color));
     cursor: pointer;
     transition: 0.2s;
 
     &:hover {
-      color: var(--dark-alt);
-      transform: translateX(-0.5rem);
+      color: var(--brown);
+      transform: translateX(-0.5rem) scale(1.1, 1.1);
+
       transition: 0.2s ease-out;
     }
 

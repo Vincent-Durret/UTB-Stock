@@ -49,7 +49,7 @@ main {
 
         &:hover {
             box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-            border: 8px solid var(--dark);
+            border: 15px solid var(--dark);
         }
 
     }

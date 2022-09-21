@@ -9,6 +9,7 @@
                 :to="{name: 'SubCard', params: {name: allitem.name }}">
                 <div class="container--restaurant--search">
                     <p class="lh"> {{ allitem.name }} </p>
+                    <hr class="trait">
                 </div>
             </router-link>
         </div>
@@ -105,7 +106,6 @@ export default {
         position: absolute;
         top: 100%;
         width: 400px;
-        // background-color: rgb(206, 172, 103);
         background: var(--light);
         border: 5px solid var(--dark);
         border-top: none;
@@ -117,56 +117,26 @@ export default {
             text-decoration: none;
             color: black;
 
-            &:hover .lh::after {
-                animation: etirer 0.4s ease-in-out ;
-            }
-
-
             .container--restaurant--search {
                 padding: 10px;
                 display: flex;
+                flex-direction: column;
 
-                &:hover {
-                    background: var(--light);
+                &:hover .lh {
+                    background: var(--dark);
+                    color: black;
                 }
 
                 .lh {
                     display: flex;
                     flex-direction: column;
                     padding: 1rem;
+                    font-weight: 600;
                 }
 
-                .lh::after {
-                    content: "";
-                    flex: 1 2;
-                    display: flex;
-                    border-bottom: 4px solid rgb(206, 172, 103);
-                    width: 0%;
-                }
-
-
-
-
-                @keyframes etirer {
-                    0% {
-                        width: 0%;
-                    }
-
-                    25% {
-                        width: 25%;
-                    }
-
-                    50% {
-                        width: 50%;
-                    }
-
-                    75% {
-                        width: 75%;
-                    }
-
-                    100% {
-                        width: 100%;
-                    }
+                .trait {
+                    width: 100%;
+                    border-radius: 50%;
                 }
             }
         }
@@ -175,6 +145,9 @@ export default {
 
 @media (max-width: 760px) {
     .wrapper--input {
+        margin: 1.5rem;
+        align-items: center;
+        justify-content: center;
 
         input {
             width: 300px;

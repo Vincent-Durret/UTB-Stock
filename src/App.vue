@@ -26,11 +26,13 @@ export default {
   --primary: #ddcdba;
   --primary-alt: #22c55e;
   --grey: #64748b;
-  --dark: #1e293b;
-  --dark-alt: #334155;
+  // --dark: #1e293b;
+  --dark:rgb(206,172,103);
+  --dark-alt: #E3CD8B;
   --light: #F0F7EE;
   --sidebar-width: 300px;
-  --logo-color: #D08B00;
+  --logo-color: black;
+  --brown: #863A12;
 }
 
 * {
@@ -42,6 +44,10 @@ export default {
 
 body {
   background: var(--light);
+}
+
+header {
+  margin-right: 5rem;
 }
 
 button {
