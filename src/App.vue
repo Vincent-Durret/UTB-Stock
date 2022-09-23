@@ -30,9 +30,17 @@ export default {
   --dark:rgb(206,172,103);
   --dark-alt: #E3CD8B;
   --light: #F0F7EE;
-  --sidebar-width: 300px;
+  // COLOR
+  --background:#ddcdba;
   --logo-color: black;
   --brown: #863A12;
+  --or:rgb(206,172,103);
+  // DIMENTION
+  --card-width: 250px;
+  --card-height: 250px
+  --sidebar-width: 300px;
+
+
 }
 
 * {

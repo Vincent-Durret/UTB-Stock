@@ -98,7 +98,7 @@ aside {
     }
 
     .logo {
-        margin-bottom: 1rem;
+        margin-bottom: 2rem;
 
         img {
             width: 5rem;
