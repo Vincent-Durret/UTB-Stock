@@ -15,7 +15,7 @@
 
 <script>
 export default {
-    name: "SubPage",
+    name: "SubCard",
     props: {
         sub: Object,
     },
@@ -24,7 +24,6 @@ export default {
 
 <style lang="scss" scoped>
 main {
-    background: #f0f7ee;
     min-height: 100vh;
 }
 
@@ -39,7 +38,7 @@ main {
         box-sizing: border-box;
         width: 16rem;
         height: 15rem;
-        background: var(--dark-alt);
+        background: var(--or-alt);
         border-radius: 5%;
         display: flex;
         justify-content: center;
@@ -49,7 +48,7 @@ main {
 
         &:hover {
             box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-            border: 15px solid var(--dark);
+            border: 15px solid var(--or);
         }
 
     }
@@ -77,19 +76,20 @@ main {
 
     }
 
-
-
     .bouton-subpage {
         margin-top: 10px;
         border-radius: 5px;
-        background-color: var(--dark);
+        background-color: var(--or);
         padding: 10px;
-        color: var(--logo-color);
-        transition: transform 0.2s;
+        color: var(--black);
+        transition: background 0.2s ease;
+        font-size: 1rem;
+        font-weight: 700;
 
         &:hover {
             box-shadow: rgb(38, 57, 77) 0px 10px 15px -10px;
-            transform: scale(1.1, 1.1);
+            background-color: var(--brown);
+            color: var(--white);
         }
     }
 

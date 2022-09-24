@@ -27,19 +27,19 @@ export default {
   --primary-alt: #22c55e;
   --grey: #64748b;
   // --dark: #1e293b;
-  --dark:rgb(206,172,103);
+  --dark: rgb(206, 172, 103);
   --dark-alt: #E3CD8B;
-  --light: #F0F7EE;
   // COLOR
-  --background:#ddcdba;
+  --background: #ddcdba;
   --logo-color: black;
+  --black: #000000;
   --brown: #863A12;
-  --or:rgb(206,172,103);
+  --or: rgb(206, 172, 103);
+  --or-alt: #E3CD8B;
+  --light: #F0F7EE;
+  --white: #FFF;
   // DIMENTION
-  --card-width: 250px;
-  --card-height: 250px
   --sidebar-width: 300px;
-
 
 }
 
@@ -49,7 +49,6 @@ export default {
   box-sizing: border-box;
   // font-family: 'Fira sans', sans-serif;
   font-family: 'Oswald';
-
 }
 
 body {
@@ -58,6 +57,15 @@ body {
 
 header {
   margin-right: 5rem;
+}
+
+h1 {
+  font-size: 2rem;
+  color: var(--black);
+  background-color: var(--or);
+  padding: 1rem;
+  border-radius: 5px;
+  margin: 2rem;
 }
 
 button {
@@ -74,12 +82,12 @@ button {
 
   main {
     flex: 1 1 0;
-    padding-left: 6rem;
+    padding-left: 4rem;
     padding-top: 2rem;
 
 
     @media (max-width: 760px) {
-      padding-left: 6rem;
+      padding-left: 3.8rem;
       padding-top: 2rem;
     }
   }

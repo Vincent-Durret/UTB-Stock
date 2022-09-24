@@ -69,7 +69,6 @@ main {
 
 
   header {
-    // background: white;
 
     .wrap-header-img {
       padding: 1rem;
@@ -86,5 +85,4 @@ main {
   }
 }
 
-@media (max-width: 760px) {}
 </style>

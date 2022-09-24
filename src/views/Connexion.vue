@@ -46,7 +46,7 @@ export default {
 
 <style scoped>
 main {
-  background: #F0F7EE;
+  background: var(--light);
   padding: 0;
 }
 
@@ -61,14 +61,6 @@ form {
   display: block;
 }
 
-form.register {
-  display: none;
-  color: #FFF;
-  background-color: rgb(245, 66, 101);
-  background-image: linear-gradient(to bottom right,
-      rgb(245, 66, 101) 0%,
-      rgb(189, 28, 60) 100%);
-}
 
 .wrap {
   display: flex;
@@ -114,8 +106,8 @@ input::placeholder {
 }
 
 form.register input:not([type="submit"]) {
-  color: #FFF;
-  border-bottom: 2px solid #FFF;
+  color: var(--white);
+  border-bottom: 2px solid var(--white);
 }
 
 form.login input:not([type="submit"]) {
@@ -125,7 +117,7 @@ form.login input:not([type="submit"]) {
 
 form.login input[type="submit"] {
   background-color: var(--dark);
-  color: #f1f5f9;
+  color: var(--black);
   font-weight: 700;
   padding: 1rem 2rem;
   border-radius: 0.5rem;
@@ -137,18 +129,10 @@ form.login input[type="submit"] {
 form.login input[type="submit"]:hover {
   box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
   background-color: var(--brown);
+  color: var(--white);
   transform: scale(0.95, 0.95);
 }
 
-form.register input[type="submit"] {
-  background-color: #FFF;
-  color: rgb(245, 66, 101);
-  font-weight: 700;
-  padding: 1rem 2rem;
-  border-radius: 0.5rem;
-  cursor: pointer;
-  text-transform: uppercase;
-}
 
 @media (max-width: 760px) {
   .login {

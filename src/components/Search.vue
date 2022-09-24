@@ -127,8 +127,9 @@ export default {
     }
 
     input[type=search]:focus {
-        border: 5px solid var(--dark);
+        border: 5px solid var(--or);
         border-bottom: none;
+        
     }
 
     .search {
@@ -136,7 +137,7 @@ export default {
         top: 100%;
         width: 400px;
         background: var(--light);
-        border: 5px solid var(--dark);
+        border: 5px solid var(--or);
         border-top: none;
         border-radius: 0 0 5px 5px;
         z-index: 2;
@@ -144,40 +145,35 @@ export default {
 
         .link {
             text-decoration: none;
-            color: black;
+            color: var(--black);
 
             .container--restaurant--search {
                 display: flex;
                 flex-direction: column;
 
-                // &:hover .lh {
-                //     background: var(--dark);
-                //     color: black;
-                // }
-
                 .lh {
                     text-decoration: none;
-                    color: #222;
-                    font-size: 1.2rem;
+                    color: var(--black);
+                    font-size: 1rem;
                     padding: 20px;
-                    // background: #efefef;
-                    // text-transform: uppercase;
+                    text-transform: uppercase;
                     text-align: center;
-                    @include magic-border(3px, var(--dark), 0.2s, 0);
+                    @include magic-border(3px, var(--or), 0.2s, 0);
                     margin: 10px;
                     flex-grow: 1;
                     cursor: pointer;
                     transition: background 2s ease;
 
                     &:hover {
-                        color: black;
-                        background: var(--dark);
+                        color: var(--black);
+                        background: var(--or);
                     }
                 }
 
                 .trait {
                     width: 100%;
                     border-radius: 50%;
+                    margin-bottom: 5px;
                 }
             }
         }

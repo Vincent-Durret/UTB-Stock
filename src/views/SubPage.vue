@@ -1,20 +1,20 @@
 <template>
     <main class="subcard">
         <div class="wrap-titre">
-            <h1 class="titre-subcard"> {{ $route.params.name }} </h1>
+            <h1> {{ $route.params.name }} </h1>
         </div>
-        <SubPageRow v-for="(data, i) in data_sub" :info_sub="data" :key="i" />
+        <SubCardRow v-for="(data, i) in data_sub" :info_sub="data" :key="i" />
     </main>
 </template>
 
 <script>
 import { info_itauba } from '../DB/db.js'
-import SubPageRow from '../components/SubPageRow.vue';
+import SubCardRow from '../components/SubCardRow.vue';
 import { onMounted, ref } from 'vue';
 export default {
-    name: "SubCard",
+    name: "SubPage",
     components: {
-        SubPageRow,
+        SubCardRow,
     },
 
     setup() {
@@ -59,17 +59,6 @@ export default {
     .wrap-titre {
         display: flex;
         width: 100%;
-
-
-        .titre-subcard {
-            font-size: 2rem;
-            color: var(--logo-color);
-            background-color: var(--dark);
-            padding: 1rem;
-            border-radius: 5px;
-            margin: 1rem;
-
-        }
     }
 
 

@@ -73,15 +73,15 @@ export default {
 <style lang="scss">
 .other-page {
     .return {
-        margin-bottom: 1rem;
+        margin: 1rem;
     }
 
     .material-icons {
-        background: var(--dark);
+        background: var(--or);
         padding: 0.4rem;
         border-radius: 5px;
         font-size: 2.5rem;
-        color: var((--logo-color));
+        color: var((--black));
         cursor: pointer;
         transition: 0.2s;
 
@@ -95,15 +95,6 @@ export default {
     .wrap-title {
         display: flex;
         width: 100%;
-
-        h1 {
-            font-size: 2rem;
-            color: var(--logo-color);
-            background-color: var(--dark);
-            padding: 1rem;
-            border-radius: 5px;
-            margin: 1rem;
-        }
     }
 }
 </style>

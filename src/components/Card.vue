@@ -28,7 +28,6 @@ export default {
         display: flex;
         flex-direction: row;
         transition: 0.5s;
-        margin: 15px;
     }
 
     .button {
@@ -44,10 +43,10 @@ export default {
         transition: 0.3s;
 
         &:hover {
-            background: var(--dark);
+            background: var(--or);
             transform: scale(0.9, 0.9);
             box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
-            border: 3px solid var(--dark);
+            border: 3px solid var(--or);
         }
 
         .image {
@@ -59,19 +58,19 @@ export default {
             height: 200px;
             border-radius: 20px;
             z-index: 0;
-            border: 3px solid var(--dark);
+            border: 3px solid var(--or);
         }
 
 
         .text {
             position: relative;
-            background: var(--dark);
+            background: var(--or);
             border-radius: 5px;
             padding: 5px;
             position: relative;
             font-size: 1.2rem;
             text-transform: uppercase;
-            color: var(--logo-color);
+            color: var(--black);
             z-index: 1;
             margin-left: 25px;
             margin-right: 25px;
@@ -82,12 +81,12 @@ export default {
         .total {
             // margin-top: 1rem;
             top: 20%;
-            background: var(--dark);
+            background: var(--or);
             padding: 0.3rem;
             border-radius: 5px;
             position: relative;
             z-index: 1;
-            color: black;
+            color: var(--black);
             font-weight: 600;
         }
     }

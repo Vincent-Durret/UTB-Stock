@@ -87,7 +87,7 @@ aside {
     min-height: 100vh;
     padding: 1rem;
 
-    background-color: var(--dark);
+    background-color: var(--or);
     color: var(--light);
 
     transition: 0.2s ease-out;
@@ -120,7 +120,7 @@ aside {
 
             .material-icons {
                 font-size: 2rem;
-                color: black;
+                color: var(--black);
                 cursor: pointer;
             }
 
@@ -157,12 +157,12 @@ aside {
 
             .material-icons {
                 font-size: 2rem;
-                color: black;
+                color: var(--black);
                 transition: 0.2s ease-out;
             }
 
             .text {
-                color: black;
+                color: var(--black);
                 font-weight: 600;
                 transition: 0.2s ease-out;
             }

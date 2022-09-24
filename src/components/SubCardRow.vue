@@ -1,20 +1,22 @@
 <template>
-    <div class="subpage-row">
-        <div class="wrapper-sub">
-            <SubPage v-for="(sub, index) in info_sub" :sub="sub" :key="index" />
+    <main>
+        <div class="subpage-row">
+            <div class="wrapper-sub">
+                <SubCard v-for="(sub, index) in info_sub" :sub="sub" :key="index" />
+            </div>
         </div>
-    </div>
+    </main>
 </template>
 
 <script>
-import SubPage from './SubPage.vue';
+import SubCard from './SubCard.vue';
 export default {
-    name: "SubPageRow",
+    name: "SubCardRow",
     props: {
         info_sub: Array
     },
     components: {
-        SubPage,
+        SubCard
     },
 
 
@@ -23,7 +25,6 @@ export default {
 
 <style lang="scss">
 .subpage-row {
-    background: #f0f7ee;
     min-height: 100vh;
 
 

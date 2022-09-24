@@ -23,7 +23,7 @@ const routes = [
   },
   {
     path: "/bois/:name",
-    component: () => import("../views/SubCard.vue"),
+    component: () => import("../views/SubPage.vue"),
     name: "SubCard",
     meta: {
       requiresAuth: true,
