@@ -1,6 +1,7 @@
 // Partie BOIS-----------------------------
 const info_bois = [
   {
+    category:"Bois",
     name: "Itauba",
     image: "/assets/Bois/itauba.jpg",
     total: "4000",

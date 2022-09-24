@@ -94,6 +94,7 @@ export default {
 
     .wrap-title {
         display: flex;
+        justify-content: center;
         width: 100%;
     }
 

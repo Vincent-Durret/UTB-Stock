@@ -96,7 +96,6 @@ export default {
 @media (max-width: 760px) {
     .wood-card {
         .card {
-            display: flex;
             flex-direction: column;
             transition: 0.5s;
         }

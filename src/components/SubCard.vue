@@ -22,13 +22,10 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-main {
-    min-height: 100vh;
-}
+<style lang="scss" >
+
 
 .subpage {
-
     .sub-card {
         display: flex;
     }
@@ -36,8 +33,8 @@ main {
     .sub-wrap {
         margin: 15px;
         box-sizing: border-box;
-        width: 16rem;
-        height: 15rem;
+        width: 230px;
+        height: 230px;
         background: var(--or-alt);
         border-radius: 5%;
         display: flex;
@@ -106,12 +103,10 @@ main {
 }
 
 @media (max-width: 760px) {
-    .subpage-hardware-store {
+    .subpage {
         .sub-card {
-            display: flex;
             flex-direction: column;
             transition: 0.5s;
-            margin-left: -10px;
         }
 
         .sub-wrap {
