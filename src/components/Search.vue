@@ -20,10 +20,15 @@
 <script>
 import { onMounted, ref, watch } from 'vue';
 import { info_all_item } from '../DB/db';
+
+
+
 export default {
     name: 'Search',
-
+    
     setup() {
+
+
         class All {
             constructor(name) {
                 this.name = name
@@ -58,6 +63,7 @@ export default {
             new_value == 0 ? search_item.value = [] : search_item.value = new_search_item
 
         })
+
 
         onMounted(makeDataItem,)
 
@@ -129,7 +135,7 @@ export default {
     input[type=search]:focus {
         border: 5px solid var(--or);
         border-bottom: none;
-        
+
     }
 
     .search {

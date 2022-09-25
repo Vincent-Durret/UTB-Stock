@@ -3,7 +3,7 @@ const info_bois = [
   {
     category:"Bois",
     name: "Itauba",
-    image: "/assets/Bois/itauba.jpg",
+    image: "./assets/Bois/itauba.jpg",
     total: "4000",
     stock: "6000 m²",
   },

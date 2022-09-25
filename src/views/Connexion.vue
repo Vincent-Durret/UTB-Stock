@@ -116,7 +116,7 @@ form.login input:not([type="submit"]) {
 }
 
 form.login input[type="submit"] {
-  background-color: var(--dark);
+  background-color: var(--or);
   color: var(--black);
   font-weight: 700;
   padding: 1rem 2rem;

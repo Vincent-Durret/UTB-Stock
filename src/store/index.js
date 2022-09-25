@@ -6,6 +6,9 @@ import {
   signInWithEmailAndPassword,
   signOut,
 } from "firebase/auth";
+import { useToast } from 'vue-toastification'
+
+const toast = useToast()
 
 export default createStore({
   state: {
@@ -29,19 +32,20 @@ export default createStore({
       } catch (error) {
         switch (error.code) {
           case "auth/user-not-found":
-            alert("Utilisateur inconnue !");
+            toast.error("Utilisateur inconnue !")
             break;
           case "auth/wrong-password":
-            alert("Mot de passe inconnue !");
+            toast.error("Mot de passe inconnue !")
             break;
           default:
-            alert("Veuillez remplire tous les champs");
+            toast.error("Veuillez remplire tous les champs")
         }
 
         return;
       }
 
       commit("SET_USER", auth.currentUser);
+      toast.success("Bienvenue sur UTB Stock")
 
       router.push("/");
     },
@@ -73,6 +77,7 @@ export default createStore({
       }
 
       commit("SET_USER", auth.currentUser);
+      
 
       router.push("/");
     },
@@ -81,6 +86,8 @@ export default createStore({
       await signOut(auth);
 
       commit("CLEAR_USER");
+
+      toast.success("Vous êtes deconnectée")
 
       router.push("/connexion");
     },

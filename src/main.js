@@ -2,8 +2,14 @@ import { createApp } from "vue";
 import App from "./App.vue";
 
 import router from "./router";
+
 import { initializeApp } from "firebase/app";
+
 import store from "./store";
+
+import Toast from "vue-toastification";
+import "vue-toastification/dist/index.css";
+
 
 const firebaseConfig = {
   apiKey: "AIzaSyCyRyUyuuVCs6eEs-U1l3h09R11LQtU-VM",
@@ -15,6 +21,15 @@ const firebaseConfig = {
   measurementId: "G-MZCJEL5WNJ",
 };
 
+const options = {
+  transition: "Vue-Toastification__fade",
+  timeout: 2000,
+  maxToasts: 20,
+  newestOnTop: true,
+  position: "top-center",
+  pauseOnHover: false,
+};
+
 initializeApp(firebaseConfig);
 
-createApp(App).use(router).use(store).mount("#app");
+createApp(App).use(router).use(store).use(Toast, options).mount("#app");

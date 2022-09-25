@@ -24,7 +24,12 @@ export default {
     Search,
   },
 
+
+
   setup() {
+
+
+
     class Item {
       constructor(name, image, total, stock) {
         this.name = name

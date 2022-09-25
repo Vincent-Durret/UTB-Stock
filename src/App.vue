@@ -26,9 +26,6 @@ export default {
   --primary: #ddcdba;
   --primary-alt: #22c55e;
   --grey: #64748b;
-  // --dark: #1e293b;
-  --dark: rgb(206, 172, 103);
-  --dark-alt: #E3CD8B;
   // COLOR
   --background: #ddcdba;
   --logo-color: black;
@@ -48,7 +45,7 @@ export default {
   padding: 0;
   box-sizing: border-box;
   // font-family: 'Fira sans', sans-serif;
-  font-family: 'Oswald';
+  font-family: Geomanist, sans-serif;;
 }
 
 body {
