@@ -7,12 +7,14 @@
       <h1>Bois</h1>
     </div>
     <SearchVue />
-    <CardRow v-for="(data, i) in data_card" :info_card="data" :key="i" />
+    <div class="cards-grid">
+      <CardRow v-for="(data, i) in data_card" :info_card="data" :key="i" />
+    </div>
   </main>
 </template>
 
 <script>
-import { info_bois } from '../DB/db.js'
+import info_all_item, { info_bois } from '../DB/db.js'
 
 import { onMounted, ref } from 'vue';
 
@@ -45,7 +47,7 @@ export default {
     const makeDataCard = () => {
       let info_card = [];
 
-      for (const card of info_bois) {
+      for (const card of info_all_item.filter(item => item.category.toLowerCase() === 'bois')) {
         const new_card = new Card(card.name, card.image, card.total, card.stock)
 
         if (info_card.length === 3) {
