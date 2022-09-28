@@ -38,7 +38,7 @@ export default {
     let data_item_card = ref([]);
 
 
-    const itemCollectionRef = query(collection(db, 'products'), orderBy('name', "asc"))
+    const itemCollectionRef = query(collection(db, 'products'), orderBy('category', "asc"))
     // const itemCollectionQuery = query(itemCollectionRef, orderBy('date', 'desc'))
 
     const makeData = async () => {

@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import { info_itauba } from '../DB/db.js'
+// import { info_itauba } from '../DB/db.js'
 import SubCardRow from '../components/SubCardRow.vue';
 import { onMounted, ref } from 'vue';
 export default {

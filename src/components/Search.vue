@@ -21,7 +21,7 @@
 <script>
 import { onMounted, ref, watch } from 'vue';
 
-import { collection, getDocs, orderBy, query } from 'firebase/firestore'
+import { collection, getDocs, orderBy, query, where, limit } from 'firebase/firestore'
 import { db } from '../Firebase/firebase.js'
 
 
@@ -39,6 +39,8 @@ export default {
 
 
         const itemCollectionRef = query(collection(db, 'products'), orderBy('category', 'asc'))
+
+        // const itemCollectionCategory = query(collection(db, "products"), where("category", "==", "Bois"), limit(1))
         // const itemCollectionQuery = query(itemCollectionRef, orderBy('date', 'desc'))
 
         const makeData = async () => {
@@ -53,9 +55,12 @@ export default {
                     name: doc.data().name,
                 }
                 itemProduct.push(product)
+
             })
             all_item = itemProduct
         }
+
+
         //  user search restaurant
         let user_search_item = ref('')
 

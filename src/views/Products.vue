@@ -8,7 +8,7 @@
     </div>
     <SearchVue />
     <div class="cards-grid" >
-      <Card v-for="(product) in data_card" :card="product" :key="product" />
+      <Card v-for="(product) in data_card" :card="product" :key="product.category" />
     </div>
   </main>
 </template>
