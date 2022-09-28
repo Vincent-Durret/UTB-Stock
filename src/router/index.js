@@ -14,13 +14,22 @@ const routes = [
   },
 
   {
-    path: "/bois",
-    component: () => import("../views/Bois.vue"),
-    name: "Bois",
+    path: "/:category",
+    component: () => import("../views/Products.vue"),
+    name: "Products",
     meta: {
       requiresAuth: true,
     },
   },
+
+  // {
+  //   path: "/bois",
+  //   component: () => import("../views/Bois.vue"),
+  //   name: "Bois",
+  //   meta: {
+  //     requiresAuth: true,
+  //   },
+  // },
   {
     path: "/bois/:name",
     component: () => import("../views/SubPage.vue"),
@@ -29,30 +38,30 @@ const routes = [
       requiresAuth: true,
     },
   },
-  {
-    path: "/quincailleries",
-    component: () => import("../views/Quincailleries.vue"),
-    name: "Quincailleries",
-    meta: {
-      requiresAuth: true,
-    },
-  },
-  {
-    path: "/produits",
-    name: "Produits",
-    component: () => import("../views/Produits.vue"),
-    meta: {
-      requiresAuth: true,
-    },
-  },
-  {
-    path: "/autres",
-    name: "Autres",
-    component: () => import("../views/Autres.vue"),
-    meta: {
-      requiresAuth: true,
-    },
-  },
+  // {
+  //   path: "/quincailleries",
+  //   component: () => import("../views/Quincailleries.vue"),
+  //   name: "Quincailleries",
+  //   meta: {
+  //     requiresAuth: true,
+  //   },
+  // },
+  // {
+  //   path: "/produits",
+  //   name: "Produits",
+  //   component: () => import("../views/Produits.vue"),
+  //   meta: {
+  //     requiresAuth: true,
+  //   },
+  // },
+  // {
+  //   path: "/autres",
+  //   name: "Autres",
+  //   component: () => import("../views/Autres.vue"),
+  //   meta: {
+  //     requiresAuth: true,
+  //   },
+  // },
   {
     path: "/connexion",
     name: "Connexion",

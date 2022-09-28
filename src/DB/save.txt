@@ -414,8 +414,8 @@ const info_product = [
     category: 'Produits',
     name: 'Colle EPDM',
     image: '/assets/Produits/colle-epdm-cartouche.jpg',
-    total: 50,
-    stock: 50,
+    total: 50 ,
+    stock: 50 ,
     unit: 'Boites',
   },
   {
@@ -568,5 +568,3 @@ const info_all_item = [
 ]
 
 export default info_all_item
-
-

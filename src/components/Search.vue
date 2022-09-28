@@ -5,10 +5,11 @@
             search
         </span> -->
         <div class="search">
-            <router-link class="link" v-for="(allitem, i) in search_item" :key="i"
-                :to="{name: 'SubCard', params: {name: allitem.name }}">
+            <router-link class="link" v-for="(product, i) in search_item" :key="i"
+                :to="{name: 'SubCard', params: {name: product.name }}">
                 <div class="container--restaurant--search">
-                    <p class="lh"> {{ allitem.name }} </p>
+                    <h3> {{ product.category }} </h3>
+                    <p class="lh"> {{ product.name }} </p>
                     <hr class="trait">
                 </div>
             </router-link>
@@ -19,34 +20,41 @@
 
 <script>
 import { onMounted, ref, watch } from 'vue';
-import { info_all_item } from '../DB/db';
+
+import { collection, getDocs, orderBy, query } from 'firebase/firestore'
+import { db } from '../Firebase/firebase.js'
+
 
 
 
 export default {
     name: 'Search',
-    
+
     setup() {
-
-
-        class All {
-            constructor(name) {
-                this.name = name
-            }
-        }
 
         let data_item = ref([]);
 
         let all_item = []
 
-        const makeDataItem = () => {
-            let three_item = [];
 
-            for (const allitem of info_all_item) {
-                const new_item = new All(allitem.name)
-                all_item.push(new_item)
 
-            }
+        const itemCollectionRef = query(collection(db, 'products'), orderBy('category', 'asc'))
+        // const itemCollectionQuery = query(itemCollectionRef, orderBy('date', 'desc'))
+
+        const makeData = async () => {
+            const querySnapshot = await getDocs(itemCollectionRef)
+            let itemProduct = []
+            querySnapshot.forEach((doc) => {
+                // doc.data() is never undefined for query doc snapshots
+                // console.log(doc.id, " => ", doc.data());
+                const product = {
+                    id: doc.id,
+                    category: doc.data().category,
+                    name: doc.data().name,
+                }
+                itemProduct.push(product)
+            })
+            all_item = itemProduct
         }
         //  user search restaurant
         let user_search_item = ref('')
@@ -57,15 +65,14 @@ export default {
 
             let regex = RegExp(new_value.toLowerCase())
 
-            let new_search_item = all_item.filter(allitem => regex.test(allitem.name.toLowerCase()))
+            let new_search_item = all_item.filter(product => regex.test(product.name.toLowerCase()))
 
 
             new_value == 0 ? search_item.value = [] : search_item.value = new_search_item
 
         })
 
-
-        onMounted(makeDataItem,)
+        onMounted(makeData)
 
         return {
             data_item,
@@ -161,8 +168,9 @@ export default {
                     text-decoration: none;
                     color: var(--black);
                     font-size: 1rem;
+                    font-weight: bold;
                     padding: 20px;
-                    text-transform: uppercase;
+                    // text-transform: uppercase;
                     text-align: center;
                     @include magic-border(3px, var(--or), 0.2s, 0);
                     margin: 10px;

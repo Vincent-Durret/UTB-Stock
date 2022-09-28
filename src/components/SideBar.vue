@@ -1,54 +1,63 @@
 <template>
     <div v-if="store.state.user">
-            <aside :class="`${is_expanded && 'is-expanded'}`">
-                <div class="logo">
-                    <router-link to="/">
-                        <img :src="imgSrc" alt="UTB">
-                    </router-link>
-                </div>
+        <aside :class="`${is_expanded && 'is-expanded'}`">
+            <div class="logo">
+                <router-link to="/">
+                    <img :src="imgSrc" alt="UTB">
+                </router-link>
+            </div>
 
-                <div class="menu-toggle-wrap">
-                    <button class="menu-toggle" @click="ToggleMenu">
-                        <span class="material-icons">keyboard_double_arrow_right</span>
-                    </button>
-                </div>
+            <div class="menu-toggle-wrap">
+                <button class="menu-toggle" @click="ToggleMenu">
+                    <span class="material-icons">keyboard_double_arrow_right</span>
+                </button>
+            </div>
 
-                <div class="menu">
-                    <router-link class="button" to="/bois">
-                        <span class="material-icons">forest</span>
-                        <span class="text">Bois</span>
-                    </router-link>
-                    <router-link class="button" to="/quincailleries">
-                        <span class="material-icons">construction</span>
-                        <span class="text">Quincailleries</span>
-                    </router-link>
-                    <router-link class="button" to="/produits">
-                        <span class="material-icons">inventory</span>
-                        <span class="text">Produits</span>
-                    </router-link>
-                    <router-link class="button" to="/autres">
-                        <span class="material-icons">widgets</span>
-                        <span class="text">Autres</span>
-                    </router-link>
-                </div>
+            <div class="menu">
+                <router-link class="button" v-for="(wood) in data_card_wood" :key="wood"
+                :to="{name: 'Products', params: {category: wood.category }}">
+                    <span class="material-icons">forest</span>
+                    <span class="text">Bois</span>
+                </router-link>
+                <router-link class="button" v-for="(hardware) in data_card_harware" :key="hardware"
+                :to="{name: 'Products', params: {category: hardware.category }}">
+                    <span class="material-icons">construction</span>
+                    <span class="text">Quincailleries</span>
+                </router-link>
+                <router-link class="button" v-for="(product) in data_card_product" :key="product"
+                :to="{name: 'Products', params: {category: product.category }}">
+                    <span class="material-icons">inventory</span>
+                    <span class="text">Produits</span>
+                </router-link>
+                <router-link class="button" v-for="(other) in data_card_other" :key="other"
+                :to="{name: 'Products', params: {category: other.category }}">
+                    <span class="material-icons">widgets</span>
+                    <span class="text">Autres</span>
+                </router-link>
+            </div>
 
-                <div class="flex"></div>
+            <div class="flex"></div>
 
-                <div class="menu">
-                    <div class="button" @click="store.dispatch('logout')">
-                        <span class="material-icons">logout</span>
-                        <span class="text">Se déconecter</span>
-                    </div>
+            <div class="menu">
+                <div class="button" @click="store.dispatch('logout')">
+                    <span class="material-icons">logout</span>
+                    <span class="text">Se déconecter</span>
                 </div>
-            </aside>
-        </div>
+            </div>
+        </aside>
+    </div>
 
 </template>
 
 <script setup>
 import { ref } from 'vue';
-import { onBeforeMount } from 'vue'
+import { onBeforeMount, onMounted } from 'vue'
 import { useStore } from 'vuex'
+import { collection, getDocs, query, where, limit } from "firebase/firestore";
+
+import { db } from '../Firebase/firebase.js'
+
+
 
 
 const is_expanded = ref(localStorage.getItem("is_expanded") === "true")
@@ -71,6 +80,98 @@ const store = useStore()
 onBeforeMount(() => {
     store.dispatch('fetchUser')
 })
+
+let data_card_wood = ref([]);
+
+const itemCollectionWood = query(collection(db, "products"), where("category", "==", "Bois"), limit(1))
+const itemCollectionHardwareStore = query(collection(db, "products"), where("category", "==", "Quincailleries"), limit(1))
+const itemCollectionProduct = query(collection(db, "products"), where("category", "==", "Produits"), limit(1))
+const itemCollectionOther = query(collection(db, "products"), where("category", "==", "Autres"), limit(1))
+
+onMounted(async () => {
+    const querySnapshot = await getDocs(itemCollectionWood)
+    let itemProduct = []
+    querySnapshot.forEach((doc) => {
+        // doc.data() is never undefined for query doc snapshots
+        console.log(doc.id, " => ", doc.data())
+
+        const wood = {
+            id: doc.id,
+            category: doc.data().category
+
+        }
+        itemProduct.push(wood)
+
+    })
+    data_card_wood.value = itemProduct
+
+})
+
+let data_card_harware = ref([])
+
+onMounted(async () => {
+    const querySnapshot = await getDocs(itemCollectionHardwareStore)
+    let itemProduct = []
+    querySnapshot.forEach((doc) => {
+        // doc.data() is never undefined for query doc snapshots
+        console.log(doc.id, " => ", doc.data())
+
+        const hardware = {
+            id: doc.id,
+            category: doc.data().category
+
+        }
+        itemProduct.push(hardware)
+
+    })
+    data_card_harware.value = itemProduct
+
+})
+
+let data_card_product = ref([])
+
+onMounted(async () => {
+    const querySnapshot = await getDocs(itemCollectionProduct)
+    let itemProduct = []
+    querySnapshot.forEach((doc) => {
+        // doc.data() is never undefined for query doc snapshots
+        console.log(doc.id, " => ", doc.data())
+
+        const product = {
+            id: doc.id,
+            category: doc.data().category
+
+        }
+        itemProduct.push(product)
+
+    })
+    data_card_product.value = itemProduct
+
+})
+
+let data_card_other = ref([])
+
+onMounted(async () => {
+    const querySnapshot = await getDocs(itemCollectionOther)
+    let itemProduct = []
+    querySnapshot.forEach((doc) => {
+        // doc.data() is never undefined for query doc snapshots
+        console.log(doc.id, " => ", doc.data())
+
+        const other = {
+            id: doc.id,
+            category: doc.data().category.toLowerCase()
+
+        }
+        itemProduct.push(other)
+
+    })
+    data_card_other.value = itemProduct
+
+})
+
+
+
 
 
 </script>

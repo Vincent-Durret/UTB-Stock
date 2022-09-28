@@ -2,7 +2,7 @@
     <main>
         <div class="card-row">
             <div class="wrapper-card">
-                <Card v-for="(card, index) in info_card" :card="card" :key="index" />
+                <Card v-for="(product, index) in product" :card="product" :key="index" />
             </div>
         </div>
     </main>
@@ -13,7 +13,7 @@ import Card from './Card.vue';
 export default {
     name: "CardRow",
     props: {
-        info_card: Array
+        product: Array
     },
     components: {
         Card,
@@ -27,7 +27,7 @@ export default {
 main {
 
     .card-row {
-        min-height: 100vh;
+
 
 
         .wrapper-card {

@@ -5,7 +5,7 @@
                 <div :style="{ backgroundImage: `url(${card.image})` }" class="image"></div>
                 <span class="text">{{ card.name }}</span>
                 <!-- <progress id="file" :max="card.stock" :value="card.total"> {{ card.total }} </progress> -->
-                <h3 class="total"> {{card.total}} / {{ card.stock }} </h3>
+                <h3 class="total"> {{card.total}} / {{ card.stock }} {{ card.unit }} </h3>
             </router-link>
         </div>
     </div>

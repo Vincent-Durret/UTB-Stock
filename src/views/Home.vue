@@ -6,21 +6,27 @@
       </div>
       <Search />
     </header>
-    <CardRow v-for="(data, i) in data_item_card" :info_card="data" :key="i" />
+    <div class="wrap-card">
+      <Card v-for="(product) in data_item_card" :card="product" :key="product" />
+    </div>
   </main>
 </template>
 
 <script>
-import { info_all_item } from '../DB/db.js'
+// import info_all_item from '../DB/db.js'
 import { onMounted, ref } from 'vue';
 
-import CardRow from '../components/CardRow.vue';
+import { collection, getDocs, orderBy, query } from 'firebase/firestore'
+
+import { db } from '../Firebase/firebase.js'
+
+import Card from '../components/Card.vue';
 import Search from '../components/Search.vue';
 
 export default {
   name: 'Home',
   components: {
-    CardRow,
+    Card,
     Search,
   },
 
@@ -29,38 +35,37 @@ export default {
   setup() {
 
 
-
-    class Item {
-      constructor(name, image, total, stock) {
-        this.name = name
-        this.image = image
-        this.total = total
-        this.stock = stock
-      }
-    }
-
     let data_item_card = ref([]);
 
-    const makeDataItem = () => {
-      let info_card = [];
 
-      for (const item of info_all_item) {
-        const new_item_card = new Item(item.name, item.image, item.total, item.stock)
+    const itemCollectionRef = query(collection(db, 'products'), orderBy('name', "asc"))
+    // const itemCollectionQuery = query(itemCollectionRef, orderBy('date', 'desc'))
 
-        if (info_card.length == 58) {
-          info_card.push(new_item_card);
-          data_item_card.value.push(info_card);
-          info_card = [];
-        } else {
-          info_card.push(new_item_card);
+    const makeData = async () => {
+      const querySnapshot = await getDocs(itemCollectionRef)
+      let itemProduct = []
+      querySnapshot.forEach((doc) => {
+        // doc.data() is never undefined for query doc snapshots
+        // console.log(doc.id, " => ", doc.data());
+        const product = {
+          id: doc.id,
+          category: doc.data().category,
+          name: doc.data().name,
+          image: doc.data().image,
+          total: doc.data().total,
+          stock: doc.data().stock,
+          unit: doc.data().unit
         }
-      }
-    };
+        itemProduct.push(product)
+      })
+      data_item_card.value = itemProduct
+    }
 
-    onMounted(makeDataItem,);
+    onMounted(makeData)
 
     return {
       data_item_card,
+
     }
   },
 
@@ -88,6 +93,12 @@ main {
       }
     }
   }
-}
 
+  .wrap-card {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem 2rem;
+    justify-content: center;
+  }
+}
 </style>
