@@ -35,7 +35,8 @@ export default {
   setup() {
 
 
-    let data_item_card = ref([]);
+
+    let data_item_card = ref([])
 
 
     const itemCollectionRef = query(collection(db, 'products'), orderBy('category', "asc"))
@@ -62,6 +63,8 @@ export default {
     }
 
     onMounted(makeData)
+
+
 
     return {
       data_item_card,

@@ -15,7 +15,7 @@
 
             <div class="menu">
                 <router-link class="button" v-for="(wood) in data_card_wood" :key="wood"
-                :to="{name: 'Products', params: {category: wood.category }}">
+                :to="{name: 'Products', params: {category: wood.category, name: wood.name, image: wood.image, total: wood.total, stock: wood.stock, unit: wood.unit }}">
                     <span class="material-icons">forest</span>
                     <span class="text">Bois</span>
                 </router-link>
@@ -93,12 +93,16 @@ onMounted(async () => {
     let itemProduct = []
     querySnapshot.forEach((doc) => {
         // doc.data() is never undefined for query doc snapshots
-        console.log(doc.id, " => ", doc.data())
+        // console.log(doc.id, " => ", doc.data())
 
         const wood = {
             id: doc.id,
-            category: doc.data().category
-
+            category: doc.data().category,
+            name: doc.data().name,
+            image: doc.data().image,
+            total: doc.data().total,
+            stock: doc.data().stock,
+            unit: doc.data().unit
         }
         itemProduct.push(wood)
 
@@ -114,7 +118,7 @@ onMounted(async () => {
     let itemProduct = []
     querySnapshot.forEach((doc) => {
         // doc.data() is never undefined for query doc snapshots
-        console.log(doc.id, " => ", doc.data())
+        // console.log(doc.id, " => ", doc.data())
 
         const hardware = {
             id: doc.id,
@@ -135,7 +139,7 @@ onMounted(async () => {
     let itemProduct = []
     querySnapshot.forEach((doc) => {
         // doc.data() is never undefined for query doc snapshots
-        console.log(doc.id, " => ", doc.data())
+        // console.log(doc.id, " => ", doc.data())
 
         const product = {
             id: doc.id,
@@ -156,7 +160,7 @@ onMounted(async () => {
     let itemProduct = []
     querySnapshot.forEach((doc) => {
         // doc.data() is never undefined for query doc snapshots
-        console.log(doc.id, " => ", doc.data())
+        // console.log(doc.id, " => ", doc.data())
 
         const other = {
             id: doc.id,

@@ -5,10 +5,11 @@
     </div>
     <div class="wrap-title">
       <h1>{{ $route.params.category }}</h1>
+
     </div>
     <SearchVue />
-    <div class="cards-grid" >
-      <Card v-for="(product) in data_card" :card="product" :key="product.category" />
+    <div class="cards-grid">
+      <Card v-for="(product) in data_card" :card="product" :key="product" />
     </div>
   </main>
 </template>
@@ -115,10 +116,10 @@ export default {
     justify-content: center;
 
     @media (max-width: 760px) {
-    .cards-grid {
+      .cards-grid {
         flex-direction: column;
+      }
     }
-}
   }
 
 
