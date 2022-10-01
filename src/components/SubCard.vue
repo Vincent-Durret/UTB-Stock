@@ -14,7 +14,10 @@
 
 
 <script>
-    import { ref } from 'vue'
+import { ref } from 'vue'
+import {  doc, collection } from "firebase/firestore";
+import { db } from '../Firebase/firebase.js'
+
 export default {
     name: "SubCard",
     props: {
@@ -23,6 +26,21 @@ export default {
 
     setup() {
         const less_stock = ref('')
+
+        // const todosCollectionRef = collection(db, "products")
+
+
+        // const toggleDone = id => {
+        //     const index = sub.findIndex(todo => sub.id === id)
+
+        //     updateDoc(doc(todosCollectionRef, id), {
+        //         stock: !sub[index].stock
+        //     });
+        // }
+
+
+
+
 
 
         return {
@@ -33,8 +51,6 @@ export default {
 </script>
 
 <style lang="scss" >
-
-
 .subpage {
     .sub-card {
         display: flex;
