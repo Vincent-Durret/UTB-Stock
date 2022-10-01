@@ -15,8 +15,9 @@
 
 <script>
 import { ref } from 'vue'
-import {  doc, collection } from "firebase/firestore";
-import { db } from '../Firebase/firebase.js'
+// import { doc, updateDoc, increment, collection } from "firebase/firestore";
+
+// import { db } from '../Firebase/firebase.js'
 
 export default {
     name: "SubCard",
@@ -29,25 +30,24 @@ export default {
 
         // const todosCollectionRef = collection(db, "products")
 
-
+        // const washingtonRef = collection(db, "products");
         // const toggleDone = id => {
-        //     const index = sub.findIndex(todo => sub.id === id)
+        //     const index = sub.value.findIndex(product => product.id === id)
 
-        //     updateDoc(doc(todosCollectionRef, id), {
-        //         stock: !sub[index].stock
+        //     updateDoc(collection(washingtonRef, id), {
+        //         stock: increment(50)
+               
         //     });
         // }
+        //     // Atomically increment the population of the city by 50.
+        //      updateDoc(washingtonRef, {
+        //     });
 
-
-
-
-
-
-        return {
-            less_stock
+            return {
+                less_stock
+            }
         }
     }
-}
 </script>
 
 <style lang="scss" >
