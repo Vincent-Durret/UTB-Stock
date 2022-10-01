@@ -46,8 +46,8 @@ export default createStore({
 
       commit("SET_USER", auth.currentUser);
       toast.success("Bienvenue sur UTB Stock")
-
-      router.push("/");
+      
+      router.push("/"); 
     },
 
     async register({ commit }, details) {

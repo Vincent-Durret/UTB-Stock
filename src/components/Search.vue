@@ -21,7 +21,7 @@
 <script>
 import { onMounted, ref, watch } from 'vue';
 
-import { collection, getDocs, orderBy, query, where, limit } from 'firebase/firestore'
+import { collection, getDocs, orderBy, query } from 'firebase/firestore'
 import { db } from '../Firebase/firebase.js'
 
 
@@ -31,56 +31,41 @@ export default {
     name: 'Search',
 
     setup() {
-
-        let data_item = ref([]);
-
-        let all_item = []
+        const allitem = ref([])
 
 
+        onMounted( async () => {
+            const q = query(collection(db, 'products'), orderBy('category', 'asc'))
 
-        const itemCollectionRef = query(collection(db, 'products'), orderBy('category', 'asc'))
+            const querySnapshot = await getDocs(q)
 
-        // const itemCollectionCategory = query(collection(db, "products"), where("category", "==", "Bois"), limit(1))
-        // const itemCollectionQuery = query(itemCollectionRef, orderBy('date', 'desc'))
+            const fetchedProducts = []
 
-        const makeData = async () => {
-            const querySnapshot = await getDocs(itemCollectionRef)
-            let itemProduct = []
-            querySnapshot.forEach((doc) => {
-                // doc.data() is never undefined for query doc snapshots
-                // console.log(doc.id, " => ", doc.data());
-                const product = {
-                    id: doc.id,
-                    category: doc.data().category,
-                    name: doc.data().name,
-                }
-                itemProduct.push(product)
+            querySnapshot.forEach(doc => fetchedProducts.push(doc.data()))
 
-            })
-            all_item = itemProduct
-        }
+            allitem.value = fetchedProducts
+
+        })
 
 
-        //  user search restaurant
-        let user_search_item = ref('')
+        const user_search_item = ref('')
 
-        let search_item = ref([])
+        const search_item = ref([])
 
         watch(user_search_item, new_value => {
 
             let regex = RegExp(new_value.toLowerCase())
 
-            let new_search_item = all_item.filter(product => regex.test(product.name.toLowerCase()))
+            let new_search_item = allitem.value.filter(product => regex.test(product.name.toLowerCase()))
 
 
             new_value == 0 ? search_item.value = [] : search_item.value = new_search_item
 
+
         })
 
-        onMounted(makeData)
 
         return {
-            data_item,
             user_search_item,
             search_item,
         }
@@ -168,6 +153,11 @@ export default {
             .container--restaurant--search {
                 display: flex;
                 flex-direction: column;
+
+                h3 {
+                    display: flex;
+                    justify-content: center;
+                }
 
                 .lh {
                     text-decoration: none;

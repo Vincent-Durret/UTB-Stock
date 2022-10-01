@@ -12,7 +12,6 @@ const routes = [
       requiresAuth: true,
     },
   },
-
   {
     path: "/:category",
     component: () => import("../views/Products.vue"),
@@ -21,47 +20,15 @@ const routes = [
       requiresAuth: true,
     },
   },
-
-  // {
-  //   path: "/bois",
-  //   component: () => import("../views/Bois.vue"),
-  //   name: "Bois",
-  //   meta: {
-  //     requiresAuth: true,
-  //   },
-  // },
   {
-    path: "/bois/:name",
+    path: "/:category/:title",
     component: () => import("../views/SubPage.vue"),
     name: "SubCard",
     meta: {
       requiresAuth: true,
     },
   },
-  // {
-  //   path: "/quincailleries",
-  //   component: () => import("../views/Quincailleries.vue"),
-  //   name: "Quincailleries",
-  //   meta: {
-  //     requiresAuth: true,
-  //   },
-  // },
-  // {
-  //   path: "/produits",
-  //   name: "Produits",
-  //   component: () => import("../views/Produits.vue"),
-  //   meta: {
-  //     requiresAuth: true,
-  //   },
-  // },
-  // {
-  //   path: "/autres",
-  //   name: "Autres",
-  //   component: () => import("../views/Autres.vue"),
-  //   meta: {
-  //     requiresAuth: true,
-  //   },
-  // },
+
   {
     path: "/connexion",
     name: "Connexion",
@@ -80,10 +47,10 @@ router.beforeEach((to, from, next) => {
     return;
   }
 
-  if (to.matched.some(record => record.meta.requiresAuth) && !auth.currentUser) {
-    next('/connexion')
-    return;
-  }
+  // if (to.matched.some(record => record.meta.requiresAuth) && !auth.currentUser) {
+  //   next('/connexion')
+  //   return;
+  // }
 
   next();
 })

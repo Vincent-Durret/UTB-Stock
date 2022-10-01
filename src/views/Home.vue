@@ -7,7 +7,7 @@
       <Search />
     </header>
     <div class="wrap-card">
-      <Card v-for="(product) in data_item_card" :card="product" :key="product" />
+      <Card v-for="(product) in allproducts" :card="product" :key="product.id" />
     </div>
   </main>
 </template>
@@ -30,44 +30,25 @@ export default {
     Search,
   },
 
-
-
   setup() {
 
 
+    const allproducts = ref([])
 
-    let data_item_card = ref([])
+    onMounted(async () => {
+      const q = query(collection(db, 'products'), orderBy('category', "asc"))
 
+      const querySnapshot = await getDocs(q)
 
-    const itemCollectionRef = query(collection(db, 'products'), orderBy('category', "asc"))
-    // const itemCollectionQuery = query(itemCollectionRef, orderBy('date', 'desc'))
+      const fetchedProducts = []
 
-    const makeData = async () => {
-      const querySnapshot = await getDocs(itemCollectionRef)
-      let itemProduct = []
-      querySnapshot.forEach((doc) => {
-        // doc.data() is never undefined for query doc snapshots
-        // console.log(doc.id, " => ", doc.data());
-        const product = {
-          id: doc.id,
-          category: doc.data().category,
-          name: doc.data().name,
-          image: doc.data().image,
-          total: doc.data().total,
-          stock: doc.data().stock,
-          unit: doc.data().unit
-        }
-        itemProduct.push(product)
-      })
-      data_item_card.value = itemProduct
-    }
+      querySnapshot.forEach(doc => fetchedProducts.push(doc.data()))
 
-    onMounted(makeData)
-
-
+      allproducts.value = fetchedProducts
+    })
 
     return {
-      data_item_card,
+      allproducts,
 
     }
   },

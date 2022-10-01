@@ -14,23 +14,19 @@
             </div>
 
             <div class="menu">
-                <router-link class="button" v-for="(wood) in data_card_wood" :key="wood"
-                :to="{name: 'Products', params: {category: wood.category, name: wood.name, image: wood.image, total: wood.total, stock: wood.stock, unit: wood.unit }}">
+                <router-link class="button" to="/Bois">
                     <span class="material-icons">forest</span>
                     <span class="text">Bois</span>
                 </router-link>
-                <router-link class="button" v-for="(hardware) in data_card_harware" :key="hardware"
-                :to="{name: 'Products', params: {category: hardware.category }}">
+                <router-link class="button" to="/Quincailleries">
                     <span class="material-icons">construction</span>
                     <span class="text">Quincailleries</span>
                 </router-link>
-                <router-link class="button" v-for="(product) in data_card_product" :key="product"
-                :to="{name: 'Products', params: {category: product.category }}">
+                <router-link class="button" to="/Produits">
                     <span class="material-icons">inventory</span>
                     <span class="text">Produits</span>
                 </router-link>
-                <router-link class="button" v-for="(other) in data_card_other" :key="other"
-                :to="{name: 'Products', params: {category: other.category }}">
+                <router-link class="button" to="/Autres">
                     <span class="material-icons">widgets</span>
                     <span class="text">Autres</span>
                 </router-link>
@@ -51,11 +47,9 @@
 
 <script setup>
 import { ref } from 'vue';
-import { onBeforeMount, onMounted } from 'vue'
+import { onBeforeMount } from 'vue'
 import { useStore } from 'vuex'
-import { collection, getDocs, query, where, limit } from "firebase/firestore";
 
-import { db } from '../Firebase/firebase.js'
 
 
 
@@ -80,101 +74,6 @@ const store = useStore()
 onBeforeMount(() => {
     store.dispatch('fetchUser')
 })
-
-let data_card_wood = ref([]);
-
-const itemCollectionWood = query(collection(db, "products"), where("category", "==", "Bois"), limit(1))
-const itemCollectionHardwareStore = query(collection(db, "products"), where("category", "==", "Quincailleries"), limit(1))
-const itemCollectionProduct = query(collection(db, "products"), where("category", "==", "Produits"), limit(1))
-const itemCollectionOther = query(collection(db, "products"), where("category", "==", "Autres"), limit(1))
-
-onMounted(async () => {
-    const querySnapshot = await getDocs(itemCollectionWood)
-    let itemProduct = []
-    querySnapshot.forEach((doc) => {
-        // doc.data() is never undefined for query doc snapshots
-        // console.log(doc.id, " => ", doc.data())
-
-        const wood = {
-            id: doc.id,
-            category: doc.data().category,
-            name: doc.data().name,
-            image: doc.data().image,
-            total: doc.data().total,
-            stock: doc.data().stock,
-            unit: doc.data().unit
-        }
-        itemProduct.push(wood)
-
-    })
-    data_card_wood.value = itemProduct
-
-})
-
-let data_card_harware = ref([])
-
-onMounted(async () => {
-    const querySnapshot = await getDocs(itemCollectionHardwareStore)
-    let itemProduct = []
-    querySnapshot.forEach((doc) => {
-        // doc.data() is never undefined for query doc snapshots
-        // console.log(doc.id, " => ", doc.data())
-
-        const hardware = {
-            id: doc.id,
-            category: doc.data().category
-
-        }
-        itemProduct.push(hardware)
-
-    })
-    data_card_harware.value = itemProduct
-
-})
-
-let data_card_product = ref([])
-
-onMounted(async () => {
-    const querySnapshot = await getDocs(itemCollectionProduct)
-    let itemProduct = []
-    querySnapshot.forEach((doc) => {
-        // doc.data() is never undefined for query doc snapshots
-        // console.log(doc.id, " => ", doc.data())
-
-        const product = {
-            id: doc.id,
-            category: doc.data().category
-
-        }
-        itemProduct.push(product)
-
-    })
-    data_card_product.value = itemProduct
-
-})
-
-let data_card_other = ref([])
-
-onMounted(async () => {
-    const querySnapshot = await getDocs(itemCollectionOther)
-    let itemProduct = []
-    querySnapshot.forEach((doc) => {
-        // doc.data() is never undefined for query doc snapshots
-        // console.log(doc.id, " => ", doc.data())
-
-        const other = {
-            id: doc.id,
-            category: doc.data().category.toLowerCase()
-
-        }
-        itemProduct.push(other)
-
-    })
-    data_card_other.value = itemProduct
-
-})
-
-
 
 
 

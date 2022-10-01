@@ -5,69 +5,56 @@
     </div>
     <div class="wrap-title">
       <h1>{{ $route.params.category }}</h1>
-
     </div>
-    <SearchVue />
+    <Search />
     <div class="cards-grid">
-      <Card v-for="(product) in data_card" :card="product" :key="product" />
+      <Card v-for="(product) in products" :card="product" :key="product.id" />
     </div>
   </main>
 </template>
 
 <script>
 import { onMounted, ref } from 'vue';
+import { useRoute } from "vue-router"
 
 import Card from '../components/Card.vue';
-import SearchVue from '../components/Search.vue';
 
-import { collection, getDocs, where, query } from 'firebase/firestore'
+
+import { collection, query, where, getDocs } from 'firebase/firestore'
 
 import { db } from '../Firebase/firebase.js'
+import Search from '../components/Search.vue';
 
 export default {
   name: 'Products',
   components: {
     Card,
-    SearchVue,
-  },
+    Search
+},
   methods: {
     goHome() {
       this.$router.push('/')
     }
   },
   setup() {
+    const products = ref([]);
 
-    let data_card = ref([]);
+    onMounted(async () => {
+      const route = useRoute()
 
+      const q = query(collection(db, "products"), where("category", "==", route.params.category))
 
-    const itemCollectionRef = query(collection(db, 'products'), where("category", "==", "Bois"))
-    // const itemCollectionQuery = query(itemCollectionRef, orderBy('date', 'desc'))
+      const querySnapshot = await getDocs(q)
 
-    const makeData = async () => {
-      const querySnapshot = await getDocs(itemCollectionRef)
-      let itemProduct = []
-      querySnapshot.forEach((doc) => {
-        // doc.data() is never undefined for query doc snapshots
-        console.log(doc.id, " => ", doc.data());
-        const product = {
-          id: doc.id,
-          name: doc.data().name,
-          image: doc.data().image,
-          total: doc.data().total,
-          stock: doc.data().stock,
-          unit: doc.data().unit
-        }
-        itemProduct.push(product)
-      })
-      data_card.value = itemProduct
-    }
+      const fetchedProducts = []
 
-    onMounted(makeData)
+      querySnapshot.forEach(doc => fetchedProducts.push(doc.data()))
 
-    // onMounted(makeDataCard,);
+      products.value = fetchedProducts
+    })
 
     return {
-      data_card,
+      products,
     }
   },
 }
@@ -106,6 +93,13 @@ export default {
     justify-content: center;
     width: 100%;
 
+  }
+
+  .test {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
   }
 
   .cards-grid {

@@ -3,10 +3,10 @@
         <div class="sub-card">
             <div class="sub-wrap">
                 <h2 class="title-subpage">{{ sub.name }}: </h2>
-                <input type="number" placeholder="Nombre de lames" />
+                <input v-model="less_stock" type="number" placeholder="Nombre de lames" />
                 <button class="bouton-subpage">Envoyer</button>
                 <h3 class="restant-stock">Stock :</h3>
-                <p class="total-stock">{{ sub.total }} / {{ sub.stock }}</p>
+                <p class="total-stock">{{ sub.total }} / {{ sub.stock }} {{ sub.unit }}</p>
             </div>
         </div>
     </div>
@@ -14,11 +14,21 @@
 
 
 <script>
+    import { ref } from 'vue'
 export default {
     name: "SubCard",
     props: {
         sub: Object,
     },
+
+    setup() {
+        const less_stock = ref('')
+
+
+        return {
+            less_stock
+        }
+    }
 }
 </script>
 

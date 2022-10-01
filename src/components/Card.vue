@@ -1,7 +1,7 @@
 <template>
     <div class="wood-card">
         <div class="card">
-            <router-link class="button" :to="{name: 'SubCard', params: {name: card.name }}">
+            <router-link class="button" :to="{name: 'SubCard', params: {category: card.category, title: card.name }}">
                 <div :style="{ backgroundImage: `url(${card.image})` }" class="image"></div>
                 <span class="text">{{ card.name }}</span>
                 <h3 class="total"> {{card.total}} / {{ card.stock }} {{ card.unit }} </h3>
@@ -45,7 +45,7 @@ export default {
             background: var(--or);
             transform: scale(0.9, 0.9);
             box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
-            border: 3px solid var(--or);
+            border: 3px solid black;
         }
 
         .image {

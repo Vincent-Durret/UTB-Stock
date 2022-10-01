@@ -43,7 +43,7 @@ const info_quincaillerie = [
     image: './assets/Quincaillerie/vis-terrasse.jpg',
     total: 65,
     stock: 2000,
-    unit: 'Boite',
+    unit: 'Boites',
   },
   {
     category: 'Quincailleries',
@@ -51,7 +51,7 @@ const info_quincaillerie = [
     image: './assets/Quincaillerie/vis.jpg',
     total: 14,
     stock: 2000,
-    unit: 'Boite',
+    unit: 'Boites',
   },
   {
     category: 'Quincailleries',
@@ -59,7 +59,7 @@ const info_quincaillerie = [
     image: './assets/Quincaillerie/plot-beton.jpg',
     total: 5,
     stock: 10,
-    unit: 'Boite',
+    unit: 'Boites',
   },
   {
     category: 'Quincailleries',
@@ -67,7 +67,7 @@ const info_quincaillerie = [
     image: './assets/Quincaillerie/lame-scie-sauteuse.jpg',
     total: 25,
     stock: 50,
-    unit: 'Boite',
+    unit: 'Boites',
   },
   {
     category: 'Quincailleries',
@@ -83,7 +83,7 @@ const info_quincaillerie = [
     image: './assets/Quincaillerie/boulon-charpente.jpg',
     total: 50,
     stock: 50,
-    unit: 'Boite',
+    unit: 'Boites',
   },
   {
     category: 'Quincailleries',
@@ -91,7 +91,7 @@ const info_quincaillerie = [
     image: './assets/Quincaillerie/equerre-de-fixation-renforcee.jpg',
     total: 25,
     stock: 50,
-    unit: 'Boite',
+    unit: 'Boites',
   },
   {
     category: 'Quincailleries',
@@ -99,7 +99,7 @@ const info_quincaillerie = [
     image: './assets/Quincaillerie/tige-filleté.jpg',
     total: 5,
     stock: 50,
-    unit: 'Boite',
+    unit: 'Boites',
   },
   {
     category: 'Quincailleries',
@@ -107,7 +107,7 @@ const info_quincaillerie = [
     image: './assets/Quincaillerie/ecrou-m14.jpg',
     total: 50,
     stock: 50,
-    unit: 'Boite',
+    unit: 'Boites',
   },
   {
     category: 'Quincailleries',
@@ -115,7 +115,7 @@ const info_quincaillerie = [
     image: './assets/Quincaillerie/rondelle.jpg',
     total: 90,
     stock: 50,
-    unit: 'Boite',
+    unit: 'Boites',
   },
   {
     category: 'Quincailleries',
@@ -123,7 +123,7 @@ const info_quincaillerie = [
     image: './assets/Quincaillerie/pied-de-poteau.jpg',
     total: 8,
     stock: 50,
-    unit: 'Boite',
+    unit: 'Boites',
   },
   {
     category: 'Quincailleries',
@@ -131,7 +131,7 @@ const info_quincaillerie = [
     image: './assets/Quincaillerie/vis-de-fondation.jpg',
     total: 50,
     stock: 50,
-    unit: 'Boite',
+    unit: 'Boites',
   },
   {
     category: 'Quincailleries',
@@ -139,7 +139,7 @@ const info_quincaillerie = [
     image: './assets/Quincaillerie/feutre-geotextile.jpg',
     total: 100,
     stock: 50,
-    unit: 'Boite',
+    unit: 'Boites',
   },
   {
     category: 'Quincailleries',
@@ -147,7 +147,7 @@ const info_quincaillerie = [
     image: './assets/Quincaillerie/disque-a-tronconner.jpg',
     total: 50,
     stock: 50,
-    unit: 'Boite',
+    unit: 'Boites',
   },
   {
     category: 'Quincailleries',
@@ -155,7 +155,7 @@ const info_quincaillerie = [
     image: './assets/Quincaillerie/disque-a-ebarber.jpg',
     total: 80,
     stock: 50,
-    unit: 'Boite',
+    unit: 'Boites',
   },
   {
     category: 'Quincailleries',
@@ -163,7 +163,7 @@ const info_quincaillerie = [
     image: './assets/Quincaillerie/disque-pollissage.jpg',
     total: 50,
     stock: 50,
-    unit: 'Boite',
+    unit: 'Boites',
   },
   {
     category: 'Quincailleries',
@@ -171,7 +171,7 @@ const info_quincaillerie = [
     image: './assets/Quincaillerie/agraffe.jpg',
     total: 50,
     stock: 50,
-    unit: 'Boite',
+    unit: 'Boites',
   },
   {
     category: 'Quincailleries',
@@ -179,7 +179,7 @@ const info_quincaillerie = [
     image: './assets/Quincaillerie/sangle.jpg',
     total: 100,
     stock: 50,
-    unit: 'Boite',
+    unit: 'Boites',
   },
   {
     category: 'Quincailleries',
@@ -187,7 +187,7 @@ const info_quincaillerie = [
     image: './assets/Quincaillerie/masque-ffp3.jpg',
     total: 5,
     stock: 50,
-    unit: 'Boite',
+    unit: 'Boites',
   },
   {
     category: 'Quincailleries',
@@ -195,7 +195,7 @@ const info_quincaillerie = [
     image: './assets/Quincaillerie/crayon.jpg',
     total:100,
     stock: 50,
-    unit: 'Boite',
+    unit: 'Boites',
   },
   {
     category: 'Quincailleries',
@@ -203,7 +203,7 @@ const info_quincaillerie = [
     image: './assets/Quincaillerie/gant-chantier.jpg',
     total: 50,
     stock: 50,
-    unit: 'Boite',
+    unit: 'Boites',
   },
   {
     category: 'Quincailleries',
@@ -211,7 +211,7 @@ const info_quincaillerie = [
     image: './assets/Quincaillerie/ruban-signalisation.jpg',
     total: 100,
     stock: 50,
-    unit: 'Boite',
+    unit: 'Boites',
   },
   {
     category: 'Quincailleries',
@@ -219,7 +219,7 @@ const info_quincaillerie = [
     image: './assets/Quincaillerie/lingette-main.jpg',
     total: 50,
     stock: 50,
-    unit: 'Boite',
+    unit: 'Boites',
   },
   {
     category: 'Quincailleries',
@@ -227,7 +227,7 @@ const info_quincaillerie = [
     image: './assets/Quincaillerie/degripant.jpg',
     total: 50,
     stock: 50,
-    unit: 'Boite',
+    unit: 'Boites',
   },
   {  
     category: 'Quincailleries',
@@ -235,7 +235,7 @@ const info_quincaillerie = [
     image: './assets/Quincaillerie/cales.jpg',
     total: 80,
     stock: 50,
-    unit: 'Boite',
+    unit: 'Boites',
   },
   {
     category: 'Quincailleries',
@@ -243,7 +243,7 @@ const info_quincaillerie = [
     image: './assets/Quincaillerie/plot.jpg',
     total: 50,
     stock: 50,
-    unit: 'Boite',
+    unit: 'Boites',
   },
   {
     category: 'Quincailleries',
@@ -251,7 +251,7 @@ const info_quincaillerie = [
     image: './assets/Quincaillerie/abrasif.jpg',
     total: 50,
     stock: 50,
-    unit: 'Boite',
+    unit: 'Boites',
   },
   {
     category: 'Quincailleries',
@@ -259,7 +259,7 @@ const info_quincaillerie = [
     image: './assets/Quincaillerie/chanfrein.jpg',
     total: 50,
     stock: 50,
-    unit: 'Boite',
+    unit: 'Boites',
   },
   {
     category: 'Quincailleries',
@@ -267,7 +267,7 @@ const info_quincaillerie = [
     image: './assets/Quincaillerie/cale-caoutchouc.jpg',
     total: 50,
     stock: 50,
-    unit: 'Boite',
+    unit: 'Boites',
   },
 ]
 
@@ -539,25 +539,106 @@ const info_other = [
 
 const info_itauba = [
   {
+    title: 'Itauba',
     name: '95',
     total: '800',
-    stock: '1000 m2',
+    stock: '1000',
+    unit: 'm²',
   },
   {
+    title: 'Itauba',
     name: '120',
     total: '600',
-    stock: '1000 m2',
+    stock: '1000',
+    unit: 'm²',
   },
   {
+    title: 'Itauba',
     name: '150',
     total: '500',
-    stock: '1000 m2',
+    stock: '1000',
+    unit: 'm²',
   },
   {
+    title: 'Itauba',
     name: '180',
     total: '500',
-    stock: '1000 m2',
+    stock: '1000',
+    unit: 'm²',
   },
+]
+
+const info_ipe = [
+  {
+    title: 'Ipé',
+    name: '95',
+    total: '800',
+    stock: '1000',
+    unit: 'm²',
+  },
+  {
+    title: 'Ipé',
+    name: '120',
+    total: '600',
+    stock: '1000',
+    unit: 'm²',
+  },
+  {
+    title: 'Ipé',
+    name: '150',
+    total: '500',
+    stock: '1000',
+    unit: 'm²',
+  },
+  {
+    title: 'Ipé',
+    name: '180',
+    total: '500',
+    stock: '1000',
+    unit: 'm²',
+  },
+]
+
+const info_cumaru = [
+  {
+    title: 'Cumaru',
+    name: '95',
+    total: '800',
+    stock: '1000',
+    unit: 'm²',
+  },
+  {
+    title: 'Cumaru',
+    name: '120',
+    total: '600',
+    stock: '1000',
+    unit: 'm²',
+  },
+  {
+    title: 'Cumaru',
+    name: '150',
+    total: '500',
+    stock: '1000',
+    unit: 'm²',
+  },
+  {
+    title: 'Cumaru',
+    name: '180',
+    total: '500',
+    stock: '1000',
+    unit: 'm²',
+  },
+]
+
+const info_structure = [
+  {
+    title: 'Structure',
+    name: '200',
+    total: '250',
+    stock: '250',
+    unit: 'm²',
+  },
+  
 ]
 
 const info_all_item = [
@@ -565,6 +646,10 @@ const info_all_item = [
   ...info_quincaillerie,
   ...info_product,
   ...info_other,
+  ...info_itauba,
+  ...info_ipe,
+  ...info_cumaru,
+  ...info_structure
 ]
 
 export default info_all_item

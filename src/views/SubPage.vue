@@ -1,53 +1,54 @@
 <template>
     <main class="subcard">
-        <div class="wrap-titre">
-            <h1> {{ $route.params.name }} </h1>
+        <div class="return">
+            <span @click="goBack()" class="material-icons">arrow_back</span>
         </div>
-        <SubCardRow v-for="(data, i) in data_sub" :info_sub="data" :key="i" />
+        <div class="wrap-titre">
+            <h1> {{ $route.params.title }} </h1>
+        </div>
+        <div class="wrap-card">
+            <SubCard v-for="(product) in products" :sub="product" :key="product.id" />
+        </div>
     </main>
 </template>
 
 <script>
-// import { info_itauba } from '../DB/db.js'
-import SubCardRow from '../components/SubCardRow.vue';
+import SubCard from '../components/SubCard.vue';
+import { useRoute } from "vue-router"
+import { collection, query, where, getDocs } from 'firebase/firestore'
+import { db } from '../Firebase/firebase.js'
 import { onMounted, ref } from 'vue';
 export default {
     name: "SubPage",
     components: {
-        SubCardRow,
+        SubCard,
+    },
+    methods: {
+        goBack() {
+            this.$router.push('/Bois')
+        }
     },
 
     setup() {
-        class SubCard {
-            constructor(name, total, stock) {
-                this.name = name
-                this.total = total
-                this.stock = stock
-            }
-        }
 
-        let data_sub = ref([]);
+        const products = ref([]);
 
-        const makeDataSub = () => {
-            let info_sub = [];
+        onMounted(async () => {
+            const route = useRoute()
 
-            for (const sub of info_itauba) {
-                const new_sub = new SubCard(sub.name, sub.total, sub.stock)
+            const q = query(collection(db, "products"), where("title", "==", route.params.title))
 
-                if (info_sub.length === 3) {
-                    info_sub.push(new_sub);
-                    data_sub.value.push(info_sub);
-                    info_sub = [];
-                } else {
-                    info_sub.push(new_sub);
-                }
-            }
-        };
+            const querySnapshot = await getDocs(q)
 
-        onMounted(makeDataSub,);
+            const fetchedProducts = []
+
+            querySnapshot.forEach(doc => fetchedProducts.push(doc.data()))
+
+            products.value = fetchedProducts
+        })
 
         return {
-            data_sub,
+            products,
         }
     },
 }
@@ -55,11 +56,45 @@ export default {
 
 <style lang="scss">
 .subcard {
-    
+    .return {
+        margin: 1rem;
+
+        .material-icons {
+            background: var(--or);
+            padding: 0.4rem;
+            border-radius: 5px;
+            font-size: 2.5rem;
+            color: var((--black));
+            cursor: pointer;
+            transition: 0.2s;
+
+            &:hover {
+                color: var(--brown);
+                transform: translateX(-0.5rem) scale(1.1, 1.1);
+
+                transition: 0.2s ease-out;
+            }
+
+            .button {
+                text-decoration: none;
+            }
+        }
+    }
+
+
+
+
     .wrap-titre {
         display: flex;
         justify-content: center;
         width: 100%;
+    }
+
+    .wrap-card {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem 2rem;
+        justify-content: center;
     }
 
 
