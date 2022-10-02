@@ -7,7 +7,7 @@
             <h1> {{ $route.params.title }} </h1>
         </div>
         <div class="wrap-card">
-            <SubCard v-for="(product) in products" :sub="product" :key="product.id" />
+            <SubCard v-for="(product) in products" :premier="products" :sub="product" :key="product.id" />
         </div>
     </main>
 </template>

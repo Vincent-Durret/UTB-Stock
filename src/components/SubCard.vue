@@ -4,7 +4,7 @@
             <div class="sub-wrap">
                 <h2 class="title-subpage">{{ sub.name }}: </h2>
                 <input v-model="inputStock" type="number" placeholder="Nombre de lames" />
-                <button @click="updateStock" class="bouton-subpage">Envoyer</button>
+                <button @click="updateStock(sub.id)" class="bouton-subpage">Envoyer</button>
                 <h3 class="restant-stock">Stock :</h3>
                 <p class="total-stock">{{ sub.total }} / {{ sub.stock }} {{ sub.unit }}</p>
             </div>
@@ -15,7 +15,7 @@
 
 <script>
 import { ref } from 'vue'
-import { doc, updateDoc, increment } from "firebase/firestore";
+import { doc, updateDoc, increment, collection } from "firebase/firestore";
 
 
 import { db } from '../Firebase/firebase.js'
@@ -24,22 +24,31 @@ export default {
     name: "SubCard",
     props: {
         sub: Object,
+        test: Array,
     },
 
-    setup() {
+    setup(props) {
         const inputStock = ref(0)
-        const id = sub.id
+        // console.log(props.sub.id)
+        console.log(props.test)
+
 
         const updateStock = async () => {
-            const stockQ = doc(db, "products", id);
+            const stockQ = doc(db, "products", props.sub.id);
 
             await updateDoc(stockQ, {
                 total: increment(-inputStock.value)
             });
 
-
-
         }
+
+        // const updateStock = async ()  => {
+        //     const stockQ = collection(db, "products")
+
+        //     await updateDoc(doc(stockQ, p), {
+        //         total: increment(-inputStock.value)
+        //     });
+        // }
 
         return {
             inputStock,
