@@ -28,11 +28,11 @@ export default {
 
     setup() {
         const inputStock = ref(0)
+        const id = sub.id
 
         const updateStock = async () => {
-            const stockQ = doc(db, "products", "Ft5inj02I400lTxj5XvY");
+            const stockQ = doc(db, "products", id);
 
-            // Set the "capital" field of the city 'DC'
             await updateDoc(stockQ, {
                 total: increment(-inputStock.value)
             });
