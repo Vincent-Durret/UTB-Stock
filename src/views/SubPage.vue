@@ -52,8 +52,9 @@ export default {
         const unsubscribe = onSnapshot(q, (querySnapshot) => {
             const fetchedProducts = [];
 
-            querySnapshot.forEach((doc) => fetchedProducts.push(doc.data()))
-
+            querySnapshot.forEach((doc) => {
+                fetchedProducts.push({ id: doc.id, ...doc.data() })
+            })
             products.value = fetchedProducts
         });
 
