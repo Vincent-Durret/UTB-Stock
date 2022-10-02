@@ -15,9 +15,9 @@
 <script>
 import SubCard from '../components/SubCard.vue';
 import { useRoute } from "vue-router"
-import { collection, query, where, getDocs } from 'firebase/firestore'
+import { collection, query, where, getDocs, onSnapshot } from 'firebase/firestore'
 import { db } from '../Firebase/firebase.js'
-import { onMounted, ref } from 'vue';
+import { ref } from 'vue';
 export default {
     name: "SubPage",
     components: {
@@ -32,23 +32,34 @@ export default {
     setup() {
 
         const products = ref([]);
+        const route = useRoute()
 
-        onMounted(async () => {
-            const route = useRoute()
+        const q = query(collection(db, "products"), where("title", "==", route.params.title))
 
-            const q = query(collection(db, "products"), where("title", "==", route.params.title))
 
-            const querySnapshot = await getDocs(q)
+        // onMounted(async () => {
 
-            const fetchedProducts = []
 
-            querySnapshot.forEach(doc => fetchedProducts.push(doc.data()))
+        //     const querySnapshot = await getDocs(q)
+
+        //     const fetchedProducts = []
+
+        //     querySnapshot.forEach(doc => fetchedProducts.push(doc.data()))
+
+        //     products.value = fetchedProducts
+        // })
+
+        const unsubscribe = onSnapshot(q, (querySnapshot) => {
+            const fetchedProducts = [];
+
+            querySnapshot.forEach((doc) => fetchedProducts.push(doc.data()))
 
             products.value = fetchedProducts
-        })
+        });
 
         return {
             products,
+            unsubscribe
         }
     },
 }

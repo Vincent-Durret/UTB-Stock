@@ -1,7 +1,7 @@
 <template>
     <div class="wood-card">
         <div class="card">
-            <router-link class="button" :to="{name: 'SubCard', params: {category: card.category, title: card.name }}">
+            <router-link class="button" :to="{name: 'SubCard', params: {category: card.category, title: card.name, total: card.total }}">
                 <div :style="{ backgroundImage: `url(${card.image})` }" class="image"></div>
                 <span class="text">{{ card.name }}</span>
                 <h3 class="total"> {{card.total}} / {{ card.stock }} {{ card.unit }} </h3>

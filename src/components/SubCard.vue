@@ -3,8 +3,8 @@
         <div class="sub-card">
             <div class="sub-wrap">
                 <h2 class="title-subpage">{{ sub.name }}: </h2>
-                <input v-model="less_stock" type="number" placeholder="Nombre de lames" />
-                <button class="bouton-subpage">Envoyer</button>
+                <input v-model="inputStock" type="number" placeholder="Nombre de lames" />
+                <button @click="updateStock" class="bouton-subpage">Envoyer</button>
                 <h3 class="restant-stock">Stock :</h3>
                 <p class="total-stock">{{ sub.total }} / {{ sub.stock }} {{ sub.unit }}</p>
             </div>
@@ -15,9 +15,10 @@
 
 <script>
 import { ref } from 'vue'
-// import { doc, updateDoc, increment, collection } from "firebase/firestore";
+import { doc, updateDoc, increment } from "firebase/firestore";
 
-// import { db } from '../Firebase/firebase.js'
+
+import { db } from '../Firebase/firebase.js'
 
 export default {
     name: "SubCard",
@@ -26,28 +27,26 @@ export default {
     },
 
     setup() {
-        const less_stock = ref('')
+        const inputStock = ref(0)
 
-        // const todosCollectionRef = collection(db, "products")
+        const updateStock = async () => {
+            const stockQ = doc(db, "products", "Ft5inj02I400lTxj5XvY");
 
-        // const washingtonRef = collection(db, "products");
-        // const toggleDone = id => {
-        //     const index = sub.value.findIndex(product => product.id === id)
+            // Set the "capital" field of the city 'DC'
+            await updateDoc(stockQ, {
+                total: increment(-inputStock.value)
+            });
 
-        //     updateDoc(collection(washingtonRef, id), {
-        //         stock: increment(50)
-               
-        //     });
-        // }
-        //     // Atomically increment the population of the city by 50.
-        //      updateDoc(washingtonRef, {
-        //     });
 
-            return {
-                less_stock
-            }
+
+        }
+
+        return {
+            inputStock,
+            updateStock
         }
     }
+}
 </script>
 
 <style lang="scss" >
