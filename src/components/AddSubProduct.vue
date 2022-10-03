@@ -1,27 +1,28 @@
 <template>
-    <main class="add-product" alt="Ajouter un produits">
+    <main class="add-sub-product">
         <div class="wrap-element">
             <span @click="isOpen = !isOpen" class="material-icons open">
-                note_add
+                post_add
             </span>
-            <p class="title-logo">Ajouter un produit</p>
+            <p class="title-logo">Ajouter un sous produit</p>
         </div>
+
         <div v-if="isOpen" class="cart-add-product">
             <div @click="isOpen = !isOpen" class="wrap-icon">
                 <span class="material-icons close">
                     cancel
                 </span>
+
             </div>
 
-            <h3>Ajouter un produit</h3>
+            <h3>Ajouter un sous produit</h3>
             <div class="forms">
-                <input v-model="addCategory" type="text" placeholder="Categorie">
+                <input v-model="addTitle" type="text" placeholder="Titre">
                 <input v-model="addName" type="text" placeholder="Nom">
-                <input v-model="addImage" type="text" placeholder="Image">
                 <input v-model="addTotal" type="number" placeholder="Totale">
                 <input v-model="addStock" type="number" placeholder="Stock">
                 <input v-model="addUnit" type="text" placeholder="Unités">
-                <button @click="addProducts">Créer le produit</button>
+                <button @click="addSubProducts">Créer le sous produit</button>
             </div>
         </div>
     </main>
@@ -32,10 +33,8 @@ import { ref } from 'vue'
 import { collection, addDoc } from "firebase/firestore";
 import { db } from '../Firebase/firebase.js'
 import { useToast } from 'vue-toastification'
-
-
 export default {
-    name: "AddProduct",
+    name: "AddSubProduct",
     data() {
         return {
             isOpen: false
@@ -45,34 +44,31 @@ export default {
     setup() {
         const toast = useToast()
 
-        const addCategory = ref('')
+        const addTitle = ref('')
         const addName = ref('')
-        const addImage = ref('')
         const addTotal = ref()
         const addStock = ref()
         const addUnit = ref('')
 
-        const addProducts = async () => {
+        const addSubProducts = async () => {
             await addDoc(collection(db, "products"), {
-                category: addCategory.value,
+                title: addTitle.value,
                 name: addName.value,
-                image: addImage.value,
                 total: addTotal.value,
                 stock: addStock.value,
                 unit: addUnit.value,
             });
-            toast.success("Produit créer avec succes")
+            toast.success("Sous produit créer avec succes")
 
         }
 
         return {
-            addCategory,
+            addTitle,
             addName,
-            addImage,
             addTotal,
             addStock,
             addUnit,
-            addProducts
+            addSubProducts
         }
     }
 
@@ -80,7 +76,7 @@ export default {
 </script>
 
 <style lang="scss">
-.add-product {
+.add-sub-product {
     margin: 1rem;
 
     .wrap-element {
@@ -109,7 +105,7 @@ export default {
             position: relative;
             margin-left: 0.8rem;
             transform: translateX(-10rem);
-            visibility: hidden; 
+            visibility: hidden;
             z-index: -1;
         }
 
@@ -120,12 +116,14 @@ export default {
         }
     }
 
+
+
     .cart-add-product {
         position: fixed;
         border: 3px solid var(--black);
         background: var(--or-alt);
         width: 30rem;
-        height: 30rem;
+        height: 28rem;
         top: 25%;
         left: 40%;
         display: flex;
