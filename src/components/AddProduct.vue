@@ -15,12 +15,12 @@
 
             <h3>Ajouter un produit</h3>
             <div class="forms">
-                <input v-model="addCategory" type="text" placeholder="Categorie">
-                <input v-model="addName" type="text" placeholder="Nom">
-                <input v-model="addImage" type="text" placeholder="Image">
-                <input v-model="addTotal" type="number" placeholder="Totale">
-                <input v-model="addStock" type="number" placeholder="Stock">
-                <input v-model="addUnit" type="text" placeholder="Unités">
+                <input v-model="addCategory" type="text" placeholder="*Categorie">
+                <input v-model="addName" type="text" placeholder="*Nom">
+                <input v-model="addImage" type="text" placeholder="*Image">
+                <input v-model="addTotal" type="number" placeholder="*Totale">
+                <input v-model="addStock" type="number" placeholder="*Stock">
+                <input v-model="addUnit" type="text" placeholder="*Unités">
                 <button @click="addProducts">Créer le produit</button>
             </div>
         </div>

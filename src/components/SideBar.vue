@@ -93,7 +93,7 @@ aside {
     color: var(--light);
 
     transition: 0.2s ease-out;
-    z-index: 2;
+    z-index: 5;
 
     .flex {
         flex: 1;

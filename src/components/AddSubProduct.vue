@@ -17,11 +17,11 @@
 
             <h3>Ajouter un sous produit</h3>
             <div class="forms">
-                <input v-model="addTitle" type="text" placeholder="Titre">
-                <input v-model="addName" type="text" placeholder="Nom">
-                <input v-model="addTotal" type="number" placeholder="Totale">
-                <input v-model="addStock" type="number" placeholder="Stock">
-                <input v-model="addUnit" type="text" placeholder="Unités">
+                <input v-model="addTitle" type="text" placeholder="*Titre">
+                <input v-model="addName" type="text" placeholder="*Nom">
+                <input v-model="addTotal" type="number" placeholder="*Totale">
+                <input v-model="addStock" type="number" placeholder="*Stock">
+                <input v-model="addUnit" type="text" placeholder="*Unités">
                 <button @click="addSubProducts">Créer le sous produit</button>
             </div>
         </div>
