@@ -28,7 +28,11 @@ const routes = [
       requiresAuth: true,
     },
   },
-
+  {
+    path: "/ajout-produit",
+    name: "AddProduct",
+    component: () => import("../components/AddProduct.vue"),
+  },
   {
     path: "/connexion",
     name: "Connexion",

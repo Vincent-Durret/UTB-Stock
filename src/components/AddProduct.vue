@@ -1,0 +1,172 @@
+<template>
+    <main class="add-product" alt="Ajouter un produits">
+        <span @click="isOpen = !isOpen"  class="material-icons open">
+            note_add
+        </span>
+        <div v-if="isOpen" class="cart-add-product">
+            <div @click="isOpen = !isOpen" class="wrap-icon">
+                <span class="material-icons close">
+                    cancel
+                </span>
+            </div>
+
+            <h3>Ajouter un produit</h3>
+            <div class="forms">
+                <input v-model="addCategory" type="text" placeholder="Categorie">
+                <input v-model="addName" type="text" placeholder="Nom">
+                <input v-model="addImage" type="text" placeholder="Image">
+                <input v-model="addTotal" type="number" placeholder="Totale">
+                <input v-model="addStock" type="number" placeholder="Stock">
+                <input v-model="addUnit" type="text" placeholder="Unités">
+                <button @click="addProducts">Créer le produit</button>
+            </div>
+        </div>
+    </main>
+</template>
+
+<script>
+import { ref } from 'vue'
+import { collection, addDoc } from "firebase/firestore";
+import { db } from '../Firebase/firebase.js'
+import { useToast } from 'vue-toastification'
+
+
+export default {
+    name: "AddProduct",
+    data() {
+        return {
+            isOpen: false
+        }
+    },
+
+    setup() {
+        const toast = useToast()
+
+        const addCategory = ref('')
+        const addName = ref('')
+        const addImage = ref('')
+        const addTotal = ref()
+        const addStock = ref()
+        const addUnit = ref('')
+
+        const addProducts = async () => {
+            await addDoc(collection(db, "products"), {
+                category: addCategory.value,
+                name: addName.value,
+                image: addImage.value,
+                total: addTotal.value,
+                stock: addStock.value,
+                unit: addUnit.value,
+            });
+            toast.success("Produit créer avec succes")
+
+        }
+
+        return {
+            addCategory,
+            addName,
+            addImage,
+            addTotal,
+            addStock,
+            addUnit,
+            addProducts
+        }
+    }
+
+}
+</script>
+
+<style lang="scss">
+.add-product {
+
+    .wrap-title {
+        display: flex;
+        justify-content: center;
+    }
+
+    .open {
+        position: relative;
+        background: var(--or);
+        padding: 0.4rem;
+        border-radius: 5px;
+        font-size: 2.5rem;
+        color: var((--black));
+        cursor: pointer;
+        transition: 0.2s;
+
+        &:hover {
+            color: var(--brown);
+            transform: translateY(-0.5rem) scale(1.2, 1.2);
+            transition: 0.2s ease-out;
+        }
+
+
+    }
+
+    .cart-add-product {
+        position: fixed;
+        border: 3px solid var(--black);
+        background: var(--or-alt);
+        width: 30rem;
+        height: 30rem;
+        top: 25%;
+        left: 40%;
+        display: flex;
+        flex-direction: column;
+        padding: 1rem;
+        border-radius: 5px;
+        z-index: 10;
+
+        .wrap-icon {
+            .close {
+                position: relative;
+                float: right;
+                background: var(--or);
+                color: var(--black);
+                padding: 0.3rem;
+                border-radius: 5px;
+                transition: color 0.2s transform 0.3s;
+                cursor: pointer;
+
+                &:hover {
+                    color: red;
+                    transform: scale(1.1, 1.1);
+
+                    transition: 0.2s ease-out;
+                }
+            }
+        }
+
+        h3 {
+            display: flex;
+            justify-content: center;
+        }
+
+        .forms {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+
+            input {
+                margin: 1rem;
+                height: 1.5rem;
+            }
+
+            button {
+                background: var(--or);
+                padding: 1rem;
+                font-size: 1.3rem;
+                font-weight: bold;
+                transition: background 0.3s;
+                border-radius: 5px;
+
+                &:hover {
+                    background: var(--brown);
+                    color: white;
+                }
+            }
+        }
+
+    }
+}
+</style>

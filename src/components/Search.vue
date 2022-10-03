@@ -6,7 +6,7 @@
         </span> -->
         <div class="search">
             <router-link class="link" v-for="(product, i) in search_item" :key="i"
-                :to="{name: 'SubCard', params: {name: product.name }}">
+                :to="{name: 'SubCard', params: {title: product.title, category: product.category}}">
                 <div class="container--restaurant--search">
                     <h3> {{ product.category }} </h3>
                     <p class="lh"> {{ product.name }} </p>
@@ -34,7 +34,7 @@ export default {
         const allitem = ref([])
 
 
-        onMounted( async () => {
+        onMounted(async () => {
             const q = query(collection(db, 'products'), orderBy('category', 'asc'))
 
             const querySnapshot = await getDocs(q)
@@ -46,6 +46,7 @@ export default {
             allitem.value = fetchedProducts
 
         })
+
 
 
         const user_search_item = ref('')
@@ -61,6 +62,7 @@ export default {
 
             new_value == 0 ? search_item.value = [] : search_item.value = new_search_item
 
+            console.log(search_item)
 
         })
 

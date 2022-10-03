@@ -42,13 +42,7 @@ export default {
 
         }
 
-        // const updateStock = async ()  => {
-        //     const stockQ = collection(db, "products")
 
-        //     await updateDoc(doc(stockQ, p), {
-        //         total: increment(-inputStock.value)
-        //     });
-        // }
 
         return {
             inputStock,
