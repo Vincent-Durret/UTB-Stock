@@ -8,8 +8,8 @@
         </div>
 
         <div v-if="isOpen" class="cart-add-product">
-            <div @click="isOpen = !isOpen" class="wrap-icon">
-                <span class="material-icons close">
+            <div  class="wrap-icon">
+                <span @click="isOpen = !isOpen" class="material-icons close">
                     cancel
                 </span>
 
@@ -17,7 +17,16 @@
 
             <h3>Ajouter un sous produit</h3>
             <div class="forms">
-                <input v-model="addTitle" type="text" placeholder="*Titre">
+                <select v-model="addTitle" name="product-title" required>
+                    <option value="" disabled selected hidden>Choisir une categorie</option>
+                    <optgroup label="Bois">
+                        <option value="Itauba">Itauba</option>
+                        <option value="Structure">Structure</option>
+                        <option value="Ipé">Ipé</option>
+                        <option value="Cumaru">Cumaru</option>
+                    </optgroup>
+                </select>
+                <input v-model="addTitle" type="text" placeholder="Si categorie inexistante a remplir">
                 <input v-model="addName" type="text" placeholder="*Nom">
                 <input v-model="addTotal" type="number" placeholder="*Totale">
                 <input v-model="addStock" type="number" placeholder="*Stock">
@@ -95,7 +104,7 @@ export default {
             transition: 0.2s;
             z-index: 3;
 
-            &:hover{
+            &:hover {
                 color: var(--brown);
                 transform: translateY(-0.5rem) scale(1.2, 1.2);
                 transition: 0.2s ease-out;
@@ -108,7 +117,7 @@ export default {
             transform: translateX(-0.5rem);
             visibility: hidden;
             z-index: -1;
-            
+
         }
 
         &:hover .title-logo {
@@ -125,7 +134,7 @@ export default {
         border: 3px solid var(--black);
         background: var(--or-alt);
         width: 30rem;
-        height: 28rem;
+        height: 29rem;
         top: 25%;
         left: 40%;
         display: flex;
@@ -142,7 +151,7 @@ export default {
                 color: var(--black);
                 padding: 0.3rem;
                 border-radius: 5px;
-                transition: color 0.2s transform 0.3s;
+                transition: color 0.2s, transform 0.3s;
                 cursor: pointer;
 
                 &:hover {
@@ -164,12 +173,18 @@ export default {
             flex-direction: column;
             justify-content: center;
 
+            select {
+                height: 1.5rem;
+                margin: 1rem;
+            }
+
             input {
                 margin: 1rem;
                 height: 1.5rem;
             }
 
             button {
+                margin: 1rem;
                 background: var(--or);
                 padding: 1rem;
                 font-size: 1.3rem;

@@ -19,7 +19,7 @@
 <script>
 import { onMounted, ref } from 'vue';
 
-import { collection, getDocs, orderBy, query } from 'firebase/firestore'
+import { collection, onSnapshot, orderBy, query } from 'firebase/firestore'
 
 import { db } from '../Firebase/firebase.js'
 
@@ -42,16 +42,20 @@ export default {
 
     const allproducts = ref([])
 
-    onMounted(async () => {
+    onMounted(() => {
       const q = query(collection(db, 'products'), orderBy('category', "asc"))
 
-      const querySnapshot = await getDocs(q)
 
-      const fetchedProducts = []
+      onSnapshot(q, (querySnapshot) => {
+        const fetchedProducts = [];
 
-      querySnapshot.forEach(doc => fetchedProducts.push(doc.data()))
+        querySnapshot.forEach((doc) => {
+          fetchedProducts.push({ id: doc.id, ...doc.data() })
+        })
+        allproducts.value = fetchedProducts
+      });
 
-      allproducts.value = fetchedProducts
+
     })
 
     return {

@@ -20,7 +20,7 @@ import { useRoute } from "vue-router"
 import Card from '../components/Card.vue';
 
 
-import { collection, query, where, getDocs } from 'firebase/firestore'
+import { collection, query, where, getDocs, onSnapshot } from 'firebase/firestore'
 
 import { db } from '../Firebase/firebase.js'
 import Search from '../components/Search.vue';
@@ -44,14 +44,14 @@ export default {
 
       const q = query(collection(db, "products"), where("category", "==", route.params.category))
 
-      const querySnapshot = await getDocs(q)
+      onSnapshot(q, (querySnapshot) => {
+        const fetchedProducts = [];
 
-      const fetchedProducts = []
-
-      querySnapshot.forEach(doc => { fetchedProducts.push({ id: doc.id, ...doc.data() }) })
-
-      products.value = fetchedProducts
-
+        querySnapshot.forEach((doc) => {
+          fetchedProducts.push({ id: doc.id, ...doc.data() })
+        })
+        products.value = fetchedProducts
+      });
     })
 
 
@@ -62,7 +62,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .bois-page {
 
   .return {

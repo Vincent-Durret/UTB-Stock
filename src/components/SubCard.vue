@@ -1,9 +1,19 @@
 <template>
     <div class="subpage">
         <div class="sub-card">
+            <div class="wrap-edit">
+                <span @click="isOpen = !isOpen" class="material-icons edit">
+                    mode_edit
+                </span>
+            </div>
+            <div class="wrap-icon">
+                <span v-if="isOpen" @click="deleteProduct" class="material-icons delete">
+                    delete
+                </span>
+            </div>
             <div class="sub-wrap">
                 <h2 class="title-subpage">{{ sub.name }}: </h2>
-                <input v-model="inputStock" type="number" placeholder="Nombre de lames" />
+                <input v-model="inputStock" type="number" placeholder="Quantités" />
                 <button @click="updateStock" class="bouton-subpage">Envoyer</button>
                 <h3 class="restant-stock">Stock :</h3>
                 <p class="total-stock">{{ sub.total }} / {{ sub.stock }} {{ sub.unit }}</p>
@@ -15,7 +25,8 @@
 
 <script>
 import { ref } from 'vue'
-import { doc, updateDoc } from "firebase/firestore";
+import { doc, updateDoc, deleteDoc } from "firebase/firestore";
+import { useToast } from 'vue-toastification'
 
 
 import { db } from '../Firebase/firebase.js'
@@ -24,12 +35,17 @@ export default {
     name: "SubCard",
     props: {
         sub: Object,
-        test: Array,
+    },
+    data() {
+        return {
+            isOpen: false
+        }
     },
 
     setup(props) {
-        const inputStock = ref(0)
-        // console.log(props.test.id)
+        const inputStock = ref()
+        const toast = useToast()
+
 
 
         const updateStock = () => {
@@ -40,9 +56,16 @@ export default {
             });
         }
 
+        const deleteProduct = async () => {
+            await deleteDoc(doc(db, "products", props.sub.id));
+            toast.success("Produit supprimé avec succes")
+
+        }
+
         return {
             inputStock,
-            updateStock
+            updateStock,
+            deleteProduct
         }
     }
 }
@@ -52,6 +75,40 @@ export default {
 .subpage {
     .sub-card {
         display: flex;
+    }
+
+    .wrap-edit {
+        margin-right: 3px;
+
+        .edit {
+            background: var(--or);
+            padding: 0.5rem;
+            border-radius: 5px;
+            color: var((--black));
+            cursor: pointer;
+
+            &:hover {
+                color: var(--brown);
+                transform: translateY(-0.5rem) scale(1.1, 1.1);
+                transition: 0.2s ease-out;
+            }
+        }
+    }
+
+    .wrap-icon {
+        .delete {
+            background: var(--or);
+            padding: 00.5rem;
+            border-radius: 5px;
+            color: var((--black));
+            cursor: pointer;
+
+            &:hover {
+                color: red;
+                transform: translateY(-0.5rem) scale(1.1, 1.1);
+                transition: 0.2s ease-out;
+            }
+        }
     }
 
     .sub-wrap {

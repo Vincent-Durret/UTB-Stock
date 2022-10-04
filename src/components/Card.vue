@@ -44,7 +44,7 @@ export default {
 
         const deleteProduct = async () => {
             await deleteDoc(doc(db, "products", props.card.id));
-            toast.success("Produit supprimer avec succes")
+            toast.success("Produit supprimé avec succes")
 
         }
 
@@ -56,17 +56,46 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .products-card {
 
     .card {
         display: flex;
-        flex-direction: row;
         transition: 0.5s;
     }
 
     .wrap-edit {
         margin-right: 3px;
+
+        .edit {
+            background: var(--or);
+            padding: 0.5rem;
+            border-radius: 5px;
+            color: var((--black));
+            cursor: pointer;
+
+            &:hover {
+                color: var(--brown);
+                transform: translateY(-0.5rem) scale(1.1, 1.1);
+                transition: 0.2s ease-out;
+            }
+        }
+    }
+
+    .wrap-icon {
+        .delete {
+            background: var(--or);
+            padding: 00.5rem;
+            border-radius: 5px;
+            color: var((--black));
+            cursor: pointer;
+
+            &:hover {
+                color: red;
+                transform: translateY(-0.5rem) scale(1.1, 1.1);
+                transition: 0.2s ease-out;
+            }
+        }
     }
 
     .button {
