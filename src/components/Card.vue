@@ -43,7 +43,7 @@ export default {
         const toast = useToast()
 
         const deleteProduct = async () => {
-            await deleteDoc(doc(db, "product", props.card.id));
+            await deleteDoc(doc(db, "products", props.card.id));
             toast.success("Produit supprimer avec succes")
 
         }

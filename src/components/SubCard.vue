@@ -15,7 +15,7 @@
 
 <script>
 import { ref } from 'vue'
-import { doc, updateDoc, increment } from "firebase/firestore";
+import { doc, updateDoc } from "firebase/firestore";
 
 
 import { db } from '../Firebase/firebase.js'
@@ -28,8 +28,7 @@ export default {
     },
 
     setup(props) {
-        const inputStock = ref()
-        console.log(props.sub.id)
+        const inputStock = ref(0)
         // console.log(props.test.id)
 
 
@@ -37,12 +36,9 @@ export default {
             const stockQ = doc(db, "products", props.sub.id);
 
             updateDoc(stockQ, {
-                total: increment(-inputStock.value)
+                total: Math.max(0, props.sub.total - inputStock.value)
             });
-
         }
-
-
 
         return {
             inputStock,
