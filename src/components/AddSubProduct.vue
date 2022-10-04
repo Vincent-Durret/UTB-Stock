@@ -82,6 +82,7 @@ export default {
     .wrap-element {
         display: flex;
         align-items: center;
+        float: left;
 
         .open {
             position: relative;
@@ -102,17 +103,18 @@ export default {
         }
 
         .title-logo {
-            position: relative;
+            position: absolute;
             margin-left: 0.8rem;
-            transform: translateX(-10rem);
+            transform: translateX(-0.5rem);
             visibility: hidden;
             z-index: -1;
+            
         }
 
         &:hover .title-logo {
             visibility: visible;
-            transform: translateX(0rem);
-            transition: transform 0.3s;
+            transform: translateX(4rem);
+            transition: transform 0.3s ease-in-out;
         }
     }
 

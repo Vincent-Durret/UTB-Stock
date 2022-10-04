@@ -1,7 +1,19 @@
 <template>
-    <div class="wood-card">
+    <div class="products-card">
         <div class="card">
-            <router-link class="button" :to="{name: 'SubCard', params: {category: card.category, title: card.name, total: card.total }}">
+            <div class="wrap-edit">
+                <span @click="isOpen = !isOpen" class="material-icons edit">
+                    mode_edit
+                </span>
+            </div>
+            <div class="wrap-icon">
+                <span v-if="isOpen" @click="deleteProduct" class="material-icons delete">
+                    delete
+                </span>
+            </div>
+
+            <router-link class="button"
+                :to="{name: 'SubCard', params: {category: card.category, title: card.name, total: card.total }}">
                 <div :style="{ backgroundImage: `url(${card.image})` }" class="image"></div>
                 <span class="text">{{ card.name }}</span>
                 <h3 class="total"> {{card.total}} / {{ card.stock }} {{ card.unit }} </h3>
@@ -11,22 +23,50 @@
 </template>
 
 <script>
+import { doc, deleteDoc } from "firebase/firestore";
+import { db } from '../Firebase/firebase.js'
+import { useToast } from 'vue-toastification'
+
+
 export default {
     name: "Card",
     props: {
         card: Object,
     },
+    data() {
+        return {
+            isOpen: false
+        }
+    },
+
+    setup(props) {
+        const toast = useToast()
+
+        const deleteProduct = async () => {
+            await deleteDoc(doc(db, "product", props.card.id));
+            toast.success("Produit supprimer avec succes")
+
+        }
+
+        return {
+            deleteProduct
+        }
+    }
 
 }
 </script>
 
 <style lang="scss">
-.wood-card {
+.products-card {
 
     .card {
         display: flex;
         flex-direction: row;
         transition: 0.5s;
+    }
+
+    .wrap-edit {
+        margin-right: 3px;
     }
 
     .button {

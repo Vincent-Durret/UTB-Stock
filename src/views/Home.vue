@@ -4,8 +4,10 @@
       <div class="wrap-header-img">
         <img class="header-img" src="../assets/Logo/logo-UTB-stock.png" alt="">
       </div>
-      <AddProduct />
-      <AddSubProduct />
+      <div class="wrap-icons">
+        <AddProduct />
+        <AddSubProduct />
+      </div>
       <Search />
     </header>
     <div class="wrap-card">
@@ -15,7 +17,6 @@
 </template>
 
 <script>
-// import info_all_item from '../DB/db.js'
 import { onMounted, ref } from 'vue';
 
 import { collection, getDocs, orderBy, query } from 'firebase/firestore'
@@ -34,7 +35,7 @@ export default {
     Search,
     AddProduct,
     AddSubProduct
-},
+  },
 
   setup() {
 
@@ -81,6 +82,12 @@ main {
         position: center;
         width: 50%;
       }
+    }
+
+    .wrap-icons {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
     }
   }
 

@@ -395,7 +395,7 @@ const info_product = [
     unit: 'Boites',
   },
   {
-    category: 'Produts',
+    category: 'Produits',
     name: 'Bidon AD Blue',
     image: '/assets/Produits/adblue.jpg',
     total: 50,

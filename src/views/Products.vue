@@ -30,7 +30,7 @@ export default {
   components: {
     Card,
     Search
-},
+  },
   methods: {
     goHome() {
       this.$router.push('/')
@@ -48,10 +48,12 @@ export default {
 
       const fetchedProducts = []
 
-      querySnapshot.forEach(doc => fetchedProducts.push(doc.data()))
+      querySnapshot.forEach(doc => { fetchedProducts.push({ id: doc.id, ...doc.data() }) })
 
       products.value = fetchedProducts
+
     })
+
 
     return {
       products,
