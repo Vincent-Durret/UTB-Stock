@@ -6,22 +6,22 @@
         </span> -->
         <div class="search">
             <router-link class="link" v-for="(product, i) in search_item" :key="i"
-                :to="{name: 'SubCard', params: {title: product.title, category: product.category}}">
+                :to="{name: 'SubCard', params: { category: product.category, title: product.title }}">
                 <div class="container--restaurant--search">
                     <h3> {{ product.category }} </h3>
                     <p class="lh"> {{ product.name }} </p>
+                    <p> {{ product.title }}</p>
                     <hr class="trait">
                 </div>
             </router-link>
         </div>
-
     </div>
 </template>
 
 <script>
 import { onMounted, ref, watch } from 'vue';
 
-import { collection, getDocs, orderBy, query } from 'firebase/firestore'
+import { collection, onSnapshot, query } from 'firebase/firestore'
 import { db } from '../Firebase/firebase.js'
 
 
@@ -35,19 +35,20 @@ export default {
 
 
         onMounted(async () => {
-            const q = query(collection(db, 'products'), orderBy('category', 'asc'))
+            const q = query(collection(db, 'products'))
 
-            const querySnapshot = await getDocs(q)
 
-            const fetchedProducts = []
+            onSnapshot(q, (querySnapshot) => {
+                const fetchedProducts = [];
 
-            querySnapshot.forEach(doc => fetchedProducts.push(doc.data()))
-
-            allitem.value = fetchedProducts
+                querySnapshot.forEach((doc) => {
+                    fetchedProducts.push({ id: doc.id, ...doc.data() })
+                })
+                allitem.value = fetchedProducts
+                console.log(fetchedProducts)
+            })
 
         })
-
-
 
         const user_search_item = ref('')
 
@@ -62,7 +63,7 @@ export default {
 
             new_value == 0 ? search_item.value = [] : search_item.value = new_search_item
 
-            console.log(search_item)
+            // console.log(search_item)
 
         })
 

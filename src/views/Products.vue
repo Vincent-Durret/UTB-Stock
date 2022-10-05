@@ -4,7 +4,7 @@
       <span @click="goHome()" class="material-icons">arrow_back</span>
     </div>
     <div class="wrap-title">
-      <h1>{{ $route.params.category }}</h1>
+      <h1> {{ $route.params.category }} </h1>
     </div>
     <Search />
     <div class="cards-grid">
@@ -20,7 +20,7 @@ import { useRoute } from "vue-router"
 import Card from '../components/Card.vue';
 
 
-import { collection, query, where, getDocs, onSnapshot } from 'firebase/firestore'
+import { collection, query, where,  onSnapshot } from 'firebase/firestore'
 
 import { db } from '../Firebase/firebase.js'
 import Search from '../components/Search.vue';
