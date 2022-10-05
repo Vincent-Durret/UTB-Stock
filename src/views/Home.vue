@@ -5,8 +5,7 @@
         <img class="header-img" src="../assets/Logo/logo-UTB-stock.png" alt="">
       </div>
       <div class="wrap-icons">
-        <AddProduct />
-        <AddSubProduct />
+        <AddProducts />
       </div>
       <Search />
     </header>
@@ -25,17 +24,16 @@ import { db } from '../Firebase/firebase.js'
 
 import Card from '../components/Card.vue';
 import Search from '../components/Search.vue';
-import AddProduct from '../components/AddProduct.vue';
-import AddSubProduct from '../components/AddSubProduct.vue';
+import AddProducts from '../components/AddProducts.vue';
+
 
 export default {
   name: 'Home',
   components: {
     Card,
     Search,
-    AddProduct,
-    AddSubProduct
-  },
+    AddProducts
+},
 
   setup() {
 

@@ -1,5 +1,5 @@
 <template>
-    <main class="add-product" alt="Ajouter un produits">
+    <div class="add-product" alt="Ajouter un produits">
         <div class="wrap-element">
             <span @click="isOpen = !isOpen" class="material-icons open">
                 note_add
@@ -16,7 +16,7 @@
             <h3>Ajouter un produit</h3>
             <div class="forms">
                 <select v-model="addCategory" name="product-category" required>
-                        <option value="" disabled selected hidden>Choisir une categorie</option>
+                        <option value="" disabled selected hidden>Choisir une catégorie</option>
                         <option value="Bois">Bois</option>
                         <option value="Quincailleries">Quincailleries</option>
                         <option value="Produits">Produits</option>
@@ -31,7 +31,7 @@
                 <button @click="addProducts">Créer le produit</button>
             </div>
         </div>
-    </main>
+    </div>
 </template>
 
 <script>
@@ -88,12 +88,12 @@ export default {
 
 <style lang="scss">
 .add-product {
-    margin: 1rem;
+    margin-bottom: 1rem;
 
     .wrap-element {
         display: flex;
         align-items: center;
-        float: left;
+        // float: left;
 
         .open {
             position: relative;

@@ -11,7 +11,6 @@
                     delete
                 </span>
             </div>
-
             <router-link class="button"
                 :to="{name: 'SubCard', params: {category: card.category, title: card.name, total: card.total }}">
                 <div :style="{ backgroundImage: `url(${card.image})` }" class="image"></div>

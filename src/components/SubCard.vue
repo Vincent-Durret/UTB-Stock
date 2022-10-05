@@ -54,6 +54,8 @@ export default {
             updateDoc(stockQ, {
                 total: Math.max(0, props.sub.total - inputStock.value)
             });
+            toast.success(" Vous avez retirer " + inputStock.value + props.sub.unit + " en " + props.sub.name)
+
         }
 
         const deleteProduct = async () => {
@@ -98,7 +100,7 @@ export default {
     .wrap-icon {
         .delete {
             background: var(--or);
-            padding: 00.5rem;
+            padding: 0.5rem;
             border-radius: 5px;
             color: var((--black));
             cursor: pointer;
@@ -117,16 +119,16 @@ export default {
         width: 230px;
         height: 230px;
         background: var(--or-alt);
-        border-radius: 5%;
+        border-radius: 5px;
         display: flex;
         justify-content: center;
         align-items: center;
         flex-direction: column;
-        transition: border 0.3s ease-in-out;
+        transition: border 0.2s ease-in;
 
         &:hover {
             box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-            border: 15px solid var(--or);
+            border: 1px solid var(--black);
         }
 
     }

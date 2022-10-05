@@ -1,5 +1,5 @@
 <template>
-    <main class="add-sub-product">
+    <div class="add-sub-product">
         <div class="wrap-element">
             <span @click="isOpen = !isOpen" class="material-icons open">
                 post_add
@@ -18,7 +18,7 @@
             <h3>Ajouter un sous produit</h3>
             <div class="forms">
                 <select v-model="addTitle" name="product-title" required>
-                    <option value="" disabled selected hidden>Choisir une categorie</option>
+                    <option value="" disabled selected hidden>Choisir une catégorie</option>
                     <optgroup label="Bois">
                         <option value="Itauba">Itauba</option>
                         <option value="Structure">Structure</option>
@@ -34,7 +34,7 @@
                 <button @click="addSubProducts">Créer le sous produit</button>
             </div>
         </div>
-    </main>
+    </div>
 </template>
 
 <script>
@@ -86,12 +86,12 @@ export default {
 
 <style lang="scss">
 .add-sub-product {
-    margin: 1rem;
+    // margin: 1rem;
 
     .wrap-element {
         display: flex;
         align-items: center;
-        float: left;
+        // // float: left;
 
         .open {
             position: relative;
@@ -134,7 +134,7 @@ export default {
         border: 3px solid var(--black);
         background: var(--or-alt);
         width: 30rem;
-        height: 29rem;
+        height: 32.5rem;
         top: 25%;
         left: 40%;
         display: flex;
