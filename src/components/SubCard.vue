@@ -54,7 +54,7 @@ export default {
             updateDoc(stockQ, {
                 total: Math.max(0, props.sub.total - inputStock.value)
             });
-            toast.success(" Vous avez retirer " + inputStock.value + props.sub.unit + " en " + props.sub.name)
+            toast.success(" Vous avez retirer " + inputStock.value + props.sub.unit + " en longueur " + props.sub.name)
 
         }
 

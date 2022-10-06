@@ -6,9 +6,9 @@
         </span> -->
         <div class="search">
             <router-link class="link" v-for="(product, i) in search_item" :key="i"
-                :to="{name: 'SubCard', params: { category: product.category, title: product.title }}">
+            :to="{name: 'SubCard', params: {category: product.category, title: product.name }}">
                 <div class="container--restaurant--search">
-                    <h3> {{ product.category }} </h3>
+                    <!-- <h3> {{ product.category }} </h3> -->
                     <p class="lh"> {{ product.name }} </p>
                     <p> {{ product.title }}</p>
                     <hr class="trait">
@@ -45,7 +45,6 @@ export default {
                     fetchedProducts.push({ id: doc.id, ...doc.data() })
                 })
                 allitem.value = fetchedProducts
-                console.log(fetchedProducts)
             })
 
         })
