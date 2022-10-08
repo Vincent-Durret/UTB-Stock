@@ -104,6 +104,8 @@ export default {
         text-decoration: none;
         flex-direction: column;
         box-sizing: border-box;
+        text-decoration: none;
+        color: white;
         width: 230px;
         height: 230px;
         border-radius: 25px;
