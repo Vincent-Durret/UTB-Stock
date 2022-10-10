@@ -1,6 +1,13 @@
 <template>
     <div class="subpage">
         <div class="sub-card">
+            <div class="sub-wrap">
+                <h2 class="title-subpage">{{ sub.name }}: </h2>
+                <input v-model="inputStock" type="number" placeholder="Quantités" />
+                <button @click="updateStock" class="bouton-subpage">Envoyer</button>
+                <h3 class="restant-stock">Stock :</h3>
+                <p class="total-stock">{{ sub.total }} / {{ sub.stock }} {{ sub.unit }}</p>
+            </div>
             <div class="wrap-edit">
                 <span @click="isOpen = !isOpen" class="material-icons edit">
                     mode_edit
@@ -10,13 +17,6 @@
                 <span v-if="isOpen" @click="deleteProduct" class="material-icons delete">
                     delete
                 </span>
-            </div>
-            <div class="sub-wrap">
-                <h2 class="title-subpage">{{ sub.name }}: </h2>
-                <input v-model="inputStock" type="number" placeholder="Quantités" />
-                <button @click="updateStock" class="bouton-subpage">Envoyer</button>
-                <h3 class="restant-stock">Stock :</h3>
-                <p class="total-stock">{{ sub.total }} / {{ sub.stock }} {{ sub.unit }}</p>
             </div>
         </div>
     </div>
@@ -80,6 +80,7 @@ export default {
     }
 
     .wrap-edit {
+        position: absolute;
         margin-right: 3px;
 
         .edit {
@@ -90,7 +91,8 @@ export default {
             cursor: pointer;
 
             &:hover {
-                color: var(--brown);
+                color: #34C924;
+                filter: drop-shadow(10px 10px 10px #34C924);
                 transform: translateY(-0.5rem) scale(1.1, 1.1);
                 transition: 0.2s ease-out;
             }
@@ -98,6 +100,9 @@ export default {
     }
 
     .wrap-icon {
+        position: absolute;
+        margin-left: 3rem;
+
         .delete {
             background: var(--or);
             padding: 0.5rem;

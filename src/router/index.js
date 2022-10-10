@@ -46,10 +46,10 @@ router.beforeEach((to, from, next) => {
     return;
   }
 
-  // if (to.matched.some(record => record.meta.requiresAuth) && !auth.currentUser) {
-  //   next('/connexion')
-  //   return;
-  // }
+  if (to.matched.some(record => record.meta.requiresAuth) && !auth.currentUser) {
+    next()
+    return;
+  }
 
   next();
 })

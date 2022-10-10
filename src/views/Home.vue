@@ -33,7 +33,7 @@ export default {
     Card,
     Search,
     AddProducts
-},
+  },
 
   setup() {
 

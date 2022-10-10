@@ -35,6 +35,7 @@ export default {
   --or-alt: #E3CD8B;
   --light: #F0F7EE;
   --white: #FFF;
+  --logo-letters:#D08B00;
   // DIMENTION
   --sidebar-width: 300px;
 

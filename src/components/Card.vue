@@ -1,6 +1,12 @@
 <template>
     <div class="products-card">
         <div class="card">
+            <router-link class="button"
+                :to="{name: 'SubCard', params: {category: card.category, title: card.name, total: card.total }}">
+                <div :style="{ backgroundImage: `url(${card.image})` }" class="image"></div>
+                <span class="text">{{ card.name }}</span>
+                <h3 class="total"> {{card.total}} / {{ card.stock }} {{ card.unit }} </h3>
+            </router-link>
             <div class="wrap-edit">
                 <span @click="isOpen = !isOpen" class="material-icons edit">
                     mode_edit
@@ -11,12 +17,6 @@
                     delete
                 </span>
             </div>
-            <router-link class="button"
-                :to="{name: 'SubCard', params: {category: card.category, title: card.name, total: card.total }}">
-                <div :style="{ backgroundImage: `url(${card.image})` }" class="image"></div>
-                <span class="text">{{ card.name }}</span>
-                <h3 class="total"> {{card.total}} / {{ card.stock }} {{ card.unit }} </h3>
-            </router-link>
         </div>
     </div>
 </template>
@@ -64,35 +64,43 @@ export default {
     }
 
     .wrap-edit {
-        margin-right: 3px;
+        position: absolute;
+        // margin-right: 3px;
 
         .edit {
-            background: var(--or);
+            background: var(--black);
             padding: 0.5rem;
             border-radius: 5px;
-            color: var((--black));
+            color: var((--light));
             cursor: pointer;
+            opacity: 0.8;
 
             &:hover {
-                color: var(--brown);
+                color: var(--logo-letters);
                 transform: translateY(-0.5rem) scale(1.1, 1.1);
                 transition: 0.2s ease-out;
+                opacity: 1;
             }
         }
     }
 
     .wrap-icon {
+        position: absolute;
+        margin-left: 3rem;
+
         .delete {
-            background: var(--or);
+            background: var(--black);
             padding: 00.5rem;
             border-radius: 5px;
-            color: var((--black));
+            color: var((--logo-letters));
             cursor: pointer;
+            opacity: 0.8;
 
             &:hover {
                 color: red;
                 transform: translateY(-0.5rem) scale(1.1, 1.1);
                 transition: 0.2s ease-out;
+                opacity: 1;
             }
         }
     }
@@ -106,13 +114,13 @@ export default {
         box-sizing: border-box;
         text-decoration: none;
         color: white;
-        width: 230px;
-        height: 230px;
+        width: 210px;
+        height: 210px;
         border-radius: 25px;
         transition: 0.3s;
 
         &:hover {
-            background: var(--or);
+            background: var(--black);
             transform: scale(0.9, 0.9);
             box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
             border: 3px solid black;
@@ -127,7 +135,7 @@ export default {
             height: 200px;
             border-radius: 20px;
             z-index: 0;
-            border: 3px solid var(--or);
+            border: 2px solid var(--black);
         }
 
 

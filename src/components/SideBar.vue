@@ -30,17 +30,29 @@
                     <span class="material-icons">widgets</span>
                     <span class="text">Autres</span>
                 </router-link>
-            </div>
-
-            <div class="flex"></div>
-
-            <div class="menu">
-                <div class="button" @click="store.dispatch('logout')">
-                    <span class="material-icons">logout</span>
-                    <span class="text">Se déconecter</span>
+                <div class="button">
+                    <span @click="isOpen = !isOpen" class="material-icons edit">
+                        add_circle_outline
+                    </span>
                 </div>
+                <div v-if="isOpen" class="button">
+                    <div class="wrap-icons">
+                        <AddProduct />
+                        <AddSubProduct />
+                    </div>
             </div>
-        </aside>
+
+    </div>
+
+    <div class="flex"></div>
+
+    <div class="menu">
+        <div class="button" @click="store.dispatch('logout')">
+            <span class="material-icons">logout</span>
+            <span class="text">Se déconecter</span>
+        </div>
+    </div>
+    </aside>
     </div>
 
 </template>
@@ -49,10 +61,11 @@
 import { ref } from 'vue';
 import { onBeforeMount } from 'vue'
 import { useStore } from 'vuex'
+import AddProduct from './AddProduct.vue';
+import AddSubProduct from './AddSubProduct.vue';
 
 
-
-
+const isOpen = ref(false)
 
 const is_expanded = ref(localStorage.getItem("is_expanded") === "true")
 
@@ -89,11 +102,12 @@ aside {
     min-height: 100vh;
     padding: 1rem;
 
-    background-color: var(--or);
+    background-color: var(--black);
     color: var(--light);
 
     transition: 0.2s ease-out;
     z-index: 5;
+    opacity: 0.9;
 
     .flex {
         flex: 1;
@@ -122,7 +136,7 @@ aside {
 
             .material-icons {
                 font-size: 2rem;
-                color: var(--black);
+                color: var(--light);
                 cursor: pointer;
             }
 
@@ -153,18 +167,28 @@ aside {
             display: flex;
             align-items: center;
             text-decoration: none;
-
+            cursor: pointer;
             padding: 0.5rem 1rem;
             transition: 0.2s ease-out;
 
             .material-icons {
                 font-size: 2rem;
-                color: var(--black);
+                color: var(--light);
                 transition: 0.2s ease-out;
             }
 
+            .edit {
+                display: flex;
+                flex-direction: row;
+            }
+
+            .wrap-icons {
+                display: flex;
+                margin: 0;
+            }
+
             .text {
-                color: var(--black);
+                color: var(--light);
                 font-weight: 600;
                 transition: 0.2s ease-out;
             }
@@ -174,12 +198,12 @@ aside {
 
                 .material-icons,
                 .text {
-                    color: var(--brown);
+                    color: var(--logo-letters);
                 }
             }
 
             &.router-link-exact-active {
-                border-right: 5px solid var(--brown);
+                border-right: 5px solid var(--logo-letters);
 
             }
         }

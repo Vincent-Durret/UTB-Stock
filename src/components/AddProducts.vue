@@ -43,16 +43,16 @@ export default {
     .wrap-edit {
         margin-bottom: 1rem;
         .edit {
-            background: var(--or);
+            background: var(--black);
             padding: 0.4rem;
             border-radius: 5px;
             font-size: 2.5rem;
-            color: var((--black));
+            color: var((--light));
             cursor: pointer;
             transition: transform 0.2s;
 
             &:hover {
-                color: var(--brown);
+                color: var(--logo-letters);
                 transform: translateY(-1rem);
             }
         }

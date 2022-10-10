@@ -132,7 +132,7 @@ export default {
     }
 
     input[type=search]:focus {
-        border: 5px solid var(--or);
+        border: 1px solid var(--black);
         border-bottom: none;
 
     }
@@ -142,7 +142,7 @@ export default {
         top: 100%;
         width: 400px;
         background: var(--light);
-        border: 5px solid var(--or);
+        border: 2px solid var(--black);
         border-top: none;
         border-radius: 0 0 5px 5px;
         z-index: 2;

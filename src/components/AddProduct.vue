@@ -89,6 +89,8 @@ export default {
 <style lang="scss">
 .add-product {
     margin-bottom: 1rem;
+    position: absolute;
+    left: 10rem;
 
     .wrap-element {
         display: flex;
@@ -97,17 +99,17 @@ export default {
 
         .open {
             position: relative;
-            background: var(--or);
+            background: var(--black);
             padding: 0.4rem;
             border-radius: 5px;
             font-size: 2.5rem;
-            color: var((--black));
+            color: var((--light));
             cursor: pointer;
             transition: 0.2s;
             z-index: 3;
 
             &:hover {
-                color: var(--brown);
+                color: var(--logo-letters);
                 transform: translateY(-0.5rem) scale(1.2, 1.2);
                 transition: 0.2s ease-out;
             }
