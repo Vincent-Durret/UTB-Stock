@@ -34,25 +34,27 @@
                     <span @click="isOpen = !isOpen" class="material-icons edit">
                         add_circle_outline
                     </span>
+                    <span class="text">Ajouter un produit</span>
+
                 </div>
                 <div v-if="isOpen" class="button">
                     <div class="wrap-icons">
                         <AddProduct />
                         <AddSubProduct />
                     </div>
+                </div>
+
             </div>
 
-    </div>
+            <div class="flex"></div>
 
-    <div class="flex"></div>
-
-    <div class="menu">
-        <div class="button" @click="store.dispatch('logout')">
-            <span class="material-icons">logout</span>
-            <span class="text">Se déconecter</span>
-        </div>
-    </div>
-    </aside>
+            <div class="menu">
+                <div class="button" @click="store.dispatch('logout')">
+                    <span class="material-icons">logout</span>
+                    <span class="text">Se déconecter</span>
+                </div>
+            </div>
+        </aside>
     </div>
 
 </template>
@@ -179,12 +181,12 @@ aside {
 
             .edit {
                 display: flex;
-                flex-direction: row;
+                flex-direction: column;
             }
 
             .wrap-icons {
                 display: flex;
-                margin: 0;
+                flex-direction: column;
             }
 
             .text {

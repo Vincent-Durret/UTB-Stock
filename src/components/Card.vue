@@ -92,7 +92,7 @@ export default {
             background: var(--black);
             padding: 00.5rem;
             border-radius: 5px;
-            color: var((--logo-letters));
+            color: var((--light));
             cursor: pointer;
             opacity: 0.8;
 
