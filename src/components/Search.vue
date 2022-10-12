@@ -1,16 +1,11 @@
 <template>
     <div class="wrapper--input">
         <input v-model="user_search_item" type="search" placeholder="Rechercher">
-        <!-- <span class="material-icons">
-            search
-        </span> -->
         <div class="search">
             <router-link class="link" v-for="(product, i) in search_item" :key="i"
             :to="{name: 'SubCard', params: {category: product.category, title: product.name }}">
                 <div class="container--restaurant--search">
-                    <!-- <h3> {{ product.category }} </h3> -->
                     <p class="lh"> {{ product.name }} </p>
-                    <p> {{ product.title }}</p>
                     <hr class="trait">
                 </div>
             </router-link>
@@ -169,15 +164,15 @@ export default {
                     padding: 20px;
                     // text-transform: uppercase;
                     text-align: center;
-                    @include magic-border(3px, var(--or), 0.2s, 0);
+                    @include magic-border(2px, var(--black), 0.2s, 0);
                     margin: 10px;
                     flex-grow: 1;
                     cursor: pointer;
                     transition: background 2s ease;
 
                     &:hover {
-                        color: var(--black);
-                        background: var(--or);
+                        color: var(--logo-letters);
+                        background: rgba(0, 0, 0, 0.9);
                     }
                 }
 

@@ -61,10 +61,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-main {
-  padding-left: 4rem;
-  padding-top: 0rem;
-
+.home-page {
 
   header {
 
@@ -80,8 +77,13 @@ main {
         width: 50%;
         // filter: drop-shadow();
         filter: drop-shadow(0px 0px 3px var(--logo-letters));
+        
+        @media (max-width: 760px) {
+            width: 80%;
 
+        }
       }
+      
     }
 
     .wrap-icons {
@@ -94,8 +96,13 @@ main {
   .wrap-card {
     display: flex;
     flex-wrap: wrap;
-    gap: 1rem 2rem;
+    gap: 2rem 1rem;
     justify-content: center;
+    
+    @media (max-width: 760px) {
+      flex-direction: column;
+      
+    }
   }
 }
 </style>

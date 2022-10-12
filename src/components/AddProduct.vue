@@ -88,41 +88,20 @@ export default {
 
 <style lang="scss">
 .add-product {
-    margin-bottom: 1rem;
-    // position: absolute;
-    // left: 10rem;
+    // margin-bottom: 1rem;
 
     .wrap-element {
         display: flex;
         align-items: center;
-        // float: left;
-
-
 
         .open {
-            // position: relative;
-            // // background: var(--black);
-            // // padding: 0.4rem;
-            // border-radius: 5px;
-            // // font-size: 2.5rem;
-            // color: var((--light));
-            // cursor: pointer;
-            // transition: 0.2s;
-            // z-index: 3;
             font-size: 2rem;
             color: var(--light);
             transition: 0.2s ease-out;
-
-            // &:hover {
-            //     color: var(--logo-letters);
-            //     transform: translateY(-0.5rem) scale(1.2, 1.2);
-            //     transition: 0.2s ease-out;
-            // }
         }
 
         .title-logo {
-            margin-left: 0.8rem;
-            // transform: translateX(-0.5rem);
+            margin-left: 1rem;
             color: var(--light);
             font-weight: 600;
             transition: 0.2s ease-out;
@@ -139,8 +118,8 @@ export default {
 
     .cart-add-product {
         position: fixed;
-        border: 3px solid var(--black);
-        background: var(--or-alt);
+        border: 3px solid var(--logo-letters);
+        background: var(--black);
         width: 30rem;
         height: 32rem;
         top: 25%;
@@ -151,12 +130,17 @@ export default {
         border-radius: 5px;
         z-index: 10;
 
+        @media (max-width: 768px) {
+            left: 22%;
+            width: 18rem;
+        }
+
         .wrap-icon {
             .close {
                 position: relative;
                 float: right;
-                background: var(--or);
-                color: var(--black);
+                background: var(--light);
+                color: var(--logo-letters);
                 padding: 0.3rem;
                 border-radius: 5px;
                 transition: color 0.2s, transform 0.3s;
@@ -193,7 +177,7 @@ export default {
 
             button {
                 margin: 1rem;
-                background: var(--or);
+                background: var(--light);
                 padding: 1rem;
                 font-size: 1.3rem;
                 font-weight: bold;
@@ -201,7 +185,7 @@ export default {
                 border-radius: 5px;
 
                 &:hover {
-                    background: var(--brown);
+                    background: var(--logo-letters);
                     color: white;
                 }
             }

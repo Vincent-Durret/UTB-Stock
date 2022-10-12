@@ -116,7 +116,7 @@ form.login input:not([type="submit"]) {
 }
 
 form.login input[type="submit"] {
-  background-color: var(--black);
+  background: rgba(0, 0, 0, 0.9);
   color: var(--light);
   font-weight: 700;
   padding: 1rem 2rem;
@@ -127,7 +127,7 @@ form.login input[type="submit"] {
 }
 
 form.login input[type="submit"]:hover {
-  box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+  box-shadow: rgb(0, 0, 0, 0.6) 0px 20px 30px -10px;
   /* background-color: var(--brown); */
   color: var(--logo-letters);
   /* transform: scale(0.95, 0.95); */

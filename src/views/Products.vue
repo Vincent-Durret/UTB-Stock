@@ -70,18 +70,19 @@ export default {
   }
 
   .material-icons {
-    background: var(--or);
+    background: rgba(0, 0, 0, 0.9);
     padding: 0.4rem;
     border-radius: 5px;
     font-size: 2.5rem;
-    color: var((--black));
+    color: var((--light));
     cursor: pointer;
     transition: 0.2s;
+    border: 2px solid var(--logo-letters);
 
     &:hover {
-      color: var(--brown);
+      color: var(--logo-letters);
+      filter: drop-shadow(0px 0px 10px var(--logo-letters));
       transform: translateX(-0.5rem) scale(1.1, 1.1);
-
       transition: 0.2s ease-out;
     }
 
@@ -107,8 +108,7 @@ export default {
   .cards-grid {
     display: flex;
     flex-wrap: wrap;
-    column-gap: 1rem;
-    row-gap: 1rem;
+    gap: 2rem 1rem;
     justify-content: center;
 
     @media (max-width: 760px) {

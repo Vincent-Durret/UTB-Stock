@@ -141,13 +141,13 @@ export default {
 
         .text {
             position: relative;
-            background: var(--or);
+            background: rgba(0, 0, 0, 0.9);
             border-radius: 5px;
             padding: 5px;
             position: relative;
             font-size: 1.2rem;
             text-transform: uppercase;
-            color: var(--black);
+            color: var(--logo-letters);
             z-index: 1;
             margin-left: 25px;
             margin-right: 25px;
@@ -158,12 +158,12 @@ export default {
         .total {
             // margin-top: 1rem;
             top: 20%;
-            background: var(--or);
+            background: rgba(0, 0, 0, 0.9);
             padding: 0.3rem;
             border-radius: 5px;
             position: relative;
             z-index: 1;
-            color: var(--black);
+            color: var(--logo-letters);
             font-weight: 600;
         }
     }

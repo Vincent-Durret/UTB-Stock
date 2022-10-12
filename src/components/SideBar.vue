@@ -32,9 +32,9 @@
                 </router-link>
                 <div @click="isOpen = !isOpen" class="button">
                     <span class="material-icons edit">
-                        add_circle_outline
+                        add_circle
                     </span>
-                    <span class="text">Ajouter un produit</span>
+                    <span class="text">Ajouter</span>
 
                 </div>
                 <div v-if="isOpen" class="button">
@@ -104,12 +104,11 @@ aside {
     min-height: 100vh;
     padding: 1rem;
 
-    background-color: var(--black);
+    background-color: rgba(0, 0, 0, 0.9);
     color: var(--light);
 
     transition: 0.2s ease-out;
     z-index: 5;
-    opacity: 0.9;
 
     .flex {
         flex: 1;
@@ -187,7 +186,6 @@ aside {
             .wrap-icons {
                 display: flex;
                 flex-direction: column;
-                align-items: center;
             }
 
             .text {

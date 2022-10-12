@@ -1,7 +1,7 @@
 <template>
     <main class="subcard">
         <div class="return">
-            <span @click="goBack()" class="material-icons">arrow_back</span>
+            <span @click="$router.back()" class="material-icons">arrow_back</span>
         </div>
         <div class="wrap-titre">
             <h1> {{ $route.params.title }} </h1>
@@ -23,11 +23,6 @@ export default {
     components: {
         SubCard,
     },
-    methods: {
-        goBack() {
-            this.$router.push('/Bois')
-        }
-    },
 
     setup() {
 
@@ -38,7 +33,7 @@ export default {
         onMounted(() => {
             const route = useRoute()
             const q = query(collection(db, "products"), where("title", "==", route.params.title))
-            
+
             onSnapshot(q, (querySnapshot) => {
                 const fetchedProducts = [];
 
@@ -64,18 +59,19 @@ export default {
         margin: 1rem;
 
         .material-icons {
-            background: var(--or);
+            background: rgba(0, 0, 0, 0.9);
             padding: 0.4rem;
             border-radius: 5px;
             font-size: 2.5rem;
-            color: var((--black));
+            color: var((--light));
             cursor: pointer;
             transition: 0.2s;
+            border: 2px solid var(--logo-letters);
 
             &:hover {
-                color: var(--brown);
+                color: var(--logo-letters);
                 transform: translateX(-0.5rem) scale(1.1, 1.1);
-
+                filter: drop-shadow(0px 0px 10px var(--logo-letters));
                 transition: 0.2s ease-out;
             }
 

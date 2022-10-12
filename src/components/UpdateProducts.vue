@@ -1,13 +1,13 @@
 <template>
-    <div class="add-sub-product">
+    <div class="update-product">
         <div class="wrap-element">
-            <span @click="isOpen = !isOpen" class="material-icons open">
-                post_add
+            <span class="material-icons open">
+                edit
             </span>
-            <p class="title-logo">Ajouter un sous produit</p>
-        </div>
+            <p class="title-logo">Modifier un produit</p>
 
-        <div v-if="isOpen" class="cart-add-product">
+        </div>
+        <div class="cart-add-product">
             <div class="wrap-icon">
                 <span @click="isOpen = !isOpen" class="material-icons close">
                     cancel
@@ -15,35 +15,31 @@
 
             </div>
 
-            <h3>Ajouter un sous produit</h3>
+            <h3>Modifier un produit</h3>
             <div class="forms">
                 <select v-model="addTitle" name="product-title" required>
-                    <option value="" disabled selected hidden>Choisir une catégorie</option>
-                    <optgroup label="Bois">
-                        <option value="Itauba">Itauba</option>
-                        <option value="Structure">Structure</option>
-                        <option value="Ipé">Ipé</option>
-                        <option value="Cumaru">Cumaru</option>
-                    </optgroup>
+                    <option value="" disabled selected hidden>Choisir un Produit</option>
+                    <option v-for="(product) in allitem" :key="product.id" value="Itauba">{{ product.name }}</option>
                 </select>
-                <input v-model="addTitle" type="text" placeholder="Si categorie inexistante a remplir">
-                <input v-model="addName" type="text" placeholder="*Nom">
-                <input v-model="addTotal" type="number" placeholder="*Totale">
-                <input v-model="addStock" type="number" placeholder="*Stock">
-                <input v-model="addUnit" type="text" placeholder="*Unités">
-                <button @click="addSubProducts">Créer le sous produit</button>
+                <input v-for="(product) in allitem" :key="product.id" v-model="category" type="text" :placeholder="product.total">
+                <input v-model="name" type="text" placeholder="*Nom">
+                <input v-model="total" type="number" placeholder="*Totale">
+                <input v-model="stock" type="number" placeholder="*Stock">
+                <input v-model="unit" type="text" placeholder="*Unités">
+                <button>Modifier le produit</button>
             </div>
         </div>
     </div>
 </template>
 
 <script>
-import { ref } from 'vue'
-import { collection, addDoc } from "firebase/firestore";
+import { ref, onMounted } from 'vue'
+import { collection, addDoc, query, where, onSnapshot } from "firebase/firestore";
 import { db } from '../Firebase/firebase.js'
+import { useRoute } from "vue-router"
 import { useToast } from 'vue-toastification'
 export default {
-    name: "AddSubProduct",
+    name: "UpdateProducts",
     data() {
         return {
             isOpen: false
@@ -53,31 +49,50 @@ export default {
     setup() {
         const toast = useToast()
 
-        const addTitle = ref('')
-        const addName = ref('')
-        const addTotal = ref()
-        const addStock = ref()
-        const addUnit = ref('')
+        const Name = ref('')
+        const Total = ref()
+        const Stock = ref()
+        const Unit = ref('')
 
-        const addSubProducts = async () => {
-            await addDoc(collection(db, "products"), {
-                title: addTitle.value,
-                name: addName.value,
-                total: addTotal.value,
-                stock: addStock.value,
-                unit: addUnit.value,
-            });
-            toast.success("Sous produit créer avec succes")
+        // const addSubProducts = async () => {
+        //     await addDoc(collection(db, "products"), {
+        //         title: addTitle.value,
+        //         name: addName.value,
+        //         total: addTotal.value,
+        //         stock: addStock.value,
+        //         unit: addUnit.value,
+        //     });
+        //     toast.success("Sous produit créer avec succes")
 
-        }
+        // }
+
+        const allitem = ref([]);
+
+        onMounted(async () => {
+            const q = query(collection(db, 'products'))
+
+
+            onSnapshot(q, (querySnapshot) => {
+                const fetchedProducts = [];
+
+                querySnapshot.forEach((doc) => {
+                    fetchedProducts.push({ id: doc.id, ...doc.data() })
+                })
+                allitem.value = fetchedProducts
+            })
+            console.log(product.name)
+        })
+        // const category = ref()
 
         return {
-            addTitle,
-            addName,
-            addTotal,
-            addStock,
-            addUnit,
-            addSubProducts
+            // addTitle,
+            // addName,
+            // addTotal,
+            // addStock,
+            // addUnit,
+            // addSubProducts,
+            allitem,
+            // category
         }
     }
 
@@ -85,7 +100,7 @@ export default {
 </script>
 
 <style lang="scss">
-.add-sub-product {
+.update-product {
 
     .wrap-element {
         display: flex;
@@ -117,8 +132,8 @@ export default {
 
     .cart-add-product {
         position: fixed;
-        border: 3px solid var(--logo-letters);
-        background: var(--black);
+        border: 3px solid var(--black);
+        background: var(--or-alt);
         width: 30rem;
         height: 32.5rem;
         top: 25%;
@@ -129,17 +144,12 @@ export default {
         border-radius: 5px;
         z-index: 10;
 
-        @media (max-width: 768px) {
-            left: 22%;
-            width: 18rem;
-        }
-
         .wrap-icon {
             .close {
                 position: relative;
                 float: right;
-                background: var(--light);
-                color: var(--logo-letters);
+                background: var(--or);
+                color: var(--black);
                 padding: 0.3rem;
                 border-radius: 5px;
                 transition: color 0.2s, transform 0.3s;
@@ -176,7 +186,7 @@ export default {
 
             button {
                 margin: 1rem;
-                background: var(--light);
+                background: var(--or);
                 padding: 1rem;
                 font-size: 1.3rem;
                 font-weight: bold;
@@ -184,7 +194,7 @@ export default {
                 border-radius: 5px;
 
                 &:hover {
-                    background: var(--logo-letters);
+                    background: var(--brown);
                     color: white;
                 }
             }

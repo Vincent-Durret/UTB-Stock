@@ -84,15 +84,15 @@ export default {
         margin-right: 3px;
 
         .edit {
-            background: var(--or);
+            background: black;
+            border: 1px solid var(--logo-letters);
             padding: 0.5rem;
             border-radius: 5px;
-            color: var((--black));
+            color: var((--light));
             cursor: pointer;
 
             &:hover {
-                color: #34C924;
-                filter: drop-shadow(10px 10px 10px #34C924);
+                color: var(--logo-letters);
                 transform: translateY(-0.5rem) scale(1.1, 1.1);
                 transition: 0.2s ease-out;
             }
@@ -104,10 +104,11 @@ export default {
         margin-left: 3rem;
 
         .delete {
-            background: var(--or);
+            background: rgba(0, 0, 0, 0.9);
+            border: 1px solid var(--logo-letters);
             padding: 0.5rem;
             border-radius: 5px;
-            color: var((--black));
+            color: var((--light));
             cursor: pointer;
 
             &:hover {
@@ -123,23 +124,21 @@ export default {
         box-sizing: border-box;
         width: 230px;
         height: 230px;
-        background: var(--or-alt);
+        background: rgba(0, 0, 0, 0.9);
         border-radius: 5px;
         display: flex;
         justify-content: center;
         align-items: center;
         flex-direction: column;
         transition: border 0.2s ease-in;
-
-        &:hover {
-            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-            border: 1px solid var(--black);
-        }
+        border: 2px solid var(--logo-letters);
+        filter: drop-shadow(0px 0px 15px var(--logo-letters));
 
     }
 
     .title-subpage {
         font-size: 2rem;
+        color: var(--light);
         // line-height: 3.5rem;
     }
 
@@ -164,28 +163,29 @@ export default {
     .bouton-subpage {
         margin-top: 10px;
         border-radius: 5px;
-        background-color: var(--or);
+        background-color: var(--black);
         padding: 10px;
-        color: var(--black);
+        color: var(--light);
         transition: background 0.2s ease;
         font-size: 1rem;
         font-weight: 700;
 
         &:hover {
-            box-shadow: rgb(38, 57, 77) 0px 10px 15px -10px;
-            background-color: var(--brown);
-            color: var(--white);
+            color: var(--logo-letters);
         }
     }
 
     .restant-stock {
         font-size: 1.5rem;
         margin-top: 0.7rem;
+        color: var(--light);
     }
 
     .total-stock {
         line-height: 2rem;
         font-size: 1.2rem;
+        color: var(--light);
+
     }
 
 }
