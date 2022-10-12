@@ -8,7 +8,7 @@
         </div>
 
         <div v-if="isOpen" class="cart-add-product">
-            <div  class="wrap-icon">
+            <div class="wrap-icon">
                 <span @click="isOpen = !isOpen" class="material-icons close">
                     cancel
                 </span>
@@ -91,19 +91,23 @@ export default {
 
     .wrap-element {
         display: flex;
-        align-items: center;
+        // align-items: center;
+        
         // // float: left;
 
         .open {
-            position: relative;
+            // position: relative;
             // background: var(--black);
             // padding: 0.4rem;
             // border-radius: 5px;
             // font-size: 2.5rem;
-            color: var((--light));
-            cursor: pointer;
-            transition: 0.2s;
-            z-index: 3;
+            // color: var((--light));
+            // cursor: pointer;
+            // transition: 0.2s;
+            // z-index: 3;
+            font-size: 2rem;
+            color: var(--light);
+            transition: 0.2s ease-out;
 
             // &:hover {
             //     color: var(--logo-letters);

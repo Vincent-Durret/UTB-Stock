@@ -16,7 +16,7 @@ import SideBar from '../src/components/SideBar.vue';
 export default {
   components: {
     SideBar,
-},
+  },
 }
 
 </script>
@@ -35,7 +35,7 @@ export default {
   --or-alt: #E3CD8B;
   --light: #F0F7EE;
   --white: #FFF;
-  --logo-letters:#D08B00;
+  --logo-letters: #D08B00;
   // DIMENTION
   --sidebar-width: 300px;
 
@@ -46,7 +46,8 @@ export default {
   padding: 0;
   box-sizing: border-box;
   // font-family: 'Fira sans', sans-serif;
-  font-family: Geomanist, sans-serif;;
+  font-family: Geomanist, sans-serif;
+  ;
 }
 
 body {
@@ -59,11 +60,13 @@ header {
 
 h1 {
   font-size: 5rem;
-  color: var(--black);
-  background-color: var(--or);
+  color: var(--logo-letters);
+  background-color: var(--black);
   padding: 1rem;
   border-radius: 5px;
   margin: 2rem;
+  opacity: 0.8;
+  filter: drop-shadow(0px 0px 10px var(--logo-letters));
 
   @media (max-width: 760px) {
     font-size: 2.5rem;

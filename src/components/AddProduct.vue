@@ -1,13 +1,13 @@
 <template>
     <div class="add-product" alt="Ajouter un produits">
-        <div class="wrap-element">
-            <span @click="isOpen = !isOpen" class="material-icons open">
+        <div @click="isOpen = !isOpen" class="wrap-element">
+            <span  class="material-icons open">
                 note_add
             </span>
             <p class="title-logo">Ajouter un produit</p>
         </div>
         <div v-if="isOpen" class="cart-add-product">
-            <div  class="wrap-icon">
+            <div class="wrap-icon">
                 <span @click="isOpen = !isOpen" class="material-icons close">
                     cancel
                 </span>
@@ -16,11 +16,11 @@
             <h3>Ajouter un produit</h3>
             <div class="forms">
                 <select v-model="addCategory" name="product-category" required>
-                        <option value="" disabled selected hidden>Choisir une catégorie</option>
-                        <option value="Bois">Bois</option>
-                        <option value="Quincailleries">Quincailleries</option>
-                        <option value="Produits">Produits</option>
-                        <option value="Autres">Autres</option>
+                    <option value="" disabled selected hidden>Choisir une catégorie</option>
+                    <option value="Bois">Bois</option>
+                    <option value="Quincailleries">Quincailleries</option>
+                    <option value="Produits">Produits</option>
+                    <option value="Autres">Autres</option>
                 </select>
 
                 <input v-model="addName" type="text" placeholder="*Nom">
@@ -88,7 +88,7 @@ export default {
 
 <style lang="scss">
 .add-product {
-    // margin-bottom: 1rem;
+    margin-bottom: 1rem;
     // position: absolute;
     // left: 10rem;
 
@@ -97,16 +97,21 @@ export default {
         align-items: center;
         // float: left;
 
+
+
         .open {
-            position: relative;
-            // background: var(--black);
-            // padding: 0.4rem;
-            border-radius: 5px;
-            // font-size: 2.5rem;
-            color: var((--light));
-            cursor: pointer;
-            transition: 0.2s;
-            z-index: 3;
+            // position: relative;
+            // // background: var(--black);
+            // // padding: 0.4rem;
+            // border-radius: 5px;
+            // // font-size: 2.5rem;
+            // color: var((--light));
+            // cursor: pointer;
+            // transition: 0.2s;
+            // z-index: 3;
+            font-size: 2rem;
+            color: var(--light);
+            transition: 0.2s ease-out;
 
             // &:hover {
             //     color: var(--logo-letters);
@@ -116,17 +121,19 @@ export default {
         }
 
         .title-logo {
-            position: absolute;
             margin-left: 0.8rem;
-            transform: translateX(-0.5rem);
-            visibility: hidden;
-            z-index: -1;
+            // transform: translateX(-0.5rem);
+            color: var(--light);
+            font-weight: 600;
+            transition: 0.2s ease-out;
         }
 
-        &:hover .title-logo {
-            visibility: visible;
-            transform: translateX(4rem);
-            transition: transform 0.3s ease-in-out;
+        &:hover {
+
+            .open,
+            .title-logo {
+                color: var(--logo-letters);
+            }
         }
     }
 

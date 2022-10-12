@@ -30,8 +30,8 @@
                     <span class="material-icons">widgets</span>
                     <span class="text">Autres</span>
                 </router-link>
-                <div class="button">
-                    <span @click="isOpen = !isOpen" class="material-icons edit">
+                <div @click="isOpen = !isOpen" class="button">
+                    <span class="material-icons edit">
                         add_circle_outline
                     </span>
                     <span class="text">Ajouter un produit</span>
@@ -144,7 +144,7 @@ aside {
 
             &:hover {
                 .material-icons {
-                    color: var(--brown);
+                    color: var(--logo-letters);
                     transform: translateX(0.5rem);
                     transition: 0.2s ease-out;
                     cursor: pointer;
@@ -187,6 +187,7 @@ aside {
             .wrap-icons {
                 display: flex;
                 flex-direction: column;
+                align-items: center;
             }
 
             .text {
@@ -201,11 +202,13 @@ aside {
                 .material-icons,
                 .text {
                     color: var(--logo-letters);
+                    // filter: drop-shadow(0px 0px 5px var(--logo-letters));
                 }
             }
 
             &.router-link-exact-active {
                 border-right: 5px solid var(--logo-letters);
+
 
             }
         }
