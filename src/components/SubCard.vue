@@ -124,21 +124,22 @@ export default {
         box-sizing: border-box;
         width: 230px;
         height: 230px;
-        background: rgba(0, 0, 0, 0.9);
+        // background: rgba(0, 0, 0, 0.9);
+        background: var(--or-alt);
         border-radius: 5px;
         display: flex;
         justify-content: center;
         align-items: center;
         flex-direction: column;
         transition: border 0.2s ease-in;
-        border: 2px solid var(--logo-letters);
-        filter: drop-shadow(0px 0px 15px var(--logo-letters));
+        border: 2px solid var(--black);
+        // filter: drop-shadow(0px 0px 15px var(--logo-letters));
 
     }
 
     .title-subpage {
         font-size: 2rem;
-        color: var(--light);
+        color: var(--black-alt);
         // line-height: 3.5rem;
     }
 
@@ -178,13 +179,13 @@ export default {
     .restant-stock {
         font-size: 1.5rem;
         margin-top: 0.7rem;
-        color: var(--light);
+        color: var(--black-alt);
     }
 
     .total-stock {
         line-height: 2rem;
         font-size: 1.2rem;
-        color: var(--light);
+        color: var(--black-alt);
 
     }
 
