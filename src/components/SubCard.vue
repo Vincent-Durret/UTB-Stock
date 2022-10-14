@@ -125,7 +125,7 @@ export default {
         width: 230px;
         height: 230px;
         // background: rgba(0, 0, 0, 0.9);
-        background: var(--or-alt);
+        background: var(--or);
         border-radius: 5px;
         display: flex;
         justify-content: center;
