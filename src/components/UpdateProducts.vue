@@ -17,15 +17,14 @@
 
             <h3>Modifier un produit</h3>
             <div class="forms">
-                <select v-model="addTitle" name="product-title" required>
+                <select name="product-title" required>
                     <option value="" disabled selected hidden>Choisir un Produit</option>
                     <option v-for="(product) in allitem" :key="product.id" value="Itauba">{{ product.name }}</option>
                 </select>
-                <input v-for="(product) in allitem" :key="product.id" v-model="category" type="text" :placeholder="product.total">
-                <input v-model="name" type="text" placeholder="*Nom">
-                <input v-model="total" type="number" placeholder="*Totale">
-                <input v-model="stock" type="number" placeholder="*Stock">
-                <input v-model="unit" type="text" placeholder="*Unités">
+                <input v-model="Name" type="text" placeholder="*Nom">
+                <input v-model="Total" type="number" placeholder="*Totale">
+                <input v-model="Stock" type="number" placeholder="*Stock">
+                <input v-model="Unit" type="text" placeholder="*Unités">
                 <button>Modifier le produit</button>
             </div>
         </div>
@@ -34,7 +33,7 @@
 
 <script>
 import { ref, onMounted } from 'vue'
-import { collection, addDoc, query, where, onSnapshot } from "firebase/firestore";
+import { collection, query, onSnapshot } from "firebase/firestore";
 import { db } from '../Firebase/firebase.js'
 import { useRoute } from "vue-router"
 import { useToast } from 'vue-toastification'
@@ -49,10 +48,7 @@ export default {
     setup() {
         const toast = useToast()
 
-        const Name = ref('')
-        const Total = ref()
-        const Stock = ref()
-        const Unit = ref('')
+
 
         // const addSubProducts = async () => {
         //     await addDoc(collection(db, "products"), {
@@ -80,17 +76,20 @@ export default {
                 })
                 allitem.value = fetchedProducts
             })
-            console.log(product.name)
         })
+        const Name = ('')
+        const Total = ref(0)
+        const Stock = ref(0)
+        const Unit = ref('')
+        // console.log(allitem.value.name)
         // const category = ref()
 
         return {
             // addTitle,
-            // addName,
-            // addTotal,
-            // addStock,
-            // addUnit,
-            // addSubProducts,
+            Name,
+            Total,
+            Stock,
+            Unit,
             allitem,
             // category
         }
