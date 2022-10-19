@@ -48,10 +48,10 @@ export default {
 
 
 
-        const updateStock = () => {
+        const updateStock = async () => {
             const stockQ = doc(db, "products", props.sub.id);
 
-            updateDoc(stockQ, {
+            await updateDoc(stockQ, {
                 total: Math.max(0, props.sub.total - inputStock.value)
             });
             toast.success(" Vous avez retirer " + inputStock.value + props.sub.unit + " en longueur " + props.sub.name)
@@ -63,6 +63,7 @@ export default {
             toast.success("Produit supprimé avec succes")
 
         }
+
 
         return {
             inputStock,

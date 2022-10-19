@@ -12,17 +12,39 @@
                     mode_edit
                 </span>
             </div>
-            <div class="wrap-icon">
-                <span v-if="isOpen" @click="deleteProduct" class="material-icons delete">
+            <div v-if="isOpen" class="wrap-icon">
+                <span @click="deleteProduct" class="material-icons delete">
                     delete
                 </span>
+                <span @click="openUpdate = !openUpdate" class="material-icons update">
+                    edit_note
+                </span>
             </div>
+        </div>
+
+        <div v-if="openUpdate" class="forms">
+            <div class="wrap-close">
+                <span @click="openUpdate = !openUpdate" class="material-icons close">
+                    cancel
+                </span>
+            </div>
+            <h3>Modifier un produit</h3>
+            <input v-model="updateName" type="text" :placeholder=card.name>
+            <input v-model="updateImage" type="text" list="image" :placeholder=card.image>
+            <datalist id="image">
+                <option :value=card.image></option>
+            </datalist>
+            <input v-model="updateTotal" type="number" :placeholder=card.total>
+            <input v-model="updateStock" type="number" :placeholder=card.stock>
+            <input v-model="updateUnit" type="text" :placeholder=card.unit>
+            <button @click="updateProducts">Modifier le produit</button>
         </div>
     </div>
 </template>
 
 <script>
-import { doc, deleteDoc } from "firebase/firestore";
+import { ref } from 'vue';
+import { doc, deleteDoc, updateDoc } from "firebase/firestore";
 import { db } from '../Firebase/firebase.js'
 import { useToast } from 'vue-toastification'
 
@@ -34,12 +56,33 @@ export default {
     },
     data() {
         return {
-            isOpen: false
+            isOpen: false,
+            openUpdate: false
         }
     },
 
     setup(props) {
         const toast = useToast()
+
+        const updateName = ref('')
+        const updateImage = ref('')
+        const updateTotal = ref()
+        const updateStock = ref()
+        const updateUnit = ref('')
+
+        const updateProducts = async () => {
+            const stockQ = doc(db, "products", props.card.id);
+
+            await updateDoc(stockQ, {
+                name: updateName.value,
+                image: updateImage.value,
+                total: updateTotal.value,
+                stock: updateStock.value,
+                unit: updateUnit.value
+            });
+            toast.success("Produits modifier")
+
+        }
 
         const deleteProduct = async () => {
             await deleteDoc(doc(db, "products", props.card.id));
@@ -48,6 +91,12 @@ export default {
         }
 
         return {
+            updateName,
+            updateImage,
+            updateTotal,
+            updateStock,
+            updateUnit,
+            updateProducts,
             deleteProduct
         }
     }
@@ -57,7 +106,8 @@ export default {
 
 <style lang="scss" scoped>
 .products-card {
-
+    display: flex;
+    justify-content: center;
     .card {
         display: flex;
         transition: 0.5s;
@@ -98,6 +148,23 @@ export default {
 
             &:hover {
                 color: red;
+                transform: translateY(-0.5rem) scale(1.1, 1.1);
+                transition: 0.2s ease-out;
+                opacity: 1;
+            }
+        }
+
+        .update {
+            margin-left: 0.5rem;
+            background: var(--black);
+            padding: 00.5rem;
+            border-radius: 5px;
+            color: var((--light));
+            cursor: pointer;
+            opacity: 0.8;
+
+            &:hover {
+                color: var(--logo-letters);
                 transform: translateY(-0.5rem) scale(1.1, 1.1);
                 transition: 0.2s ease-out;
                 opacity: 1;
@@ -165,6 +232,74 @@ export default {
             z-index: 1;
             color: var(--logo-letters);
             font-weight: 600;
+        }
+    }
+
+    .forms {
+        position: fixed;
+        border: 3px solid var(--logo-letters);
+        background: var(--black);
+        width: 30rem;
+        height: 30rem;
+        top: 25%;
+        left: 40%;
+        display: flex;
+        flex-direction: column;
+        padding: 1rem;
+        border-radius: 5px;
+        z-index: 10;
+        overflow: hidden;
+
+        @media (max-width: 768px) {
+            left: 22%;
+            width: 18rem;
+        }
+
+        .wrap-close {
+            .close {
+                position: relative;
+                float: right;
+                background: var(--light);
+                color: var(--logo-letters);
+                padding: 0.3rem;
+                border-radius: 5px;
+                transition: color 0.2s, transform 0.3s;
+                cursor: pointer;
+
+                &:hover {
+                    color: red;
+                    transform: scale(1.1, 1.1);
+
+                    transition: 0.2s ease-out;
+                }
+            }
+        }
+
+        h3 {
+            display: flex;
+            justify-content: center;
+            color: var(--light);
+        }
+
+
+        input {
+            margin: 1rem;
+            height: 1.5rem;
+        }
+
+        button {
+            margin: 1rem;
+            background: var(--light);
+            padding: 1rem;
+            font-size: 1.3rem;
+            font-weight: bold;
+            transition: background 0.3s;
+            border-radius: 5px;
+
+            &:hover {
+                background: var(--logo-letters);
+                color: white;
+            }
         }
     }
 }

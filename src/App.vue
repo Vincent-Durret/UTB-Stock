@@ -55,9 +55,6 @@ body {
   background: var(--light);
 }
 
-header {
-  margin-right: 5rem;
-}
 
 h1 {
   font-size: 5rem;

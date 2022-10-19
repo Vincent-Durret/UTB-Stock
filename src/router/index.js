@@ -29,12 +29,6 @@ const routes = [
     },
     
   },
-  {
-    path: "/test",
-    component: () => import("../components/UpdateProducts.vue"),
-    name: "UpdateProducts",
-    
-  },
   
   {
     path: "/connexion",

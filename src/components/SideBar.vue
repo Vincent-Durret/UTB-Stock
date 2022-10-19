@@ -120,6 +120,7 @@ aside {
         img {
             width: 5rem;
             transition: 0.3s;
+            filter: drop-shadow(0px 0px 1px var(--logo-letters));
         }
     }
 

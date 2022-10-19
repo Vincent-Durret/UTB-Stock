@@ -190,13 +190,14 @@ export default {
     .wrapper--input {
         margin: 1.5rem;
         align-items: center;
+        justify-content: center;
 
         input {
-            width: 300px;
+            width: 250px;
         }
 
         .search {
-            width: 300px;
+            width: 250px;
         }
     }
 }
