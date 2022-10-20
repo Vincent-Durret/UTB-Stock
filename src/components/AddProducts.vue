@@ -59,9 +59,6 @@ export default {
 
     }
 
-    .wrap-icons {   
-
-    }
 }
 
 

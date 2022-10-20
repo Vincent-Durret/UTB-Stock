@@ -9,6 +9,7 @@
     <div class="wrap-card">
       <Card v-for="(product) in allproducts" :card="product" :key="product.id" />
     </div>
+    <Footer />
   </main>
 </template>
 
@@ -21,6 +22,7 @@ import { db } from '../Firebase/firebase.js'
 
 import Card from '../components/Card.vue';
 import Search from '../components/Search.vue';
+import Footer from '../components/Footer.vue';
 
 
 export default {
@@ -28,7 +30,8 @@ export default {
   components: {
     Card,
     Search,
-  },
+    Footer
+},
 
   setup() {
 

@@ -13,11 +13,11 @@
                 </span>
             </div>
             <div v-if="isOpen" class="wrap-icon">
-                <span @click="deleteProduct" class="material-icons delete">
-                    delete
-                </span>
                 <span @click="openUpdate = !openUpdate" class="material-icons update">
                     edit_note
+                </span>
+                <span @click="deleteProduct" class="material-icons delete">
+                    delete
                 </span>
             </div>
         </div>
@@ -29,7 +29,10 @@
                 </span>
             </div>
             <h3>Modifier un produit</h3>
-            <input v-model="updateName" type="text" :placeholder=card.name>
+            <input v-model="updateName" type="text" list="nom" :placeholder=card.name>
+            <datalist id="nom">
+                <option :value=card.name></option>
+            </datalist>
             <input v-model="updateImage" type="text" list="image" :placeholder=card.image>
             <datalist id="image">
                 <option :value=card.image></option>
@@ -118,18 +121,18 @@ export default {
         // margin-right: 3px;
 
         .edit {
-            background: var(--black);
+            background: var(--black-alt);
             padding: 0.5rem;
             border-radius: 5px;
             color: var((--light));
             cursor: pointer;
-            opacity: 0.8;
+            border: 1px solid var(--logo-letters);
 
             &:hover {
                 color: var(--logo-letters);
                 transform: translateY(-0.5rem) scale(1.1, 1.1);
                 transition: 0.2s ease-out;
-                opacity: 1;
+
             }
         }
     }
@@ -137,37 +140,36 @@ export default {
     .wrap-icon {
         position: absolute;
         margin-left: 3rem;
+        
 
         .delete {
-            background: var(--black);
+            margin-left: 0.5rem;
+            background: var(--black-alt);
             padding: 00.5rem;
             border-radius: 5px;
             color: var((--light));
+            border: 1px solid var(--logo-letters);
             cursor: pointer;
-            opacity: 0.8;
 
             &:hover {
                 color: red;
                 transform: translateY(-0.5rem) scale(1.1, 1.1);
                 transition: 0.2s ease-out;
-                opacity: 1;
             }
         }
 
         .update {
-            margin-left: 0.5rem;
-            background: var(--black);
+            background: var(--black-alt);
             padding: 00.5rem;
             border-radius: 5px;
             color: var((--light));
             cursor: pointer;
-            opacity: 0.8;
+            border: 1px solid var(--logo-letters);
 
             &:hover {
                 color: var(--logo-letters);
                 transform: translateY(-0.5rem) scale(1.1, 1.1);
                 transition: 0.2s ease-out;
-                opacity: 1;
             }
         }
     }
@@ -253,6 +255,10 @@ export default {
         @media (max-width: 768px) {
             left: 22%;
             width: 18rem;
+        }
+
+        @media (max-width: 1200px) {
+            left: 25%;
         }
 
         .wrap-close {

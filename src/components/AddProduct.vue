@@ -134,6 +134,9 @@ export default {
             left: 22%;
             width: 18rem;
         }
+        @media (max-width: 1200px) {
+            left: 25%;
+        }
 
         .wrap-icon {
             .close {
