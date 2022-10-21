@@ -71,6 +71,7 @@ export default {
 
         }
 
+
         return {
             addTitle,
             addName,
@@ -120,7 +121,7 @@ export default {
         border: 3px solid var(--logo-letters);
         background: var(--black);
         width: 30rem;
-        height: 32.5rem;
+        height: 36rem;
         top: 25%;
         left: 40%;
         display: flex;
@@ -133,8 +134,27 @@ export default {
             left: 20.5%;
             width: 18rem;
         }
+
         @media (min-width: 768px) {
             left: 25%;
+        }
+
+        select {
+            // padding: 1rem;
+            border: none;
+            color: black;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 1rem;
+        }
+
+        input {
+            padding: 1rem;
+            border: none;
+            color: black;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 1rem;
         }
 
         .wrap-icon {
@@ -150,7 +170,7 @@ export default {
 
                 &:hover {
                     color: red;
-                    transform: scale(1.1, 1.1);
+                    // transform: scale(1.1, 1.1);
 
                     transition: 0.2s ease-out;
                 }

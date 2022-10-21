@@ -82,7 +82,7 @@ export default {
         filter: drop-shadow(0px 0px 3px var(--logo-letters));
 
         @media (max-width: 760px) {
-          width: 80%;
+          width: 100%;
           filter: drop-shadow(0px 0px 1px var(--logo-letters));
         }
       }

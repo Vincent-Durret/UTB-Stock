@@ -6,7 +6,6 @@
             :to="{name: 'SubCard', params: {category: product.category, title: product.name }}">
                 <div class="container--restaurant--search">
                     <p class="lh"> {{ product.name }} </p>
-                    <hr class="trait">
                 </div>
             </router-link>
         </div>
@@ -50,9 +49,9 @@ export default {
 
         watch(user_search_item, new_value => {
 
-            let regex = RegExp(new_value.toLowerCase())
+            const regex = RegExp(new_value.toLowerCase())
 
-            let new_search_item = allitem.value.filter(product => regex.test(product.name.toLowerCase()))
+            const new_search_item = allitem.value.filter(product => regex.test(product.name.toLowerCase()))
 
 
             new_value == 0 ? search_item.value = [] : search_item.value = new_search_item
@@ -103,7 +102,8 @@ export default {
 
 .wrapper--input {
     position: relative;
-    margin: 1rem;
+    margin-bottom: 3rem;
+    margin-right: 3rem;
     display: flex;
     justify-content: end;
 
@@ -169,17 +169,12 @@ export default {
                     flex-grow: 1;
                     cursor: pointer;
                     transition: background 2s ease;
+                    border-bottom: 1px solid var(--black);
 
                     &:hover {
                         color: var(--logo-letters);
                         background: rgba(0, 0, 0, 0.9);
                     }
-                }
-
-                .trait {
-                    width: 100%;
-                    border-radius: 50%;
-                    margin-bottom: 5px;
                 }
             }
         }

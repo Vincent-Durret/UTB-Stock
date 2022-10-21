@@ -29,6 +29,13 @@
                 </span>
             </div>
             <h3>Modifier un produit</h3>
+            <input v-model="updateCategory" type="text" list="category" :placeholder=card.category>
+            <datalist id="category">
+                <option value="Bois"></option>
+                <option value="Quincailleries"></option>
+                <option value="Produits"></option>
+                <option value="Autres"></option>
+            </datalist>
             <input v-model="updateName" type="text" list="nom" :placeholder=card.name>
             <datalist id="nom">
                 <option :value=card.name></option>
@@ -67,6 +74,7 @@ export default {
     setup(props) {
         const toast = useToast()
 
+        const updateCategory = ref('')
         const updateName = ref('')
         const updateImage = ref('')
         const updateTotal = ref()
@@ -77,6 +85,7 @@ export default {
             const stockQ = doc(db, "products", props.card.id);
 
             await updateDoc(stockQ, {
+                category: updateCategory.value,
                 name: updateName.value,
                 image: updateImage.value,
                 total: updateTotal.value,
@@ -94,6 +103,7 @@ export default {
         }
 
         return {
+            updateCategory,
             updateName,
             updateImage,
             updateTotal,
@@ -240,9 +250,9 @@ export default {
     .forms {
         position: fixed;
         border: 3px solid var(--logo-letters);
-        background: var(--black);
+        background: var(--black-alt);
         width: 30rem;
-        height: 30rem;
+        height: 37rem;
         top: 25%;
         left: 40%;
         display: flex;
@@ -261,6 +271,15 @@ export default {
             left: 25%;
         }
 
+        input {
+            padding: 1rem;
+            border: none;
+            color: black;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 1rem;
+        }
+
         .wrap-close {
             .close {
                 position: relative;
@@ -274,7 +293,7 @@ export default {
 
                 &:hover {
                     color: red;
-                    transform: scale(1.1, 1.1);
+                    // transform: scale(1.1, 1.1);
 
                     transition: 0.2s ease-out;
                 }
