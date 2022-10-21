@@ -30,7 +30,7 @@ export default {
   --background: #ddcdba;
   --logo-color: black;
   --black: #000000;
-  --black-alt: rgba(0 , 0, 0, 0.9);
+  --black-alt: rgba(0, 0, 0, 0.9);
   --brown: #863A12;
   --or: rgb(206, 172, 103);
   --or-alt: #E3CD8B;
@@ -68,6 +68,8 @@ h1 {
 
   @media (max-width: 760px) {
     font-size: 2.5rem;
+    filter: drop-shadow(0px 0px 3px var(--logo-letters));
+
   }
 }
 

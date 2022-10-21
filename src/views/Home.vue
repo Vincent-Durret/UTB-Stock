@@ -31,7 +31,7 @@ export default {
     Card,
     Search,
     Footer
-},
+  },
 
   setup() {
 
@@ -80,13 +80,13 @@ export default {
         width: 50%;
         // filter: drop-shadow();
         filter: drop-shadow(0px 0px 3px var(--logo-letters));
-        
-        @media (max-width: 760px) {
-            width: 80%;
 
+        @media (max-width: 760px) {
+          width: 80%;
+          filter: drop-shadow(0px 0px 1px var(--logo-letters));
         }
       }
-      
+
     }
 
     .wrap-icons {
@@ -101,10 +101,10 @@ export default {
     flex-wrap: wrap;
     gap: 2rem 1rem;
     justify-content: center;
-    
+
     @media (max-width: 760px) {
       flex-direction: column;
-      
+
     }
   }
 }

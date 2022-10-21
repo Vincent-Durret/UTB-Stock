@@ -130,10 +130,10 @@ export default {
         z-index: 10;
 
         @media (max-width: 768px) {
-            left: 22%;
+            left: 20.5%;
             width: 18rem;
         }
-        @media (max-width: 1200px) {
+        @media (min-width: 768px) {
             left: 25%;
         }
 
