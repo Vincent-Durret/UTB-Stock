@@ -5,7 +5,7 @@
                 :to="{name: 'SubCard', params: {category: card.category, title: card.name, total: card.total }}">
                 <div :style="{ backgroundImage: `url(${card.image})` }" class="image"></div>
                 <span class="text">{{ card.name }}</span>
-                <h3 class="total"> {{card.total}} / {{ card.stock }} {{ card.unit }} </h3>
+                <h3 class="total"> {{ card.total }} / {{ card.stock }} {{ card.unit }} </h3>
             </router-link>
             <div class="wrap-edit">
                 <span @click="isOpen = !isOpen" class="material-icons edit">
@@ -28,7 +28,7 @@
                     cancel
                 </span>
             </div>
-            <h3>Modifier un produit</h3>
+            <h3>Modifier le produit "{{ card.name }}"</h3>
             <input v-model="updateCategory" type="text" list="category" :placeholder=card.category>
             <datalist id="category">
                 <option value="Bois"></option>
@@ -56,6 +56,8 @@
 import { ref } from 'vue';
 import { doc, deleteDoc, updateDoc } from "firebase/firestore";
 import { db } from '../Firebase/firebase.js'
+import { useRoute } from "vue-router"
+
 import { useToast } from 'vue-toastification'
 
 
@@ -73,7 +75,7 @@ export default {
 
     setup(props) {
         const toast = useToast()
-
+        const route = useRoute()
         const updateCategory = ref('')
         const updateName = ref('')
         const updateImage = ref('')
@@ -92,6 +94,13 @@ export default {
                 stock: updateStock.value,
                 unit: updateUnit.value
             });
+            updateProducts ? updateCategory.value = '' : updateCategory.value = updateCategory.value
+            updateProducts ? updateName.value = '' : updateName.value = updateName.value
+            updateProducts ? updateImage.value = '' : updateImage.value = updateImage.value
+            updateProducts ? updateTotal.value = '' : updateTotal.value = updateTotal.value
+            updateProducts ? updateStock.value = '' : updateStock.value = updateStock.value
+            updateProducts ? updateUnit.value = '' : updateUnit.value = updateUnit.value
+
             toast.success("Produits modifier")
 
         }
@@ -121,6 +130,9 @@ export default {
 .products-card {
     display: flex;
     justify-content: center;
+    flex-direction: column-reverse;
+    align-items: center;
+    position: relative;
     .card {
         display: flex;
         transition: 0.5s;
@@ -248,19 +260,20 @@ export default {
     }
 
     .forms {
-        position: fixed;
+        position: absolute;
         border: 3px solid var(--logo-letters);
         background: var(--black-alt);
         width: 30rem;
         height: 37rem;
-        top: 25%;
-        left: 40%;
+        bottom: 100%;
+        margin-bottom: 1rem;
+        // top: 100%;
         display: flex;
         flex-direction: column;
         padding: 1rem;
         border-radius: 5px;
         z-index: 10;
-        overflow: hidden;
+        overflow: scroll;
 
         @media (max-width: 768px) {
             left: 20.5%;
@@ -271,16 +284,9 @@ export default {
             left: 25%;
         }
 
-        input {
-            padding: 1rem;
-            border: none;
-            color: black;
-            border-radius: 5px;
-            font-weight: bold;
-            font-size: 1rem;
-        }
 
         .wrap-close {
+            // margin-top: 1rem;
             .close {
                 position: relative;
                 float: right;
@@ -301,6 +307,7 @@ export default {
         }
 
         h3 {
+            // margin-top: 1rem;
             display: flex;
             justify-content: center;
             color: var(--light);
@@ -308,8 +315,14 @@ export default {
 
 
         input {
+            margin-top: 1rem;
             margin: 1rem;
-            height: 1.5rem;
+            padding: 8px;
+            border: none;
+            color: black;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 1rem;
         }
 
         button {

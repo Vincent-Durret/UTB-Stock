@@ -80,10 +80,22 @@ export default {
         width: 50%;
         // filter: drop-shadow();
         filter: drop-shadow(0px 0px 3px var(--logo-letters));
+        animation: zoom 2s ease-in-out;
 
         @media (max-width: 760px) {
           width: 100%;
           filter: drop-shadow(0px 0px 1px var(--logo-letters));
+        }
+
+        @keyframes zoom {
+          0% {
+            // transform: scale(0);
+            opacity: 0;
+          }
+          100% {
+            // transform: scale(100%);
+            opacity: 1;
+          }
         }
       }
 

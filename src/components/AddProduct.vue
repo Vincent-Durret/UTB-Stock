@@ -69,6 +69,12 @@ export default {
                 unit: addUnit.value,
             });
             toast.success("Produit créer avec succes")
+            addProducts ? addCategory.value = '' : addCategory.value = addCategory.value
+            addProducts ? addName.value = '' : addName.value = addName.value
+            addProducts ? addImage.value = '' : addImage.value = addImage.value
+            addProducts ? addTotal.value = '' : addTotal.value = addTotal.value
+            addProducts ? addStock.value = '' : addStock.value = addStock.value
+            addProducts ? addUnit.value = '' : addUnit.value = addUnit.value
 
         }
 

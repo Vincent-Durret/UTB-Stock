@@ -1,7 +1,7 @@
 <template>
     <footer>
         <div class="wrap-title">
-            <h3> Made by GareFunkle</h3>
+            <h3> Made by Vincent.D</h3>
         </div>
         <div class="wrap">
             <p>© {{currentYear}} Univers Terrasses Bois Stock</p>
@@ -24,7 +24,7 @@ export default {
 <style lang="scss">
 footer {
     position: relative;
-    bottom: 0%;
+    bottom: 0;
     background-color: var(--black-alt);
     padding: 1rem;
     margin-top: 2rem;
@@ -32,6 +32,7 @@ footer {
     align-items: center;
     justify-content: space-between;
     flex-direction: row-reverse;
+    overflow: auto;
 
     .wrap-title {
 

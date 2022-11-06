@@ -3,13 +3,16 @@
         <input v-model="user_search_item" type="search" placeholder="Rechercher">
         <div class="search">
             <router-link class="link" v-for="(product, i) in search_item" :key="i"
-            :to="{name: 'SubCard', params: {category: product.category, title: product.name }}">
+                :to="{ name: 'SubCard', params: { category: product.category, title: product.name } }">
                 <div class="container--restaurant--search">
                     <p class="lh"> {{ product.name }} </p>
                 </div>
             </router-link>
         </div>
     </div>
+    <div class="closed" @click="isClosed"></div>
+
+
 </template>
 
 <script>
@@ -26,7 +29,8 @@ export default {
 
     setup() {
         const allitem = ref([])
-
+        const user_search_item = ref('')
+        const search_item = ref([])
 
         onMounted(async () => {
             const q = query(collection(db, 'products'))
@@ -43,10 +47,6 @@ export default {
 
         })
 
-        const user_search_item = ref('')
-
-        const search_item = ref([])
-
         watch(user_search_item, new_value => {
 
             const regex = RegExp(new_value.toLowerCase())
@@ -60,10 +60,15 @@ export default {
 
         })
 
+        const isClosed = () => {
+            user_search_item.value = ''
+        }
+
 
         return {
             user_search_item,
             search_item,
+            isClosed
         }
 
     },
@@ -106,6 +111,7 @@ export default {
     margin-right: 3rem;
     display: flex;
     justify-content: end;
+    z-index: 4;
 
     input {
         background-color: var(--light);
@@ -179,6 +185,15 @@ export default {
             }
         }
     }
+}
+
+.closed {
+    position:absolute;
+    top: 0;
+    height: 100%;
+    width: 94vw;
+    z-index: 0;
+    // background: #000;
 }
 
 @media (max-width: 760px) {

@@ -66,6 +66,8 @@ export default {
 .bois-page {
 
   .return {
+    position: relative;
+    z-index: 1;
     margin: 1rem;
   }
 
@@ -74,7 +76,7 @@ export default {
     padding: 0.4rem;
     border-radius: 5px;
     font-size: 2.5rem;
-    color: var((--light));
+    color: var(--light);
     cursor: pointer;
     transition: 0.2s;
     border: 2px solid var(--logo-letters);

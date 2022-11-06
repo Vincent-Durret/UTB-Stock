@@ -68,6 +68,11 @@ export default {
                 unit: addUnit.value,
             });
             toast.success("Sous produit créer avec succes")
+            addSubProducts ? addTitle.value = '' : addTitle.value = addTitle.value
+            addSubProducts ? addTotal.value = '' : addTotal.value = addTotal.value
+            addSubProducts ? addName.value = '' : addName.value = addName.value
+            addSubProducts ? addStock.value = '' : addStock.value = addStock.value
+            addSubProducts ? addUnit.value = '' : addUnit.value = addUnit.value
 
         }
 
