@@ -55,6 +55,7 @@
                 </div>
             </div>
         </aside>
+        <div class="closemenu" @click="closeMenu"></div>
     </div>
 
 </template>
@@ -80,6 +81,12 @@ const ToggleMenu = () => {
     imgSrc.value = is_expanded.value ? '../assets/Logo/logo-UTB-stock.png' : '../assets/Logo/logo2.png'
 
     localStorage.getItem("is_expanded", is_expanded.value)
+}
+
+const closeMenu = () => {
+    is_expanded.value = false    
+    imgSrc.value = is_expanded.value ? '../assets/Logo/logo-UTB-stock.png' : '../assets/Logo/logo2.png'
+
 }
 
 
@@ -251,5 +258,13 @@ aside {
         height: 100%;
         z-index: 99;
     }
+}
+
+.closemenu {
+    position: absolute;
+    // background: #000;
+    height: 100%;
+    width: 100%;
+    z-index: 1;
 }
 </style>

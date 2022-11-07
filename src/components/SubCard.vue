@@ -92,11 +92,11 @@ export default {
                 unit: updateUnit.value,
             });
 
-            updateSubStock ? updateTitle.value = '' : updateTitle.value = updateTitle.value
-            updateSubStock ? updateName.value = '' : updateName.value = updateName.value
-            updateSubStock ? updateTotal.value = '' : updateTotal.value = updateTotal.value
-            updateSubStock ? updateStock.value = '' : updateStock.value = updateStock.value
-            updateSubStock ? updateUnit.value = '' : updateUnit.value = updateUnit.value
+            updateSubProducts ? updateTitle.value = '' : updateTitle.value = updateTitle.value
+            updateSubProducts ? updateName.value = '' : updateName.value = updateName.value
+            updateSubProducts ? updateTotal.value = '' : updateTotal.value = updateTotal.value
+            updateSubProducts ? updateStock.value = '' : updateStock.value = updateStock.value
+            updateSubProducts ? updateUnit.value = '' : updateUnit.value = updateUnit.value
         }
 
 
@@ -107,7 +107,7 @@ export default {
             await updateDoc(stockQ, {
                 total: Math.max(0, props.sub.total - inputStock.value)
             });
-            toast.success(" Vous avez retirer " + inputStock.value + props.sub.unit + " en longueur " + props.sub.name)
+            toast.success(" Vous avez retirer " + inputStock.value + "  " + props.sub.unit + " en longueur " + props.sub.name)
 
             updateStocks ? inputStock.value = '' : inputStock.value = inputStock.value
 

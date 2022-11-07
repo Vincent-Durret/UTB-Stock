@@ -264,7 +264,7 @@ export default {
         border: 3px solid var(--logo-letters);
         background: var(--black-alt);
         width: 30rem;
-        height: 37rem;
+        // height: 37rem;
         bottom: 100%;
         margin-bottom: 1rem;
         // top: 100%;
