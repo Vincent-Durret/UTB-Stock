@@ -4,33 +4,64 @@ const info_bois = [
     category: 'Bois',
     name: 'Itauba',
     image: './assets/Bois/itauba.jpg',
-    total: 4000,
+    length1: '95',
+    length2: '125',
+    length3: '155',
+    length4: '185',
+    total_l1: 1000,
+    total_l2: 1000,
+    total_l3: 1000,
+    total_l4: 1000,
     stock: 6000,
-    unit: 'm²'
+    unit: 'lames'
   },
   {
     category: 'Bois',
     name: 'Ipé',
     image: './assets/Bois/ipe.jpg',
+    length1: '95',
+    length2: '125',
+    length3: '155',
+    length4: '185',
+    total_l1: 1000,
+    total_l2: 1000,
+    total_l3: 1000,
+    total_l4: 1000,
     total: 100,
     stock: 6000,
-    unit: 'm²'
+    unit: 'lames'
   },
   {
     category: 'Bois',
     name: 'Cumaru',
+    length1: '95',
+    length2: '125',
+    length3: '155',
+    length4: '185',
+    total_l1: 1000,
+    total_l2: 1000,
+    total_l3: 1000,
+    total_l4: 1000,
     image: './assets/Bois/cumaru.jpg',
     total: 55,
     stock: 6000,
-    unit: 'm²'
+    unit: 'lames'
   },
   {
     category: 'Bois',
     name: 'Structure',
+    length1: '95',
+    length2: '125',
+    length3: '155',
+    length4: '185',
+    total_l1: 1000,
+    total_l4: 1000,
+    total_l2: 1000,
+    total_l3: 1000,
     image: './assets/Bois/Structure.jpg',
     total: 3500,
     stock: 6000 ,
-    unit: 'm²'
+    unit: 'lames'
   },
 ]
 

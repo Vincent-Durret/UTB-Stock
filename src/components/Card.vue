@@ -5,7 +5,7 @@
                 :to="{name: 'SubCard', params: {category: card.category, title: card.name, total: card.total }}">
                 <div :style="{ backgroundImage: `url(${card.image})` }" class="image"></div>
                 <span class="text">{{ card.name }}</span>
-                <h3 class="total"> {{ card.total }} / {{ card.stock }} {{ card.unit }} </h3>
+                <h3 class="total"> {{ card.total  }} / {{ card.stock }} {{ card.unit }} </h3>
             </router-link>
             <div class="wrap-edit">
                 <span @click="isOpen = !isOpen" class="material-icons edit">
