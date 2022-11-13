@@ -133,6 +133,7 @@ export default {
     flex-direction: column-reverse;
     align-items: center;
     position: relative;
+    z-index: 3;
     .card {
         display: flex;
         transition: 0.5s;
@@ -140,6 +141,7 @@ export default {
 
     .wrap-edit {
         position: absolute;
+        z-index: 3;
         // margin-right: 3px;
 
         .edit {
@@ -162,6 +164,7 @@ export default {
     .wrap-icon {
         position: absolute;
         margin-left: 3rem;
+        z-index: 3;
         
 
         .delete {
@@ -225,7 +228,7 @@ export default {
             width: 200px;
             height: 200px;
             border-radius: 20px;
-            z-index: 0;
+            z-index: 2;
             border: 2px solid var(--black);
         }
 
@@ -239,7 +242,7 @@ export default {
             font-size: 1.2rem;
             text-transform: uppercase;
             color: var(--logo-letters);
-            z-index: 1;
+            z-index: 3;
             margin-left: 25px;
             margin-right: 25px;
             font-weight: 550;
@@ -253,7 +256,7 @@ export default {
             padding: 0.3rem;
             border-radius: 5px;
             position: relative;
-            z-index: 1;
+            z-index: 3;
             color: var(--logo-letters);
             font-weight: 600;
         }

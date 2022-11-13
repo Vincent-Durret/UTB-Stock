@@ -55,6 +55,8 @@ export default {
 
 <style lang="scss">
 .subcard {
+    position: relative;
+    z-index: 3;
     .return {
         margin: 1rem;
 
@@ -88,6 +90,8 @@ export default {
         display: flex;
         justify-content: center;
         width: 100%;
+        position: relative;
+        z-index: 3;
     }
 
     .wrap-card {

@@ -2,6 +2,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
 import Connexion from '../views/Connexion.vue'
+import Test from '../components/Test.vue'
+
 import { auth } from '../Firebase/firebase.js'
 
 const routes = [
@@ -28,6 +30,11 @@ const routes = [
       requiresAuth: true,
     },
     
+  },
+  {
+    path: "/test",
+    name: "test",
+    component: Test
   },
   
   {

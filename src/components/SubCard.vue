@@ -145,6 +145,7 @@ export default {
     .wrap-edit {
         position: absolute;
         margin-right: 3px;
+        z-index: 3;
 
         .edit {
             background: black;
@@ -165,6 +166,7 @@ export default {
     .wrap-icon {
         position: absolute;
         margin-left: 3rem;
+        z-index: 3;
 
         .delete {
             background: rgba(0, 0, 0, 0.9);
