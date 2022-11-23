@@ -2,10 +2,14 @@
     <div class="products-card">
         <div class="card">
             <router-link class="button"
-                :to="{name: 'SubCard', params: {category: card.category, title: card.name, total: card.total }}">
+                :to="{ name: 'SubPage', params: { id: card.id, category: card.category, title: card.name } }">
+                <!-- @click="$router.push(`/${card.category}/${card.id}`)"> -->
                 <div :style="{ backgroundImage: `url(${card.image})` }" class="image"></div>
                 <span class="text">{{ card.name }}</span>
-                <h3 class="total"> {{ card.total  }} / {{ card.stock }} {{ card.unit }} </h3>
+                <div v-for="sub in card.subproducts">
+                    <h3>{{ sub.total }}</h3>
+                </div>
+                <!-- <h3 class="total"> {{ card.subproducts[1] }} / {{ card.stock }} {{ card.unit }} </h3> -->
             </router-link>
             <div class="wrap-edit">
                 <span @click="isOpen = !isOpen" class="material-icons edit">
@@ -134,6 +138,7 @@ export default {
     align-items: center;
     position: relative;
     z-index: 3;
+
     .card {
         display: flex;
         transition: 0.5s;
@@ -165,7 +170,7 @@ export default {
         position: absolute;
         margin-left: 3rem;
         z-index: 3;
-        
+
 
         .delete {
             margin-left: 0.5rem;
@@ -289,6 +294,7 @@ export default {
 
 
         .wrap-close {
+
             // margin-top: 1rem;
             .close {
                 position: relative;

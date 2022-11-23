@@ -4,9 +4,28 @@ const info_bois = [
     category: 'Bois',
     name: 'Itauba',
     image: './assets/Bois/itauba.jpg',
-    total: 4000,
-    stock: 6000,
-    unit: 'm²'
+    subproducts: [
+      {
+        title: '95',
+        total: 1000,
+      },
+
+      {
+        title: '125',
+        total: 1000,
+      },
+
+      {
+        title: '155',
+        total: 1000,
+      },
+
+      {
+        title: '185',
+        total: 1000,
+      },
+    ],
+    unit: 'm²',
   },
   {
     category: 'Bois',
@@ -14,7 +33,7 @@ const info_bois = [
     image: './assets/Bois/ipe.jpg',
     total: 100,
     stock: 6000,
-    unit: 'm²'
+    unit: 'm²',
   },
   {
     category: 'Bois',
@@ -22,15 +41,15 @@ const info_bois = [
     image: './assets/Bois/cumaru.jpg',
     total: 55,
     stock: 6000,
-    unit: 'm²'
+    unit: 'm²',
   },
   {
     category: 'Bois',
     name: 'Structure',
     image: './assets/Bois/Structure.jpg',
     total: 3500,
-    stock: 6000 ,
-    unit: 'm²'
+    stock: 6000,
+    unit: 'm²',
   },
 ]
 
@@ -193,7 +212,7 @@ const info_quincaillerie = [
     category: 'Quincailleries',
     name: 'Crayon',
     image: './assets/Quincaillerie/crayon.jpg',
-    total:100,
+    total: 100,
     stock: 50,
     unit: 'Boites',
   },
@@ -229,7 +248,7 @@ const info_quincaillerie = [
     stock: 50,
     unit: 'Boites',
   },
-  {  
+  {
     category: 'Quincailleries',
     name: 'Cale PVC',
     image: './assets/Quincaillerie/cales.jpg',
@@ -638,7 +657,6 @@ const info_structure = [
     stock: 250,
     unit: 'm²',
   },
-  
 ]
 
 const info_all_item = [
@@ -649,9 +667,7 @@ const info_all_item = [
   ...info_itauba,
   ...info_ipe,
   ...info_cumaru,
-  ...info_structure
+  ...info_structure,
 ]
 
 export default info_all_item
-
-

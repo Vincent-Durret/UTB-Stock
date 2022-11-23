@@ -23,9 +23,9 @@ const routes = [
     },
   },
   {
-    path: "/:category/:title",
+    path: "/:category/:id",
     component: () => import("../views/SubPage.vue"),
-    name: "SubCard",
+    name: "SubPage",
     meta: {
       requiresAuth: true,
     },

@@ -2,13 +2,13 @@
     <div class="subpage">
         <div class="sub-card">
             <div class="sub-wrap">
-                <h2 class="title-subpage">{{ sub.name }}: </h2>
-                <input v-model="inputStock" type="number" placeholder="Quantités" />
-                <button @click="updateStocks" class="bouton-subpage">Envoyer</button>
+                <h2 class="title-subpage">{{ sub.title }} </h2>
+                <!-- <input v-model="inputStock" type="number" placeholder="Quantités" />
+                <button @click="updateStocks" class="bouton-subpage">Envoyer</button> -->
                 <h3 class="restant-stock">Stock :</h3>
-                <p class="total-stock">{{ sub.total }} / {{ sub.stock }} {{ sub.unit }}</p>
+                <p class="total-stock">{{ sub.total }}</p>
             </div>
-            <div class="wrap-edit">
+            <!-- <div class="wrap-edit">
                 <span @click="isOpen = !isOpen" class="material-icons edit">
                     mode_edit
                 </span>
@@ -20,10 +20,10 @@
                 <span v-if="isOpen" @click="deleteProduct" class="material-icons delete">
                     delete
                 </span>
-            </div>
+            </div> -->
         </div>
 
-        <div v-if="openUpdate" class="forms">
+        <!-- <div v-if="openUpdate" class="forms">
             <div class="wrap-close">
                 <span @click="openUpdate = !openUpdate" class="material-icons close">
                     cancel
@@ -42,7 +42,7 @@
             <input v-model="updateStock" type="number" :placeholder=sub.stock>
             <input v-model="updateUnit" type="text" :placeholder=sub.unit>
             <button @click="updateSubProducts">Modifier le produit</button>
-        </div>
+        </div>  -->
     </div>
 </template>
 

@@ -7,7 +7,7 @@
             <h1> {{ $route.params.title }} </h1>
         </div>
         <div class="wrap-card">
-            <SubCard v-for="(product) in products" :premier="products" :sub="product" :key="product.id" />
+            <SubCard v-for="product in products.subproducts" :sub="product" :key="product" />
         </div>
     </main>
 </template>
@@ -21,24 +21,24 @@ import { ref, onMounted } from 'vue';
 export default {
     name: "SubPage",
     components: {
-        SubCard,
+        SubCard
     },
 
     setup() {
 
         const products = ref([]);
 
-
-
         onMounted(() => {
             const route = useRoute()
-            const q = query(collection(db, "products"), where("title", "==", route.params.title))
+            const q = query(collection(db, "products"), where("id", "==", route.params.id))
+
 
             onSnapshot(q, (querySnapshot) => {
                 const fetchedProducts = [];
 
                 querySnapshot.forEach((doc) => {
                     fetchedProducts.push({ id: doc.id, ...doc.data() })
+                    console.log(doc.id)
                 })
                 products.value = fetchedProducts
             });
@@ -57,6 +57,7 @@ export default {
 .subcard {
     position: relative;
     z-index: 3;
+
     .return {
         margin: 1rem;
 
