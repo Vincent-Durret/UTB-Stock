@@ -1,12 +1,14 @@
 <template>
     <div class="subpage">
         <div class="sub-card">
-            <div v-for="subprod in sub.subproducts" :key="subprod" class="sub-wrap">
+            <div v-for="subprod in sub.subproducts.title" :key="subprod" class="sub-wrap">
                 <h2 class="title-subpage">{{ subprod.title }} </h2>
                 <input v-model="inputStock" type="number" placeholder="Quantités" />
                 <button @click="updateStocks" class="bouton-subpage">Envoyer</button>
                 <h3 class="restant-stock">Stock :</h3>
-                <p class="total-stock">{{ subprod.total }} /{{ sub.stock }} {{ sub.unit }}</p>
+                <p class="total-stock">{{ test.total
+                }} /{{ sub.stock }} {{ sub.unit }}</p>
+
             </div>
             <!-- <div class="wrap-edit">
                 <span @click="isOpen = !isOpen" class="material-icons edit">
@@ -72,7 +74,10 @@ export default {
 
     setup(props) {
 
-    
+        const sousProduit = props.test.title
+
+        console.log(sousProduit)
+
 
         const toast = useToast()
         const route = useRoute()
@@ -102,11 +107,13 @@ export default {
 
         const updateStocks = async () => {
 
-            const stockQ = query(doc(db, "products", props.sub.id), where("total", "array-contains", props.test.total));
+            const stockQ = query(doc(db, "products", props.sub.id));
 
             await updateDoc(stockQ, {
+                subproducts: {
+                    "total": Math.max(0, props.test.total - inputStock.value)
+                }
 
-                total: Math.max(0, props.test.total - inputStock.value)
 
                 // total: arrayUnion(Math.max(0, props.test.total - inputStock.value)),
 
