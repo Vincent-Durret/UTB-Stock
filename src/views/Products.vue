@@ -4,11 +4,11 @@
       <span @click="goHome()" class="material-icons">arrow_back</span>
     </div>
     <div class="wrap-title">
-      <h1> {{ $route.params.category }} </h1>
+      <h1> {{ $route.params.category.replace(/(?:^|\s|-)\S/g, x => x.toUpperCase()) }} </h1>
     </div>
     <Search />
     <div class="cards-grid">
-      <Card v-for="product in products" :card="product" :key="product.id" />
+      <Card v-for="product in products" :test="product.subproducts" :card="product" :key="product.id" />
     </div>
   </main>
 </template>

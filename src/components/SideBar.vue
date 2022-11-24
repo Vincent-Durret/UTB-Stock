@@ -14,19 +14,19 @@
             </div>
 
             <div class="menu">
-                <router-link class="button" to="/Bois">
+                <router-link class="button" to="/bois">
                     <span class="material-icons">forest</span>
                     <span class="text">Bois</span>
                 </router-link>
-                <router-link class="button" to="/Quincailleries">
+                <router-link class="button" to="/quincailleries">
                     <span class="material-icons">construction</span>
                     <span class="text">Quincailleries</span>
                 </router-link>
-                <router-link class="button" to="/Produits">
+                <router-link class="button" to="/produits">
                     <span class="material-icons">inventory</span>
                     <span class="text">Produits</span>
                 </router-link>
-                <router-link class="button" to="/Autres">
+                <router-link class="button" to="/autres">
                     <span class="material-icons">widgets</span>
                     <span class="text">Autres</span>
                 </router-link>

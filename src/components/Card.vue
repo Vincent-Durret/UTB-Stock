@@ -6,10 +6,7 @@
                 <!-- @click="$router.push(`/${card.category}/${card.id}`)"> -->
                 <div :style="{ backgroundImage: `url(${card.image})` }" class="image"></div>
                 <span class="text">{{ card.name }}</span>
-                <div v-for="sub in card.subproducts">
-                    <h3>{{ sub.total }}</h3>
-                </div>
-                <!-- <h3 class="total"> {{ card.subproducts[1] }} / {{ card.stock }} {{ card.unit }} </h3> -->
+                <h3 class="total"> / {{ card.stock }} {{ card.unit }} </h3>
             </router-link>
             <div class="wrap-edit">
                 <span @click="isOpen = !isOpen" class="material-icons edit">
@@ -69,6 +66,7 @@ export default {
     name: "Card",
     props: {
         card: Object,
+        test: Object,
     },
     data() {
         return {
@@ -86,6 +84,14 @@ export default {
         const updateTotal = ref()
         const updateStock = ref()
         const updateUnit = ref('')
+
+        // const subProductTotal = props.test
+
+        
+        // const totalAmount = subProductTotal.reduce((acc, curr) => acc + curr.total, 0)
+
+
+
 
         const updateProducts = async () => {
             const stockQ = doc(db, "products", props.card.id);
@@ -123,7 +129,8 @@ export default {
             updateStock,
             updateUnit,
             updateProducts,
-            deleteProduct
+            deleteProduct,
+            // totalAmount
         }
     }
 

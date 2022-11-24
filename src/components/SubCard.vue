@@ -1,12 +1,12 @@
 <template>
     <div class="subpage">
         <div class="sub-card">
-            <div class="sub-wrap">
-                <h2 class="title-subpage">{{ sub.title }} </h2>
-                <!-- <input v-model="inputStock" type="number" placeholder="Quantités" />
-                <button @click="updateStocks" class="bouton-subpage">Envoyer</button> -->
+            <div v-for="subprod in sub.subproducts" :key="subprod" class="sub-wrap">
+                <h2 class="title-subpage">{{ subprod.title }} </h2>
+                <input v-model="inputStock" type="number" placeholder="Quantités" />
+                <button @click="updateStocks" class="bouton-subpage">Envoyer</button>
                 <h3 class="restant-stock">Stock :</h3>
-                <p class="total-stock">{{ sub.total }}</p>
+                <p class="total-stock">{{ subprod.total }} /{{ sub.stock }} {{ sub.unit }}</p>
             </div>
             <!-- <div class="wrap-edit">
                 <span @click="isOpen = !isOpen" class="material-icons edit">
@@ -48,8 +48,8 @@
 
 
 <script>
-import { ref } from 'vue'
-import { doc, updateDoc, deleteDoc } from "firebase/firestore";
+import { ref, computed } from 'vue'
+import { doc, updateDoc, deleteDoc, where, query } from "firebase/firestore";
 import { useRoute } from "vue-router"
 import { useToast } from 'vue-toastification'
 
@@ -60,6 +60,7 @@ export default {
     name: "SubCard",
     props: {
         sub: Object,
+        test: Object,
     },
     data() {
         return {
@@ -68,7 +69,11 @@ export default {
         }
     },
 
+
     setup(props) {
+
+    
+
         const toast = useToast()
         const route = useRoute()
 
@@ -86,26 +91,26 @@ export default {
 
             await updateDoc(q, {
                 title: updateTitle.value,
-                name: updateName.value,
                 total: updateTotal.value,
-                stock: updateStock.value,
-                unit: updateUnit.value,
             });
 
             updateSubProducts ? updateTitle.value = '' : updateTitle.value = updateTitle.value
-            updateSubProducts ? updateName.value = '' : updateName.value = updateName.value
             updateSubProducts ? updateTotal.value = '' : updateTotal.value = updateTotal.value
-            updateSubProducts ? updateStock.value = '' : updateStock.value = updateStock.value
-            updateSubProducts ? updateUnit.value = '' : updateUnit.value = updateUnit.value
+
         }
 
 
         const updateStocks = async () => {
 
-            const stockQ = doc(db, "products", props.sub.id);
+            const stockQ = query(doc(db, "products", props.sub.id), where("total", "array-contains", props.test.total));
 
             await updateDoc(stockQ, {
-                total: Math.max(0, props.sub.total - inputStock.value)
+
+                total: Math.max(0, props.test.total - inputStock.value)
+
+                // total: arrayUnion(Math.max(0, props.test.total - inputStock.value)),
+
+
             });
             toast.success(" Vous avez retirer " + inputStock.value + "  " + props.sub.unit + " en longueur " + props.sub.name)
 
@@ -124,10 +129,7 @@ export default {
         return {
             inputStock,
             updateTitle,
-            updateName,
             updateTotal,
-            updateStock,
-            updateUnit,
             updateSubProducts,
             updateStocks,
             deleteProduct
@@ -295,6 +297,7 @@ export default {
 
 
         .wrap-close {
+
             // margin-top: 1rem;
             .close {
                 position: relative;

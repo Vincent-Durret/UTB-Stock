@@ -23,7 +23,7 @@ const routes = [
     },
   },
   {
-    path: "/:category/:id",
+    path: "/:category/:title",
     component: () => import("../views/SubPage.vue"),
     name: "SubPage",
     meta: {

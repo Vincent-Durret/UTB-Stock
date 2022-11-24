@@ -4,10 +4,10 @@
             <span @click="$router.back()" class="material-icons">arrow_back</span>
         </div>
         <div class="wrap-titre">
-            <h1> {{ $route.params.title }} </h1>
+            <h1> {{ $route.params.title.replace(/(?:^|\s|-)\S/g, x => x.toUpperCase()) }} </h1>
         </div>
         <div class="wrap-card">
-            <SubCard v-for="product in products.subproducts" :sub="product" :key="product" />
+            <SubCard v-for="product in products" :test="product.subproducts" :sub="product" :key="product.id" />
         </div>
     </main>
 </template>
@@ -30,7 +30,7 @@ export default {
 
         onMounted(() => {
             const route = useRoute()
-            const q = query(collection(db, "products"), where("id", "==", route.params.id))
+            const q = query(collection(db, "products"), where("name", "==", route.params.title))
 
 
             onSnapshot(q, (querySnapshot) => {
@@ -41,6 +41,7 @@ export default {
                     console.log(doc.id)
                 })
                 products.value = fetchedProducts
+                console.log(products.value)
             });
         })
 
