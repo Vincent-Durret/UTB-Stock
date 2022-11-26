@@ -4,10 +4,6 @@ const info_bois = [
     category: 'bois',
     name: 'itauba',
     image: './assets/Bois/itauba.jpg',
-    subproducts: {
-      title: ['95', '125', '155', '185'],
-      total: [1000, 1000, 1000, 1000],
-    },
     subproducts: [
       {
         title: '95',

@@ -6,7 +6,7 @@
                 <!-- @click="$router.push(`/${card.category}/${card.id}`)"> -->
                 <div :style="{ backgroundImage: `url(${card.image})` }" class="image"></div>
                 <span class="text">{{ card.name }}</span>
-                <h3 class="total"> / {{ card.stock }} {{ card.unit }} </h3>
+                <h3 class="total"> {{ totalAmount }} / {{ card.stock }} {{ card.unit }} </h3>
             </router-link>
             <div class="wrap-edit">
                 <span @click="isOpen = !isOpen" class="material-icons edit">
@@ -85,10 +85,10 @@ export default {
         const updateStock = ref()
         const updateUnit = ref('')
 
-        // const subProductTotal = props.test
+        const subProductTotal = props.test
 
         
-        // const totalAmount = subProductTotal.reduce((acc, curr) => acc + curr.total, 0)
+        const totalAmount = subProductTotal.reduce((acc, curr) => acc + curr.total, 0)
 
 
 
@@ -130,7 +130,7 @@ export default {
             updateUnit,
             updateProducts,
             deleteProduct,
-            // totalAmount
+            totalAmount
         }
     }
 
