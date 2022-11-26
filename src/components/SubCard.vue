@@ -1,13 +1,12 @@
 <template>
     <div class="subpage">
         <div class="sub-card">
-            <div v-for="subprod in sub.subproducts.title" :key="subprod" class="sub-wrap">
-                <h2 class="title-subpage">{{ subprod }} </h2>
+            <div class="sub-wrap">
+                <h2 class="title-subpage">{{ test.title }} </h2>
                 <input v-model="inputStock" type="number" placeholder="Quantités" />
                 <button @click="updateStocks" class="bouton-subpage">Envoyer</button>
                 <h3 class="restant-stock">Stock :</h3>
-                <p  class="total-stock">{{ test.total
-                }} /{{ sub.stock }} {{ sub.unit }}</p>
+                <p  class="total-stock">{{ test.total}} /{{ sub.stock }} {{ sub.unit }}</p>
 
             </div>
             <!-- <div class="wrap-edit">
@@ -74,9 +73,9 @@ export default {
 
     setup(props) {
 
-        const sousProduit = props.test.total.indexOf(1000, (props.test.total + 1))
+        // const sousProduit = props.test.total.indexOf(1000, (props.test.total + 1))
 
-        console.log(sousProduit)
+        // console.log(sousProduit)
 
 
         const toast = useToast()
