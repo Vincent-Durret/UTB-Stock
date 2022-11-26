@@ -31,7 +31,7 @@ const info_bois = [
   },
   {
     category: 'bois',
-    name: 'Ipé',
+    name: 'ipé',
     image: './assets/Bois/ipe.jpg',
     subproducts: [
       {
@@ -59,7 +59,7 @@ const info_bois = [
   },
   {
     category: 'bois',
-    name: 'Cumaru',
+    name: 'cumaru',
     image: './assets/Bois/cumaru.jpg',
     subproducts: [
       {
@@ -87,7 +87,7 @@ const info_bois = [
   },
   {
     category: 'bois',
-    name: 'Structure',
+    name: 'structure',
     image: './assets/Bois/Structure.jpg',
     subproducts: [
       {
@@ -105,7 +105,7 @@ const info_bois = [
 const info_quincaillerie = [
   {
     category: 'quincailleries',
-    name: 'Terrasses',
+    name: 'vis terrasses',
     image: './assets/Quincaillerie/vis-terrasse.jpg',
     total: 65,
     stock: 2000,
@@ -113,7 +113,7 @@ const info_quincaillerie = [
   },
   {
     category: 'quincailleries',
-    name: 'Structure',
+    name: 'vis structure',
     image: './assets/Quincaillerie/vis.jpg',
     total: 14,
     stock: 2000,
@@ -121,7 +121,7 @@ const info_quincaillerie = [
   },
   {
     category: 'quincailleries',
-    name: 'Plot Béton',
+    name: 'plot béton',
     image: './assets/Quincaillerie/plot-beton.jpg',
     total: 5,
     stock: 10,
@@ -129,7 +129,7 @@ const info_quincaillerie = [
   },
   {
     category: 'quincailleries',
-    name: 'Lames de scie',
+    name: 'lames de scie',
     image: './assets/Quincaillerie/lame-scie-sauteuse.jpg',
     total: 25,
     stock: 50,
@@ -137,7 +137,7 @@ const info_quincaillerie = [
   },
   {
     category: 'quincailleries',
-    name: 'Chevilles',
+    name: 'chevilles',
     image: './assets/Quincaillerie/cheville.jpg',
     total: 100,
     stock: 50,
@@ -145,7 +145,7 @@ const info_quincaillerie = [
   },
   {
     category: 'quincailleries',
-    name: 'Boulon Charpente',
+    name: 'boulon charpente',
     image: './assets/Quincaillerie/boulon-charpente.jpg',
     total: 50,
     stock: 50,
@@ -153,7 +153,7 @@ const info_quincaillerie = [
   },
   {
     category: 'quincailleries',
-    name: 'Equerre de Fixation',
+    name: 'equerre de fixation',
     image: './assets/Quincaillerie/equerre-de-fixation-renforcee.jpg',
     total: 25,
     stock: 50,
@@ -161,7 +161,7 @@ const info_quincaillerie = [
   },
   {
     category: 'quincailleries',
-    name: 'Tige Filete',
+    name: 'tige Filete',
     image: './assets/Quincaillerie/tige-filleté.jpg',
     total: 5,
     stock: 50,
@@ -169,7 +169,7 @@ const info_quincaillerie = [
   },
   {
     category: 'quincailleries',
-    name: 'Ecrou m14',
+    name: 'ecrou m14',
     image: './assets/Quincaillerie/ecrou-m14.jpg',
     total: 50,
     stock: 50,
@@ -177,7 +177,7 @@ const info_quincaillerie = [
   },
   {
     category: 'quincailleries',
-    name: 'Rondelle plate',
+    name: 'rondelle plate',
     image: './assets/Quincaillerie/rondelle.jpg',
     total: 90,
     stock: 50,
@@ -185,7 +185,7 @@ const info_quincaillerie = [
   },
   {
     category: 'quincailleries',
-    name: 'Pied de poteau',
+    name: 'pied de poteau',
     image: './assets/Quincaillerie/pied-de-poteau.jpg',
     total: 8,
     stock: 50,
@@ -193,7 +193,7 @@ const info_quincaillerie = [
   },
   {
     category: 'quincailleries',
-    name: 'Vis de fondation',
+    name: 'vis de fondation',
     image: './assets/Quincaillerie/vis-de-fondation.jpg',
     total: 50,
     stock: 50,
@@ -201,7 +201,7 @@ const info_quincaillerie = [
   },
   {
     category: 'quincailleries',
-    name: 'Feutre geotextile',
+    name: 'feutre geotextile',
     image: './assets/Quincaillerie/feutre-geotextile.jpg',
     total: 100,
     stock: 50,
@@ -209,7 +209,7 @@ const info_quincaillerie = [
   },
   {
     category: 'quincailleries',
-    name: 'Disque a tronconner',
+    name: 'disque a tronconner',
     image: './assets/Quincaillerie/disque-a-tronconner.jpg',
     total: 50,
     stock: 50,
@@ -217,7 +217,7 @@ const info_quincaillerie = [
   },
   {
     category: 'quincailleries',
-    name: 'Disque a ebarbe',
+    name: 'disque a ebarbe',
     image: './assets/Quincaillerie/disque-a-ebarber.jpg',
     total: 80,
     stock: 50,
@@ -225,7 +225,7 @@ const info_quincaillerie = [
   },
   {
     category: 'quincailleries',
-    name: 'Disque de pollissage',
+    name: 'disque de pollissage',
     image: './assets/Quincaillerie/disque-pollissage.jpg',
     total: 50,
     stock: 50,
@@ -233,7 +233,7 @@ const info_quincaillerie = [
   },
   {
     category: 'quincailleries',
-    name: 'Agraffes',
+    name: 'agraffes',
     image: './assets/Quincaillerie/agraffe.jpg',
     total: 50,
     stock: 50,
@@ -241,7 +241,7 @@ const info_quincaillerie = [
   },
   {
     category: 'quincailleries',
-    name: 'Sangle arrimage',
+    name: 'sangle arrimage',
     image: './assets/Quincaillerie/sangle.jpg',
     total: 100,
     stock: 50,
@@ -249,7 +249,7 @@ const info_quincaillerie = [
   },
   {
     category: 'quincailleries',
-    name: 'Masque FFP3 ',
+    name: 'masque ffp3 ',
     image: './assets/Quincaillerie/masque-ffp3.jpg',
     total: 5,
     stock: 50,
@@ -257,7 +257,7 @@ const info_quincaillerie = [
   },
   {
     category: 'quincailleries',
-    name: 'Crayon',
+    name: 'crayon',
     image: './assets/Quincaillerie/crayon.jpg',
     total: 100,
     stock: 50,
@@ -265,7 +265,7 @@ const info_quincaillerie = [
   },
   {
     category: 'quincailleries',
-    name: 'Gant de protection',
+    name: 'gant de protection',
     image: './assets/Quincaillerie/gant-chantier.jpg',
     total: 50,
     stock: 50,
@@ -273,7 +273,7 @@ const info_quincaillerie = [
   },
   {
     category: 'quincailleries',
-    name: 'Ruban signaletique',
+    name: 'ruban signaletique',
     image: './assets/Quincaillerie/ruban-signalisation.jpg',
     total: 100,
     stock: 50,
@@ -281,7 +281,7 @@ const info_quincaillerie = [
   },
   {
     category: 'quincailleries',
-    name: 'Lingette main',
+    name: 'lingette main',
     image: './assets/Quincaillerie/lingette-main.jpg',
     total: 50,
     stock: 50,
@@ -289,7 +289,7 @@ const info_quincaillerie = [
   },
   {
     category: 'quincailleries',
-    name: 'Degripant Universel',
+    name: 'degripant universel',
     image: './assets/Quincaillerie/degripant.jpg',
     total: 50,
     stock: 50,
@@ -297,7 +297,7 @@ const info_quincaillerie = [
   },
   {
     category: 'quincailleries',
-    name: 'Cale PVC',
+    name: 'cale pvc',
     image: './assets/Quincaillerie/cales.jpg',
     total: 80,
     stock: 50,
@@ -305,7 +305,7 @@ const info_quincaillerie = [
   },
   {
     category: 'quincailleries',
-    name: 'Plot PVC',
+    name: 'plot pvc',
     image: './assets/Quincaillerie/plot.jpg',
     total: 50,
     stock: 50,
@@ -313,7 +313,7 @@ const info_quincaillerie = [
   },
   {
     category: 'quincailleries',
-    name: 'Abrasif',
+    name: 'abrasif',
     image: './assets/Quincaillerie/abrasif.jpg',
     total: 50,
     stock: 50,
@@ -321,7 +321,7 @@ const info_quincaillerie = [
   },
   {
     category: 'quincailleries',
-    name: 'Chanfrein',
+    name: 'chanfrein',
     image: './assets/Quincaillerie/chanfrein.jpg',
     total: 50,
     stock: 50,
@@ -329,7 +329,7 @@ const info_quincaillerie = [
   },
   {
     category: 'quincailleries',
-    name: 'Cale Caoutchouc',
+    name: 'cale caoutchouc',
     image: './assets/Quincaillerie/cale-caoutchouc.jpg',
     total: 50,
     stock: 50,
@@ -342,7 +342,7 @@ const info_quincaillerie = [
 const info_product = [
   {
     category: 'produits',
-    name: 'Scellement Chimique',
+    name: 'scellement chimique',
     image: '/assets/Produits/chimique.jpg',
     total: 50,
     stock: 50,
@@ -350,7 +350,7 @@ const info_product = [
   },
   {
     category: 'produits',
-    name: 'Silicone',
+    name: 'silicone',
     image: '/assets/Produits/silicone.jpg',
     total: 65,
     stock: 50,
@@ -358,7 +358,7 @@ const info_product = [
   },
   {
     category: 'produits',
-    name: 'Sastic',
+    name: 'mastic',
     image: '/assets/Produits/mastic.jpg',
     total: 10,
     stock: 50,
@@ -366,7 +366,7 @@ const info_product = [
   },
   {
     category: 'produits',
-    name: 'Caoutchouc liquide',
+    name: 'caoutchouc liquide',
     image: '/assets/Produits/hbs200.jpg',
     total: 20,
     stock: 50,
@@ -374,7 +374,7 @@ const info_product = [
   },
   {
     category: 'produits',
-    name: 'Saturateur',
+    name: 'saturateur',
     image: '/assets/Produits/saturateur.jpg',
     total: 50,
     stock: 50,
@@ -382,7 +382,7 @@ const info_product = [
   },
   {
     category: 'produits',
-    name: 'Lazure',
+    name: 'lazure',
     image: '/assets/Produits/lazure.jpg',
     total: 50,
     stock: 50,
@@ -390,7 +390,7 @@ const info_product = [
   },
   {
     category: 'produits',
-    name: 'Degriseur',
+    name: 'degriseur',
     image: '/assets/Produits/degriseur.jpg',
     total: 50,
     stock: 50,
@@ -398,7 +398,7 @@ const info_product = [
   },
   {
     category: 'produits',
-    name: 'Bombe de Tracage',
+    name: 'bombe de tracage',
     image: '/assets/Produits/tracage.jpg',
     total: 50,
     stock: 50,
@@ -406,7 +406,7 @@ const info_product = [
   },
   {
     category: 'produits',
-    name: 'Craie Cordex',
+    name: 'craie cordex',
     image: '/assets/Produits/craie.jpg',
     total: 50,
     stock: 50,
@@ -414,7 +414,7 @@ const info_product = [
   },
   {
     category: 'produits',
-    name: 'Bidon Matefloc',
+    name: 'bidon matefloc',
     image: '/assets/Produits/matefloc.jpg',
     total: 50,
     stock: 50,
@@ -422,7 +422,7 @@ const info_product = [
   },
   {
     category: 'produits',
-    name: 'Bidon Oxygen Actif',
+    name: 'bidon oxygen actif',
     image: '/assets/Produits/oxygen-actif.jpg',
     total: 50,
     stock: 50,
@@ -430,7 +430,7 @@ const info_product = [
   },
   {
     category: 'produits',
-    name: 'Bidon Algicide ',
+    name: 'bidon algicide ',
     image: '/assets/Produits/algicide.jpg',
     total: 50,
     stock: 50,
@@ -438,7 +438,7 @@ const info_product = [
   },
   {
     category: 'produits',
-    name: 'Bidon choc plus',
+    name: 'bidon choc plus',
     image: '/assets/Produits/choc-plus-.jpg',
     total: 50,
     stock: 50,
@@ -446,7 +446,7 @@ const info_product = [
   },
   {
     category: 'produits',
-    name: 'Bidon PH Liquide',
+    name: 'bidon ph liquide',
     image: '/assets/Produits/ph.jpg',
     total: 50,
     stock: 50,
@@ -454,7 +454,7 @@ const info_product = [
   },
   {
     category: 'produits',
-    name: 'Bidon inoprotect',
+    name: 'bidon inoprotect',
     image: '/assets/Produits/inoprotect.jpg',
     total: 50,
     stock: 50,
@@ -462,7 +462,7 @@ const info_product = [
   },
   {
     category: 'produits',
-    name: 'Bidon AD Blue',
+    name: 'bidon ad blue',
     image: '/assets/Produits/adblue.jpg',
     total: 50,
     stock: 50,
@@ -470,7 +470,7 @@ const info_product = [
   },
   {
     category: 'produits',
-    name: 'Spray inox',
+    name: 'spray inox',
     image: '/assets/Produits/inox.jpg',
     total: 50,
     stock: 50,
@@ -478,7 +478,7 @@ const info_product = [
   },
   {
     category: 'produits',
-    name: 'Colle EPDM',
+    name: 'colle epdm',
     image: '/assets/Produits/colle-epdm-cartouche.jpg',
     total: 50,
     stock: 50,
@@ -486,7 +486,7 @@ const info_product = [
   },
   {
     category: 'produits',
-    name: 'colle EPDM pot',
+    name: 'colle epdm pot',
     image: '/assets/Produits/colle-epdm.jpg',
     total: 50,
     stock: 50,
@@ -494,7 +494,7 @@ const info_product = [
   },
   {
     category: 'produits',
-    name: 'Bande joint EPDM',
+    name: 'bande joint epdm',
     image: '/assets/Produits/joint-epdm.jpg',
     total: 50,
     stock: 50,
@@ -507,7 +507,7 @@ const info_product = [
 const info_other = [
   {
     category: 'autres',
-    name: 'Garde Corps',
+    name: 'garde corps',
     image: '/assets/Autres/garde-corps.jpg',
     total: 65,
     stock: 50,
@@ -515,7 +515,7 @@ const info_other = [
   },
   {
     category: 'autres',
-    name: 'Pare Pluie',
+    name: 'pare pluie',
     image: '/assets/Autres/pare-pluie.jpg',
     total: 10,
     stock: 50,
@@ -523,7 +523,7 @@ const info_other = [
   },
   {
     category: 'autres',
-    name: 'Scoth Pare Pluie',
+    name: 'scoth pare pluie',
     image: '/assets/Autres/scotch-pare-pluie.jpg',
     total: 20,
     stock: 50,
@@ -531,7 +531,7 @@ const info_other = [
   },
   {
     category: 'autres',
-    name: 'Gaine TPC',
+    name: 'gaine tpc',
     image: '/assets/Autres/gaine-tpc.jpg',
     total: 50,
     stock: 50,
@@ -539,7 +539,7 @@ const info_other = [
   },
   {
     category: 'autres',
-    name: 'Gaine',
+    name: 'gaine',
     image: '/assets/Autres/gaine.jpg',
     total: 65,
     stock: 50,
@@ -547,7 +547,7 @@ const info_other = [
   },
   {
     category: 'autres',
-    name: 'Cable',
+    name: 'cable',
     image: '/assets/Autres/cable.jpg',
     total: 50,
     stock: 50,
@@ -555,7 +555,7 @@ const info_other = [
   },
   {
     category: 'autres',
-    name: 'Wago',
+    name: 'wago',
     image: '/assets/Autres/wago.jpg',
     total: 10,
     stock: 50,
@@ -563,7 +563,7 @@ const info_other = [
   },
   {
     category: 'autres',
-    name: 'Medicale',
+    name: 'medicale',
     image: '/assets/Autres/medicale.jpg',
     total: 20,
     stock: 50,
@@ -571,7 +571,7 @@ const info_other = [
   },
   {
     category: 'autres',
-    name: 'Madrier',
+    name: 'madrier',
     image: './assets/Bois/Structure.jpg',
     total: 50,
     stock: 50,
@@ -579,7 +579,7 @@ const info_other = [
   },
   {
     category: 'autres',
-    name: 'Mat Voile Ombrage',
+    name: 'mat voile ombrage',
     image: '/assets/Autres/mat.jpg',
     total: 65,
     stock: 50,
@@ -587,7 +587,7 @@ const info_other = [
   },
   {
     category: 'autres',
-    name: 'Luminaire',
+    name: 'luminaire',
     image: '/assets/Autres/spot.jpg',
     total: 10,
     stock: 50,
@@ -595,7 +595,7 @@ const info_other = [
   },
   {
     category: 'autres',
-    name: 'Terreau',
+    name: 'terreau',
     image: '/assets/Autres/terreau.jpg',
     total: 20,
     stock: 50,

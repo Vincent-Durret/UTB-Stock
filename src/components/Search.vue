@@ -3,9 +3,9 @@
         <input v-model="user_search_item" type="search" placeholder="Rechercher">
         <div class="search">
             <router-link class="link" v-for="(product, i) in search_item" :key="i"
-                :to="{ name: 'SubCard', params: { category: product.category, title: product.name } }">
+                :to="{ name: 'SubPage', params: { category: product.category, title: product.name } }">
                 <div class="container--restaurant--search">
-                    <p class="lh"> {{ product.name }} </p>
+                    <p class="lh"> {{ product.name.replace(/(?:^|\s|-)\S/g, x => x.toUpperCase()) }} </p>
                 </div>
             </router-link>
         </div>
