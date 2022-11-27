@@ -7,7 +7,7 @@
       <Search />
     </header>
     <div class="wrap-card">
-      <Card v-for="(product) in allproducts" :card="product" :key="product.id" />
+      <Card v-for="product in allproducts" :card="product" :key="product.id" />
     </div>
     <Footer />
   </main>

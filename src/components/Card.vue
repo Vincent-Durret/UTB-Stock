@@ -45,9 +45,12 @@
             <datalist id="image">
                 <option :value=card.image></option>
             </datalist>
-            <input v-model="updateTotal" type="number" :placeholder=card.total>
             <input v-model="updateStock" type="number" :placeholder=card.stock>
             <input v-model="updateUnit" type="text" :placeholder=card.unit>
+            <h3>Mettre a jour les sous produits</h3>
+            <input type="text" v-model="updateTitle" :placeholder="card.subproducts[0].title.toLowerCase()">
+            <input v-model="updateTotal" type="number" :placeholder="card.subproducts[0].total">
+
             <button @click="updateProducts">Modifier le produit</button>
         </div>
     </div>
@@ -57,7 +60,7 @@
 import { ref } from 'vue';
 import { doc, deleteDoc, updateDoc } from "firebase/firestore";
 import { db } from '../Firebase/firebase.js'
-import { useRoute } from "vue-router"
+
 
 import { useToast } from 'vue-toastification'
 
@@ -77,17 +80,17 @@ export default {
 
     setup(props) {
         const toast = useToast()
-        const route = useRoute()
         const updateCategory = ref('')
         const updateName = ref('')
         const updateImage = ref('')
+        const updateTitle = ref("")
         const updateTotal = ref()
         const updateStock = ref()
         const updateUnit = ref('')
 
         // const subProductTotal = props.test
 
-        
+
         // const totalAmount = subProductTotal.reduce((acc, curr) => acc + curr.total, 0)
 
 
@@ -100,16 +103,23 @@ export default {
                 category: updateCategory.value,
                 name: updateName.value,
                 image: updateImage.value,
-                total: updateTotal.value,
+                subproducts: [
+                    {
+                        "title": updateTitle.value,
+                        "total": updateTotal.value,
+                    }
+                ],
                 stock: updateStock.value,
                 unit: updateUnit.value
             });
             updateProducts ? updateCategory.value = '' : updateCategory.value = updateCategory.value
             updateProducts ? updateName.value = '' : updateName.value = updateName.value
             updateProducts ? updateImage.value = '' : updateImage.value = updateImage.value
+            updateProducts ? updateTitle.value = '' : updateTitle.value = updateTitle.value
             updateProducts ? updateTotal.value = '' : updateTotal.value = updateTotal.value
             updateProducts ? updateStock.value = '' : updateStock.value = updateStock.value
             updateProducts ? updateUnit.value = '' : updateUnit.value = updateUnit.value
+
 
             toast.success("Produits modifier")
 
@@ -125,6 +135,7 @@ export default {
             updateCategory,
             updateName,
             updateImage,
+            updateTitle,
             updateTotal,
             updateStock,
             updateUnit,

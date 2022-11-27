@@ -9,7 +9,7 @@
                 <p class="total-stock">{{ subprod.total }} /{{ sub.stock }} {{ sub.unit }}</p>
 
             </div>
-            <!-- <div class="wrap-edit">
+            <div class="wrap-edit">
                 <span @click="isOpen = !isOpen" class="material-icons edit">
                     mode_edit
                 </span>
@@ -21,10 +21,10 @@
                 <span v-if="isOpen" @click="deleteProduct" class="material-icons delete">
                     delete
                 </span>
-            </div> -->
+            </div>
         </div>
 
-        <!-- <div v-if="openUpdate" class="forms">
+        <div v-if="openUpdate" class="forms">
             <div class="wrap-close">
                 <span @click="openUpdate = !openUpdate" class="material-icons close">
                     cancel
@@ -43,7 +43,7 @@
             <input v-model="updateStock" type="number" :placeholder=sub.stock>
             <input v-model="updateUnit" type="text" :placeholder=sub.unit>
             <button @click="updateSubProducts">Modifier le produit</button>
-        </div>  -->
+        </div> 
     </div>
 </template>
 
@@ -83,7 +83,6 @@ export default {
         const inputStock = ref(0)
 
         const updateTitle = ref('')
-        const updateName = ref('')
         const updateTotal = ref()
         const updateStock = ref()
         const updateUnit = ref('')
@@ -108,13 +107,13 @@ export default {
             const stockQ = query(doc(db, "products", props.sub.id));
 
             await updateDoc(stockQ, {
-                subproducts: [{
+                
 
-                    title: props.sub.subproducts[0].title,
-                    total: Math.max(0, props.sub.subproducts[0].total - inputStock.value)
-                }
+                    // title: props.sub.subproducts[0].title,
 
-                ]
+                    "subproducts[total]": Math.max(0, props.sub.subproducts.total - inputStock.value)
+                        
+
 
 
                 // total: arrayUnion(Math.max(0, props.test.total - inputStock.value)),
@@ -236,8 +235,8 @@ export default {
 
 
     input {
-        border: none;
-        outline: none;
+        border: none ;
+        // outline: none;
         height: 2rem;
         margin: 0.7rem;
         border-radius: 5px;
@@ -248,7 +247,8 @@ export default {
         border: none;
         outline: none;
         transition: 0.2s;
-        border-radius: 2px;
+        border-radius: 5px;
+
 
     }
 
