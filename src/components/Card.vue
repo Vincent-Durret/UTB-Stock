@@ -6,7 +6,7 @@
                 <!-- @click="$router.push(`/${card.category}/${card.id}`)"> -->
                 <div :style="{ backgroundImage: `url(${card.image})` }" class="image"></div>
                 <span class="text">{{ card.name }}</span>
-                <h3 class="total"> / {{ card.stock }} {{ card.unit }} </h3>
+                <h3 class="total"> {{ totalAmount }} / {{ card.stock }} {{ card.unit }} </h3>
             </router-link>
             <div class="wrap-edit">
                 <span @click="isOpen = !isOpen" class="material-icons edit">
@@ -48,8 +48,12 @@
             <input v-model="updateStock" type="number" :placeholder=card.stock>
             <input v-model="updateUnit" type="text" :placeholder=card.unit>
             <h3>Mettre a jour les sous produits</h3>
-            <input type="text" v-model="updateTitle" :placeholder="card.subproducts[0].title.toLowerCase()">
-            <input v-model="updateTotal" type="number" :placeholder="card.subproducts[0].total">
+            <div class="wrap__subproducts" v-for="subproduct in sub " :key="subproduct">
+
+                <input type="text" v-model="updateTitle" name="title" :onchange="(e) => handlerChange(e, i)" :placeholder="subproduct.title">
+                <input v-model="updateTotal" type="number" name="total" :placeholder="subproduct.total">
+            </div>
+
 
             <button @click="updateProducts">Modifier le produit</button>
         </div>
@@ -69,7 +73,7 @@ export default {
     name: "Card",
     props: {
         card: Object,
-        test: Object,
+        sub: Object,
     },
     data() {
         return {
@@ -88,11 +92,26 @@ export default {
         const updateStock = ref()
         const updateUnit = ref('')
 
-        // const subProductTotal = props.test
+        const setItems = ref([])
+
+        const addItem = () => {
+            setItems([...props.sub, { title: '', total: 0 }])
+        }
+
+        const subProductTotal = props.sub
 
 
-        // const totalAmount = subProductTotal.reduce((acc, curr) => acc + curr.total, 0)
+        const totalAmount = subProductTotal.reduce((acc, curr) => acc + curr.total, 0)
 
+        console.log(totalAmount)
+
+        const handlerChange = (event, i) => {
+            const { name, value } = event.target
+            const list = [...props.sub]
+            list[i]["title"] = value
+            list[i]["total"] = value
+            setItems(list)
+        }
 
 
 
@@ -141,7 +160,9 @@ export default {
             updateUnit,
             updateProducts,
             deleteProduct,
-            // totalAmount
+            totalAmount,
+            addItem,
+            handlerChange
         }
     }
 
@@ -340,7 +361,6 @@ export default {
             color: var(--light);
         }
 
-
         input {
             margin-top: 1rem;
             margin: 1rem;
@@ -351,6 +371,31 @@ export default {
             font-weight: bold;
             font-size: 1rem;
         }
+
+        .wrap__subproducts {
+            width: 100%;
+            // padding: 1rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            input {
+                margin-top: 1rem;
+                margin: 1rem;
+                padding: 8px;
+                border: none;
+                color: black;
+                border-radius: 5px;
+                font-weight: bold;
+                font-size: 1rem;
+                // width: 100%;
+            }
+        }
+
+
+
+        
+
 
         button {
             margin: 1rem;

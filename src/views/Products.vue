@@ -8,7 +8,7 @@
     </div>
     <Search />
     <div class="cards-grid">
-      <Card v-for="product in products" :test="product.subproducts" :card="product" :key="product.id" />
+      <Card v-for="product in products" :sub="product.subproducts" :card="product" :key="product.id" />
     </div>
   </main>
 </template>

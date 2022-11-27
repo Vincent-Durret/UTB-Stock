@@ -17,15 +17,27 @@
             <div class="forms">
                 <select v-model="addCategory" name="product-category" required>
                     <option value="" disabled selected hidden>Choisir une catégorie</option>
-                    <option value="Bois">Bois</option>
-                    <option value="Quincailleries">Quincailleries</option>
-                    <option value="Produits">Produits</option>
-                    <option value="Autres">Autres</option>
+                    <option value="Bois">bois</option>
+                    <option value="Quincailleries">quincailleries</option>
+                    <option value="Produits">produits</option>
+                    <option value="Autres">autres</option>
                 </select>
 
                 <input v-model="addName" type="text" placeholder="*Nom">
                 <input v-model="addImage" type="text" placeholder="*Image">
-                <input v-model="addTotal" type="number" placeholder="*Totale">
+                <div class="teste" >
+
+                    <h3>Mettre a jour les sous produits</h3>
+                    <input @click="(e) => handlerChange(e, i)" v-model="addTitle" type="text" name="title"
+                        placeholder="*Titre sous produits">
+                    <input @click="(e) => handlerChange(e, i)" v-model="addTotal" type="number" name="total"
+                        placeholder="*Totale">
+                </div>
+                <div @click="addItem()" class="wrap__add-item">
+                    <span class="material-icons add-item">
+                        add
+                    </span>
+                </div>
                 <input v-model="addStock" type="number" placeholder="*Stock">
                 <input v-model="addUnit" type="text" placeholder="*Unités">
                 <button @click="addProducts">Créer le produit</button>
@@ -39,6 +51,7 @@ import { ref } from 'vue'
 import { collection, addDoc } from "firebase/firestore";
 import { db } from '../Firebase/firebase.js'
 import { useToast } from 'vue-toastification'
+import { useState } from '../composable/state';
 
 
 export default {
@@ -55,16 +68,33 @@ export default {
         const addCategory = ref('')
         const addName = ref('')
         const addImage = ref('')
+        const addTitle = ref('')
         const addTotal = ref()
         const addStock = ref()
         const addUnit = ref('')
+        const [subproducts, setSubProducts] = useState([])
+
+
+
+        const addItem = () => {
+            setSubProducts([...subproducts, { title: addTitle.value, total: addTotal.value }])
+        }
+
+
+        const handlerChange = (event, i) => {
+            const { title, value } = event.target
+            const list = [...subproducts]
+            list[i][title] = value
+            setSubProducts(list)
+            console.log(list)
+        }
 
         const addProducts = async () => {
             await addDoc(collection(db, "products"), {
                 category: addCategory.value,
                 name: addName.value,
                 image: addImage.value,
-                total: addTotal.value,
+                subproducts: subproducts,
                 stock: addStock.value,
                 unit: addUnit.value,
             });
@@ -72,20 +102,27 @@ export default {
             addProducts ? addCategory.value = '' : addCategory.value = addCategory.value
             addProducts ? addName.value = '' : addName.value = addName.value
             addProducts ? addImage.value = '' : addImage.value = addImage.value
+            addProducts ? addTitle.value = '' : addTitle.value = addTitle.value
             addProducts ? addTotal.value = '' : addTotal.value = addTotal.value
             addProducts ? addStock.value = '' : addStock.value = addStock.value
             addProducts ? addUnit.value = '' : addUnit.value = addUnit.value
 
         }
 
+
+
         return {
             addCategory,
             addName,
             addImage,
+            addTitle,
             addTotal,
             addStock,
             addUnit,
-            addProducts
+            addProducts,
+            addItem,
+            handlerChange,
+            subproducts
         }
     }
 
@@ -127,7 +164,7 @@ export default {
         border: 3px solid var(--logo-letters);
         background: var(--black);
         width: 30rem;
-        height: 36rem;
+        // height: 36rem;
         top: 25%;
         left: 40%;
         display: flex;
@@ -201,6 +238,21 @@ export default {
             input {
                 margin: 1rem;
                 height: 1.5rem;
+            }
+
+            .wrap__add-item {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                .add-item {
+                    padding: 0.8rem;
+                    background: var(--light);
+                    font-size: 1rem;
+                    font-weight: bold;
+                    color: var(--logo-letters);
+                }
+
             }
 
             button {

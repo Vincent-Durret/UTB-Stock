@@ -7,7 +7,7 @@
             <h1> {{ $route.params.title.replace(/(?:^|\s|-)\S/g, x => x.toUpperCase()) }} </h1>
         </div>
         <div class="wrap-card">
-            <SubCard v-for="product in products" :sub="product" :key="product.id" />
+            <SubCard v-for="product in products" :subproduct="product.subproducts" :sub="product" :key="product.id" />
         </div>
     </main>
 </template>
