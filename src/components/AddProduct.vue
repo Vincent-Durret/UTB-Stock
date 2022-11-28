@@ -25,15 +25,13 @@
 
                 <input v-model="addName" type="text" placeholder="*Nom">
                 <input v-model="addImage" type="text" placeholder="*Image">
-                <div class="teste" >
+                <div class="teste">
 
                     <h3>Mettre a jour les sous produits</h3>
-                    <input @click="(e) => handlerChange(e, i)" v-model="addTitle" type="text" name="title"
-                        placeholder="*Titre sous produits">
-                    <input @click="(e) => handlerChange(e, i)" v-model="addTotal" type="number" name="total"
-                        placeholder="*Totale">
+                    <input v-model="subproducts.title" type="text" name="title" placeholder="*Titre sous produits">
+                    <input v-model="subproducts.total" type="number" name="total" placeholder="*Totale">
                 </div>
-                <div @click="addItem()" class="wrap__add-item">
+                <div @click="addItems" class="wrap__add-item">
                     <span class="material-icons add-item">
                         add
                     </span>
@@ -58,9 +56,24 @@ export default {
     name: "AddProduct",
     data() {
         return {
-            isOpen: false
+            isOpen: false,
+
+            subproducts: []
         }
     },
+    methods: {
+        addItems: () => {
+            this.subproducts.push({
+                title: '',
+                total: 0
+            });
+        }
+    },
+    created() {
+        this.addItems()
+        console.log(...subproducts) // => 2
+    },
+
 
     setup() {
         const toast = useToast()
@@ -72,29 +85,23 @@ export default {
         const addTotal = ref()
         const addStock = ref()
         const addUnit = ref('')
-        const [subproducts, setSubProducts] = useState([])
+        // const [subproducts, setSubProducts] = useState([])
 
+        // console.log(this.subproducts)
 
+        // const addItem = () => {
+        //     setSubProducts([...subproducts, { title: addTitle.value, total: addTotal.value }])
+        // }
 
-        const addItem = () => {
-            setSubProducts([...subproducts, { title: addTitle.value, total: addTotal.value }])
-        }
+        // console.log(addItem())
 
-
-        const handlerChange = (event, i) => {
-            const { title, value } = event.target
-            const list = [...subproducts]
-            list[i][title] = value
-            setSubProducts(list)
-            console.log(list)
-        }
 
         const addProducts = async () => {
             await addDoc(collection(db, "products"), {
                 category: addCategory.value,
                 name: addName.value,
                 image: addImage.value,
-                subproducts: subproducts,
+                subproducts: this.subproducts,
                 stock: addStock.value,
                 unit: addUnit.value,
             });
@@ -120,9 +127,8 @@ export default {
             addStock,
             addUnit,
             addProducts,
-            addItem,
-            handlerChange,
-            subproducts
+            // addItem,
+            // handlerChange,
         }
     }
 
