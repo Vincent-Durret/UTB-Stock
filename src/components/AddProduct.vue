@@ -17,21 +17,21 @@
             <div class="forms">
                 <select v-model="addCategory" name="product-category" required>
                     <option value="" disabled selected hidden>Choisir une catégorie</option>
-                    <option value="Bois">bois</option>
-                    <option value="Quincailleries">quincailleries</option>
-                    <option value="Produits">produits</option>
-                    <option value="Autres">autres</option>
+                    <option value="bois">Bois</option>
+                    <option value="quincailleries">Quincailleries</option>
+                    <option value="produits">Produits</option>
+                    <option value="autres">Autres</option>
                 </select>
 
                 <input v-model="addName" type="text" placeholder="*Nom">
                 <input v-model="addImage" type="text" placeholder="*Image">
-                <div class="teste">
+                <h3>Ajouter les sous produits</h3>
+                <div v-for="item in subproducts" class="wrap__input-subproducts">
 
-                    <h3>Mettre a jour les sous produits</h3>
-                    <input v-model="subproducts.title" type="text" name="title" placeholder="*Titre sous produits">
-                    <input v-model="subproducts.total" type="number" name="total" placeholder="*Totale">
+                    <input v-model="item.title" type="text"  placeholder="*Titre sous produits">
+                    <input v-model="item.total" type="number"  placeholder="*Totale">
                 </div>
-                <div @click="addItems" class="wrap__add-item">
+                <div @click="addInputItem" class="wrap__add-item">
                     <span class="material-icons add-item">
                         add
                     </span>
@@ -49,7 +49,6 @@ import { ref } from 'vue'
 import { collection, addDoc } from "firebase/firestore";
 import { db } from '../Firebase/firebase.js'
 import { useToast } from 'vue-toastification'
-import { useState } from '../composable/state';
 
 
 export default {
@@ -57,21 +56,7 @@ export default {
     data() {
         return {
             isOpen: false,
-
-            subproducts: []
         }
-    },
-    methods: {
-        addItems: () => {
-            this.subproducts.push({
-                title: '',
-                total: 0
-            });
-        }
-    },
-    created() {
-        this.addItems()
-        console.log(...subproducts) // => 2
     },
 
 
@@ -85,6 +70,18 @@ export default {
         const addTotal = ref()
         const addStock = ref()
         const addUnit = ref('')
+        const subproducts = ref([])
+
+        const addInputItem = () => {
+            subproducts.value.push({
+                title: "",
+                total: 0
+            })
+        }
+
+
+
+        console.log(subproducts.value)
         // const [subproducts, setSubProducts] = useState([])
 
         // console.log(this.subproducts)
@@ -101,7 +98,7 @@ export default {
                 category: addCategory.value,
                 name: addName.value,
                 image: addImage.value,
-                subproducts: this.subproducts,
+                subproducts: subproducts.value,
                 stock: addStock.value,
                 unit: addUnit.value,
             });
@@ -127,6 +124,8 @@ export default {
             addStock,
             addUnit,
             addProducts,
+            addInputItem,
+            subproducts
             // addItem,
             // handlerChange,
         }
@@ -170,14 +169,15 @@ export default {
         border: 3px solid var(--logo-letters);
         background: var(--black);
         width: 30rem;
-        // height: 36rem;
-        top: 25%;
+        height: 36rem;
+        top: 0;
         left: 40%;
         display: flex;
         flex-direction: column;
         padding: 1rem;
         border-radius: 5px;
         z-index: 10;
+        overflow-y: scroll;
 
         @media (max-width: 768px) {
             left: 20.5%;
@@ -246,6 +246,19 @@ export default {
                 height: 1.5rem;
             }
 
+            .wrap__input-subproducts {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                input {
+                    width: 100%;
+                    margin: 1rem;
+                    height: 1.5rem;
+                }
+
+            }
+
             .wrap__add-item {
                 display: flex;
                 align-items: center;
@@ -257,7 +270,15 @@ export default {
                     font-size: 1rem;
                     font-weight: bold;
                     color: var(--logo-letters);
+                    transition: background 0.3s;
+
+                    &:hover {
+                        background: var(--logo-letters);
+                        color: var(--light);
+                        transition: color 0.3s;
+                    }
                 }
+
 
             }
 

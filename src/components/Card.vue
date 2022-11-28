@@ -50,7 +50,8 @@
             <h3>Mettre a jour les sous produits</h3>
             <div class="wrap__subproducts" v-for="subproduct in sub " :key="subproduct">
 
-                <input type="text" v-model="updateTitle" name="title" :onchange="(e) => handlerChange(e, i)" :placeholder="subproduct.title">
+                <input type="text" v-model="updateTitle" name="title" :onchange="(e) => handlerChange(e, i)"
+                    :placeholder="subproduct.title">
                 <input v-model="updateTotal" type="number" name="total" :placeholder="subproduct.total">
             </div>
 
@@ -92,11 +93,6 @@ export default {
         const updateStock = ref()
         const updateUnit = ref('')
 
-        const setItems = ref([])
-
-        const addItem = () => {
-            setItems([...props.sub, { title: '', total: 0 }])
-        }
 
         const subProductTotal = props.sub
 
@@ -104,16 +100,6 @@ export default {
         const totalAmount = subProductTotal.reduce((acc, curr) => acc + curr.total, 0)
 
         console.log(totalAmount)
-
-        const handlerChange = (event, i) => {
-            const { name, value } = event.target
-            const list = [...props.sub]
-            list[i]["title"] = value
-            list[i]["total"] = value
-            setItems(list)
-        }
-
-
 
         const updateProducts = async () => {
             const stockQ = doc(db, "products", props.card.id);
@@ -161,8 +147,6 @@ export default {
             updateProducts,
             deleteProduct,
             totalAmount,
-            addItem,
-            handlerChange
         }
     }
 
@@ -177,6 +161,11 @@ export default {
     align-items: center;
     position: relative;
     z-index: 3;
+
+    // &:active {
+    //     transform: translateY(-2rem);
+    //     transition: transform 0.2s ease-in-out;
+    // }
 
     .card {
         display: flex;
@@ -307,20 +296,22 @@ export default {
     }
 
     .forms {
-        position: absolute;
+        position: static;
         border: 3px solid var(--logo-letters);
         background: var(--black-alt);
         width: 30rem;
-        // height: 37rem;
-        bottom: 100%;
+        height: 37rem;
+        // bottom: 100%;
         margin-bottom: 1rem;
-        // top: 100%;
+        left: 20%;
+        // top: 0;
         display: flex;
         flex-direction: column;
         padding: 1rem;
         border-radius: 5px;
         z-index: 10;
-        overflow: scroll;
+        overflow-y: scroll;
+        transition: width 0.3s height 0.3s;
 
         @media (max-width: 768px) {
             left: 20.5%;
@@ -394,7 +385,7 @@ export default {
 
 
 
-        
+
 
 
         button {

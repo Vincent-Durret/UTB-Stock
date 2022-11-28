@@ -39,7 +39,7 @@ export default {
     const allproducts = ref([])
 
     onMounted(() => {
-      const q = query(collection(db, 'products'), orderBy('category', "asc"))
+      const q = query(collection(db, 'products'), orderBy('stock', "desc"))
 
 
       onSnapshot(q, (querySnapshot) => {
