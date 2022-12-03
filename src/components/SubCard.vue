@@ -3,7 +3,8 @@
         <div class="sub-card">
             <div v-for="(subprod, index) in subproduct" :key="index" class="sub-wrap">
                 <h2 class="title-subpage">{{ subprod.title }} : </h2>
-                <input v-model="inputStock" name="total" type="number" placeholder="Quantités" />
+                <input v-model="inputStock"
+                  @change="(e) => setInputStock(e.target.value)"  type="number" placeholder="Quantités" />
                 <button @click="updateStocks" class="bouton-subpage">Envoyer</button>
                 <h3 class="restant-stock">Stock :</h3>
                 <p class="total-stock"> {{ subprod.total }} /{{ sub.stock }} {{ sub.unit }}</p>
@@ -18,6 +19,7 @@
 import { ref } from 'vue'
 import { doc, updateDoc, query } from "firebase/firestore";
 import { useToast } from 'vue-toastification'
+import { useState } from '../composable/state.js'
 
 
 
@@ -40,32 +42,36 @@ export default {
     setup(props) {
 
         const toast = useToast()
-        const subProductsArray = props.sub.subproduct
-        const subProductTitle = props.subproduct.title
-        const subProductTotal = props.subproduct.total
-        const inputStock = ref()
+        const subProductsArray = props.sub.subproducts
+        // const inputStock = ref(0)
         // const totalInput = ref([])
+        const [inputStock, setInputStock] = useState("");
 
 
         const updateStocks = async () => {
 
-            const stockQ = query(doc(db, "products", props.sub.id));
+            try {
+                const stockQ = query(doc(db, "products", props.sub.id));
 
-            await updateDoc(stockQ, {
+                await updateDoc(stockQ, {
 
-                subproducts: [
-                    {
-                        // title: subProductsArray.title,
-                        total: Math.max(0, props.subProductTotal - inputStock.value)
-                    }
-                ]
+                    subproducts: [
+                        {
+                            title: subProductsArray.title,
+                            total: Math.max(0, subProductsArray.total - inputStock)
+                        }
+                    ]
+
+                });
+                toast.success(" Vous avez retirer " + inputStock + "  " + props.sub.unit + " en longueur " + props.sub.name)
+
+                updateStocks ? inputStock = '' : inputStock = inputStock
+
+            } catch (error) {
+                 toast.error('Une erreur est survenue')
+            }
 
 
-
-            });
-            toast.success(" Vous avez retirer " + inputStock.value + "  " + props.sub.unit + " en longueur " + props.sub.name)
-
-            updateStocks ? inputStock.value = '' : inputStock.value = inputStock.value
 
         }
 
@@ -73,6 +79,7 @@ export default {
 
         return {
             inputStock,
+            setInputStock,
             updateStocks,
             // totalInput
         }

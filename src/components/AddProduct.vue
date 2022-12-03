@@ -26,7 +26,7 @@
                 <input v-model="addName" type="text" placeholder="*Nom">
                 <input v-model="addImage" type="text" placeholder="*Image">
                 <h3>Ajouter les sous produits</h3>
-                <div v-for="item in subproducts" class="wrap__input-subproducts">
+                <div v-for="item in subproducts" :key="item" class="wrap__input-subproducts">
 
                     <input v-model="item.title" type="text"  placeholder="*Titre sous produits">
                     <input v-model="item.total" type="number"  placeholder="*Totale">
