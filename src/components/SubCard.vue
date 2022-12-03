@@ -3,12 +3,7 @@
         <div class="sub-card">
             <div v-for="(subprod, index) in subproduct" :key="index" class="sub-wrap">
                 <h2 class="title-subpage">{{ subprod.title }} : </h2>
-                <div class="test" v-for="(item, i) in items" :key="item.total">
-
-                    <input v-model="inputStock" @change="(e) => handlerChange(e, i)" name="total" type="number"
-                        placeholder="Quantités" />
-
-                </div>
+                <input v-model="inputStock" name="total" type="number" placeholder="Quantités" />
                 <button @click="updateStocks" class="bouton-subpage">Envoyer</button>
                 <h3 class="restant-stock">Stock :</h3>
                 <p class="total-stock"> {{ subprod.total }} /{{ sub.stock }} {{ sub.unit }}</p>
@@ -23,7 +18,6 @@
 import { ref } from 'vue'
 import { doc, updateDoc, query } from "firebase/firestore";
 import { useToast } from 'vue-toastification'
-import { useState } from '../composable/state';
 
 
 
@@ -46,18 +40,11 @@ export default {
     setup(props) {
 
         const toast = useToast()
-        const subProductsArray = props.sub.subproducts
-        const inputStock = ref(0)
-        const [items, setItems] = useState([])
-
-        const handlerChange = (event, i) => {
-            const { name, value } = event.target
-            const list = [...items]
-            list[i][name] = value
-            setItems(list)
-        }
-
-        console.log((e) => handlerChange(e, i))
+        const subProductsArray = props.sub.subproduct
+        const subProductTitle = props.subproduct.title
+        const subProductTotal = props.subproduct.total
+        const inputStock = ref()
+        // const totalInput = ref([])
 
 
         const updateStocks = async () => {
@@ -66,11 +53,12 @@ export default {
 
             await updateDoc(stockQ, {
 
-                subproducts: [{
-
-                    title: subProducts[0].title,
-                    total: Math.max(0, subProductsArray[0].total - inputStock.value)
-                }]
+                subproducts: [
+                    {
+                        // title: subProductsArray.title,
+                        total: Math.max(0, props.subProductTotal - inputStock.value)
+                    }
+                ]
 
 
 
@@ -86,8 +74,7 @@ export default {
         return {
             inputStock,
             updateStocks,
-            handlerChange,
-            items
+            // totalInput
         }
     }
 }
