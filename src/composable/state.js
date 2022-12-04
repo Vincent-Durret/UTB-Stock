@@ -1,5 +1,5 @@
 import { ref, readonly } from "vue";
-const state = ref([]);
+const state = ref("");
 export function useState(initialState) {
   state.value = initialState;
   const setState = (newState) => {

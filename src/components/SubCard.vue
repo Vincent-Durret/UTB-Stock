@@ -3,8 +3,7 @@
         <div class="sub-card">
             <div v-for="(subprod, index) in subproduct" :key="index" class="sub-wrap">
                 <h2 class="title-subpage">{{ subprod.title }} : </h2>
-                <input :value="inputStock"
-                  @change="(e) => setInputStock(e.target.value)"  type="number" placeholder="Quantités" />
+                <input v-model="inputStock" type="number" placeholder="Quantités" />
                 <button @click="updateStocks" class="bouton-subpage">Envoyer</button>
                 <h3 class="restant-stock">Stock :</h3>
                 <p class="total-stock"> {{ subprod.total }} /{{ sub.stock }} {{ sub.unit }}</p>
@@ -16,7 +15,7 @@
 
 
 <script>
-import { ref } from 'vue'
+import { ref, reactive } from 'vue'
 import { doc, updateDoc, query } from "firebase/firestore";
 import { useToast } from 'vue-toastification'
 import { useState } from '../composable/state.js'
@@ -42,34 +41,37 @@ export default {
     setup(props) {
 
         const toast = useToast()
-        const subProductsArray = props.sub.subproducts
-        // const inputStock = ref(0)
-        // const totalInput = ref([])
-        const [inputStock, setInputStock] = useState("");
+        const subProductArrayTitle = props.subproduct.title
+        const subProductsArrayTotal = props.subproduct.total
+        const inputStock = ref(0)
+
+
+
+        console.log(subProductArrayTitle)
 
 
         const updateStocks = async () => {
 
             try {
-                const stockQ = query(doc(db, "products", props.sub.id));
+                const stockQ = doc(db, "products", props.sub.id);
 
                 await updateDoc(stockQ, {
 
                     subproducts: [
                         {
-                            title: subProductsArray.title,
-                            total: Math.max(0, subProductsArray.total - inputStock)
+                            title: subProductArrayTitle,
+                            total: Math.max(0, subProductsArrayTotal - inputStock.value)
                         }
                     ]
 
                 });
-                toast.success(" Vous avez retirer " + inputStock + "  " + props.sub.unit + " en longueur " + props.sub.name)
+                // toast.success(" Vous avez retirer " + test.value + " " + props.sub.unit )
 
-                updateStocks ? inputStock = '' : inputStock = inputStock
+                // updateStocks ? inputStock.value = '' : inputStock.value = inputStock.value
 
             } catch (error) {
-                 toast.error('Une erreur est survenue')
-                 console.log(error)
+                toast.error('Une erreur est survenue')
+                console.log(error)
             }
 
 
@@ -80,9 +82,8 @@ export default {
 
         return {
             inputStock,
-            setInputStock,
             updateStocks,
-            // totalInput
+            subProductsArrayTotal,
         }
     }
 }
