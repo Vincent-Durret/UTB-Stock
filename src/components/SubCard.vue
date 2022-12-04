@@ -3,7 +3,7 @@
         <div class="sub-card">
             <div v-for="(subprod, index) in subproduct" :key="index" class="sub-wrap">
                 <h2 class="title-subpage">{{ subprod.title }} : </h2>
-                <input v-model="inputStock"
+                <input :value="inputStock"
                   @change="(e) => setInputStock(e.target.value)"  type="number" placeholder="Quantités" />
                 <button @click="updateStocks" class="bouton-subpage">Envoyer</button>
                 <h3 class="restant-stock">Stock :</h3>
@@ -69,6 +69,7 @@ export default {
 
             } catch (error) {
                  toast.error('Une erreur est survenue')
+                 console.log(error)
             }
 
 
