@@ -182,8 +182,8 @@ export default {
 	justify-content: center;
 	flex-direction: column-reverse;
 	align-items: center;
-	position:relative;
-	z-index: 1;
+	// position:relative;
+	// z-index: 1;
 
 	// &:active {
 	//     transform: translateY(-2rem);
@@ -193,6 +193,8 @@ export default {
 	.card {
 		display: flex;
 		transition: 0.5s;
+		position: relative;
+		z-index: 1;
 	}
 
 	.wrap-edit {

@@ -8,7 +8,7 @@
     </div>
     <Search />
     <div class="cards-grid">
-      <Card :style="styleObject" v-for="(product, index) in products" :sub="product.subproducts" :card="product" :index="index" :key="product.id" />
+      <Card  v-for="product in products" :sub="product.subproducts" :card="product" :key="product.id" />
     </div>
   </main>
 </template>
@@ -32,13 +32,6 @@ export default {
     Card,
     Search
   },
-  data() {
-  return {
-    styleObject: {
-      background: 'red'
-    }
-  }
-},
   methods: {
     goHome() {
       this.$router.push('/')
