@@ -3,7 +3,7 @@
         <div class="sub-card">
             <div v-for="(subprod, index) in subproduct" :key="index" class="sub-wrap">
                 <h2 class="title-subpage">{{ subprod.title }} : </h2>
-                <input v-model="inputStock" type="number" placeholder="Quantités" />
+                <input  type="number" placeholder="Quantités" />
                 <button @click="updateStocks" class="bouton-subpage">Envoyer</button>
                 <h3 class="restant-stock">Stock :</h3>
                 <p class="total-stock"> {{ subprod.total }} /{{ sub.stock }} {{ sub.unit }}</p>
@@ -15,8 +15,8 @@
 
 
 <script>
-import { ref, reactive } from 'vue'
-import { doc, updateDoc, query } from "firebase/firestore";
+import { ref, onMounted } from 'vue'
+import { doc, updateDoc, query, collection, onSnapshot } from "firebase/firestore";
 import { useToast } from 'vue-toastification'
 import { useState } from '../composable/state.js'
 
@@ -41,13 +41,29 @@ export default {
     setup(props) {
 
         const toast = useToast()
-        const subProductArrayTitle = props.subproduct.title
-        const subProductsArrayTotal = props.subproduct.total
-        const inputStock = ref(0)
+        // const inputStock = ref(0)
 
 
 
-        console.log(subProductArrayTitle)
+        // console.log(subProductArrayTitle)
+
+        const products = ref([]);
+
+        onMounted(async () => {
+            // const route = useRoute()
+
+            const q = collection(db, "products", props.sub.id, "subproducts");
+
+            onSnapshot(q, (querySnapshot) => {
+                const fetchedProducts = [];
+
+                querySnapshot.forEach((doc) => {
+                    fetchedProducts.push({ id: doc.id, ...doc.data() })
+                })
+                products.value = fetchedProducts
+                console.log(products.value)
+            });
+        })
 
 
         const updateStocks = async () => {
@@ -81,9 +97,9 @@ export default {
 
 
         return {
-            inputStock,
+            // inputStock,
             updateStocks,
-            subProductsArrayTotal,
+            // subProductsArrayTotal,
         }
     }
 }

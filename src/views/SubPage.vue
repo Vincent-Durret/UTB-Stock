@@ -30,7 +30,7 @@ export default {
 
         onMounted(() => {
             const route = useRoute()
-            const q = query(collection(db, "products"), where("name", "==", route.params.title))
+            const q = query(collection(db, "products"),  where("name", "==", route.params.title))
 
 
             onSnapshot(q, (querySnapshot) => {
