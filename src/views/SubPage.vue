@@ -15,7 +15,7 @@
 <script>
 import SubCard from '../components/SubCard.vue';
 import { useRoute } from "vue-router"
-import { collection, query, where, onSnapshot } from 'firebase/firestore'
+import { collection, query, orderBy, onSnapshot, doc } from 'firebase/firestore'
 import { db } from '../Firebase/firebase.js'
 import { ref, onMounted } from 'vue';
 export default {
@@ -30,7 +30,7 @@ export default {
 
         onMounted(() => {
             const route = useRoute()
-            const q = query(collection(db, "products", route.params.id, "subproducts"))
+            const q = query(collection(db, "products", route.params.id, "subproducts"), orderBy("title", "desc"))
 
 
             onSnapshot(q, (querySnapshot) => {

@@ -82,15 +82,6 @@ export default {
 
 
         console.log(subproducts.value)
-        // const [subproducts, setSubProducts] = useState([])
-
-        // console.log(this.subproducts)
-
-        // const addItem = () => {
-        //     setSubProducts([...subproducts, { title: addTitle.value, total: addTotal.value }])
-        // }
-
-        // console.log(addItem())
 
 
         const addProducts = async () => {
@@ -98,7 +89,6 @@ export default {
                 category: addCategory.value,
                 name: addName.value,
                 image: addImage.value,
-                subproducts: subproducts.value,
                 stock: addStock.value,
                 unit: addUnit.value,
             });

@@ -60,14 +60,6 @@
 				</datalist>
 				<input v-model="updateStock" type="number" :placeholder=card.stock>
 				<input v-model="updateUnit" type="text" :placeholder=card.unit>
-				<h3>Mettre a jour les sous produits</h3>
-				<div class="wrap__subproducts" v-for="subproduct of sub " :key="subproduct">
-
-					<input type="text" v-model.lazy="updateTitle" name="title" :placeholder="subproduct.title">
-					<input v-model="updateTotal" type="number" name="total" :placeholder="subproduct.total">
-				</div>
-
-
 				<button @click="updateProducts">Modifier le produit</button>
 			</div>
 		</div>
@@ -118,12 +110,6 @@ export default {
 					category: updateCategory.value,
 					name: updateName.value,
 					image: updateImage.value,
-					subproducts: [
-						{
-							title: updateTitle.value,
-							total: updateTotal.value,
-						}
-					],
 					stock: updateStock.value,
 					unit: updateUnit.value
 				});
@@ -412,6 +398,7 @@ export default {
 			background: var(--black);
 			z-index: 15;
 			border-radius: 5px;
+			width: 400px;
 
 			// @media (max-width: 768px) {
 			// 	left: 20.5%;

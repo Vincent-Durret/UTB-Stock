@@ -16,21 +16,15 @@
             </div>
 
             <h3>Ajouter un sous produit</h3>
-            <div class="forms">
-                <select v-model="addTitle" name="product-title" required>
+            <div  class="forms">
+                <select required>
                     <option value="" disabled selected hidden>Choisir une catégorie</option>
-                    <optgroup label="Bois">
-                        <option value="Itauba">Itauba</option>
-                        <option value="Structure">Structure</option>
-                        <option value="Ipé">Ipé</option>
-                        <option value="Cumaru">Cumaru</option>
+                    <optgroup v-for="productc in products" :key="productc.id" :label="productc.category">
+                        <option > {{ productc.name }}</option>
                     </optgroup>
                 </select>
-                <input v-model="addTitle" type="text" placeholder="Si categorie inexistante a remplir">
-                <input v-model="addName" type="text" placeholder="*Nom">
+                <input v-model="addTitle" type="text">
                 <input v-model="addTotal" type="number" placeholder="*Totale">
-                <input v-model="addStock" type="number" placeholder="*Stock">
-                <input v-model="addUnit" type="text" placeholder="*Unités">
                 <button @click="addSubProducts">Créer le sous produit</button>
             </div>
         </div>
@@ -38,10 +32,12 @@
 </template>
 
 <script>
-import { ref } from 'vue'
-import { collection, addDoc } from "firebase/firestore";
+import { ref, onMounted } from 'vue'
+import { collection, addDoc, query, onSnapshot, orderBy, doc } from "firebase/firestore";
 import { db } from '../Firebase/firebase.js'
 import { useToast } from 'vue-toastification'
+import { useRoute } from "vue-router"
+
 export default {
     name: "AddSubProduct",
     data() {
@@ -54,36 +50,46 @@ export default {
         const toast = useToast()
 
         const addTitle = ref('')
-        const addName = ref('')
         const addTotal = ref()
-        const addStock = ref()
-        const addUnit = ref('')
+
+        const products = ref([]);
+
+        onMounted(async () => {
+
+            const q = query(collection(db, "products"), orderBy("category", "asc"))
+
+            onSnapshot(q, (querySnapshot) => {
+                const fetchedProducts = [];
+
+                querySnapshot.forEach((doc) => {
+                    fetchedProducts.push({ id: doc.id, ...doc.data() })
+                })
+                products.value = fetchedProducts
+            });
+        })
 
         const addSubProducts = async () => {
-            await addDoc(collection(db, "products"), {
+            const route = useRoute()
+            await addDoc(doc(db, "products", route.params.id, "subproducts"), {
                 title: addTitle.value,
-                name: addName.value,
                 total: addTotal.value,
-                stock: addStock.value,
-                unit: addUnit.value,
+
             });
             toast.success("Sous produit créer avec succes")
             addSubProducts ? addTitle.value = '' : addTitle.value = addTitle.value
             addSubProducts ? addTotal.value = '' : addTotal.value = addTotal.value
-            addSubProducts ? addName.value = '' : addName.value = addName.value
-            addSubProducts ? addStock.value = '' : addStock.value = addStock.value
-            addSubProducts ? addUnit.value = '' : addUnit.value = addUnit.value
 
         }
 
 
+
+
+
         return {
             addTitle,
-            addName,
             addTotal,
-            addStock,
-            addUnit,
-            addSubProducts
+            products,
+            addSubProducts,
         }
     }
 

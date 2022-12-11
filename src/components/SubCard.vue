@@ -6,8 +6,8 @@
                 <input v-model="inputStock" type="number" placeholder="Quantités" />
                 <button @click="updateStocks" class="bouton-subpage">Envoyer</button>
                 <h3 class="restant-stock">Stock :</h3>
-                <p class="total-stock"> {{ sub.total }} / {{ $route.params.unit }} </p>
-                <p> {{ totalMeters }}</p>
+                <p class="total-stock"> {{ sub.total }} {{ $route.params.unit }} </p>
+                <p> {{ totalMeters }} m2</p>
 
 
             </div>
@@ -43,44 +43,14 @@ export default {
     setup(props) {
 
         const toast = useToast()
-        // const products = ref([]);
         const inputStock = ref()
         const route = useRoute()
 
-
-
-        const totalMeters = props.sub.total * props.sub.areameters
-
+        const areaMeters = props.sub.areameters
 
 
 
-
-
-        // console.log(subProductArrayTitle)
-
-
-        // onMounted(async () => {
-        //     // const route = useRoute()
-
-        //     const q = collection(db, "products", props.sub.id, "subproducts");
-
-        //     onSnapshot(q, (querySnapshot) => {
-        //         const fetchedProducts = [];
-
-        //         querySnapshot.forEach((doc) => {
-        //             fetchedProducts.push({ id: doc.id, ...doc.data() })
-        //         })
-        //         products.value = fetchedProducts
-
-        //     });
-
-        // })
-
-
-
-
-        // console.log(products.value)
-
+        const totalMeters = props.sub.total * areaMeters
 
         const updateStocks = async () => {
 
@@ -95,7 +65,7 @@ export default {
                     total: Math.max(0, props.sub.total - inputStock.value)
 
                 });
-                // toast.success(" Vous avez retirer " + test.value + " " + props.sub.unit )
+                toast.success(" Vous avez retirer " + inputStock.value + " " + route.params.unit )
 
                 updateStocks ? inputStock.value = '' : inputStock.value = inputStock.value
 
@@ -111,7 +81,6 @@ export default {
 
 
         return {
-            // products,
             inputStock,
             updateStocks,
             totalMeters
