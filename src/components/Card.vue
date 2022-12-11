@@ -2,7 +2,7 @@
 	<div class="products-card">
 		<div class="card">
 			<router-link class="button"
-				:to="{ name: 'SubPage', params: { id: card.id, category: card.category, title: card.name } }">
+				:to="{ name: 'SubPage', params: { id: card.id, category: card.category, name: card.name , unit: card.unit } }">
 				<!-- @click="$router.push(`/${card.category}/${card.id}`)"> -->
 				<div :style="{ backgroundImage: `url(${card.image})` }" class="image"></div>
 				<span class="text">{{ card.name }}</span>
@@ -87,7 +87,6 @@ export default {
 	name: "Card",
 	props: {
 		card: Object,
-		sub: Array,
 	},
 	data() {
 		return {
@@ -108,7 +107,6 @@ export default {
 		const updateUnit = ref('')
 
 
-		const subProductTotal = props.sub
 
 
 		// const totalAmount = subProductTotal.reduce((acc, curr) => acc + curr.total, 0)

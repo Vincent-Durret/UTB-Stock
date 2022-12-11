@@ -1,12 +1,14 @@
 <template>
     <div class="subpage">
         <div class="sub-card">
-            <div v-for="(subprod, index) in subproduct" :key="index" class="sub-wrap">
-                <h2 class="title-subpage">{{ subprod.title }} : </h2>
-                <input  type="number" placeholder="Quantités" />
+            <div class="sub-wrap">
+                <h2 class="title-subpage">{{ sub.title }} : </h2>
+                <input v-model="inputStock" type="number" placeholder="Quantités" />
                 <button @click="updateStocks" class="bouton-subpage">Envoyer</button>
                 <h3 class="restant-stock">Stock :</h3>
-                <p class="total-stock"> {{ subprod.total }} /{{ sub.stock }} {{ sub.unit }}</p>
+                <p class="total-stock"> {{ sub.total }} / {{ $route.params.unit }} </p>
+                <p> {{ totalMeters }}</p>
+
 
             </div>
         </div>
@@ -15,10 +17,11 @@
 
 
 <script>
-import { ref, onMounted } from 'vue'
-import { doc, updateDoc, query, collection, onSnapshot } from "firebase/firestore";
+import { ref } from 'vue'
+import { doc, updateDoc } from "firebase/firestore";
 import { useToast } from 'vue-toastification'
-import { useState } from '../composable/state.js'
+import { useRoute } from "vue-router"
+
 
 
 
@@ -28,7 +31,6 @@ export default {
     name: "SubCard",
     props: {
         sub: Object,
-        subproduct: Object,
     },
     data() {
         return {
@@ -41,49 +43,61 @@ export default {
     setup(props) {
 
         const toast = useToast()
-        // const inputStock = ref(0)
+        // const products = ref([]);
+        const inputStock = ref()
+        const route = useRoute()
+
+
+
+        const totalMeters = props.sub.total * props.sub.areameters
+
+
+
 
 
 
         // console.log(subProductArrayTitle)
 
-        const products = ref([]);
 
-        onMounted(async () => {
-            // const route = useRoute()
+        // onMounted(async () => {
+        //     // const route = useRoute()
 
-            const q = collection(db, "products", props.sub.id, "subproducts");
+        //     const q = collection(db, "products", props.sub.id, "subproducts");
 
-            onSnapshot(q, (querySnapshot) => {
-                const fetchedProducts = [];
+        //     onSnapshot(q, (querySnapshot) => {
+        //         const fetchedProducts = [];
 
-                querySnapshot.forEach((doc) => {
-                    fetchedProducts.push({ id: doc.id, ...doc.data() })
-                })
-                products.value = fetchedProducts
-                console.log(products.value)
-            });
-        })
+        //         querySnapshot.forEach((doc) => {
+        //             fetchedProducts.push({ id: doc.id, ...doc.data() })
+        //         })
+        //         products.value = fetchedProducts
+
+        //     });
+
+        // })
+
+
+
+
+        // console.log(products.value)
 
 
         const updateStocks = async () => {
 
+
+            const stockQ = doc(db, "products", route.params.id, "subproducts", props.sub.id);
+
             try {
-                const stockQ = doc(db, "products", props.sub.id);
+                // const totalRef = products.value.map(...products)
 
                 await updateDoc(stockQ, {
 
-                    subproducts: [
-                        {
-                            title: subProductArrayTitle,
-                            total: Math.max(0, subProductsArrayTotal - inputStock.value)
-                        }
-                    ]
+                    total: Math.max(0, props.sub.total - inputStock.value)
 
                 });
                 // toast.success(" Vous avez retirer " + test.value + " " + props.sub.unit )
 
-                // updateStocks ? inputStock.value = '' : inputStock.value = inputStock.value
+                updateStocks ? inputStock.value = '' : inputStock.value = inputStock.value
 
             } catch (error) {
                 toast.error('Une erreur est survenue')
@@ -97,9 +111,10 @@ export default {
 
 
         return {
-            // inputStock,
+            // products,
+            inputStock,
             updateStocks,
-            // subProductsArrayTotal,
+            totalMeters
         }
     }
 }

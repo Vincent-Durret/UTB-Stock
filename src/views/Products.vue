@@ -8,7 +8,7 @@
     </div>
     <Search />
     <div class="cards-grid">
-      <Card  v-for="product in products" :sub="product.subproducts" :card="product" :key="product.id" />
+      <Card  v-for="product in products" :card="product" :key="product.id" />
     </div>
   </main>
 </template>
@@ -24,7 +24,6 @@ import { collection, query, where,  onSnapshot } from 'firebase/firestore'
 
 import { db } from '../Firebase/firebase.js'
 import Search from '../components/Search.vue';
-import { relative } from 'path';
 
 export default {
   name: 'Products',
