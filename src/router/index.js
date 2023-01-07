@@ -1,61 +1,65 @@
-
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
 import Connexion from '../views/Connexion.vue'
 
-import { auth } from '../Firebase/firebase.js'
+// import PageNotFound from '../components/PageNotFound.vue'
+
+// import { auth } from '../Firebase/firebase.js'
 
 const routes = [
   {
-    path: "/",
+    path: '/',
     component: Home,
-    meta: {
-      requiresAuth: true,
-    },
   },
   {
-    path: "/:category",
-    component: () => import("../views/Products.vue"),
-    name: "Products",
-    meta: {
-      requiresAuth: true,
-    },
+    path: '/:category',
+    component: () => import('../views/Products.vue'),
+    name: 'Products',
+    // meta: {
+    //   requiresAuth: true,
+    // },
   },
   {
-    path: "/:category/:name",
-    component: () => import("../views/SubPage.vue"),
-    name: "SubPage",
-    meta: {
-      requiresAuth: true,
-    },
-    
+    path: '/:category/:name',
+    component: () => import('../views/SubPage.vue'),
+    name: 'SubPage',
+    // meta: {
+    //   requiresAuth: true,
+    // },
   },
+  // {
+  //   path: '/:pathMatch(.*)*',
+  //   name: 'NotFound',
+  //   component: PageNotFound,
+  // },
 
   {
-    path: "/connexion",
-    name: "Connexion",
-    component: Connexion
+    path: '/connexion',
+    name: 'Connexion',
+    component: Connexion,
   },
 ]
 
 const router = createRouter({
   history: createWebHistory(),
-  routes
+  routes,
 })
 
-router.beforeEach((to, from, next) => {
-  if (to.path === '/connexion' && auth.currentUser) {
-    next('/')
-    return;
-  }
+// router.beforeEach((to, from, next) => {
+//   if (to.path === '/connexion' && auth.currentUser) {
+//     next('/')
+//     return
+//   }
 
-  if (to.matched.some(record => record.meta.requiresAuth) && !auth.currentUser) {
-    next()
-    return;
-  }
+//   if (
+//     to.matched.some((record) => record.meta.requiresAuth) &&
+//     !auth.currentUser
+//   ) {
+//     next()
+//     return
+//   }
 
-  next();
-})
+//   next()
+// })
 
 export default router
-

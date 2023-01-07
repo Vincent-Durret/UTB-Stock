@@ -4,28 +4,6 @@ const info_bois = [
     category: 'bois',
     name: 'itauba',
     image: './assets/Bois/itauba.jpg',
-    subproducts: [
-      {
-        title: '95',
-        total: 1000,
-      },
-
-      {
-        title: '125',
-        total: 1000,
-      },
-
-      {
-        title: '155',
-        total: 1000,
-      },
-
-      {
-        title: '185',
-        total: 1000,
-      },
-    ],
-
     stock: 4000,
     unit: 'm²',
   },
@@ -33,27 +11,6 @@ const info_bois = [
     category: 'bois',
     name: 'ipé',
     image: './assets/Bois/ipe.jpg',
-    subproducts: [
-      {
-        title: '95',
-        total: 1000,
-      },
-
-      {
-        title: '125',
-        total: 1000,
-      },
-
-      {
-        title: '155',
-        total: 1000,
-      },
-
-      {
-        title: '185',
-        total: 1000,
-      },
-    ],
     stock: 4000,
     unit: 'm²',
   },
@@ -61,27 +18,6 @@ const info_bois = [
     category: 'bois',
     name: 'cumaru',
     image: './assets/Bois/cumaru.jpg',
-    subproducts: [
-      {
-        title: '95',
-        total: 1000,
-      },
-
-      {
-        title: '125',
-        total: 1000,
-      },
-
-      {
-        title: '155',
-        total: 1000,
-      },
-
-      {
-        title: '185',
-        total: 1000,
-      },
-    ],
     stock: 4000,
     unit: 'm²',
   },
@@ -89,12 +25,6 @@ const info_bois = [
     category: 'bois',
     name: 'structure',
     image: './assets/Bois/Structure.jpg',
-    subproducts: [
-      {
-        title: '200',
-        total: 1000,
-      },
-    ],
     stock: 1000,
     unit: 'm²',
   },

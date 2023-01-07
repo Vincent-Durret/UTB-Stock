@@ -25,7 +25,7 @@
                 </select>
                 <input v-model="addTitle" type="text">
                 <input v-model="addTotal" type="number" placeholder="*Totale">
-                <button @click="addSubProducts">Créer le sous produit</button>
+                <button @click="addSubProducts()">Créer le sous produit</button>
             </div>
         </div>
     </div>
@@ -70,7 +70,7 @@ export default {
 
         const addSubProducts = async () => {
             const route = useRoute()
-            await addDoc(doc(db, "products", route.params.id, "subproducts"), {
+            await addDoc(collection(db, "products", route.params.id, "subproducts"), {
                 title: addTitle.value,
                 total: addTotal.value,
 

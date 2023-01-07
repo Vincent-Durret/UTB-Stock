@@ -2,11 +2,11 @@
 	<div class="products-card">
 		<div class="card">
 			<router-link class="button"
-				:to="{ name: 'SubPage', params: { id: card.id, category: card.category, name: card.name , unit: card.unit } }">
+				:to="{ name: 'SubPage', params: { id: card.id, category: card.category, name: card.name, unit: card.unit } }">
 				<!-- @click="$router.push(`/${card.category}/${card.id}`)"> -->
 				<div :style="{ backgroundImage: `url(${card.image})` }" class="image"></div>
 				<span class="text">{{ card.name }}</span>
-				<h3 class="total">  {{ card.stock }} {{ card.unit }} </h3>
+				<h3 v-for="prod in products" :key="prod.total" class="total">{{ prod.total }} {{ card.stock }} {{ card.unit }} </h3>
 			</router-link>
 			<div class="wrap-edit">
 				<span @click="isOpen = !isOpen" class="material-icons edit">
@@ -67,11 +67,10 @@
 </template>
 
 <script>
-import { ref } from 'vue';
-import { doc, deleteDoc, updateDoc } from "firebase/firestore";
+import { ref, onMounted } from 'vue';
+import { doc, deleteDoc, updateDoc, collection, query, onSnapshot} from "firebase/firestore";
 import { db } from '../Firebase/firebase.js'
-
-
+// import { useRoute } from "vue-router"
 import { useToast } from 'vue-toastification'
 
 
@@ -97,10 +96,38 @@ export default {
 		const updateTotal = ref(0)
 		const updateStock = ref(0)
 		const updateUnit = ref('')
+		const products = ref([])
+        // const route = useRoute()
 
 
 
 
+
+		onMounted(async () => {
+			const q = query(collection(db, "products", props.card.id, "subproducts"))
+
+			onSnapshot(q, (querySnapshot) => {
+				const fetchedProducts = [];
+
+				querySnapshot.forEach((doc) => {
+					fetchedProducts.push({ id: doc.id, ...doc.data() })
+					// console.log(doc.id)
+				})
+				products.value = fetchedProducts
+				console.log(products.value)
+			});
+
+			// const querySnapshot = await getDocs(q);
+			// const fetchedProducts = [];
+			// querySnapshot.forEach((doc) => {
+			//     // doc.data() is never undefined for query doc snapshots
+			//     fetchedProducts.push({ id: doc.id, ...doc.data() })
+			// });
+
+			// products.value = fetchedProducts
+		})
+
+		// const subProductTotal = products.value.total
 		// const totalAmount = subProductTotal.reduce((acc, curr) => acc + curr.total, 0)
 
 		const updateProducts = async () => {
@@ -153,6 +180,7 @@ export default {
 			updateUnit,
 			updateProducts,
 			deleteProduct,
+			products,
 			// totalAmount,
 		}
 	}
