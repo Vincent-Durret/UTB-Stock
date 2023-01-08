@@ -3,10 +3,9 @@
 		<div class="card">
 			<router-link class="button"
 				:to="{ name: 'SubPage', params: { id: card.id, category: card.category, name: card.name, unit: card.unit } }">
-				<!-- @click="$router.push(`/${card.category}/${card.id}`)"> -->
 				<div :style="{ backgroundImage: `url(${card.image})` }" class="image"></div>
 				<span class="text">{{ card.name }}</span>
-				<h3 v-for="prod in products" :key="prod.total" class="total">{{ prod.total }} {{ card.stock }} {{ card.unit }} </h3>
+				<h3 v-for="prod in products" :key="prod" class="total">{{ prod.total }} {{ card.stock }} {{ card.unit }} </h3>
 			</router-link>
 			<div class="wrap-edit">
 				<span @click="isOpen = !isOpen" class="material-icons edit">
@@ -68,9 +67,8 @@
 
 <script>
 import { ref, onMounted } from 'vue';
-import { doc, deleteDoc, updateDoc, collection, query, onSnapshot} from "firebase/firestore";
+import { doc, deleteDoc, updateDoc, collection, query, onSnapshot } from "firebase/firestore";
 import { db } from '../Firebase/firebase.js'
-// import { useRoute } from "vue-router"
 import { useToast } from 'vue-toastification'
 
 
@@ -79,16 +77,12 @@ export default {
 	props: {
 		card: Object,
 	},
-	data() {
-		return {
-			isOpen: false,
-			openUpdate: false,
-			openDeleteModal: false,
-		}
-	},
 
 	setup(props) {
 		const toast = useToast()
+		const isOpen = ref(false)
+		const openUpdate = ref(false)
+		const openDeleteModal = ref(false)
 		const updateCategory = ref('')
 		const updateName = ref('')
 		const updateImage = ref('')
@@ -97,7 +91,7 @@ export default {
 		const updateStock = ref(0)
 		const updateUnit = ref('')
 		const products = ref([])
-        // const route = useRoute()
+
 
 
 
@@ -111,24 +105,18 @@ export default {
 
 				querySnapshot.forEach((doc) => {
 					fetchedProducts.push({ id: doc.id, ...doc.data() })
-					// console.log(doc.id)
+					// console.log(doc.data())
 				})
 				products.value = fetchedProducts
-				console.log(products.value)
 			});
-
-			// const querySnapshot = await getDocs(q);
-			// const fetchedProducts = [];
-			// querySnapshot.forEach((doc) => {
-			//     // doc.data() is never undefined for query doc snapshots
-			//     fetchedProducts.push({ id: doc.id, ...doc.data() })
-			// });
-
-			// products.value = fetchedProducts
 		})
 
-		// const subProductTotal = products.value.total
-		// const totalAmount = subProductTotal.reduce((acc, curr) => acc + curr.total, 0)
+		// const totalAmount = products.value.reduce((acc, curr) => acc + curr.total, 0)
+
+		// const test = ref(totalAmount)
+
+		// console.log(test.value)
+
 
 		const updateProducts = async () => {
 			const stockQ = doc(db, "products", props.card.id);
@@ -171,6 +159,9 @@ export default {
 		}
 
 		return {
+			isOpen,
+			openUpdate,
+			openDeleteModal,
 			updateCategory,
 			updateName,
 			updateImage,
@@ -181,6 +172,7 @@ export default {
 			updateProducts,
 			deleteProduct,
 			products,
+			// test
 			// totalAmount,
 		}
 	}
@@ -418,7 +410,6 @@ export default {
 			border: 3px solid var(--logo-letters);
 			display: flex;
 			flex-direction: column;
-			overflow-y: scroll;
 			top: 50%;
 			left: 50%;
 			transform: translate(-50%, -50%);

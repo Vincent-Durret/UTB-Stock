@@ -1,6 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
 import Connexion from '../views/Connexion.vue'
+import Products from '../views/Products.vue'
+import SubPage from '../views/SubPage.vue'
 
 // import PageNotFound from '../components/PageNotFound.vue'
 
@@ -13,7 +15,7 @@ const routes = [
   },
   {
     path: '/:category',
-    component: () => import('../views/Products.vue'),
+    component: Products,
     name: 'Products',
     // meta: {
     //   requiresAuth: true,
@@ -21,7 +23,7 @@ const routes = [
   },
   {
     path: '/:category/:name',
-    component: () => import('../views/SubPage.vue'),
+    component: SubPage,
     name: 'SubPage',
     // meta: {
     //   requiresAuth: true,

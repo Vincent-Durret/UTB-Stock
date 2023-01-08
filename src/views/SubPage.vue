@@ -3,16 +3,32 @@
         <div class="return">
             <span @click="$router.back()" class="material-icons">arrow_back</span>
         </div>
+
         <div class="wrap-titre">
             <h1> {{ $route.params.name.replace(/(?:^|\s|-)\S/g, x => x.toUpperCase()) }} </h1>
         </div>
-        <form class="addproduct">
-            <input class="addprod__input" v-model="addTitleRef" type="text" name="Title"
-                placeholder="Nom de la fourniture">
-            <input v-model="addTotalRef" type="number" name="Total" placeholder="Quantitée(s)">
-        </form>
 
-        <button @click="addSubCollection()">Valider</button>
+        <div class="subpage__add-sub">
+            <span @click="openFormSub = !openFormSub" class="material-icons add">
+                add_circle
+            </span>
+        </div>
+
+        <div v-if="openFormSub" class="subcard__forms-wrap">
+            <div class="subcard__forms">
+                <div class="subcard__forms-close">
+                    <span @click="openFormSub = !openFormSub" class="material-icons close">
+                        cancel
+                    </span>
+                </div>
+                <h3 class="subcard__forms-title">Ajouter une fourniture</h3>
+                <input class="addprod__input" v-model="addTitleRef" type="text" name="Title"
+                    placeholder="Nom de la fourniture">
+                <input v-model="addTotalRef" type="number" name="Total" placeholder="Quantitée(s)">
+                <button @click="addSubCollection()">Valider</button>
+            </div>
+        </div>
+
 
 
         <div class="wrap-card">
@@ -24,7 +40,7 @@
 <script>
 import SubCard from '../components/SubCard.vue';
 import { useRoute } from "vue-router"
-import { collection, query, onSnapshot, addDoc, getDocs } from 'firebase/firestore'
+import { collection, query, onSnapshot, addDoc } from 'firebase/firestore'
 import { db } from '../Firebase/firebase.js'
 import { ref, onMounted } from 'vue';
 import { useToast } from 'vue-toastification'
@@ -37,10 +53,11 @@ export default {
 
     setup() {
         const route = useRoute()
+        const toast = useToast()
+        const openFormSub = ref(false)
         const addTitleRef = ref('')
         const addTotalRef = ref(0)
         const products = ref([]);
-        const toast = useToast()
 
         const addSubCollection = async () => {
             try {
@@ -51,13 +68,19 @@ export default {
                 console.log(docRef.id);
                 toast.success('Fourniture ajoutée')
 
+                addSubCollection ? addTitleRef.value = '' : addTitleRef.value = addTitleRef.value
+                addSubCollection ? addTotalRef.value = '' : addTotalRef.value = addTotalRef.value
+
+
+                openFormSub.value = false
+
             } catch (error) {
                 toast.error('Un probleme est survenue')
                 console.log(error)
             }
         }
 
-        onMounted(async () => {
+        onMounted( () => {
             const q = query(collection(db, "products", route.params.id, "subproducts"))
 
             onSnapshot(q, (querySnapshot) => {
@@ -82,6 +105,7 @@ export default {
         })
 
         return {
+            openFormSub,
             addTitleRef,
             addTotalRef,
             addSubCollection,
@@ -133,12 +157,112 @@ export default {
         z-index: 3;
     }
 
-    .addproduct {
+    .subpage__add-sub {
+
         display: flex;
-        align-items: center;
         justify-content: center;
-        flex-direction: column;
         margin-bottom: 1rem;
+
+        .add {
+            background: var(--black-alt);
+            padding: 0.5rem;
+            border-radius: 5px;
+            color: var((--light));
+            cursor: pointer;
+            border: 1px solid var(--logo-letters);
+            font-size: 3rem;
+
+
+            &:hover {
+                color: var(--logo-letters);
+                transform: translateY(-0.5rem) scale(1.1, 1.1);
+                transition: 0.2s ease-out;
+            }
+        }
+
+    }
+
+    .subcard__forms-wrap {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(9, 10, 17, 0.76);
+        z-index: 14;
+
+        .subcard__forms {
+            position: fixed;
+            border: 3px solid var(--logo-letters);
+            display: flex;
+            flex-direction: column;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            // padding: 1rem;
+            background: var(--black);
+            z-index: 15;
+            border-radius: 5px;
+            width: 400px;
+
+            .subcard__forms-close {
+
+                // margin-top: 1rem;
+                .close {
+                    position: relative;
+                    float: right;
+                    background: var(--light);
+                    color: var(--logo-letters);
+                    padding: 0.3rem;
+                    border-radius: 5px;
+                    transition: color 0.2s, transform 0.3s;
+                    cursor: pointer;
+
+                    &:hover {
+                        color: red;
+                        // transform: scale(1.1, 1.1);
+
+                        transition: 0.2s ease-out;
+                    }
+                }
+            }
+
+            .subcard__forms-title {
+                display: flex;
+                justify-content: center;
+                color: var(--light);
+                margin-top: 1rem;
+            }
+
+            input {
+                margin-top: 1rem;
+                margin: 1rem;
+                padding: 8px;
+                border: none;
+                color: black;
+                border-radius: 5px;
+                font-weight: bold;
+                font-size: 1rem;
+            }
+
+            button {
+                margin: 1rem;
+                background: var(--light);
+                padding: 1rem;
+                font-size: 1.3rem;
+                font-weight: bold;
+                transition: background 0.3s;
+                border-radius: 5px;
+
+                &:hover {
+                    background: var(--logo-letters);
+                    color: white;
+                }
+            }
+
+
+        }
+
     }
 
     .wrap-card {

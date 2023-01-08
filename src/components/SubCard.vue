@@ -86,6 +86,7 @@ export default {
 
 
 
+
         const updateStocks = async () => {
 
             const stockQ = doc(db, "products", route.params.id, "subproducts", props.sub.id);
@@ -111,19 +112,19 @@ export default {
 
         const updateProduct = async () => {
             const productQ = doc(db, "products", route.params.id, "subproducts", props.sub.id);
-            
-            
+
+
             try {
                 await updateDoc(productQ, {
                     title: updateTitleRef.value,
                     total: updateTotalRef.value,
                 });
-                
+
                 toast.success(" La fourniture a etait mis a jour")
-                
+
                 updateProduct ? updateTitleRef.value = '' : updateTitleRef.value = updateTitleRef.value
                 updateProduct ? updateTotalRef.value = '' : updateTotalRef.value = updateTotalRef.value
-                
+
                 openUpdate.value = false
 
             } catch (error) {
@@ -196,28 +197,6 @@ export default {
                 // line-height: 3.5rem;
             }
 
-            .test {
-
-                width: 100%;
-
-                input {
-                    border: none;
-                    // outline: none;
-                    height: 2rem;
-                    margin: 0.7rem;
-                    border-radius: 5px;
-
-                }
-
-                input[type=number]:focus {
-                    border: none;
-                    outline: none;
-                    transition: 0.2s;
-                    border-radius: 5px;
-
-
-                }
-            }
 
 
             .bouton-subpage {
@@ -339,7 +318,6 @@ export default {
             border: 3px solid var(--logo-letters);
             display: flex;
             flex-direction: column;
-            overflow-y: scroll;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
