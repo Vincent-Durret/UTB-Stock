@@ -3,6 +3,7 @@ import Home from '../views/Home.vue'
 import Connexion from '../views/Connexion.vue'
 import Products from '../views/Products.vue'
 import SubPage from '../views/SubPage.vue'
+import PageNotFound from '../components/PageNotFound.vue'
 
 // import PageNotFound from '../components/PageNotFound.vue'
 
@@ -17,28 +18,30 @@ const routes = [
     path: '/:category',
     component: Products,
     name: 'Products',
+    props: true,
     // meta: {
     //   requiresAuth: true,
     // },
   },
   {
-    path: '/:category/:name',
+    path: '/:category/:id',
     component: SubPage,
     name: 'SubPage',
+    props: true,
     // meta: {
     //   requiresAuth: true,
     // },
   },
-  // {
-  //   path: '/:pathMatch(.*)*',
-  //   name: 'NotFound',
-  //   component: PageNotFound,
-  // },
-
   {
     path: '/connexion',
     name: 'Connexion',
     component: Connexion,
+  },
+
+  {
+    path: '/:catchAll(.*)',
+    component: PageNotFound,
+    name: "NotFound",
   },
 ]
 

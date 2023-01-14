@@ -1,8 +1,8 @@
 <template>
-    <div class="not-found__page">
+    <main class="not-found__page">
         <h1 class="not-found__title">Erreur 404</h1>
         <h2 class="not-found__not-found">Page Non Touver</h2>
-    </div>
+    </main>
 </template>
 <script>
 export default {
@@ -17,7 +17,5 @@ export default {
         align-items: center;
         justify-content: center;
         flex-direction: column
-
-
     }
 </style>

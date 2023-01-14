@@ -1,11 +1,11 @@
 <template>
 	<div class="products-card">
 		<div class="card">
-			<router-link class="button"
-				:to="{ name: 'SubPage', params: { id: card.id, category: card.category, name: card.name, unit: card.unit } }">
+			<router-link class="button" :to="`/${card.category}/${card.id}`">
 				<div :style="{ backgroundImage: `url(${card.image})` }" class="image"></div>
 				<span class="text">{{ card.name }}</span>
-				<h3 v-for="prod in products" :key="prod" class="total">{{ prod.total }} {{ card.stock }} {{ card.unit }} </h3>
+				<h3 v-for="prod in products" :key="prod" class="total">{{ prod.total }} {{ card.stock }} {{ card.unit }}
+				</h3>
 			</router-link>
 			<div class="wrap-edit">
 				<span @click="isOpen = !isOpen" class="material-icons edit">
@@ -67,7 +67,7 @@
 
 <script>
 import { ref, onMounted } from 'vue';
-import { doc, deleteDoc, updateDoc, collection, query, onSnapshot } from "firebase/firestore";
+import { doc, deleteDoc, updateDoc, collection, query, onSnapshot, where } from "firebase/firestore";
 import { db } from '../Firebase/firebase.js'
 import { useToast } from 'vue-toastification'
 
@@ -91,10 +91,6 @@ export default {
 		const updateStock = ref(0)
 		const updateUnit = ref('')
 		const products = ref([])
-
-
-
-
 
 
 		onMounted(async () => {

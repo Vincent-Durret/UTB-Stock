@@ -7,7 +7,8 @@
                 <button @click="updateStocks()" class="bouton-subpage">Envoyer</button>
                 <h3 class="restant-stock">Stock :</h3>
                 <p class="total-stock"> {{ sub.total }} {{ $route.params.unit }} </p>
-                <p> {{ totalMeters }} m2</p>
+                <p v-if="sub.areameters"> {{ totalMeters }} m2</p>
+                <!-- <p v-else="">nope</p> -->
             </div>
         </div>
         <div class="wrap-edit">
@@ -24,7 +25,6 @@
             </span>
         </div>
         <div v-if="openUpdate" class="card__forms">
-
             <div class="forms">
                 <div class="wrap-close">
                     <span @click="openUpdate = !openUpdate" class="material-icons close">
@@ -77,9 +77,13 @@ export default {
         const updateTitleRef = ref('')
         const updateTotalRef = ref(0)
 
+        const totalMeters = ref()
+
         const areaMeters = props.sub.areameters
 
-        const totalMeters = props.sub.total * areaMeters
+        const calculMeters = props.sub.total * areaMeters
+
+        totalMeters.value = calculMeters
 
 
 

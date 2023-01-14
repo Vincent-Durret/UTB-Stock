@@ -43,7 +43,6 @@
                         <AddSubProduct />
                     </div>
                 </div>
-
             </div>
 
             <div class="flex"></div>
@@ -75,20 +74,19 @@ const is_expanded = ref(localStorage.getItem("is_expanded") === "true")
 const imgSrc = ref('../assets/Logo/logo2.png')
 
 
+
 const ToggleMenu = () => {
     is_expanded.value = !is_expanded.value
 
     imgSrc.value = is_expanded.value ? '../assets/Logo/logo-UTB-stock.png' : '../assets/Logo/logo2.png'
 
-    localStorage.getItem("is_expanded", is_expanded.value)
 }
+
 
 const closeMenu = () => {
-    is_expanded.value = false    
+    is_expanded.value = false
     imgSrc.value = is_expanded.value ? '../assets/Logo/logo-UTB-stock.png' : '../assets/Logo/logo2.png'
-
 }
-
 
 
 // const store = useStore()

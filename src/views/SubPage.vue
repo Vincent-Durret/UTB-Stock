@@ -5,7 +5,7 @@
         </div>
 
         <div class="wrap-titre">
-            <h1> {{ $route.params.name.replace(/(?:^|\s|-)\S/g, x => x.toUpperCase()) }} </h1>
+            <!-- <h1> test </h1> -->
         </div>
 
         <div class="subpage__add-sub">
@@ -14,18 +14,20 @@
             </span>
         </div>
 
-        <div v-if="openFormSub" class="subcard__forms-wrap">
-            <div class="subcard__forms">
-                <div class="subcard__forms-close">
+        <div v-if="openFormSub" class="app__forms-wrap">
+            <div class="app__forms">
+                <div class="app__forms-close">
                     <span @click="openFormSub = !openFormSub" class="material-icons close">
                         cancel
                     </span>
                 </div>
-                <h3 class="subcard__forms-title">Ajouter une fourniture</h3>
+                <h3 class="app__forms-title">Ajouter une fourniture</h3>
                 <input class="addprod__input" v-model="addTitleRef" type="text" name="Title"
                     placeholder="Nom de la fourniture">
                 <input v-model="addTotalRef" type="number" name="Total" placeholder="Quantitée(s)">
-                <button @click="addSubCollection()">Valider</button>
+                <input v-if="$route.params.category === wood" v-model="addAreaMeters" type="number"
+                    placeholder="Metre carre">
+                <button class="app__btn" @click="addSubCollection()">Valider</button>
             </div>
         </div>
 
@@ -57,20 +59,22 @@ export default {
         const openFormSub = ref(false)
         const addTitleRef = ref('')
         const addTotalRef = ref(0)
+        const addAreaMeters = ref(0)
         const products = ref([]);
+        const wood = "bois"
 
         const addSubCollection = async () => {
             try {
-                const docRef = await addDoc(collection(db, "products", route.params.id, "subproducts"), {
+                await addDoc(collection(db, "products", route.params.id, "subproducts"), {
                     title: addTitleRef.value,
-                    total: addTotalRef.value
+                    total: addTotalRef.value,
+                    areameters: addAreaMeters.value
                 });
-                console.log(docRef.id);
+
                 toast.success('Fourniture ajoutée')
 
                 addSubCollection ? addTitleRef.value = '' : addTitleRef.value = addTitleRef.value
                 addSubCollection ? addTotalRef.value = '' : addTotalRef.value = addTotalRef.value
-
 
                 openFormSub.value = false
 
@@ -80,7 +84,7 @@ export default {
             }
         }
 
-        onMounted( () => {
+        onMounted(() => {
             const q = query(collection(db, "products", route.params.id, "subproducts"))
 
             onSnapshot(q, (querySnapshot) => {
@@ -91,25 +95,18 @@ export default {
                     // console.log(doc.id)
                 })
                 products.value = fetchedProducts
-                console.log(products.value)
             });
 
-            // const querySnapshot = await getDocs(q);
-            // const fetchedProducts = [];
-            // querySnapshot.forEach((doc) => {
-            //     // doc.data() is never undefined for query doc snapshots
-            //     fetchedProducts.push({ id: doc.id, ...doc.data() })
-            // });
-
-            // products.value = fetchedProducts
         })
 
         return {
             openFormSub,
             addTitleRef,
             addTotalRef,
+            addAreaMeters,
             addSubCollection,
             products,
+            wood
         }
     },
 }
@@ -182,88 +179,7 @@ export default {
 
     }
 
-    .subcard__forms-wrap {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(9, 10, 17, 0.76);
-        z-index: 14;
 
-        .subcard__forms {
-            position: fixed;
-            border: 3px solid var(--logo-letters);
-            display: flex;
-            flex-direction: column;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            // padding: 1rem;
-            background: var(--black);
-            z-index: 15;
-            border-radius: 5px;
-            width: 400px;
-
-            .subcard__forms-close {
-
-                // margin-top: 1rem;
-                .close {
-                    position: relative;
-                    float: right;
-                    background: var(--light);
-                    color: var(--logo-letters);
-                    padding: 0.3rem;
-                    border-radius: 5px;
-                    transition: color 0.2s, transform 0.3s;
-                    cursor: pointer;
-
-                    &:hover {
-                        color: red;
-                        // transform: scale(1.1, 1.1);
-
-                        transition: 0.2s ease-out;
-                    }
-                }
-            }
-
-            .subcard__forms-title {
-                display: flex;
-                justify-content: center;
-                color: var(--light);
-                margin-top: 1rem;
-            }
-
-            input {
-                margin-top: 1rem;
-                margin: 1rem;
-                padding: 8px;
-                border: none;
-                color: black;
-                border-radius: 5px;
-                font-weight: bold;
-                font-size: 1rem;
-            }
-
-            button {
-                margin: 1rem;
-                background: var(--light);
-                padding: 1rem;
-                font-size: 1.3rem;
-                font-weight: bold;
-                transition: background 0.3s;
-                border-radius: 5px;
-
-                &:hover {
-                    background: var(--logo-letters);
-                    color: white;
-                }
-            }
-
-
-        }
-
-    }
 
     .wrap-card {
         display: flex;
