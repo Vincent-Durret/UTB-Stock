@@ -5,7 +5,7 @@
         </div>
 
         <div class="wrap-titre">
-            <!-- <h1> test </h1> -->
+            <h1> Bite </h1>
         </div>
 
         <div class="subpage__add-sub">
@@ -22,8 +22,7 @@
                     </span>
                 </div>
                 <h3 class="app__forms-title">Ajouter une fourniture</h3>
-                <input class="addprod__input" v-model="addTitleRef" type="text" name="Title"
-                    placeholder="Nom de la fourniture">
+                <input v-model="addTitleRef" type="text" name="Title" placeholder="Nom de la fourniture">
                 <input v-model="addTotalRef" type="number" name="Total" placeholder="Quantitée(s)">
                 <input v-if="$route.params.category === wood" v-model="addAreaMeters" type="number"
                     placeholder="Metre carre">
@@ -34,7 +33,7 @@
 
 
         <div class="wrap-card">
-            <SubCard v-for="product in products" :sub="product" :key="product.id" />
+            <SubCard v-for="product in products" :testing="product" :sub="product" :key="product.id" />
         </div>
     </main>
 </template>
@@ -42,7 +41,7 @@
 <script>
 import SubCard from '../components/SubCard.vue';
 import { useRoute } from "vue-router"
-import { collection, query, onSnapshot, addDoc } from 'firebase/firestore'
+import { collection, query, onSnapshot, addDoc, updateDoc, doc } from 'firebase/firestore'
 import { db } from '../Firebase/firebase.js'
 import { ref, onMounted } from 'vue';
 import { useToast } from 'vue-toastification'
@@ -64,6 +63,7 @@ export default {
         const wood = "bois"
 
         const addSubCollection = async () => {
+            const stockQ = doc(db, "products", route.params.id);
             try {
                 await addDoc(collection(db, "products", route.params.id, "subproducts"), {
                     title: addTitleRef.value,
@@ -81,6 +81,23 @@ export default {
             } catch (error) {
                 toast.error('Un probleme est survenue')
                 console.log(error)
+            }
+
+            try {
+
+                await updateDoc(stockQ, {
+                    test: addTotalRef.value,
+                });
+
+                toast.success('Fourniture ajoutée')
+
+                addSubCollection ? addTitleRef.value = '' : addTitleRef.value = addTitleRef.value
+                addSubCollection ? addTotalRef.value = '' : addTotalRef.value = addTotalRef.value
+
+                openFormSub.value = false
+            } catch (error) {
+                console.log(error)
+                toast.error('Une erreur est survenue')
             }
         }
 

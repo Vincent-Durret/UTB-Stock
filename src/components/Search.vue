@@ -1,11 +1,11 @@
 <template>
-    <div class="wrapper--input">
+    <div class="search__wrap">
         <input v-model="user_search_item" type="search" placeholder="Rechercher">
         <div class="search">
-            <router-link class="link" v-for="(product, i) in search_item" :key="i"
-                :to="{ name: 'SubPage', params: { category: product.category, title: product.name } }">
-                <div class="container--restaurant--search">
-                    <p class="lh"> {{ product.name.replace(/(?:^|\s|-)\S/g, x => x.toUpperCase()) }} </p>
+            <router-link class="search__link" v-for="(product, i) in search_item" :key="i"
+            :to="`/${product.category}/${product.id}`">
+                <div class="search__box-wrap">
+                    <p class="search__name"> {{ product.name.replace(/(?:^|\s|-)\S/g, x => x.toUpperCase()) }} </p>
                 </div>
             </router-link>
         </div>
@@ -56,13 +56,12 @@ export default {
 
             new_value == 0 ? search_item.value = [] : search_item.value = new_search_item
 
-            // console.log(search_item)
-
         })
 
         const isClosed = () => {
             user_search_item.value = ''
         }
+        
 
 
         return {
@@ -105,7 +104,7 @@ export default {
     }
 }
 
-.wrapper--input {
+.search__wrap {
     position: relative;
     margin-bottom: 3rem;
     margin-right: 3rem;
@@ -122,14 +121,6 @@ export default {
         padding-left: 20px;
         transition: border 0.2s;
         border-radius: 5px 5px 0 0;
-    }
-
-    .material-icons {
-        font-size: 3rem;
-        color: var(--dark);
-        position: absolute;
-        top: 0.5rem;
-        right: 0.2rem;
     }
 
     input[type=search]:focus {
@@ -149,20 +140,20 @@ export default {
         z-index: 2;
 
 
-        .link {
+        .search__link {
             text-decoration: none;
             color: var(--black);
 
-            .container--restaurant--search {
+            .search__box-wrap {
                 display: flex;
                 flex-direction: column;
 
-                h3 {
-                    display: flex;
-                    justify-content: center;
-                }
+                // h3 {
+                //     display: flex;
+                //     justify-content: center;
+                // }
 
-                .lh {
+                .search__name {
                     text-decoration: none;
                     color: var(--black);
                     font-size: 1rem;

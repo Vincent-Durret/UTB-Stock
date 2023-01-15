@@ -24,17 +24,17 @@
                 delete
             </span>
         </div>
-        <div v-if="openUpdate" class="card__forms">
-            <div class="forms">
-                <div class="wrap-close">
+        <div v-if="openUpdate" class="app__forms-wrap">
+            <div class="app__forms">
+                <div class="app__forms-close">
                     <span @click="openUpdate = !openUpdate" class="material-icons close">
                         cancel
                     </span>
                 </div>
-                <h3>Modifier le produit "{{ sub.title }}"</h3>
+                <h3 class="app__forms-title">Modifier le produit "{{ sub.title }}"</h3>
                 <input v-model="updateTitleRef" type="text" list="nom" :placeholder=sub.title>
                 <input v-model="updateTotalRef" type="number" :placeholder=sub.total>
-                <button @click="updateProduct()">Mettre a jour</button>
+                <button class="app__btn" @click="updateProduct()">Mettre a jour</button>
             </div>
         </div>
         <div v-if="openDeleteModal" class="card__delete">
@@ -62,6 +62,7 @@ export default {
     name: "SubCard",
     props: {
         sub: Object,
+        testing: Array
     },
 
     setup(props) {
@@ -86,20 +87,23 @@ export default {
         totalMeters.value = calculMeters
 
 
-
-
-
-
-
         const updateStocks = async () => {
 
             const stockQ = doc(db, "products", route.params.id, "subproducts", props.sub.id);
+            const stockT = doc(db, "products", route.params.id);
+
 
             try {
 
                 await updateDoc(stockQ, {
                     total: Math.max(0, props.sub.total - inputStock.value)
                 });
+
+                await updateDoc(stockT, {
+                    test: props.sub.total
+                });
+
+
 
                 toast.success(" Vous avez retirer " + inputStock.value + " " + route.params.unit)
 
@@ -109,10 +113,9 @@ export default {
                 toast.error('Une erreur est survenue')
                 console.log(error)
             }
-
-
-
         }
+
+
 
         const updateProduct = async () => {
             const productQ = doc(db, "products", route.params.id, "subproducts", props.sub.id);
@@ -124,7 +127,7 @@ export default {
                     total: updateTotalRef.value,
                 });
 
-                toast.success(" La fourniture a etait mis a jour")
+                toast.success("La fourniture a etait mis a jour")
 
                 updateProduct ? updateTitleRef.value = '' : updateTitleRef.value = updateTitleRef.value
                 updateProduct ? updateTotalRef.value = '' : updateTotalRef.value = updateTotalRef.value
@@ -135,6 +138,9 @@ export default {
                 console.log(error)
                 toast.error('Une erreur est survenue')
             }
+
+
+
         }
 
         const deleteProduct = async () => {
