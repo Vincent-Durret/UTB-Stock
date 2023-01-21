@@ -8,7 +8,6 @@
                 <h3 class="restant-stock">Stock :</h3>
                 <p class="total-stock"> {{ sub.total }} {{ $route.params.unit }} </p>
                 <p v-if="sub.areameters"> {{ totalMeters }} m2</p>
-                <!-- <p v-else="">nope</p> -->
             </div>
         </div>
         <div class="wrap-edit">
@@ -62,7 +61,6 @@ export default {
     name: "SubCard",
     props: {
         sub: Object,
-        testing: Array
     },
 
     setup(props) {
@@ -78,13 +76,26 @@ export default {
         const updateTitleRef = ref('')
         const updateTotalRef = ref(0)
 
-        const totalMeters = ref()
+        const totalMeters = ref(0)
 
         const areaMeters = props.sub.areameters
 
         const calculMeters = props.sub.total * areaMeters
 
         totalMeters.value = calculMeters
+
+
+
+        // const totalStock =  () => {
+        //     const arrayTotal = props.sub.total
+        //    arrayTotal.reduce((acc, curr) => acc + curr.total, 0)
+        // }
+        // const arra = []
+        // arra.push(props.sub)
+        // const totalTest = arra.reduce((arr, curr) => arr + curr.total, 0)
+
+        
+        // console.log(totalTest)
 
 
         const updateStocks = async () => {
@@ -100,7 +111,7 @@ export default {
                 });
 
                 await updateDoc(stockT, {
-                    test: props.sub.total
+                    test: totalTest
                 });
 
 

@@ -33,7 +33,7 @@
 
 
         <div class="wrap-card">
-            <SubCard v-for="product in products" :testing="product" :sub="product" :key="product.id" />
+            <SubCard v-for="product in subProducts" :sub="product" :key="product.id" />
         </div>
     </main>
 </template>
@@ -41,7 +41,7 @@
 <script>
 import SubCard from '../components/SubCard.vue';
 import { useRoute } from "vue-router"
-import { collection, query, onSnapshot, addDoc, updateDoc, doc } from 'firebase/firestore'
+import { collection, query, onSnapshot, addDoc, updateDoc, doc, getDocs } from 'firebase/firestore'
 import { db } from '../Firebase/firebase.js'
 import { ref, onMounted } from 'vue';
 import { useToast } from 'vue-toastification'
@@ -59,8 +59,14 @@ export default {
         const addTitleRef = ref('')
         const addTotalRef = ref(0)
         const addAreaMeters = ref(0)
-        const products = ref([]);
+        const subProducts = ref([]);
         const wood = "bois"
+        const totalAmount = subProducts.value.reduce((acc, curr) => acc + curr.total, 0)
+        console.log(totalAmount)
+
+
+
+
 
         const addSubCollection = async () => {
             const stockQ = doc(db, "products", route.params.id);
@@ -86,12 +92,11 @@ export default {
             try {
 
                 await updateDoc(stockQ, {
-                    test: addTotalRef.value,
+                    test: totalAmount
                 });
 
-                toast.success('Fourniture ajoutée')
+                toast.success('Stock ajouter')
 
-                addSubCollection ? addTitleRef.value = '' : addTitleRef.value = addTitleRef.value
                 addSubCollection ? addTotalRef.value = '' : addTotalRef.value = addTotalRef.value
 
                 openFormSub.value = false
@@ -111,10 +116,13 @@ export default {
                     fetchedProducts.push({ id: doc.id, ...doc.data() })
                     // console.log(doc.id)
                 })
-                products.value = fetchedProducts
+                subProducts.value = fetchedProducts
+                console.log(subProducts.value.reduce((acc, curr) => acc + curr.total, 0))
             });
 
         })
+
+
 
         return {
             openFormSub,
@@ -122,7 +130,7 @@ export default {
             addTotalRef,
             addAreaMeters,
             addSubCollection,
-            products,
+            subProducts,
             wood
         }
     },

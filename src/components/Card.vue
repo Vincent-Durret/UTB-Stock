@@ -4,7 +4,7 @@
 			<router-link class="button" :to="`/${card.category}/${card.id}`">
 				<div :style="{ backgroundImage: `url(${card.image})` }" class="image"></div>
 				<span class="text">{{ card.name }}</span>
-				<h3 v-for="prod in products" :key="prod.id" class="total">{{ prod.total }} {{ card.stock }} {{ card.unit }}
+				<h3 class="total">{{ card.test }} {{ card.stock }} {{ card.unit }}
 				</h3>
 			</router-link>
 			<div class="wrap-edit">
@@ -90,7 +90,9 @@ export default {
 		const updateTotal = ref(0)
 		const updateStock = ref(0)
 		const updateUnit = ref('')
-		const products = ref([])
+		const subProducts = ref([])
+
+
 
 
 		onMounted(async () => {
@@ -103,7 +105,9 @@ export default {
 					fetchedProducts.push({ id: doc.id, ...doc.data() })
 					// console.log(doc.data())
 				})
-				products.value = fetchedProducts
+				subProducts.value = fetchedProducts
+
+				
 			});
 		})
 
@@ -161,7 +165,7 @@ export default {
 			updateUnit,
 			updateProducts,
 			deleteProduct,
-			products,
+			subProducts,
 			// test
 			// totalAmount,
 		}
