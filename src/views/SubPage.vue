@@ -41,7 +41,7 @@
 <script>
 import SubCard from '../components/SubCard.vue';
 import { useRoute } from "vue-router"
-import { collection, query, onSnapshot, addDoc, updateDoc, doc, getDocs } from 'firebase/firestore'
+import { collection, query, onSnapshot, addDoc, updateDoc, doc } from 'firebase/firestore'
 import { db } from '../Firebase/firebase.js'
 import { ref, onMounted } from 'vue';
 import { useToast } from 'vue-toastification'
@@ -61,10 +61,33 @@ export default {
         const addAreaMeters = ref(0)
         const subProducts = ref([]);
         const wood = "bois"
-        const totalAmount = subProducts.value.reduce((acc, curr) => acc + curr.total, 0)
+        const allSubProducts = []
+
+
+
+
+        const makeDataSubProducts = async () => {
+            const q = query(collection(db, "products", route.params.id, "subproducts"))
+
+            onSnapshot(q, (querySnapshot) => {
+                const fetchedProducts = [];
+
+                querySnapshot.forEach((doc) => {
+                    fetchedProducts.push({ id: doc.id, ...doc.data() })
+                    // console.log(doc.id)
+                })
+                subProducts.value = fetchedProducts
+                console.log(subProducts.value.reduce((acc, curr) => acc + curr.total, 0))
+
+            });
+        }
+
+
+
+        const totalAmount = allSubProducts.reduce((acc, curr) => acc + curr.total, 0)
+
+
         console.log(totalAmount)
-
-
 
 
 
@@ -106,21 +129,7 @@ export default {
             }
         }
 
-        onMounted(() => {
-            const q = query(collection(db, "products", route.params.id, "subproducts"))
-
-            onSnapshot(q, (querySnapshot) => {
-                const fetchedProducts = [];
-
-                querySnapshot.forEach((doc) => {
-                    fetchedProducts.push({ id: doc.id, ...doc.data() })
-                    // console.log(doc.id)
-                })
-                subProducts.value = fetchedProducts
-                console.log(subProducts.value.reduce((acc, curr) => acc + curr.total, 0))
-            });
-
-        })
+        onMounted(makeDataSubProducts,)
 
 
 
