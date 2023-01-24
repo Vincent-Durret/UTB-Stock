@@ -61,30 +61,31 @@ export default {
         const addAreaMeters = ref(0)
         const subProducts = ref([]);
         const wood = "bois"
-        const allSubProducts = []
+        // const allSubProducts = []
+        const fetchedProducts = [];
 
 
 
 
-        const makeDataSubProducts = async () => {
+
+        const makeDataSubProducts = () => {
             const q = query(collection(db, "products", route.params.id, "subproducts"))
 
             onSnapshot(q, (querySnapshot) => {
-                const fetchedProducts = [];
 
                 querySnapshot.forEach((doc) => {
                     fetchedProducts.push({ id: doc.id, ...doc.data() })
-                    // console.log(doc.id)
                 })
                 subProducts.value = fetchedProducts
                 console.log(subProducts.value.reduce((acc, curr) => acc + curr.total, 0))
-
             });
         }
 
 
 
-        const totalAmount = allSubProducts.reduce((acc, curr) => acc + curr.total, 0)
+
+
+        const totalAmount = fetchedProducts.reduce((acc, curr) => acc + curr.total, 0)
 
 
         console.log(totalAmount)
