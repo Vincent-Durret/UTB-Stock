@@ -33,7 +33,7 @@
 
 
         <div class="wrap-card">
-            <SubCard v-for="product in subProducts" :sub="product" :key="product.id" />
+            <SubCard v-for="product in subProducts" :sub="product" :total="totalAmount" :key="product.id" />
         </div>
 
     </main>
@@ -62,8 +62,6 @@ export default {
         const addAreaMeters = ref(0)
         const subProducts = ref([]);
         const wood = "bois"
-        // const allSubProducts = []
-        const fetchedProducts = [];
 
         const totalAmount = ref(0)
 
@@ -71,6 +69,8 @@ export default {
             const q = query(collection(db, "products", route.params.id, "subproducts"))
 
             onSnapshot(q, (querySnapshot) => {
+                const fetchedProducts = [];
+
 
                 querySnapshot.forEach((doc) => {
                     fetchedProducts.push({ id: doc.id, ...doc.data() })
@@ -137,6 +137,7 @@ export default {
             addSubCollection,
             subProducts,
             wood,
+            totalAmount
         }
     },
 }

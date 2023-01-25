@@ -61,6 +61,7 @@ export default {
     name: "SubCard",
     props: {
         sub: Object,
+        total: Number,
     },
 
     setup(props) {
@@ -85,8 +86,6 @@ export default {
         totalMeters.value = calculMeters
 
 
-
-
         // const love2 = love.reduce((acc, curr) => acc + curr.total, 0 )
 
         
@@ -96,9 +95,11 @@ export default {
         //     const arrayTotal = props.sub.total
         //    arrayTotal.reduce((acc, curr) => acc + curr.total, 0)
         // }
-        const arra = []
-        arra.push(props.sub)
-        const totalTest = arra.reduce((arr, curr) => arr + curr.total, 0)
+        const arra = ref([])
+        arra.value.push(props.sub.total)
+        const totalTest = arra.value.reduce((arr, curr) => arr + curr, 0)
+
+        console.log(arra.value.reduce((arr, curr) => arr + curr, 0))
 
 
         // console.log(totalTest)
@@ -117,7 +118,7 @@ export default {
                 });
 
                 await updateDoc(stockT, {
-                    test: totalTest
+                    test: props.total - inputStock.value
                 });
 
 

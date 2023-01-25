@@ -90,26 +90,26 @@ export default {
 		const updateTotal = ref(0)
 		const updateStock = ref(0)
 		const updateUnit = ref('')
-		const subProducts = ref([])
+		// const subProducts = ref([])
 
 
 
 
-		onMounted(async () => {
-			const q = query(collection(db, "products", props.card.id, "subproducts"))
+		// onMounted(async () => {
+		// 	const q = query(collection(db, "products", props.card.id, "subproducts"))
 
-			onSnapshot(q, (querySnapshot) => {
-				const fetchedProducts = [];
+		// 	onSnapshot(q, (querySnapshot) => {
+		// 		const fetchedProducts = [];
 
-				querySnapshot.forEach((doc) => {
-					fetchedProducts.push({ id: doc.id, ...doc.data() })
-					// console.log(doc.data())
-				})
-				subProducts.value = fetchedProducts
+		// 		querySnapshot.forEach((doc) => {
+		// 			fetchedProducts.push({ id: doc.id, ...doc.data() })
+		// 			// console.log(doc.data())
+		// 		})
+		// 		subProducts.value = fetchedProducts
 
 				
-			});
-		})
+		// 	});
+		// })
 
 
 		const updateProducts = async () => {
@@ -165,7 +165,7 @@ export default {
 			updateUnit,
 			updateProducts,
 			deleteProduct,
-			subProducts,
+			// subProducts,
 			// test
 			// totalAmount,
 		}
