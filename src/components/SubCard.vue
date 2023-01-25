@@ -86,15 +86,21 @@ export default {
 
 
 
+
+        // const love2 = love.reduce((acc, curr) => acc + curr.total, 0 )
+
+        
+
+
         // const totalStock =  () => {
         //     const arrayTotal = props.sub.total
         //    arrayTotal.reduce((acc, curr) => acc + curr.total, 0)
         // }
-        // const arra = []
-        // arra.push(props.sub)
-        // const totalTest = arra.reduce((arr, curr) => arr + curr.total, 0)
+        const arra = []
+        arra.push(props.sub)
+        const totalTest = arra.reduce((arr, curr) => arr + curr.total, 0)
 
-        
+
         // console.log(totalTest)
 
 
@@ -158,6 +164,9 @@ export default {
             try {
                 await deleteDoc(doc(db, "products", route.params.id, "subproducts", props.sub.id));
                 toast.success(props.sub.title + " supprimé avec succes ")
+
+                openDeleteModal.value = false
+
 
             } catch (error) {
                 toast.error('Un probleme est survenue')

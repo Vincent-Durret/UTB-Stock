@@ -35,6 +35,7 @@
         <div class="wrap-card">
             <SubCard v-for="product in subProducts" :sub="product" :key="product.id" />
         </div>
+
     </main>
 </template>
 
@@ -64,9 +65,7 @@ export default {
         // const allSubProducts = []
         const fetchedProducts = [];
 
-
-
-
+        const totalAmount = ref(0)
 
         const makeDataSubProducts = () => {
             const q = query(collection(db, "products", route.params.id, "subproducts"))
@@ -78,19 +77,10 @@ export default {
                 })
                 subProducts.value = fetchedProducts
                 console.log(subProducts.value.reduce((acc, curr) => acc + curr.total, 0))
+
+                totalAmount.value = subProducts.value.reduce((acc, curr) => acc + curr.total, 0)
             });
         }
-
-
-
-
-
-        const totalAmount = fetchedProducts.reduce((acc, curr) => acc + curr.total, 0)
-
-
-        console.log(totalAmount)
-
-
 
         const addSubCollection = async () => {
             const stockQ = doc(db, "products", route.params.id);
@@ -101,10 +91,15 @@ export default {
                     areameters: addAreaMeters.value
                 });
 
+                await updateDoc(stockQ, {
+                    test: totalAmount.value
+                });
+
                 toast.success('Fourniture ajoutée')
 
                 addSubCollection ? addTitleRef.value = '' : addTitleRef.value = addTitleRef.value
                 addSubCollection ? addTotalRef.value = '' : addTotalRef.value = addTotalRef.value
+                addSubCollection ? addAreaMeters.value = '' : addAreaMeters.value = addAreaMeters.value
 
                 openFormSub.value = false
 
@@ -113,21 +108,21 @@ export default {
                 console.log(error)
             }
 
-            try {
+            // try {
 
-                await updateDoc(stockQ, {
-                    test: totalAmount
-                });
+            //     await updateDoc(stockQ, {
+            //         test: totalAmount.value
+            //     });
 
-                toast.success('Stock ajouter')
+            //     toast.success('Stock ajouter')
 
-                addSubCollection ? addTotalRef.value = '' : addTotalRef.value = addTotalRef.value
+            //     addSubCollection ? addTotalRef.value = '' : addTotalRef.value = addTotalRef.value
 
-                openFormSub.value = false
-            } catch (error) {
-                console.log(error)
-                toast.error('Une erreur est survenue')
-            }
+            //     openFormSub.value = false
+            // } catch (error) {
+            //     console.log(error)
+            //     toast.error('Une erreur est survenue')
+            // }
         }
 
         onMounted(makeDataSubProducts,)
@@ -141,7 +136,7 @@ export default {
             addAreaMeters,
             addSubCollection,
             subProducts,
-            wood
+            wood,
         }
     },
 }
