@@ -4,8 +4,7 @@
 			<router-link class="button" :to="`/${card.category}/${card.id}`">
 				<div :style="{ backgroundImage: `url(${card.image})` }" class="image"></div>
 				<span class="text">{{ card.name }}</span>
-				<h3 class="total">{{ card.test }} {{ card.stock }} {{ card.unit }}
-				</h3>
+				<h3 class="total">{{ card.stock }} {{ card.unit }} </h3>
 			</router-link>
 			<div class="wrap-edit">
 				<span @click="isOpen = !isOpen" class="material-icons edit">
@@ -66,8 +65,8 @@
 </template>
 
 <script>
-import { ref, onMounted } from 'vue';
-import { doc, deleteDoc, updateDoc, collection, query, onSnapshot, where } from "firebase/firestore";
+import { ref } from 'vue';
+import { doc, deleteDoc, updateDoc } from "firebase/firestore";
 import { db } from '../Firebase/firebase.js'
 import { useToast } from 'vue-toastification'
 
@@ -90,27 +89,6 @@ export default {
 		const updateTotal = ref(0)
 		const updateStock = ref(0)
 		const updateUnit = ref('')
-		// const subProducts = ref([])
-
-
-
-
-		// onMounted(async () => {
-		// 	const q = query(collection(db, "products", props.card.id, "subproducts"))
-
-		// 	onSnapshot(q, (querySnapshot) => {
-		// 		const fetchedProducts = [];
-
-		// 		querySnapshot.forEach((doc) => {
-		// 			fetchedProducts.push({ id: doc.id, ...doc.data() })
-		// 			// console.log(doc.data())
-		// 		})
-		// 		subProducts.value = fetchedProducts
-
-				
-		// 	});
-		// })
-
 
 		const updateProducts = async () => {
 			const stockQ = doc(db, "products", props.card.id);
@@ -129,7 +107,6 @@ export default {
 				updateProducts ? updateTotal.value = '' : updateTotal.value = updateTotal.value
 				updateProducts ? updateStock.value = '' : updateStock.value = updateStock.value
 				updateProducts ? updateUnit.value = '' : updateUnit.value = updateUnit.value
-
 
 				toast.success("Produits modifier")
 
@@ -165,9 +142,6 @@ export default {
 			updateUnit,
 			updateProducts,
 			deleteProduct,
-			// subProducts,
-			// test
-			// totalAmount,
 		}
 	}
 

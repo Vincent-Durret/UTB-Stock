@@ -5,7 +5,7 @@
         </div>
 
         <div class="wrap-titre">
-            <h1> Bite </h1>
+            <h1> title </h1>
         </div>
 
         <div class="subpage__add-sub">
@@ -29,6 +29,8 @@
                 <button class="app__btn" @click="addSubCollection()">Valider</button>
             </div>
         </div>
+
+        {{ test.name }}
 
 
 
@@ -62,8 +64,25 @@ export default {
         const addAreaMeters = ref(0)
         const subProducts = ref([]);
         const wood = "bois"
+        const test = ref([])
 
         const totalAmount = ref(0)
+
+        const dataName = () => {
+            const q = query(collection(db, "products"))
+
+            onSnapshot(q, (querySnapshot) => {
+                const fetchedProducts = [];
+
+
+                querySnapshot.forEach((doc) => {
+                    fetchedProducts.push({ id: doc.id, ...doc.data() })
+                })
+                test.value = fetchedProducts
+
+                console.log(test.value)
+            });
+        }
 
         const makeDataSubProducts = () => {
             const q = query(collection(db, "products", route.params.id, "subproducts"))
@@ -92,7 +111,7 @@ export default {
                 });
 
                 await updateDoc(stockQ, {
-                    test: totalAmount.value
+                    stock: totalAmount.value
                 });
 
                 toast.success('Fourniture ajoutée')
@@ -125,7 +144,7 @@ export default {
             // }
         }
 
-        onMounted(makeDataSubProducts,)
+        onMounted(makeDataSubProducts, dataName)
 
 
 
@@ -137,7 +156,8 @@ export default {
             addSubCollection,
             subProducts,
             wood,
-            totalAmount
+            totalAmount,
+            test
         }
     },
 }

@@ -4,28 +4,27 @@ const info_bois = [
     category: 'bois',
     name: 'itauba',
     image: './assets/Bois/itauba.jpg',
-    stock: 4000,
+
     unit: 'm²',
   },
   {
     category: 'bois',
     name: 'ipé',
     image: './assets/Bois/ipe.jpg',
-    stock: 4000,
     unit: 'm²',
   },
   {
     category: 'bois',
     name: 'cumaru',
     image: './assets/Bois/cumaru.jpg',
-    stock: 4000,
+
     unit: 'm²',
   },
   {
     category: 'bois',
     name: 'structure',
     image: './assets/Bois/Structure.jpg',
-    stock: 1000,
+
     unit: 'm²',
   },
 ]
@@ -40,196 +39,196 @@ const info_quincaillerie = [
     category: 'quincailleries',
     name: 'vis structure',
     image: './assets/Quincaillerie/vis.jpg',
-    stock: 2000,
+
     unit: 'Boites',
   },
   {
     category: 'quincailleries',
     name: 'plot béton',
     image: './assets/Quincaillerie/plot-beton.jpg',
-    stock: 10,
+
     unit: 'Boites',
   },
   {
     category: 'quincailleries',
     name: 'lames de scie',
     image: './assets/Quincaillerie/lame-scie-sauteuse.jpg',
-    stock: 50,
+
     unit: 'Boites',
   },
   {
     category: 'quincailleries',
     name: 'chevilles',
     image: './assets/Quincaillerie/cheville.jpg',
-    stock: 50,
+
     unit: 'Boite',
   },
   {
     category: 'quincailleries',
     name: 'boulon charpente',
     image: './assets/Quincaillerie/boulon-charpente.jpg',
-    stock: 50,
+
     unit: 'Boites',
   },
   {
     category: 'quincailleries',
     name: 'equerre de fixation',
     image: './assets/Quincaillerie/equerre-de-fixation-renforcee.jpg',
-    stock: 50,
+
     unit: 'Boites',
   },
   {
     category: 'quincailleries',
     name: 'tige Filete',
     image: './assets/Quincaillerie/tige-filleté.jpg',
-    stock: 50,
+
     unit: 'Boites',
   },
   {
     category: 'quincailleries',
     name: 'ecrou m14',
     image: './assets/Quincaillerie/ecrou-m14.jpg',
-    stock: 50,
+
     unit: 'Boites',
   },
   {
     category: 'quincailleries',
     name: 'rondelle plate',
     image: './assets/Quincaillerie/rondelle.jpg',
-    stock: 50,
+
     unit: 'Boites',
   },
   {
     category: 'quincailleries',
     name: 'pied de poteau',
     image: './assets/Quincaillerie/pied-de-poteau.jpg',
-    stock: 50,
+
     unit: 'Boites',
   },
   {
     category: 'quincailleries',
     name: 'vis de fondation',
     image: './assets/Quincaillerie/vis-de-fondation.jpg',
-    stock: 50,
+
     unit: 'Boites',
   },
   {
     category: 'quincailleries',
     name: 'feutre geotextile',
     image: './assets/Quincaillerie/feutre-geotextile.jpg',
-    stock: 50,
+
     unit: 'Boites',
   },
   {
     category: 'quincailleries',
     name: 'disque a tronconner',
     image: './assets/Quincaillerie/disque-a-tronconner.jpg',
-    stock: 50,
+
     unit: 'Boites',
   },
   {
     category: 'quincailleries',
     name: 'disque a ebarbe',
     image: './assets/Quincaillerie/disque-a-ebarber.jpg',
-    stock: 50,
+
     unit: 'Boites',
   },
   {
     category: 'quincailleries',
     name: 'disque de pollissage',
     image: './assets/Quincaillerie/disque-pollissage.jpg',
-    stock: 50,
+
     unit: 'Boites',
   },
   {
     category: 'quincailleries',
     name: 'agraffes',
     image: './assets/Quincaillerie/agraffe.jpg',
-    stock: 50,
+
     unit: 'Boites',
   },
   {
     category: 'quincailleries',
     name: 'sangle arrimage',
     image: './assets/Quincaillerie/sangle.jpg',
-    stock: 50,
+
     unit: 'Boites',
   },
   {
     category: 'quincailleries',
     name: 'masque ffp3 ',
     image: './assets/Quincaillerie/masque-ffp3.jpg',
-    stock: 50,
+
     unit: 'Boites',
   },
   {
     category: 'quincailleries',
     name: 'crayon',
     image: './assets/Quincaillerie/crayon.jpg',
-    stock: 50,
+
     unit: 'Boites',
   },
   {
     category: 'quincailleries',
     name: 'gant de protection',
     image: './assets/Quincaillerie/gant-chantier.jpg',
-    stock: 50,
+
     unit: 'Boites',
   },
   {
     category: 'quincailleries',
     name: 'ruban signaletique',
     image: './assets/Quincaillerie/ruban-signalisation.jpg',
-    stock: 50,
+
     unit: 'Boites',
   },
   {
     category: 'quincailleries',
     name: 'lingette main',
     image: './assets/Quincaillerie/lingette-main.jpg',
-    stock: 50,
+
     unit: 'Boites',
   },
   {
     category: 'quincailleries',
     name: 'degripant universel',
     image: './assets/Quincaillerie/degripant.jpg',
-    stock: 50,
+
     unit: 'Boites',
   },
   {
     category: 'quincailleries',
     name: 'cale pvc',
     image: './assets/Quincaillerie/cales.jpg',
-    stock: 50,
+
     unit: 'Boites',
   },
   {
     category: 'quincailleries',
     name: 'plot pvc',
     image: './assets/Quincaillerie/plot.jpg',
-    stock: 50,
+
     unit: 'Boites',
   },
   {
     category: 'quincailleries',
     name: 'abrasif',
     image: './assets/Quincaillerie/abrasif.jpg',
-    stock: 50,
+
     unit: 'Boites',
   },
   {
     category: 'quincailleries',
     name: 'chanfrein',
     image: './assets/Quincaillerie/chanfrein.jpg',
-    stock: 50,
+
     unit: 'Boites',
   },
   {
     category: 'quincailleries',
     name: 'cale caoutchouc',
     image: './assets/Quincaillerie/cale-caoutchouc.jpg',
-    stock: 50,
+
     unit: 'Boites',
   },
 ]
@@ -241,140 +240,140 @@ const info_product = [
     category: 'produits',
     name: 'scellement chimique',
     image: '/assets/Produits/chimique.jpg',
-    stock: 50,
+
     unit: 'Boites',
   },
   {
     category: 'produits',
     name: 'silicone',
     image: '/assets/Produits/silicone.jpg',
-    stock: 50,
+
     unit: 'Boites',
   },
   {
     category: 'produits',
     name: 'mastic',
     image: '/assets/Produits/mastic.jpg',
-    stock: 50,
+
     unit: 'Boites',
   },
   {
     category: 'produits',
     name: 'caoutchouc liquide',
     image: '/assets/Produits/hbs200.jpg',
-    stock: 50,
+
     unit: 'Boites',
   },
   {
     category: 'produits',
     name: 'saturateur',
     image: '/assets/Produits/saturateur.jpg',
-    stock: 50,
+
     unit: 'Boites',
   },
   {
     category: 'produits',
     name: 'lazure',
     image: '/assets/Produits/lazure.jpg',
-    stock: 50,
+
     unit: 'Boites',
   },
   {
     category: 'produits',
     name: 'degriseur',
     image: '/assets/Produits/degriseur.jpg',
-    stock: 50,
+
     unit: 'Boites',
   },
   {
     category: 'produits',
     name: 'bombe de tracage',
     image: '/assets/Produits/tracage.jpg',
-    stock: 50,
+
     unit: 'Boites',
   },
   {
     category: 'produits',
     name: 'craie cordex',
     image: '/assets/Produits/craie.jpg',
-    stock: 50,
+
     unit: 'Boites',
   },
   {
     category: 'produits',
     name: 'bidon matefloc',
     image: '/assets/Produits/matefloc.jpg',
-    stock: 50,
+
     unit: 'Boites',
   },
   {
     category: 'produits',
     name: 'bidon oxygen actif',
     image: '/assets/Produits/oxygen-actif.jpg',
-    stock: 50,
+
     unit: 'Boites',
   },
   {
     category: 'produits',
     name: 'bidon algicide ',
     image: '/assets/Produits/algicide.jpg',
-    stock: 50,
+
     unit: 'Boites',
   },
   {
     category: 'produits',
     name: 'bidon choc plus',
     image: '/assets/Produits/choc-plus-.jpg',
-    stock: 50,
+
     unit: 'Boites',
   },
   {
     category: 'produits',
     name: 'bidon ph liquide',
     image: '/assets/Produits/ph.jpg',
-    stock: 50,
+
     unit: 'Boites',
   },
   {
     category: 'produits',
     name: 'bidon inoprotect',
     image: '/assets/Produits/inoprotect.jpg',
-    stock: 50,
+
     unit: 'Boites',
   },
   {
     category: 'produits',
     name: 'bidon ad blue',
     image: '/assets/Produits/adblue.jpg',
-    stock: 50,
+
     unit: 'Boites',
   },
   {
     category: 'produits',
     name: 'spray inox',
     image: '/assets/Produits/inox.jpg',
-    stock: 50,
+
     unit: 'Boites',
   },
   {
     category: 'produits',
     name: 'colle epdm',
     image: '/assets/Produits/colle-epdm-cartouche.jpg',
-    stock: 50,
+
     unit: 'Boites',
   },
   {
     category: 'produits',
     name: 'colle epdm pot',
     image: '/assets/Produits/colle-epdm.jpg',
-    stock: 50,
+
     unit: 'Boites',
   },
   {
     category: 'produits',
     name: 'bande joint epdm',
     image: '/assets/Produits/joint-epdm.jpg',
-    stock: 50,
+
     unit: 'Boites',
   },
 ]
@@ -386,84 +385,84 @@ const info_other = [
     category: 'autres',
     name: 'garde corps',
     image: '/assets/Autres/garde-corps.jpg',
-    stock: 50,
+
     unit: 'Boites',
   },
   {
     category: 'autres',
     name: 'pare pluie',
     image: '/assets/Autres/pare-pluie.jpg',
-    stock: 50,
+
     unit: 'Boites',
   },
   {
     category: 'autres',
     name: 'scoth pare pluie',
     image: '/assets/Autres/scotch-pare-pluie.jpg',
-    stock: 50,
+
     unit: 'Boites',
   },
   {
     category: 'autres',
     name: 'gaine tpc',
     image: '/assets/Autres/gaine-tpc.jpg',
-    stock: 50,
+
     unit: 'Boites',
   },
   {
     category: 'autres',
     name: 'gaine',
     image: '/assets/Autres/gaine.jpg',
-    stock: 50,
+
     unit: 'Boites',
   },
   {
     category: 'autres',
     name: 'cable',
     image: '/assets/Autres/cable.jpg',
-    stock: 50,
+
     unit: 'Boites',
   },
   {
     category: 'autres',
     name: 'wago',
     image: '/assets/Autres/wago.jpg',
-    stock: 50,
+
     unit: 'Boites',
   },
   {
     category: 'autres',
     name: 'medicale',
     image: '/assets/Autres/medicale.jpg',
-    stock: 50,
+
     unit: 'Boites',
   },
   {
     category: 'autres',
     name: 'madrier',
     image: './assets/Bois/Structure.jpg',
-    stock: 50,
+
     unit: 'Boites',
   },
   {
     category: 'autres',
     name: 'mat voile ombrage',
     image: '/assets/Autres/mat.jpg',
-    stock: 50,
+
     unit: 'Boites',
   },
   {
     category: 'autres',
     name: 'luminaire',
     image: '/assets/Autres/spot.jpg',
-    stock: 50,
+
     unit: 'Boites',
   },
   {
     category: 'autres',
     name: 'terreau',
     image: '/assets/Autres/terreau.jpg',
-    stock: 50,
+
     unit: 'Boites',
   },
 ]

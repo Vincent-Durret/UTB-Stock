@@ -85,26 +85,6 @@ export default {
 
         totalMeters.value = calculMeters
 
-
-        // const love2 = love.reduce((acc, curr) => acc + curr.total, 0 )
-
-        
-
-
-        // const totalStock =  () => {
-        //     const arrayTotal = props.sub.total
-        //    arrayTotal.reduce((acc, curr) => acc + curr.total, 0)
-        // }
-        const arra = ref([])
-        arra.value.push(props.sub.total)
-        const totalTest = arra.value.reduce((arr, curr) => arr + curr, 0)
-
-        console.log(arra.value.reduce((arr, curr) => arr + curr, 0))
-
-
-        // console.log(totalTest)
-
-
         const updateStocks = async () => {
 
             const stockQ = doc(db, "products", route.params.id, "subproducts", props.sub.id);
@@ -113,13 +93,14 @@ export default {
 
             try {
 
+                await updateDoc(stockT, {
+                    stock: props.total - inputStock.value
+                });
                 await updateDoc(stockQ, {
                     total: Math.max(0, props.sub.total - inputStock.value)
                 });
 
-                await updateDoc(stockT, {
-                    test: props.total - inputStock.value
-                });
+
 
 
 
