@@ -30,7 +30,7 @@
                     <span class="material-icons">widgets</span>
                     <span class="text">Autres</span>
                 </router-link>
-                <div @click="isOpen = !isOpen" class="button">
+                <div v-if="auth === king" @click="isOpen = !isOpen" class="button">
                     <span class="material-icons edit">
                         add_circle
                     </span>
@@ -67,12 +67,18 @@ import { useStore } from 'vuex'
 import AddProduct from './AddProduct.vue';
 import AddSubProduct from './AddSubProduct.vue';
 
+import { admin, id } from '../admin_auth/index'
+
 
 const isOpen = ref(false)
 
 const is_expanded = ref(localStorage.getItem("is_expanded") === "true")
 
 const imgSrc = ref('../assets/Logo/logo2.png')
+
+const king = admin
+
+const auth = id.value
 
 
 

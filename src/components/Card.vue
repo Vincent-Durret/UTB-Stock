@@ -6,7 +6,7 @@
 				<span class="text">{{ card.name }}</span>
 				<h3 class="total">{{ card.stock }} {{ card.unit }} </h3>
 			</router-link>
-			<div class="wrap-edit">
+			<div v-if="auth === king" class="wrap-edit">
 				<span @click="isOpen = !isOpen" class="material-icons edit">
 					mode_edit
 				</span>
@@ -68,6 +68,7 @@ import { ref } from 'vue';
 import { doc, deleteDoc, updateDoc } from "firebase/firestore";
 import { db } from '../Firebase/firebase.js'
 import { useToast } from 'vue-toastification'
+import { admin, id } from '../admin_auth/index'
 
 
 export default {
@@ -87,6 +88,10 @@ export default {
 		const updateTitle = ref('')
 		const updateTotal = ref(0)
 		const updateUnit = ref('')
+
+		const king = admin
+
+		const auth = id.value
 
 		const updateProducts = async () => {
 			const stockQ = doc(db, "products", props.card.id);
@@ -140,6 +145,8 @@ export default {
 			updateUnit,
 			updateProducts,
 			deleteProduct,
+			auth,
+			king
 		}
 	}
 

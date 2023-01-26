@@ -6,13 +6,13 @@
                 <input v-model="inputStock" type="number" placeholder="Quantités" />
                 <button @click="updateStocks()" class="bouton-subpage">Envoyer</button>
                 <h3 class="restant-stock">Stock :</h3>
-                <div v-if="admin === king">
+                <div v-if="auth === king">
                     <p v-if="sub.areameters"> {{ totalMeters }} m2</p>
                 </div>
                 <p v-else class="total-stock"> {{ sub.total }} {{ unitValue }} </p>
             </div>
         </div>
-        <div v-if="admin === king" class="wrap-edit">
+        <div v-if="auth === king" class="wrap-edit">
             <span @click="isOpen = !isOpen" class="material-icons edit">
                 mode_edit
             </span>
@@ -58,7 +58,8 @@ import { doc, updateDoc, deleteDoc } from "firebase/firestore";
 import { useRoute } from "vue-router"
 import { useToast } from 'vue-toastification'
 import { db } from '../Firebase/firebase.js'
-import { getAuth, onAuthStateChanged} from "firebase/auth";
+import { admin, id } from '../admin_auth/index'
+// import { getAuth, onAuthStateChanged} from "firebase/auth";
 
 
 export default {
@@ -87,23 +88,24 @@ export default {
         const areaMeters = props.sub.areameters
 
         const calculMeters = props.sub.total * areaMeters
-        const auth = getAuth();
+        // const auth = getAuth();
 
-        const king = 'qO65yLrWwANe3zaYr5EaTmAIRZh2'
+        const auth = id.value
+        const king = admin
 
-        const admin = ref('')
 
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
 
-                const uid = user.uid;
+        // onAuthStateChanged(auth, (user) => {
+        //     if (user) {
 
-                admin.value = uid
+        //         const uid = user.uid;
 
-            } else {
+        //         admin.value = uid
 
-            }
-        });
+        //     } else {
+
+        //     }
+        // });
 
         totalMeters.value = calculMeters
 
@@ -196,8 +198,9 @@ export default {
             updateProduct,
             deleteProduct,
             totalMeters,
-            admin,
-            king
+            king,
+            auth,
+            
 
         }
     }

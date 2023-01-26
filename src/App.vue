@@ -118,6 +118,10 @@ button {
         border-radius: 5px;
         width: 400px;
 
+        @media (max-width: 760px) {
+          left: 57%;
+        }
+
         .app__forms-close {
 
           // margin-top: 1rem;

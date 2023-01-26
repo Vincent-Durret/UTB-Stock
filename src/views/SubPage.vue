@@ -8,7 +8,7 @@
             <h1> {{ productsInfo.name }} </h1>
         </div>
 
-        <div v-if="admin === king" class="subpage__add-sub">
+        <div v-if="auth === king" class="subpage__add-sub">
             <span @click="openFormSub = !openFormSub" class="material-icons add">
                 add_circle
             </span>
@@ -50,8 +50,7 @@ import { collection, query, onSnapshot, addDoc, updateDoc, doc, getDoc } from 'f
 import { db } from '../Firebase/firebase.js'
 import { ref, onMounted } from 'vue';
 import { useToast } from 'vue-toastification'
-import { getAuth, onAuthStateChanged} from "firebase/auth";
-
+import { admin, id } from '../admin_auth/index'
 export default {
     name: "SubPage",
     components: {
@@ -70,23 +69,11 @@ export default {
         const productsInfo = ref([])
 
         const totalAmount = ref(0)
-        const auth = getAuth();
 
-        const king = 'qO65yLrWwANe3zaYr5EaTmAIRZh2'
+        const king = admin
 
-        const admin = ref('')
+        const auth = id.value
 
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-
-                const uid = user.uid;
-
-                admin.value = uid 
-
-            } else {
-
-            }
-        });
 
         const dataName = async () => {
 
@@ -182,7 +169,7 @@ export default {
             totalAmount,
             productsInfo,
             king,
-            admin
+            auth
 
         }
     },
