@@ -6,11 +6,13 @@
                 <input v-model="inputStock" type="number" placeholder="Quantités" />
                 <button @click="updateStocks()" class="bouton-subpage">Envoyer</button>
                 <h3 class="restant-stock">Stock :</h3>
-                <p class="total-stock"> {{ sub.total }} {{ $route.params.unit }} </p>
-                <p v-if="sub.areameters"> {{ totalMeters }} m2</p>
+                <div v-if="admin === king">
+                    <p v-if="sub.areameters"> {{ totalMeters }} m2</p>
+                </div>
+                <p v-else class="total-stock"> {{ sub.total }} {{ unitValue }} </p>
             </div>
         </div>
-        <div class="wrap-edit">
+        <div v-if="admin === king" class="wrap-edit">
             <span @click="isOpen = !isOpen" class="material-icons edit">
                 mode_edit
             </span>
@@ -56,12 +58,15 @@ import { doc, updateDoc, deleteDoc } from "firebase/firestore";
 import { useRoute } from "vue-router"
 import { useToast } from 'vue-toastification'
 import { db } from '../Firebase/firebase.js'
+import { getAuth, onAuthStateChanged} from "firebase/auth";
+
 
 export default {
     name: "SubCard",
     props: {
         sub: Object,
         total: Number,
+        unitValue: String,
     },
 
     setup(props) {
@@ -82,6 +87,23 @@ export default {
         const areaMeters = props.sub.areameters
 
         const calculMeters = props.sub.total * areaMeters
+        const auth = getAuth();
+
+        const king = 'qO65yLrWwANe3zaYr5EaTmAIRZh2'
+
+        const admin = ref('')
+
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+
+                const uid = user.uid;
+
+                admin.value = uid
+
+            } else {
+
+            }
+        });
 
         totalMeters.value = calculMeters
 
@@ -147,6 +169,8 @@ export default {
                 await deleteDoc(doc(db, "products", route.params.id, "subproducts", props.sub.id));
                 toast.success(props.sub.title + " supprimé avec succes ")
 
+
+
                 openDeleteModal.value = false
 
 
@@ -172,6 +196,8 @@ export default {
             updateProduct,
             deleteProduct,
             totalMeters,
+            admin,
+            king
 
         }
     }

@@ -1,54 +1,70 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import Home from '../views/Home.vue'
-import Connexion from '../views/Connexion.vue'
-import Products from '../views/Products.vue'
-import SubPage from '../views/SubPage.vue'
-import PageNotFound from '../components/PageNotFound.vue'
+import { createRouter, createWebHistory } from "vue-router";
+import Home from "../views/Home.vue";
+import Connexion from "../views/Connexion.vue";
+import Products from "../views/Products.vue";
+import SubPage from "../views/SubPage.vue";
+import PageNotFound from "../components/PageNotFound.vue";
 
-// import PageNotFound from '../components/PageNotFound.vue'
-
-// import { auth } from '../Firebase/firebase.js'
+import { auth } from "../Firebase/firebase.js";
 
 const routes = [
   {
-    path: '/',
+    path: "/",
     component: Home,
+    name: 'Home',
+    meta: {
+      requiresAuth: true,
+    },
   },
   {
-    path: '/:category',
+    path: "/:category",
     component: Products,
-    name: 'Products',
+    name: "Products",
     props: true,
-    // meta: {
-    //   requiresAuth: true,
-    // },
+    meta: {
+      requiresAuth: true,
+    },
   },
   {
-    path: '/:category/:id',
+    path: "/:category/:id",
     component: SubPage,
-    name: 'SubPage',
+    name: "SubPage",
     props: true,
-    // meta: {
-    //   requiresAuth: true,
-    // },
+    meta: {
+      requiresAuth: true,
+    },
   },
   {
-    path: '/connexion',
-    name: 'Connexion',
+    path: "/connexion",
+    name: "Connexion",
     component: Connexion,
   },
 
   {
-    path: '/:catchAll(.*)',
+    path: "/:catchAll(.*)",
     component: PageNotFound,
     name: "NotFound",
   },
-]
+];
 
 const router = createRouter({
   history: createWebHistory(),
   routes,
-})
+});
+
+router.beforeEach((to, from, next) => {
+  if (to.path === "/connexion" && auth.currentUser) {
+    next({name: 'Home'});
+    return;
+  } else if (
+    to.matched.some((record) => record.meta.requiresAuth) &&
+    !auth.currentUser
+  ) {
+    next({name: 'Connexion'});
+    return;
+  }
+  next();
+});
 
 // router.beforeEach((to, from, next) => {
 //   if (to.path === '/connexion' && auth.currentUser) {
@@ -67,4 +83,4 @@ const router = createRouter({
 //   next()
 // })
 
-export default router
+export default router;

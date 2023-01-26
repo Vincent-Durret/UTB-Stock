@@ -5,37 +5,39 @@
         </div>
 
         <div class="wrap-titre">
-            <h1> title </h1>
+            <h1> {{ productsInfo.name }} </h1>
         </div>
 
-        <div class="subpage__add-sub">
+        <div v-if="admin === king" class="subpage__add-sub">
             <span @click="openFormSub = !openFormSub" class="material-icons add">
                 add_circle
             </span>
         </div>
 
-        <div v-if="openFormSub" class="app__forms-wrap">
-            <div class="app__forms">
-                <div class="app__forms-close">
-                    <span @click="openFormSub = !openFormSub" class="material-icons close">
-                        cancel
-                    </span>
-                </div>
-                <h3 class="app__forms-title">Ajouter une fourniture</h3>
-                <input v-model="addTitleRef" type="text" name="Title" placeholder="Nom de la fourniture">
-                <input v-model="addTotalRef" type="number" name="Total" placeholder="Quantitée(s)">
-                <input v-if="$route.params.category === wood" v-model="addAreaMeters" type="number"
-                    placeholder="Metre carre">
-                <button class="app__btn" @click="addSubCollection()">Valider</button>
-            </div>
-        </div>
 
-        {{ test.name }}
+
+            <div v-if="openFormSub" class="app__forms-wrap">
+                <div class="app__forms">
+                    <div class="app__forms-close">
+                        <span @click="openFormSub = !openFormSub" class="material-icons close">
+                            cancel
+                        </span>
+                    </div>
+                    <h3 class="app__forms-title">Ajouter une fourniture</h3>
+                    <input v-model="addTitleRef" type="text" name="Title" placeholder="Nom de la fourniture">
+                    <input v-model="addTotalRef" type="number" name="Total" placeholder="Quantitée(s)">
+                    <input v-if="$route.params.category === wood" v-model="addAreaMeters" type="number"
+                        placeholder="Metre carre">
+                    <button class="app__btn" @click="addSubCollection()">Valider</button>
+                </div>
+            </div>
+
 
 
 
         <div class="wrap-card">
-            <SubCard v-for="product in subProducts" :sub="product" :total="totalAmount" :key="product.id" />
+            <SubCard v-for="product in subProducts" :sub="product" :unitValue="productsInfo.unit" :total="totalAmount"
+                :key="product.id" />
         </div>
 
     </main>
@@ -44,10 +46,11 @@
 <script>
 import SubCard from '../components/SubCard.vue';
 import { useRoute } from "vue-router"
-import { collection, query, onSnapshot, addDoc, updateDoc, doc } from 'firebase/firestore'
+import { collection, query, onSnapshot, addDoc, updateDoc, doc, getDoc } from 'firebase/firestore'
 import { db } from '../Firebase/firebase.js'
 import { ref, onMounted } from 'vue';
 import { useToast } from 'vue-toastification'
+import { getAuth, onAuthStateChanged} from "firebase/auth";
 
 export default {
     name: "SubPage",
@@ -64,25 +67,43 @@ export default {
         const addAreaMeters = ref(0)
         const subProducts = ref([]);
         const wood = "bois"
-        const test = ref([])
+        const productsInfo = ref([])
 
         const totalAmount = ref(0)
+        const auth = getAuth();
 
-        const dataName = () => {
-            const q = query(collection(db, "products"))
+        const king = 'qO65yLrWwANe3zaYr5EaTmAIRZh2'
 
-            onSnapshot(q, (querySnapshot) => {
-                const fetchedProducts = [];
+        const admin = ref('')
 
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
 
-                querySnapshot.forEach((doc) => {
-                    fetchedProducts.push({ id: doc.id, ...doc.data() })
-                })
-                test.value = fetchedProducts
+                const uid = user.uid;
 
-                console.log(test.value)
-            });
+                admin.value = uid 
+
+            } else {
+
+            }
+        });
+
+        const dataName = async () => {
+
+            const docRef = doc(db, "products", route.params.id);
+            const docSnap = await getDoc(docRef);
+
+            if (docSnap.exists()) {
+                // console.log("Document data:", docSnap.data());
+                productsInfo.value = docSnap.data()
+            } else {
+                // doc.data() will be undefined in this case
+                // console.log("No such document!");
+                toast.warning("Document non trouver ! veuillez appelez votre devellopeur.")
+            }
         }
+
+        // console.log(dataName())
 
         const makeDataSubProducts = () => {
             const q = query(collection(db, "products", route.params.id, "subproducts"))
@@ -99,6 +120,7 @@ export default {
 
                 totalAmount.value = subProducts.value.reduce((acc, curr) => acc + curr.total, 0)
             });
+
         }
 
         const addSubCollection = async () => {
@@ -144,7 +166,8 @@ export default {
             // }
         }
 
-        onMounted(makeDataSubProducts, dataName)
+        onMounted(makeDataSubProducts)
+        onMounted(dataName)
 
 
 
@@ -157,7 +180,10 @@ export default {
             subProducts,
             wood,
             totalAmount,
-            test
+            productsInfo,
+            king,
+            admin
+
         }
     },
 }

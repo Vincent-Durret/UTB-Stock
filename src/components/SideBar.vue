@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div v-if="store.state.user">
         <aside :class="`${is_expanded && 'is-expanded'}`">
             <div class="logo">
                 <router-link to="/">
@@ -54,6 +54,7 @@
                 </div>
             </div>
         </aside>
+
         <div class="closemenu" @click="closeMenu"></div>
     </div>
 
@@ -61,8 +62,8 @@
 
 <script setup>
 import { ref } from 'vue';
-// import { onBeforeMount } from 'vue'
-// import { useStore } from 'vuex'
+import { onBeforeMount } from 'vue'
+import { useStore } from 'vuex'
 import AddProduct from './AddProduct.vue';
 import AddSubProduct from './AddSubProduct.vue';
 
@@ -89,11 +90,11 @@ const closeMenu = () => {
 }
 
 
-// const store = useStore()
+const store = useStore()
 
-// onBeforeMount(() => {
-//     store.dispatch('fetchUser')
-// })
+onBeforeMount(() => {
+    store.dispatch('fetchUser')
+})
 
 
 

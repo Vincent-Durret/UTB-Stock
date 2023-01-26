@@ -43,10 +43,10 @@
 				<h3 class="app__forms-title">Modifier le produit "{{ card.name }}"</h3>
 				<input v-model="updateCategory" type="text" list="category" :placeholder=card.category>
 				<datalist id="category">
-					<option value="Bois"></option>
-					<option value="Quincailleries"></option>
-					<option value="Produits"></option>
-					<option value="Autres"></option>
+					<option value="bois"></option>
+					<option value="quincailleries"></option>
+					<option value="produits"></option>
+					<option value="autres"></option>
 				</datalist>
 				<input v-model="updateName" type="text" list="nom" :placeholder=card.name>
 				<datalist id="nom">
@@ -56,7 +56,6 @@
 				<datalist id="image">
 					<option :value=card.image></option>
 				</datalist>
-				<input v-model="updateStock" type="number" :placeholder=card.stock>
 				<input v-model="updateUnit" type="text" :placeholder=card.unit>
 				<button class="app__btn" @click="updateProducts">Valider</button>
 			</div>
@@ -87,7 +86,6 @@ export default {
 		const updateImage = ref('')
 		const updateTitle = ref('')
 		const updateTotal = ref(0)
-		const updateStock = ref(0)
 		const updateUnit = ref('')
 
 		const updateProducts = async () => {
@@ -97,7 +95,6 @@ export default {
 					category: updateCategory.value,
 					name: updateName.value,
 					image: updateImage.value,
-					stock: updateStock.value,
 					unit: updateUnit.value
 				});
 				updateProducts ? updateCategory.value = '' : updateCategory.value = updateCategory.value
@@ -105,10 +102,12 @@ export default {
 				updateProducts ? updateImage.value = '' : updateImage.value = updateImage.value
 				updateProducts ? updateTitle.value = '' : updateTitle.value = updateTitle.value
 				updateProducts ? updateTotal.value = '' : updateTotal.value = updateTotal.value
-				updateProducts ? updateStock.value = '' : updateStock.value = updateStock.value
 				updateProducts ? updateUnit.value = '' : updateUnit.value = updateUnit.value
 
 				toast.success("Produits modifier")
+
+				openUpdate.value = false
+				isOpen.value = false
 
 			} catch (error) {
 				toast.error('Une erreur est survenue !')
@@ -138,7 +137,6 @@ export default {
 			updateImage,
 			updateTitle,
 			updateTotal,
-			updateStock,
 			updateUnit,
 			updateProducts,
 			deleteProduct,

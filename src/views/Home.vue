@@ -1,4 +1,5 @@
 <template>
+  
   <main class="home-page">
     <header>
       <div class="wrap-header-img">
