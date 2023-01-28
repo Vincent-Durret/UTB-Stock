@@ -1,35 +1,66 @@
 <template>
-  <main class="bois-page">
+  <main class="products-page">
     <div class="return">
-      <span @click="goHome()" class="material-icons">arrow_back</span>
+      <span @click="goHome()" class="material-icons back">arrow_back</span>
     </div>
     <div class="wrap-title">
       <h1> {{ $route.params.category.replace(/(?:^|\s|-)\S/g, x => x.toUpperCase()) }} </h1>
     </div>
+    <div v-if="auth === king" class="products__add-sub">
+      <span @click="openForm = !openForm" class="material-icons add">
+        add_circle
+      </span>
+    </div>
     <Search />
     <div class="cards-grid">
-      <Card  v-for="product in products" :card="product" :key="product.id" />
+      <Card v-for="product in products" :card="product" :key="product.id" />
     </div>
+
+
+    <!-- form add products -->
+    <div v-if="openForm" class="app__forms-wrap">
+      <div class="app__forms">
+        <div class="app__forms-close">
+          <span @click="openForm = !openForm" class="material-icons close">
+            cancel
+          </span>
+        </div>
+        <h3 class="app__forms-title">Ajouter une fourniture</h3>
+        <select v-model="addCategory" name="product-category" required>
+          <option value="" disabled selected hidden>Choisir une catégorie</option>
+          <option value="bois">Bois</option>
+          <option value="quincailleries">Quincailleries</option>
+          <option value="produits">Produits</option>
+          <option value="autres">Autres</option>
+        </select>
+        <input v-model="addName" type="text" placeholder="*Nom">
+        <input v-model="addImage" type="text" placeholder="*Image">
+        <input v-model="addUnit" type="text" placeholder="*Unités">
+        <button class="app__btn" @click="addProducts()">Valider</button>
+      </div>
+    </div>
+
   </main>
+
 </template>
 
 <script>
 import { onMounted, ref } from 'vue';
 import { useRoute } from "vue-router"
-
 import Card from '../components/Card.vue';
-
-
-import { collection, query, where,  onSnapshot } from 'firebase/firestore'
-
+import { collection, query, where, onSnapshot, addDoc } from 'firebase/firestore'
 import { db } from '../Firebase/firebase.js'
 import Search from '../components/Search.vue';
+import { useToast } from 'vue-toastification'
+
+import { admin, id } from '../admin_auth/index'
+
 
 export default {
   name: 'Products',
   components: {
     Card,
-    Search
+    Search,
   },
   methods: {
     goHome() {
@@ -37,7 +68,36 @@ export default {
     }
   },
   setup() {
+    const openForm = ref(false)
+    const toast = useToast()
     const products = ref([]);
+    const addCategory = ref('')
+    const addName = ref('')
+    const addImage = ref('')
+    const addTitle = ref('')
+    const addUnit = ref('')
+
+    const king = admin
+
+    const auth = id.value
+
+
+    const addProducts = async () => {
+      await addDoc(collection(db, "products"), {
+        category: addCategory.value,
+        name: addName.value,
+        image: addImage.value,
+        unit: addUnit.value,
+      });
+      toast.success("Produit créer avec succes")
+      addProducts ? addCategory.value = '' : addCategory.value = addCategory.value
+      addProducts ? addName.value = '' : addName.value = addName.value
+      addProducts ? addImage.value = '' : addImage.value = addImage.value
+      addProducts ? addUnit.value = '' : addUnit.value = addUnit.value
+
+      openForm.value = false
+    }
+
 
     onMounted(async () => {
       const route = useRoute()
@@ -56,14 +116,24 @@ export default {
 
 
     return {
+      openForm,
       products,
+      addCategory,
+      addName,
+      addImage,
+      addTitle,
+      addUnit,
+      addProducts,
+      king,
+      auth
+
     }
   },
 }
 </script>
 
-<style lang="scss" scoped>
-.bois-page {
+<style lang="scss">
+.products-page {
 
   .return {
     position: relative;
@@ -71,7 +141,7 @@ export default {
     margin: 1rem;
   }
 
-  .material-icons {
+  .back {
     background: rgba(0, 0, 0, 0.9);
     padding: 0.4rem;
     border-radius: 5px;
@@ -100,12 +170,31 @@ export default {
 
   }
 
-  .test {
+  .products__add-sub {
+    position: relative;
+    z-index: 5;
     display: flex;
     justify-content: center;
-    flex-direction: column;
-    align-items: center;
+    margin-bottom: 1rem;
+
+    .add {
+      background: var(--black-alt);
+      padding: 0.5rem;
+      border-radius: 5px;
+      color: var((--light));
+      cursor: pointer;
+      border: 1px solid var(--logo-letters);
+      font-size: 3rem;
+
+
+      &:hover {
+        color: var(--logo-letters);
+        transform: translateY(-0.5rem) scale(1.1, 1.1);
+        transition: 0.2s ease-out;
+      }
+    }
   }
+
 
   .cards-grid {
     display: flex;

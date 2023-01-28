@@ -4,6 +4,9 @@
 			<router-link class="button" :to="`/${card.category}/${card.id}`">
 				<div :style="{ backgroundImage: `url(${card.image})` }" class="image"></div>
 				<span class="text">{{ card.name }}</span>
+				<!-- <div v-if="card.category === 'bois'">
+					<h3 v-if="auth === king" class="card__total"> {{ card.stock }} m²</h3>
+				</div> -->
 				<h3 class="total">{{ card.stock }} {{ card.unit }} </h3>
 			</router-link>
 			<div v-if="auth === king" class="wrap-edit">
@@ -280,6 +283,17 @@ export default {
 				margin-right: 25px;
 				font-weight: 550;
 
+			}
+
+			.card__total {
+				top: 2.5rem;
+				background: rgba(0, 0, 0, 0.9);
+				padding: 0.3rem;
+				border-radius: 5px;
+				position: relative;
+				z-index: 3;
+				color: var(--logo-letters);
+				font-weight: 600;
 			}
 
 			.total {

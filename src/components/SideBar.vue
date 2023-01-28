@@ -30,19 +30,6 @@
                     <span class="material-icons">widgets</span>
                     <span class="text">Autres</span>
                 </router-link>
-                <div v-if="auth === king" @click="isOpen = !isOpen" class="button">
-                    <span class="material-icons edit">
-                        add_circle
-                    </span>
-                    <span class="text">Ajouter</span>
-
-                </div>
-                <div v-if="isOpen" class="button">
-                    <div class="wrap-icons">
-                        <AddProduct />
-                        <AddSubProduct />
-                    </div>
-                </div>
             </div>
 
             <div class="flex"></div>
@@ -64,22 +51,11 @@
 import { ref } from 'vue';
 import { onBeforeMount } from 'vue'
 import { useStore } from 'vuex'
-import AddProduct from './AddProduct.vue';
-import AddSubProduct from './AddSubProduct.vue';
 
-import { admin, id } from '../admin_auth/index'
-
-
-const isOpen = ref(false)
 
 const is_expanded = ref(localStorage.getItem("is_expanded") === "true")
 
 const imgSrc = ref('../assets/Logo/logo2.png')
-
-const king = admin
-
-const auth = id.value
-
 
 
 const ToggleMenu = () => {
@@ -132,7 +108,7 @@ aside {
         img {
             width: 5rem;
             transition: 0.3s;
-            filter: drop-shadow(0px 0px 1px var(--logo-letters));
+            // filter: drop-shadow(0px 0px 1px var(--logo-letters));
         }
     }
 
@@ -233,7 +209,7 @@ aside {
 
             img {
                 width: 15rem;
-                transition: 0.3s;
+                transition: width 0.3s;
             }
         }
 

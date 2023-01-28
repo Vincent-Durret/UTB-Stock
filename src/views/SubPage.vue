@@ -51,6 +51,7 @@ import { db } from '../Firebase/firebase.js'
 import { ref, onMounted } from 'vue';
 import { useToast } from 'vue-toastification'
 import { admin, id } from '../admin_auth/index'
+
 export default {
     name: "SubPage",
     components: {
@@ -86,11 +87,10 @@ export default {
             } else {
                 // doc.data() will be undefined in this case
                 // console.log("No such document!");
-                toast.warning("Document non trouver ! veuillez appelez votre devellopeur.")
+                toast.warning("Document non trouver ! veuillez appelez votre developeur.")
             }
         }
 
-        // console.log(dataName())
 
         const makeDataSubProducts = () => {
             const q = query(collection(db, "products", route.params.id, "subproducts"))
@@ -136,21 +136,6 @@ export default {
                 console.log(error)
             }
 
-            // try {
-
-            //     await updateDoc(stockQ, {
-            //         test: totalAmount.value
-            //     });
-
-            //     toast.success('Stock ajouter')
-
-            //     addSubCollection ? addTotalRef.value = '' : addTotalRef.value = addTotalRef.value
-
-            //     openFormSub.value = false
-            // } catch (error) {
-            //     console.log(error)
-            //     toast.error('Une erreur est survenue')
-            // }
         }
 
         onMounted(makeDataSubProducts)

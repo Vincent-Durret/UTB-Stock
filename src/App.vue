@@ -151,6 +151,18 @@ button {
           margin-top: 1rem;
         }
 
+        
+        select {
+          margin-top: 1rem;
+          margin: 1rem;
+          padding: 8px;
+          border: none;
+          color: black;
+          border-radius: 5px;
+          font-weight: bold;
+          font-size: 1rem;
+            }
+
         input {
           margin-top: 1rem;
           margin: 1rem;
