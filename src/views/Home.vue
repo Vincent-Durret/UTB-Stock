@@ -15,9 +15,10 @@
 </template>
 
 <script>
+
 import { onMounted, ref } from 'vue';
 
-import { collection, onSnapshot, orderBy, query } from 'firebase/firestore'
+import { collection, onSnapshot, query } from 'firebase/firestore'
 
 import { db } from '../Firebase/firebase.js'
 

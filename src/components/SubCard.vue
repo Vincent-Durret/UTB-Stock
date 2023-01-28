@@ -128,7 +128,7 @@ export default {
 
 
 
-                toast.success(" Vous avez retirer " + inputStock.value + " " + route.params.unit)
+                toast.success(" Vous avez retirer " + inputStock.value + " " + props.unitValue)
 
                 updateStocks ? inputStock.value = '' : inputStock.value = inputStock.value
 

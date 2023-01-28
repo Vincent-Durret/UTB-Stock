@@ -70,10 +70,10 @@ form {
 }
 
 .logo-login {
-  background-image: url(../assets/Logo/logo-UTB-stock.png);
+  background-image: url(../assets/Logo/logo-UTB-stock.svg);
   background-size: cover;
   background-position: center;
-  width: 350px;
+  width: 450px;
   height: 150px;
 }
 
