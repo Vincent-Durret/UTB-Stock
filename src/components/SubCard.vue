@@ -7,7 +7,7 @@
                 <button @click="updateStocks()" class="bouton-subpage">Envoyer</button>
                 <h3 class="restant-stock">Stock :</h3>
                 <div v-if="auth === king">
-                    <p v-if="sub.areameters"> {{ totalMeters }} m2</p>
+                    <p v-if="sub.areameters" class="subcard__total-stock"> {{ totalMeters }} m²</p>
                 </div>
                 <p v-else class="total-stock"> {{ sub.total }} {{ unitValue }} </p>
             </div>
@@ -258,6 +258,12 @@ export default {
             .restant-stock {
                 font-size: 1.5rem;
                 margin-top: 0.7rem;
+                color: var(--black-alt);
+            }
+
+            .subcard__total-stock {
+                margin-top: 0.5rem;
+                font-size: 1.1rem;
                 color: var(--black-alt);
             }
 

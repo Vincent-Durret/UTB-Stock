@@ -1,5 +1,5 @@
 <template>
-  <div class="app">
+  <div  class="app">
     <SideBar />
     <router-view :key="$route.fullPath">
     </router-view>
@@ -151,7 +151,7 @@ button {
           margin-top: 1rem;
         }
 
-        
+
         select {
           margin-top: 1rem;
           margin: 1rem;
@@ -161,7 +161,7 @@ button {
           border-radius: 5px;
           font-weight: bold;
           font-size: 1rem;
-            }
+        }
 
         input {
           margin-top: 1rem;

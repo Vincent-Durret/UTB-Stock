@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import { useStore } from 'vuex'
 
 export default {
@@ -33,6 +33,16 @@ export default {
     const register = () => {
       store.dispatch('register', register_form.value);
     }
+
+    const persistanAuth = () => {
+      const authStatus = localStorage.getItem('authStatus')
+      if (authStatus) {
+        store.commit('updateAuthStatus', JSON.parse(authStatus))
+      }
+    }
+
+
+    onMounted(persistanAuth)
 
     return {
       login_form,
@@ -142,11 +152,11 @@ form.login input[type="submit"]:hover {
   }
 
   form {
-  flex: 1 1 0%;
-  padding: 8rem 1rem 1rem;
-  display:contents;
-}
+    flex: 1 1 0%;
+    padding: 8rem 1rem 1rem;
+    display: contents;
+  }
 
-  
+
 }
 </style>

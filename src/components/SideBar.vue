@@ -1,5 +1,5 @@
 <template>
-    <div v-if="store.state.user">
+    <div v-if="store.state.user" >
         <aside :class="`${is_expanded && 'is-expanded'}`">
             <div class="logo">
                 <router-link to="/">
