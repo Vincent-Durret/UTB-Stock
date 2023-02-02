@@ -20,12 +20,12 @@ const db = getFirestore(app);
 
 const auth = getAuth(app);
 
-setPersistence(firebase.auth.Auth.Persistence.LOCAL)
-.then(function() {
-return signInWithEmailAndPassword(auth, email, password);
-})
-.catch(function(error) {
-console.error(error);
-});
+// setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+// .then(function() {
+// return signInWithEmailAndPassword(auth, email, password);
+// })
+// .catch(function(error) {
+// console.error(error);
+// });
 
 export { db, auth };
