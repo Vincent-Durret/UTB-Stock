@@ -1,5 +1,5 @@
 <template>
-  <div  class="app">
+  <div class="app">
     <SideBar />
     <router-view :key="$route.fullPath">
     </router-view>
@@ -104,6 +104,7 @@ button {
       background: rgba(9, 10, 17, 0.76);
       z-index: 14;
 
+
       .app__forms {
         position: fixed;
         border: 3px solid var(--logo-letters);
@@ -119,7 +120,8 @@ button {
         width: 400px;
 
         @media (max-width: 760px) {
-          left: 57%;
+          left: 58%;
+          width: 300px;
         }
 
         .app__forms-close {
