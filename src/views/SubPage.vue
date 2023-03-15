@@ -35,7 +35,7 @@
 
         <div class="wrap-card">
             <SubCard v-for="product in subProducts" :sub="product" :unitValue="productsInfo.unit" :total="totalAmount"
-                :key="product.id" />
+                :areaMeter="totalAreaMeters" :key="product.id" />
         </div>
 
     </main>
@@ -126,7 +126,7 @@ export default {
 
                 await updateDoc(stockQ, {
                     stock: totalAmount.value,
-                    // stockAreaMeters: totalAreaMeters.value
+                    stockAreaMeters: totalAreaMeters.value
                 });
 
                 toast.success('Fourniture ajoutée')

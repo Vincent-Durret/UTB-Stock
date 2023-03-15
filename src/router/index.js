@@ -11,7 +11,7 @@ const routes = [
   {
     path: "/",
     component: Home,
-    name: 'Home',
+    name: "Home",
     meta: {
       requiresAuth: true,
     },
@@ -53,36 +53,17 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  if (to.path === "/connexion" && auth.currentUser) {
-    next('/');
-    return;
-  } else if (
-    to.matched.some((record) => record.meta.requiresAuth) &&
-    !auth.currentUser
-  ) {
-    next('/connexion');
-    return;
-  } else {
-    next();
+  const requiresAuth = to.matched.some((record) => record.meta.requiresAuth);
 
-  }
+  auth.onAuthStateChanged((user) => {
+    if (requiresAuth && !user) {
+      next("/connexion");
+    } else if (to.name === "Connexion" && user) {
+      next("/");
+    } else {
+      next();
+    }
+  });
 });
-
-// router.beforeEach((to, from, next) => {
-//   if (to.path === '/connexion' && auth.currentUser) {
-//     next('/')
-//     return
-//   }
-
-//   if (
-//     to.matched.some((record) => record.meta.requiresAuth) &&
-//     !auth.currentUser
-//   ) {
-//     next()
-//     return
-//   }
-
-//   next()
-// })
 
 export default router;

@@ -36,7 +36,8 @@
                 <h3 class="app__forms-title">Modifier le produit "{{ sub.title }}"</h3>
                 <input v-model="updateTitleRef" type="text" list="nom" :placeholder=sub.title>
                 <input v-model="updateTotalRef" type="number" :placeholder=sub.total>
-                    <input v-if="$route.params.category === 'bois'" v-model="updateAreaMetersRef" type="number" :placeholder="sub.areameters">
+                <input v-if="$route.params.category === 'bois'" v-model="updateAreaMetersRef" type="number"
+                    :placeholder="sub.areameters">
                 <button class="app__btn" @click="updateProduct()">Mettre a jour</button>
             </div>
         </div>
@@ -69,6 +70,7 @@ export default {
         sub: Object,
         total: Number,
         unitValue: String,
+        areameter: Number,
     },
 
     setup(props) {
@@ -105,7 +107,8 @@ export default {
             try {
 
                 await updateDoc(stockT, {
-                    stock: props.total - inputStock.value
+                    stock: props.total - inputStock.value,
+                    // stockAreaMeters: props.areameters - inputStock.value
                 });
                 await updateDoc(stockQ, {
                     total: Math.max(0, props.sub.total - inputStock.value)
@@ -266,7 +269,7 @@ export default {
         }
     }
 
-   
+
 
     .card__forms {
         position: fixed;
