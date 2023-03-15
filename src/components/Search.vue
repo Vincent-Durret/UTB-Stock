@@ -107,7 +107,7 @@ export default {
 .search__wrap {
     position: relative;
     margin-bottom: 3rem;
-    margin-right: 3rem;
+    // margin-right: 3rem;
     display: flex;
     justify-content: end;
     z-index: 4;

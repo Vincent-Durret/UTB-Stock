@@ -95,6 +95,88 @@ button {
       padding-top: 2rem;
     }
 
+    .wrap-edit {
+      position: absolute;
+      top: 0;
+      z-index: 3;
+      // margin-right: 3px;
+
+
+      .edit {
+        background: var(--black-alt);
+        padding: 0.5rem;
+        border-radius: 5px;
+        color: var((--light));
+        cursor: pointer;
+        border: 1px solid var(--logo-letters);
+
+        &:hover {
+          color: var(--logo-letters);
+          transform: translateY(-0.5rem) scale(1.1, 1.1);
+          transition: 0.2s ease-out;
+        }
+      }
+    }
+
+
+
+    .wrap-icon {
+      position: absolute;
+      margin-left: 3rem;
+      top: 0;
+      z-index: 3;
+
+      animation: fade 0.3s ease-in-out;
+      transition: all 0.3s ease-in-out;
+
+      @keyframes fade {
+        0% {
+          transform: translateX(-3rem);
+          transition: all 0.3s ease-in-out;
+        }
+
+        100% {
+          transform: translateX(0rem);
+
+          // transform: scale(1);
+          transition: all 0.3s ease-in-out;
+
+        }
+      }
+
+
+      .delete {
+        margin-left: 0.5rem;
+        background: var(--black-alt);
+        padding: 00.5rem;
+        border-radius: 5px;
+        color: var((--light));
+        border: 1px solid var(--logo-letters);
+        cursor: pointer;
+
+        &:hover {
+          color: red;
+          transform: translateY(-0.5rem) scale(1.1, 1.1);
+          transition: 0.2s ease-out;
+        }
+      }
+
+      .update {
+        background: var(--black-alt);
+        padding: 00.5rem;
+        border-radius: 5px;
+        color: var((--light));
+        cursor: pointer;
+        border: 1px solid var(--logo-letters);
+
+        &:hover {
+          color: var(--logo-letters);
+          transform: translateY(-0.5rem) scale(1.1, 1.1);
+          transition: 0.2s ease-out;
+        }
+      }
+    }
+
     .app__forms-wrap {
       position: fixed;
       top: 0;

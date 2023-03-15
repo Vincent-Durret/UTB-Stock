@@ -7,7 +7,7 @@
 				<!-- <div v-if="card.category === 'bois'">
 					<h3 v-if="auth === king" class="card__total"> {{ card.stock }} m²</h3>
 				</div> -->
-				<h3 class="total">{{ card.stock }} {{ card.unit }} </h3>
+				<h3 class="total">{{ card.stock }} {{ card.stockAreaMeters }} {{ card.unit }} </h3>
 			</router-link>
 			<div v-if="auth === king" class="wrap-edit">
 				<span @click="isOpen = !isOpen" class="material-icons edit">
@@ -172,67 +172,6 @@ export default {
 		@media (max-width: 760px) {
 			flex-direction: column;
 			transition: 0.5s;
-		}
-
-
-		.wrap-edit {
-			position: absolute;
-			z-index: 3;
-			// margin-right: 3px;
-
-			.edit {
-				background: var(--black-alt);
-				padding: 0.5rem;
-				border-radius: 5px;
-				color: var((--light));
-				cursor: pointer;
-				border: 1px solid var(--logo-letters);
-
-				&:hover {
-					color: var(--logo-letters);
-					transform: translateY(-0.5rem) scale(1.1, 1.1);
-					transition: 0.2s ease-out;
-
-				}
-			}
-		}
-
-		.wrap-icon {
-			position: absolute;
-			margin-left: 3rem;
-			z-index: 3;
-
-
-			.delete {
-				margin-left: 0.5rem;
-				background: var(--black-alt);
-				padding: 00.5rem;
-				border-radius: 5px;
-				color: var((--light));
-				border: 1px solid var(--logo-letters);
-				cursor: pointer;
-
-				&:hover {
-					color: red;
-					transform: translateY(-0.5rem) scale(1.1, 1.1);
-					transition: 0.2s ease-out;
-				}
-			}
-
-			.update {
-				background: var(--black-alt);
-				padding: 00.5rem;
-				border-radius: 5px;
-				color: var((--light));
-				cursor: pointer;
-				border: 1px solid var(--logo-letters);
-
-				&:hover {
-					color: var(--logo-letters);
-					transform: translateY(-0.5rem) scale(1.1, 1.1);
-					transition: 0.2s ease-out;
-				}
-			}
 		}
 
 		.button {

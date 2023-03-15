@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import { ref, onMounted } from 'vue'
+import { ref } from 'vue'
 import { useStore } from 'vuex'
 
 export default {
@@ -33,16 +33,6 @@ export default {
     const register = () => {
       store.dispatch('register', register_form.value);
     }
-
-    const persistanAuth = () => {
-      const authStatus = localStorage.getItem('authStatus')
-      if (authStatus) {
-        store.commit('updateAuthStatus', JSON.parse(authStatus))
-      }
-    }
-
-
-    onMounted(persistanAuth)
 
     return {
       login_form,

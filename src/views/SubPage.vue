@@ -5,32 +5,30 @@
         </div>
 
         <div class="wrap-titre">
-            <h1> {{ productsInfo.name }} </h1>
+            <h1> {{ productsName }} </h1>
         </div>
+        <p> {{ totalAreaMeters }}</p>
 
         <div v-if="auth === king" class="subpage__add-sub">
             <span @click="openFormSub = !openFormSub" class="material-icons add">
                 add_circle
             </span>
         </div>
-
-
-
-            <div v-if="openFormSub" class="app__forms-wrap">
-                <div class="app__forms">
-                    <div class="app__forms-close">
-                        <span @click="openFormSub = !openFormSub" class="material-icons close">
-                            cancel
-                        </span>
-                    </div>
-                    <h3 class="app__forms-title">Ajouter une fourniture</h3>
-                    <input v-model="addTitleRef" type="text" name="Title" placeholder="Nom de la fourniture">
-                    <input v-model="addTotalRef" type="number" name="Total" placeholder="Quantitée(s)">
-                    <input v-if="$route.params.category === wood" v-model="addAreaMeters" type="number"
-                        placeholder="Metre carre">
-                    <button class="app__btn" @click="addSubCollection()">Valider</button>
+        <div v-if="openFormSub" class="app__forms-wrap">
+            <div class="app__forms">
+                <div class="app__forms-close">
+                    <span @click="openFormSub = !openFormSub" class="material-icons close">
+                        cancel
+                    </span>
                 </div>
+                <h3 class="app__forms-title">Ajouter une fourniture</h3>
+                <input v-model="addTitleRef" type="text" name="Title" placeholder="Nom de la fourniture">
+                <input v-model="addTotalRef" type="number" name="Total" placeholder="Quantitée(s)">
+                <input v-if="$route.params.category === wood" v-model="addAreaMeters" type="number"
+                    placeholder="Metre carre">
+                <button class="app__btn" @click="addSubCollection()">Valider</button>
             </div>
+        </div>
 
 
 
@@ -63,16 +61,17 @@ export default {
         const toast = useToast()
         const openFormSub = ref(false)
         const addTitleRef = ref('')
-        const addTotalRef = ref(0)
-        const addAreaMeters = ref(0)
+        const addTotalRef = ref()
+        const addAreaMeters = ref()
         const subProducts = ref([]);
         const wood = "bois"
         const productsInfo = ref([])
-
+        const productsName = ref([])
         const totalAmount = ref(0)
+        const calculAreaMeters = ref([])
+        const totalAreaMeters = ref(0)
 
         const king = admin
-
         const auth = id.value
 
 
@@ -84,6 +83,8 @@ export default {
             if (docSnap.exists()) {
                 // console.log("Document data:", docSnap.data());
                 productsInfo.value = docSnap.data()
+                productsName.value = docSnap.data().name.replace(/(?:^|\s|-)\S/g, x => x.toUpperCase())
+                // console.log(docSnap.data().name.replace(/(?:^|\s|-)\S/g, x => x.toUpperCase()))
             } else {
                 // doc.data() will be undefined in this case
                 // console.log("No such document!");
@@ -101,11 +102,15 @@ export default {
 
                 querySnapshot.forEach((doc) => {
                     fetchedProducts.push({ id: doc.id, ...doc.data() })
+                    const totalMeters = doc.data().total
+                    const areaMeters = doc.data().areameters
+
+                    calculAreaMeters.value.push(totalMeters * areaMeters)
                 })
                 subProducts.value = fetchedProducts
-                console.log(subProducts.value.reduce((acc, curr) => acc + curr.total, 0))
-
+                totalAreaMeters.value = calculAreaMeters.value.reduce((acc, curr) => acc + curr, 0)
                 totalAmount.value = subProducts.value.reduce((acc, curr) => acc + curr.total, 0)
+                // console.log(totalAreaMeters.value)
             });
 
         }
@@ -120,7 +125,8 @@ export default {
                 });
 
                 await updateDoc(stockQ, {
-                    stock: totalAmount.value
+                    stock: totalAmount.value,
+                    // stockAreaMeters: totalAreaMeters.value
                 });
 
                 toast.success('Fourniture ajoutée')
@@ -153,6 +159,9 @@ export default {
             wood,
             totalAmount,
             productsInfo,
+            productsName,
+            totalAreaMeters,
+            calculAreaMeters,
             king,
             auth
 

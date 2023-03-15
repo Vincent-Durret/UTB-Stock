@@ -185,12 +185,14 @@ export default {
       cursor: pointer;
       border: 1px solid var(--logo-letters);
       font-size: 3rem;
+      transition: all 0.3s ease-in-out;
 
 
       &:hover {
-        color: var(--logo-letters);
+        background: var(--logo-letters);
+        color: var(--black-alt);
         transform: translateY(-0.5rem) scale(1.1, 1.1);
-        transition: 0.2s ease-out;
+        transition: all 0.3s ease-in-out;
       }
     }
   }

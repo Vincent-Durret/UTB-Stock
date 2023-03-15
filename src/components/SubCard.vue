@@ -7,6 +7,7 @@
                 <button @click="updateStocks()" class="bouton-subpage">Envoyer</button>
                 <h3 class="restant-stock">Stock :</h3>
                 <div v-if="auth === king">
+                    <p class="total-stock"> {{ sub.total }} {{ unitValue }} </p>
                     <p v-if="sub.areameters" class="subcard__total-stock"> {{ totalMeters }} m²</p>
                 </div>
                 <p v-else class="total-stock"> {{ sub.total }} {{ unitValue }} </p>
@@ -35,6 +36,7 @@
                 <h3 class="app__forms-title">Modifier le produit "{{ sub.title }}"</h3>
                 <input v-model="updateTitleRef" type="text" list="nom" :placeholder=sub.title>
                 <input v-model="updateTotalRef" type="number" :placeholder=sub.total>
+                    <input v-if="$route.params.category === 'bois'" v-model="updateAreaMetersRef" type="number" :placeholder="sub.areameters">
                 <button class="app__btn" @click="updateProduct()">Mettre a jour</button>
             </div>
         </div>
@@ -59,7 +61,6 @@ import { useRoute } from "vue-router"
 import { useToast } from 'vue-toastification'
 import { db } from '../Firebase/firebase.js'
 import { admin, id } from '../admin_auth/index'
-// import { getAuth, onAuthStateChanged} from "firebase/auth";
 
 
 export default {
@@ -81,33 +82,19 @@ export default {
         const openDeleteModal = ref(false)
 
         const updateTitleRef = ref('')
-        const updateTotalRef = ref(0)
+        const updateTotalRef = ref()
+        const updateAreaMetersRef = ref()
 
         const totalMeters = ref(0)
 
-        const areaMeters = props.sub.areameters
 
-        const calculMeters = props.sub.total * areaMeters
-        // const auth = getAuth();
+        const calculMeters = props.sub.total * props.sub.areameters
 
         const auth = id.value
         const king = admin
 
-
-
-        // onAuthStateChanged(auth, (user) => {
-        //     if (user) {
-
-        //         const uid = user.uid;
-
-        //         admin.value = uid
-
-        //     } else {
-
-        //     }
-        // });
-
         totalMeters.value = calculMeters
+
 
         const updateStocks = async () => {
 
@@ -148,6 +135,7 @@ export default {
                 await updateDoc(productQ, {
                     title: updateTitleRef.value,
                     total: updateTotalRef.value,
+                    areameters: updateAreaMetersRef.value
                 });
 
                 toast.success("La fourniture a etait mis a jour")
@@ -194,13 +182,14 @@ export default {
             inputStock,
             updateTitleRef,
             updateTotalRef,
+            updateAreaMetersRef,
             updateStocks,
             updateProduct,
             deleteProduct,
             totalMeters,
             king,
             auth,
-            
+
 
         }
     }
@@ -277,79 +266,7 @@ export default {
         }
     }
 
-    .wrap-edit {
-        position: absolute;
-        top: 0;
-        z-index: 3;
-        // margin-right: 3px;
-
-
-        .edit {
-            background: var(--black-alt);
-            padding: 0.5rem;
-            border-radius: 5px;
-            color: var((--light));
-            cursor: pointer;
-            border: 1px solid var(--logo-letters);
-
-            &:hover {
-                color: var(--logo-letters);
-                transform: translateY(-0.5rem) scale(1.1, 1.1);
-                transition: 0.2s ease-out;
-            }
-        }
-    }
-
-    .wrap-icon {
-        position: absolute;
-        margin-left: 3rem;
-        top: 0;
-        z-index: 3;
-
-        animation: fade 0.3s ease-in-out;
-
-        @keyframes fade {
-            0% {
-                transform: scale(0);
-            }
-
-            100% {
-                transform: scale(1);
-            }
-        }
-
-
-        .delete {
-            margin-left: 0.5rem;
-            background: var(--black-alt);
-            padding: 00.5rem;
-            border-radius: 5px;
-            color: var((--light));
-            border: 1px solid var(--logo-letters);
-            cursor: pointer;
-
-            &:hover {
-                color: red;
-                transform: translateY(-0.5rem) scale(1.1, 1.1);
-                transition: 0.2s ease-out;
-            }
-        }
-
-        .update {
-            background: var(--black-alt);
-            padding: 00.5rem;
-            border-radius: 5px;
-            color: var((--light));
-            cursor: pointer;
-            border: 1px solid var(--logo-letters);
-
-            &:hover {
-                color: var(--logo-letters);
-                transform: translateY(-0.5rem) scale(1.1, 1.1);
-                transition: 0.2s ease-out;
-            }
-        }
-    }
+   
 
     .card__forms {
         position: fixed;
