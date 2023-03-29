@@ -1,5 +1,5 @@
 <template>
-    <div v-if="store.state.user" >
+    <div v-if="store.state.user">
         <aside :class="`${is_expanded && 'is-expanded'}`">
             <div class="logo">
                 <router-link to="/">
@@ -44,7 +44,6 @@
 
         <div class="closemenu" @click="closeMenu"></div>
     </div>
-
 </template>
 
 <script setup>
@@ -55,20 +54,20 @@ import { useStore } from 'vuex'
 
 const is_expanded = ref(localStorage.getItem("is_expanded") === "true")
 
-const imgSrc = ref('../assets/Logo/logo2.png')
+const imgSrc = ref('/assets/Logo/logo2.png')
 
 
 const ToggleMenu = () => {
     is_expanded.value = !is_expanded.value
 
-    imgSrc.value = is_expanded.value ? '../assets/Logo/logo-UTB-stock.png' : '../assets/Logo/logo2.png'
+    imgSrc.value = is_expanded.value ? '/assets/Logo/logo-UTB-stock.png' : '/assets/Logo/logo2.png'
 
 }
 
 
 const closeMenu = () => {
     is_expanded.value = false
-    imgSrc.value = is_expanded.value ? '../assets/Logo/logo-UTB-stock.png' : '../assets/Logo/logo2.png'
+    imgSrc.value = is_expanded.value ? '/assets/Logo/logo-UTB-stock.png' : '/assets/Logo/logo2.png'
 }
 
 

@@ -73,7 +73,6 @@ import { db } from '../Firebase/firebase.js'
 import { useToast } from 'vue-toastification'
 import { admin, id } from '../admin_auth/index'
 
-
 export default {
 	name: "Card",
 	props: {
@@ -88,12 +87,9 @@ export default {
 		const updateCategory = ref('')
 		const updateName = ref('')
 		const updateImage = ref('')
-		const updateTitle = ref('')
-		const updateTotal = ref(0)
 		const updateUnit = ref('')
 
 		const king = admin
-
 		const auth = id.value
 
 		const updateProducts = async () => {
@@ -105,12 +101,11 @@ export default {
 					image: updateImage.value,
 					unit: updateUnit.value
 				});
-				updateProducts ? updateCategory.value = '' : updateCategory.value = updateCategory.value
-				updateProducts ? updateName.value = '' : updateName.value = updateName.value
-				updateProducts ? updateImage.value = '' : updateImage.value = updateImage.value
-				updateProducts ? updateTitle.value = '' : updateTitle.value = updateTitle.value
-				updateProducts ? updateTotal.value = '' : updateTotal.value = updateTotal.value
-				updateProducts ? updateUnit.value = '' : updateUnit.value = updateUnit.value
+
+				updateCategory.value = ''
+				updateName.value = ''
+				updateImage.value = ''
+				updateUnit.value = ''
 
 				toast.success("Produits modifier")
 
@@ -121,19 +116,16 @@ export default {
 				toast.error('Une erreur est survenue !')
 				console.log(error)
 			}
-
 		}
 
 		const deleteProduct = async () => {
 			try {
 				await deleteDoc(doc(db, "products", props.card.id));
-				toast.success("Produit supprimé avec succes")
+				toast.success("Produit supprimé avec succès")
 
 			} catch (error) {
-				toast.error('Un probleme est survenue')
-
+				toast.error('Un problème est survenu')
 			}
-
 		}
 
 		return {
@@ -143,8 +135,6 @@ export default {
 			updateCategory,
 			updateName,
 			updateImage,
-			updateTitle,
-			updateTotal,
 			updateUnit,
 			updateProducts,
 			deleteProduct,
@@ -152,7 +142,6 @@ export default {
 			king
 		}
 	}
-
 }
 </script>
 

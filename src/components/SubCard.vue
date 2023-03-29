@@ -63,7 +63,6 @@ import { useToast } from 'vue-toastification'
 import { db } from '../Firebase/firebase.js'
 import { admin, id } from '../admin_auth/index'
 
-
 export default {
     name: "SubCard",
     props: {
@@ -74,7 +73,6 @@ export default {
     },
 
     setup(props) {
-
         const route = useRoute()
         const toast = useToast()
         const inputStock = ref()
@@ -89,7 +87,6 @@ export default {
 
         const totalMeters = ref(0)
 
-
         const calculMeters = props.sub.total * props.sub.areameters
 
         const auth = id.value
@@ -97,30 +94,22 @@ export default {
 
         totalMeters.value = calculMeters
 
-
         const updateStocks = async () => {
-
             const stockQ = doc(db, "products", route.params.id, "subproducts", props.sub.id);
             const stockT = doc(db, "products", route.params.id);
 
-
             try {
-
                 await updateDoc(stockT, {
-                    stock: props.total - inputStock.value,
-                    // stockAreaMeters: props.areameters - inputStock.value
+                    stock: props.total - parseInt(inputStock.value),
                 });
+
                 await updateDoc(stockQ, {
-                    total: Math.max(0, props.sub.total - inputStock.value)
+                    total: Math.max(0, props.sub.total - parseInt(inputStock.value))
                 });
-
-
-
-
 
                 toast.success(" Vous avez retirer " + inputStock.value + " " + props.unitValue)
 
-                updateStocks ? inputStock.value = '' : inputStock.value = inputStock.value
+                inputStock.value = ''
 
             } catch (error) {
                 toast.error('Une erreur est survenue')
@@ -128,11 +117,8 @@ export default {
             }
         }
 
-
-
         const updateProduct = async () => {
             const productQ = doc(db, "products", route.params.id, "subproducts", props.sub.id);
-
 
             try {
                 await updateDoc(productQ, {
@@ -143,8 +129,8 @@ export default {
 
                 toast.success("La fourniture a etait mis a jour")
 
-                updateProduct ? updateTitleRef.value = '' : updateTitleRef.value = updateTitleRef.value
-                updateProduct ? updateTotalRef.value = '' : updateTotalRef.value = updateTotalRef.value
+                updateTitleRef.value = ''
+                updateTotalRef.value = ''
 
                 openUpdate.value = false
 
@@ -152,31 +138,21 @@ export default {
                 console.log(error)
                 toast.error('Une erreur est survenue')
             }
-
-
-
         }
 
         const deleteProduct = async () => {
             try {
                 await deleteDoc(doc(db, "products", route.params.id, "subproducts", props.sub.id));
-                toast.success(props.sub.title + " supprimé avec succes ")
-
-
+                toast.success(props.sub.title + " supprimé avec succès ")
 
                 openDeleteModal.value = false
 
-
             } catch (error) {
-                toast.error('Un probleme est survenue')
+                toast.error('Un problème est survenu')
+                openDeleteModal.value = false
                 console.log(error)
-
-
             }
-
         }
-
-
 
         return {
             isOpen,
@@ -192,12 +168,11 @@ export default {
             totalMeters,
             king,
             auth,
-
-
         }
     }
 }
 </script>
+
 
 <style lang="scss" >
 .subpage {

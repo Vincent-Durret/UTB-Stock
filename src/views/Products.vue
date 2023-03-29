@@ -41,7 +41,6 @@
     </div>
 
   </main>
-
 </template>
 
 <script>
@@ -62,25 +61,20 @@ export default {
     Card,
     Search,
   },
-  methods: {
-    goHome() {
-      this.$router.push('/')
-    }
-  },
   setup() {
-    const openForm = ref(false)
-    const toast = useToast()
+    const openForm = ref(false);
     const products = ref([]);
-    const addCategory = ref('')
-    const addName = ref('')
-    const addImage = ref('')
-    const addTitle = ref('')
-    const addUnit = ref('')
+    const addCategory = ref('');
+    const addName = ref('');
+    const addImage = ref('');
+    const addUnit = ref('');
 
-    const king = admin
+    const king = admin;
+    const auth = id.value;
 
-    const auth = id.value
-
+    const goHome = () => {
+      this.$router.push('/');
+    };
 
     const addProducts = async () => {
       await addDoc(collection(db, "products"), {
@@ -89,31 +83,34 @@ export default {
         image: addImage.value,
         unit: addUnit.value,
       });
-      toast.success("Produit créer avec succes")
-      addProducts ? addCategory.value = '' : addCategory.value = addCategory.value
-      addProducts ? addName.value = '' : addName.value = addName.value
-      addProducts ? addImage.value = '' : addImage.value = addImage.value
-      addProducts ? addUnit.value = '' : addUnit.value = addUnit.value
 
-      openForm.value = false
-    }
+      const toast = useToast();
+      toast.success("Produit créé avec succès");
 
+      addCategory.value = '';
+      addName.value = '';
+      addImage.value = '';
+      addUnit.value = '';
 
-    onMounted(async () => {
-      const route = useRoute()
+      openForm.value = false;
+    };
 
-      const q = query(collection(db, "products"), where("category", "==", route.params.category))
+    const fetchProducts = () => {
+      const route = useRoute();
+
+      const q = query(collection(db, "products"), where("category", "==", route.params.category));
 
       onSnapshot(q, (querySnapshot) => {
         const fetchedProducts = [];
 
         querySnapshot.forEach((doc) => {
           fetchedProducts.push({ id: doc.id, ...doc.data() })
-        })
-        products.value = fetchedProducts
+        });
+        products.value = fetchedProducts;
       });
-    })
+    };
 
+    onMounted(fetchProducts);
 
     return {
       openForm,
@@ -121,16 +118,16 @@ export default {
       addCategory,
       addName,
       addImage,
-      addTitle,
       addUnit,
-      addProducts,
       king,
-      auth
-
-    }
-  },
+      auth,
+      goHome,
+      addProducts
+    };
+  }
 }
 </script>
+
 
 <style lang="scss">
 .products-page {
