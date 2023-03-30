@@ -1,7 +1,7 @@
 <template>
   <main class="products-page">
     <div class="return">
-      <span @click="goHome()" class="material-icons back">arrow_back</span>
+      <span @click="$router.back()" class="material-icons back">arrow_back</span>
     </div>
     <div class="wrap-title">
       <h1> {{ $route.params.category.replace(/(?:^|\s|-)\S/g, x => x.toUpperCase()) }} </h1>
@@ -72,9 +72,9 @@ export default {
     const king = admin;
     const auth = id.value;
 
-    const goHome = () => {
-      this.$router.push('/');
-    };
+    // const goHome = () => {
+    //   this.$router.push('/');
+    // };
 
     const addProducts = async () => {
       await addDoc(collection(db, "products"), {
@@ -121,7 +121,6 @@ export default {
       addUnit,
       king,
       auth,
-      goHome,
       addProducts
     };
   }
@@ -131,6 +130,7 @@ export default {
 
 <style lang="scss">
 .products-page {
+  width: 100%;
 
   .return {
     position: relative;
