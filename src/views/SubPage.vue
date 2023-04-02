@@ -16,9 +16,7 @@
         <div v-if="openFormSub" class="app__forms-wrap">
             <div class="app__forms">
                 <div class="app__forms-close">
-                    <span @click="openFormSub = !openFormSub" class="material-icons close">
-                        cancel
-                    </span>
+                    <BtnClose @click="openFormSub = !openFormSub" />
                 </div>
                 <h3 class="app__forms-title">Ajouter une fourniture</h3>
                 <input v-model="addTitleRef" type="text" name="Title" placeholder="Nom de la fourniture">
@@ -42,8 +40,9 @@
 
 <script>
 import SubCard from '../components/SubCard.vue';
-import BtnReturn from '../components/BtnReturn.vue';
-import BtnAdd from '../components/BtnAdd.vue';
+import BtnReturn from '../components/button/BtnReturn.vue';
+import BtnAdd from '../components/button/BtnAdd.vue';
+import BtnClose from '../components/button/BtnClose.vue';
 import { useRoute } from "vue-router"
 import { collection, query, onSnapshot, addDoc, updateDoc, doc, getDoc } from 'firebase/firestore'
 import { db } from '../Firebase/firebase.js'
@@ -56,7 +55,8 @@ export default {
     components: {
         SubCard,
         BtnReturn,
-        BtnAdd
+        BtnAdd,
+        BtnClose
     },
 
     setup() {

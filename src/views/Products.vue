@@ -17,9 +17,7 @@
     <div v-if="openForm" class="app__forms-wrap">
       <div class="app__forms">
         <div class="app__forms-close">
-          <span @click="openForm = !openForm" class="material-icons close">
-            cancel
-          </span>
+          <BtnClose @click="openForm = !openForm" />
         </div>
         <h3 class="app__forms-title">Ajouter une fourniture</h3>
         <select v-model="addCategory" name="product-category" required>
@@ -43,8 +41,9 @@
 import { onMounted, ref } from 'vue';
 import { useRoute } from "vue-router"
 import Card from '../components/Card.vue';
-import BtnReturn from '../components/BtnReturn.vue';
-import BtnAdd from '../components/BtnAdd.vue';
+import BtnReturn from '../components/button/BtnReturn.vue';
+import BtnAdd from '../components/button/BtnAdd.vue';
+import BtnClose from '../components/button/BtnClose.vue';
 import { collection, query, where, onSnapshot, addDoc } from 'firebase/firestore'
 import { db } from '../Firebase/firebase.js'
 import Search from '../components/Search.vue';
@@ -56,9 +55,10 @@ export default {
   name: 'Products',
   components: {
     BtnReturn,
+    BtnAdd,
+    BtnClose,
     Card,
     Search,
-    BtnAdd
   },
   setup() {
     const openForm = ref(false);

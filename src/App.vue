@@ -4,8 +4,6 @@
     <router-view :key="$route.fullPath">
     </router-view>
   </div>
-
-
 </template>
 
 <script>
@@ -206,27 +204,6 @@ button {
           width: 300px;
         }
 
-        .app__forms-close {
-
-          // margin-top: 1rem;
-          .close {
-            position: relative;
-            float: right;
-            background: var(--light);
-            color: var(--logo-letters);
-            padding: 0.3rem;
-            border-radius: 5px;
-            transition: color 0.2s, transform 0.3s;
-            cursor: pointer;
-
-            &:hover {
-              color: red;
-              // transform: scale(1.1, 1.1);
-
-              transition: 0.2s ease-out;
-            }
-          }
-        }
 
         .app__forms-title {
           display: flex;
