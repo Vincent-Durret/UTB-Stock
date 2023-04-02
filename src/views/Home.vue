@@ -6,6 +6,7 @@
       </div>
       <Search />
     </header>
+    <Button label="BITE" type="default" />
     <div class="wrap-card">
       <Card v-for="product in allproducts" :card="product" :key="product.id" />
     </div>
@@ -14,54 +15,48 @@
 </template>
 
 <script>
-
 import { onMounted, ref } from 'vue';
-
-import { collection, onSnapshot, query } from 'firebase/firestore'
-
-import { db } from '../Firebase/firebase.js'
-
+import { collection, getDocs } from 'firebase/firestore';
+import { db } from '../Firebase/firebase.js';
 import Card from '../components/Card.vue';
 import Search from '../components/Search.vue';
 import Footer from '../components/Footer.vue';
-
+import Button from '../components/Button.vue';
 
 export default {
-  name: 'Home',
+  name: 'Accueil',
   components: {
+    Button,
     Card,
     Search,
     Footer
   },
 
   setup() {
+    const allproducts = ref([]);
+
+    const fetchProducts = async () => {
+      try {
+        const querySnapshot = await getDocs(collection(db, 'products'));
+        allproducts.value = querySnapshot.docs.map((doc) => {
+          return { id: doc.id, ...doc.data() };
+        });
+      } catch (error) {
+        console.log('Erreur lors de la récupération des produits', error);
+      }
+    };
 
 
-    const allproducts = ref([])
-
-    onMounted(() => {
-      const q = query(collection(db, 'products'))
-
-
-      onSnapshot(q, (querySnapshot) => {
-        const fetchedProducts = [];
-
-        querySnapshot.forEach((doc) => {
-          fetchedProducts.push({ id: doc.id, ...doc.data() })
-        })
-        allproducts.value = fetchedProducts
-      });
-
-
-    })
+    onMounted(fetchProducts);
 
     return {
       allproducts,
+      isClicked,
+      changeBackgroundColor,
 
-    }
+    };
   },
-
-}
+};
 </script>
 
 <style lang="scss" scoped>
