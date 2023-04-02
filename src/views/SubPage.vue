@@ -2,15 +2,16 @@
     <main class="subcard">
         <BtnReturn />
 
+
+
+
         <div class="wrap-titre">
             <h1> {{ productsName }} </h1>
         </div>
         <p> {{ totalAreaMeters }}</p>
 
         <div v-if="auth === king" class="subpage__add-sub">
-            <span @click="openFormSub = !openFormSub" class="material-icons add">
-                add_circle
-            </span>
+            <BtnAdd @click="openFormSub = !openFormSub" />
         </div>
         <div v-if="openFormSub" class="app__forms-wrap">
             <div class="app__forms">
@@ -42,6 +43,7 @@
 <script>
 import SubCard from '../components/SubCard.vue';
 import BtnReturn from '../components/BtnReturn.vue';
+import BtnAdd from '../components/BtnAdd.vue';
 import { useRoute } from "vue-router"
 import { collection, query, onSnapshot, addDoc, updateDoc, doc, getDoc } from 'firebase/firestore'
 import { db } from '../Firebase/firebase.js'
@@ -53,7 +55,8 @@ export default {
     name: "SubPage",
     components: {
         SubCard,
-        BtnReturn
+        BtnReturn,
+        BtnAdd
     },
 
     setup() {
@@ -73,6 +76,10 @@ export default {
 
         const king = admin
         const auth = id.value
+
+        const testeur = () => {
+            console.log("tu as cliquer")
+        }
 
 
         const dataName = async () => {
@@ -163,7 +170,8 @@ export default {
             totalAreaMeters,
             calculAreaMeters,
             king,
-            auth
+            auth,
+            testeur
 
         }
     },
@@ -189,24 +197,6 @@ export default {
         display: flex;
         justify-content: center;
         margin-bottom: 1rem;
-
-        .add {
-            background: var(--black-alt);
-            padding: 0.5rem;
-            border-radius: 5px;
-            color: var((--light));
-            cursor: pointer;
-            border: 1px solid var(--logo-letters);
-            font-size: 3rem;
-
-
-            &:hover {
-                color: var(--logo-letters);
-                transform: translateY(-0.5rem) scale(1.1, 1.1);
-                transition: 0.2s ease-out;
-            }
-        }
-
     }
 
 

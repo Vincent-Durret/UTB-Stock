@@ -5,9 +5,7 @@
       <h1> {{ $route.params.category.replace(/(?:^|\s|-)\S/g, x => x.toUpperCase()) }} </h1>
     </div>
     <div v-if="auth === king" class="products__add-sub">
-      <span @click="openForm = !openForm" class="material-icons add">
-        add_circle
-      </span>
+      <BtnAdd @click="openForm = !openForm" />
     </div>
     <Search />
     <div class="cards-grid">
@@ -46,6 +44,7 @@ import { onMounted, ref } from 'vue';
 import { useRoute } from "vue-router"
 import Card from '../components/Card.vue';
 import BtnReturn from '../components/BtnReturn.vue';
+import BtnAdd from '../components/BtnAdd.vue';
 import { collection, query, where, onSnapshot, addDoc } from 'firebase/firestore'
 import { db } from '../Firebase/firebase.js'
 import Search from '../components/Search.vue';
@@ -59,6 +58,7 @@ export default {
     BtnReturn,
     Card,
     Search,
+    BtnAdd
   },
   setup() {
     const openForm = ref(false);
