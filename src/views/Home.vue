@@ -6,7 +6,6 @@
       </div>
       <Search />
     </header>
-    <Button label="BITE" type="default" />
     <div class="wrap-card">
       <Card v-for="product in allproducts" :card="product" :key="product.id" />
     </div>
@@ -21,12 +20,10 @@ import { db } from '../Firebase/firebase.js';
 import Card from '../components/Card.vue';
 import Search from '../components/Search.vue';
 import Footer from '../components/Footer.vue';
-import Button from '../components/Button.vue';
 
 export default {
   name: 'Accueil',
   components: {
-    Button,
     Card,
     Search,
     Footer
@@ -51,8 +48,6 @@ export default {
 
     return {
       allproducts,
-      isClicked,
-      changeBackgroundColor,
 
     };
   },

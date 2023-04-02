@@ -1,8 +1,6 @@
 <template>
     <main class="subcard">
-        <div class="return">
-            <span @click="$router.back()" class="material-icons">arrow_back</span>
-        </div>
+        <BtnReturn />
 
         <div class="wrap-titre">
             <h1> {{ productsName }} </h1>
@@ -43,6 +41,7 @@
 
 <script>
 import SubCard from '../components/SubCard.vue';
+import BtnReturn from '../components/BtnReturn.vue';
 import { useRoute } from "vue-router"
 import { collection, query, onSnapshot, addDoc, updateDoc, doc, getDoc } from 'firebase/firestore'
 import { db } from '../Firebase/firebase.js'
@@ -53,7 +52,8 @@ import { admin, id } from '../admin_auth/index'
 export default {
     name: "SubPage",
     components: {
-        SubCard
+        SubCard,
+        BtnReturn
     },
 
     setup() {
@@ -174,34 +174,6 @@ export default {
 .subcard {
     position: relative;
     z-index: 3;
-
-    .return {
-        margin: 1rem;
-
-        .material-icons {
-            background: rgba(0, 0, 0, 0.9);
-            padding: 0.4rem;
-            border-radius: 5px;
-            font-size: 2.5rem;
-            color: var((--light));
-            cursor: pointer;
-            transition: 0.2s;
-            border: 2px solid var(--logo-letters);
-
-            &:hover {
-                color: var(--logo-letters);
-                transform: translateX(-0.5rem) scale(1.1, 1.1);
-                filter: drop-shadow(0px 0px 10px var(--logo-letters));
-                transition: 0.2s ease-out;
-            }
-
-            .button {
-                text-decoration: none;
-            }
-        }
-    }
-
-
 
 
     .wrap-titre {

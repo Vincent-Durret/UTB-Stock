@@ -1,8 +1,6 @@
 <template>
   <main class="products-page">
-    <div class="return">
-      <span @click="$router.back()" class="material-icons back">arrow_back</span>
-    </div>
+    <BtnReturn />
     <div class="wrap-title">
       <h1> {{ $route.params.category.replace(/(?:^|\s|-)\S/g, x => x.toUpperCase()) }} </h1>
     </div>
@@ -47,17 +45,18 @@
 import { onMounted, ref } from 'vue';
 import { useRoute } from "vue-router"
 import Card from '../components/Card.vue';
+import BtnReturn from '../components/BtnReturn.vue';
 import { collection, query, where, onSnapshot, addDoc } from 'firebase/firestore'
 import { db } from '../Firebase/firebase.js'
 import Search from '../components/Search.vue';
 import { useToast } from 'vue-toastification'
-
 import { admin, id } from '../admin_auth/index'
 
 
 export default {
   name: 'Products',
   components: {
+    BtnReturn,
     Card,
     Search,
   },
@@ -71,10 +70,6 @@ export default {
 
     const king = admin;
     const auth = id.value;
-
-    // const goHome = () => {
-    //   this.$router.push('/');
-    // };
 
     const addProducts = async () => {
       await addDoc(collection(db, "products"), {
@@ -132,33 +127,7 @@ export default {
 .products-page {
   width: 100%;
 
-  .return {
-    position: relative;
-    z-index: 1;
-    margin: 1rem;
-  }
 
-  .back {
-    background: rgba(0, 0, 0, 0.9);
-    padding: 0.4rem;
-    border-radius: 5px;
-    font-size: 2.5rem;
-    color: var(--light);
-    cursor: pointer;
-    transition: 0.2s;
-    border: 2px solid var(--logo-letters);
-
-    &:hover {
-      color: var(--logo-letters);
-      filter: drop-shadow(0px 0px 10px var(--logo-letters));
-      transform: translateX(-0.5rem) scale(1.1, 1.1);
-      transition: 0.2s ease-out;
-    }
-
-    .button {
-      text-decoration: none;
-    }
-  }
 
   .wrap-title {
     display: flex;
