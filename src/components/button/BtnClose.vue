@@ -24,8 +24,6 @@ export default {
 
     &:hover {
         color: red;
-        // transform: scale(1.1, 1.1);
-
         transition: 0.2s ease-out;
     }
 }

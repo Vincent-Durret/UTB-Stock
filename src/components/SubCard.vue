@@ -14,24 +14,16 @@
             </div>
         </div>
         <div v-if="auth === king" class="wrap-edit">
-            <span @click="isOpen = !isOpen" class="material-icons edit">
-                mode_edit
-            </span>
+            <BtnEdit @click="isOpen = !isOpen" />
         </div>
         <div v-if="isOpen" class="wrap-icon">
-            <span @click="openUpdate = !openUpdate" class="material-icons update">
-                edit_note
-            </span>
-            <span @click="openDeleteModal = !openDeleteModal" class="material-icons delete">
-                delete
-            </span>
+            <BtnUpdate @click="openUpdate = !openUpdate" />
+            <BtnDelete @click="openDeleteModal = !openDeleteModal" />
         </div>
         <div v-if="openUpdate" class="app__forms-wrap">
             <div class="app__forms">
                 <div class="app__forms-close">
-                    <span @click="openUpdate = !openUpdate" class="material-icons close">
-                        cancel
-                    </span>
+                    <BtnClose @click="openUpdate = !openUpdate" />
                 </div>
                 <h3 class="app__forms-title">Modifier le produit "{{ sub.title }}"</h3>
                 <input v-model="updateTitleRef" type="text" list="nom" :placeholder=sub.title>
@@ -58,13 +50,24 @@
 <script>
 import { ref } from 'vue'
 import { doc, updateDoc, deleteDoc } from "firebase/firestore";
+import BtnEdit from './button/button-edit/BtnEdit.vue';
+import BtnUpdate from './button/button-edit/BtnUpdate.vue';
+import BtnDelete from './button/button-edit/BtnDelete.vue';
+import BtnClose from './button/BtnClose.vue';
 import { useRoute } from "vue-router"
 import { useToast } from 'vue-toastification'
 import { db } from '../Firebase/firebase.js'
 import { admin, id } from '../admin_auth/index'
 
+
 export default {
     name: "SubCard",
+    components: {
+        BtnEdit,
+        BtnUpdate,
+        BtnDelete,
+        BtnClose
+    },
     props: {
         sub: Object,
         total: Number,

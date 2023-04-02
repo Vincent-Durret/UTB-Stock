@@ -10,17 +10,11 @@
 				<h3 class="total">{{ card.stock }} {{ card.stockAreaMeters }} {{ card.unit }} </h3>
 			</router-link>
 			<div v-if="auth === king" class="wrap-edit">
-				<span @click="isOpen = !isOpen" class="material-icons edit">
-					mode_edit
-				</span>
+				<BtnEdit @click="isOpen = !isOpen" />
 			</div>
 			<div v-if="isOpen" class="wrap-icon">
-				<span @click="openUpdate = !openUpdate" class="material-icons update">
-					edit_note
-				</span>
-				<span @click="openDeleteModal = !openDeleteModal" class="material-icons delete">
-					delete
-				</span>
+				<BtnUpdate @click="openUpdate = !openUpdate" />
+				<BtnDelete @click="openDeleteModal = !openDeleteModal" />
 			</div>
 		</div>
 
@@ -39,9 +33,7 @@
 
 			<div class="app__forms">
 				<div class="app__forms-close">
-					<span @click="openUpdate = !openUpdate" class="material-icons close">
-						cancel
-					</span>
+					<BtnClose @click="openUpdate = !openUpdate" />
 				</div>
 				<h3 class="app__forms-title">Modifier le produit "{{ card.name }}"</h3>
 				<input v-model="updateCategory" type="text" list="category" :placeholder=card.category>
@@ -69,12 +61,22 @@
 <script>
 import { ref } from 'vue';
 import { doc, deleteDoc, updateDoc } from "firebase/firestore";
+import BtnEdit from '../components/button/button-edit/BtnEdit.vue';
+import BtnUpdate from '../components/button/button-edit/BtnUpdate.vue';
+import BtnDelete from '../components/button/button-edit/BtnDelete.vue';
+import BtnClose from '../components/button/BtnClose.vue';
 import { db } from '../Firebase/firebase.js'
 import { useToast } from 'vue-toastification'
 import { admin, id } from '../admin_auth/index'
 
 export default {
 	name: "Card",
+	components: {
+		BtnEdit,
+		BtnUpdate,
+		BtnDelete,
+		BtnClose
+	},
 	props: {
 		card: Object,
 	},
