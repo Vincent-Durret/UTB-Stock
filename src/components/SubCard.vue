@@ -8,7 +8,8 @@
                 <h3 class="restant-stock">Stock :</h3>
                 <div v-if="auth === king">
                     <p class="total-stock"> {{ sub.total }} {{ unitValue }} </p>
-                    <p v-if="sub.areameters" class="subcard__total-stock"> {{ totalMeters }} m²</p>
+                    <p v-if="sub.areameters" class="subcard__total-stock"> {{ sub.areameters }} m²</p>
+                    <p class="total-stock">{{ areaMeter }}</p>
                 </div>
                 <p v-else class="total-stock"> {{ sub.total }} {{ unitValue }} </p>
             </div>
@@ -73,6 +74,7 @@ export default {
         total: Number,
         unitValue: String,
         areameter: Number,
+        areaMeter: Number
     },
 
     setup(props) {
@@ -91,11 +93,11 @@ export default {
         const totalMeters = ref(0)
 
         const calculMeters = props.sub.total * props.sub.areameters
+        totalMeters.value = calculMeters
 
         const auth = id.value
         const king = admin
 
-        totalMeters.value = calculMeters
 
         const updateStocks = async () => {
             const stockQ = doc(db, "products", route.params.id, "subproducts", props.sub.id);

@@ -7,7 +7,8 @@
 				<!-- <div v-if="card.category === 'bois'">
 					<h3 v-if="auth === king" class="card__total"> {{ card.stock }} m²</h3>
 				</div> -->
-				<h3 class="total">{{ card.stock }} {{ card.stockAreaMeters }} {{ card.unit }} </h3>
+				<h3 class="total">{{ card.stock }} {{ card.unit }} </h3>
+				<h3 class="total"> {{ card.stockAreaMeters }}</h3>
 			</router-link>
 			<div v-if="auth === king" class="wrap-edit">
 				<BtnEdit @click="isOpen = !isOpen" />

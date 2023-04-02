@@ -1,10 +1,6 @@
 <template>
     <main class="subcard">
         <BtnReturn />
-
-
-
-
         <div class="wrap-titre">
             <h1> {{ productsName }} </h1>
         </div>
@@ -71,7 +67,7 @@ export default {
         const productsInfo = ref([])
         const productsName = ref([])
         const totalAmount = ref(0)
-        const calculAreaMeters = ref([])
+        const calculAreaMeters = []
         const totalAreaMeters = ref(0)
 
         const king = admin
@@ -88,13 +84,9 @@ export default {
             const docSnap = await getDoc(docRef);
 
             if (docSnap.exists()) {
-                // console.log("Document data:", docSnap.data());
                 productsInfo.value = docSnap.data()
                 productsName.value = docSnap.data().name.replace(/(?:^|\s|-)\S/g, x => x.toUpperCase())
-                // console.log(docSnap.data().name.replace(/(?:^|\s|-)\S/g, x => x.toUpperCase()))
             } else {
-                // doc.data() will be undefined in this case
-                // console.log("No such document!");
                 toast.warning("Document non trouver ! veuillez appelez votre developeur.")
             }
         }
@@ -105,22 +97,22 @@ export default {
 
             onSnapshot(q, (querySnapshot) => {
                 const fetchedProducts = [];
-
+                // Videz le tableau calculAreaMeters
+                calculAreaMeters.length = 0;
 
                 querySnapshot.forEach((doc) => {
                     fetchedProducts.push({ id: doc.id, ...doc.data() })
                     const totalMeters = doc.data().total
                     const areaMeters = doc.data().areameters
 
-                    calculAreaMeters.value.push(totalMeters * areaMeters)
+                    calculAreaMeters.push(totalMeters * areaMeters)
                 })
                 subProducts.value = fetchedProducts
-                totalAreaMeters.value = calculAreaMeters.value.reduce((acc, curr) => acc + curr, 0)
+                totalAreaMeters.value = calculAreaMeters.reduce((acc, curr) => acc + curr, 0)
                 totalAmount.value = subProducts.value.reduce((acc, curr) => acc + curr.total, 0)
-                // console.log(totalAreaMeters.value)
             });
-
         }
+
 
         const addSubCollection = async () => {
             const stockQ = doc(db, "products", route.params.id);
@@ -138,9 +130,9 @@ export default {
 
                 toast.success('Fourniture ajoutée')
 
-                addSubCollection ? addTitleRef.value = '' : addTitleRef.value = addTitleRef.value
-                addSubCollection ? addTotalRef.value = '' : addTotalRef.value = addTotalRef.value
-                addSubCollection ? addAreaMeters.value = '' : addAreaMeters.value = addAreaMeters.value
+                addTitleRef.value = ''
+                addTotalRef.value = ''
+                addAreaMeters.value = ''
 
                 openFormSub.value = false
 
