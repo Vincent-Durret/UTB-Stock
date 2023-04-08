@@ -4,7 +4,7 @@
         <div class="wrap-titre">
             <h1> {{ productsName }} </h1>
         </div>
-        <p> {{ totalAreaMeters }}</p>
+        <!-- <p> {{ totalAreaMeters }}</p> -->
 
         <div v-if="auth === king" class="subpage__add-sub">
             <BtnAdd @click="openFormSub = !openFormSub" />

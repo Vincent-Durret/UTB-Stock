@@ -9,7 +9,7 @@
                 <div v-if="auth === king">
                     <p class="total-stock"> {{ sub.total }} {{ unitValue }} </p>
                     <p v-if="sub.areameters" class="subcard__total-stock"> {{ sub.areameters }} m²</p>
-                    <p class="total-stock">{{ areaMeter }}</p>
+                    <!-- <p class="total-stock">{{ areaMeter }}</p> -->
                 </div>
                 <p v-else class="total-stock"> {{ sub.total }} {{ unitValue }} </p>
             </div>
