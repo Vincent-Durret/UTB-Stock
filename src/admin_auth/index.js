@@ -1,21 +1,17 @@
-import { getAuth, onAuthStateChanged} from "firebase/auth";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { ref } from "vue";
 const auth = getAuth();
 
-const admin = 'qO65yLrWwANe3zaYr5EaTmAIRZh2'
+const admin = "qO65yLrWwANe3zaYr5EaTmAIRZh2";
 
-const id = ref('')
+const id = ref("");
 
 onAuthStateChanged(auth, (user) => {
-    if (user) {
+  if (user) {
+    const uid = user.uid;
 
-        const uid = user.uid;
-
-        id.value = uid
-
-    } else {
-
-    }
+    id.value = uid;
+  }
 });
 
-export {admin, id}
+export { admin, id };
