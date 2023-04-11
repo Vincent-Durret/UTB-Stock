@@ -5,7 +5,9 @@
 				<div :style="{ backgroundImage: `url(${card.image})` }" class="image"></div>
 				<span class="text">{{ card.name }}</span>
 				<h3 class="total">{{ card.stock }} {{ card.unit }} </h3>
-				<h3 class="total"> {{ card.stockAreaMeters }}</h3>
+				<div v-if="isAdmin && card.stockMeters" class="wrap__total-meters">
+					<h3 class="total__meters"> {{ card.stockMeters }} m2</h3>
+				</div>
 			</router-link>
 			<div v-if="isAdmin" class="wrap-edit">
 				<BtnEdit @click="isOpen = !isOpen" />
@@ -238,6 +240,21 @@ export default {
 				z-index: 3;
 				color: var(--logo-letters);
 				font-weight: 600;
+			}
+
+			.wrap__total-meters {
+				position: relative;
+				top: 21%;
+
+				.total__meters {
+					background: rgba(0, 0, 0, 0.9);
+					padding: 0.3rem;
+					border-radius: 5px;
+					position: relative;
+					z-index: 3;
+					color: var(--logo-letters);
+					font-weight: 600;
+				}
 			}
 		}
 	}

@@ -1,7 +1,7 @@
 import { createStore } from "vuex";
 import router from "../router";
 import { auth } from "../firebase/firebase.js";
-import { collection, query, where, getDocs } from "firebase/firestore";
+import { collection, query, where, getDocs, addDoc } from "firebase/firestore";
 import { db } from "../firebase/firebase.js";
 import {
   createUserWithEmailAndPassword,

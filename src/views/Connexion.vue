@@ -2,12 +2,12 @@
   <main class="login">
     <section class="forms">
 
-      <!-- <form class="register" @submit.prevent="register">
+      <form class="register" @submit.prevent="register">
         <h2>Inscription pour UTB stock</h2>
         <input type="email" placeholder="Email address" v-model="register_form.email" />
         <input type="password" placeholder="Password" v-model="register_form.password" />
         <input type="submit" value="Register" />
-      </form> -->
+      </form>
 
       <form class="login" @submit.prevent="login">
         <div class="wrap">

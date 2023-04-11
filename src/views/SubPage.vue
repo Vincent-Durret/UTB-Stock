@@ -4,8 +4,6 @@
         <div class="wrap-titre">
             <h1> {{ productsName }} </h1>
         </div>
-        <!-- <p> {{ totalAreaMeters }}</p> -->
-
         <div v-if="isAdmin" class="subpage__add-sub">
             <BtnAdd @click="openFormSub = !openFormSub" />
         </div>
@@ -35,16 +33,16 @@
 </template>
 
 <script>
-import SubCard from '../components/SubCard.vue';
-import BtnReturn from '../components/button/BtnReturn.vue';
-import BtnAdd from '../components/button/BtnAdd.vue';
-import BtnClose from '../components/button/BtnClose.vue';
 import { useRoute } from "vue-router"
 import { collection, query, onSnapshot, addDoc, updateDoc, doc, getDoc } from 'firebase/firestore'
 import { db } from '../Firebase/firebase.js'
 import { ref, onMounted, computed } from 'vue';
 import { useStore } from "vuex";
 import { useToast } from 'vue-toastification'
+import SubCard from '../components/SubCard.vue';
+import BtnReturn from '../components/button/BtnReturn.vue';
+import BtnAdd from '../components/button/BtnAdd.vue';
+import BtnClose from '../components/button/BtnClose.vue';
 
 export default {
     name: "SubPage",
@@ -75,12 +73,6 @@ export default {
         const calculAreaMeters = []
         const totalAreaMeters = ref(0)
 
-
-        const testeur = () => {
-            console.log("tu as cliquer")
-        }
-
-
         const dataName = async () => {
 
             const docRef = doc(db, "products", route.params.id);
@@ -97,39 +89,55 @@ export default {
 
         const makeDataSubProducts = () => {
             const q = query(collection(db, "products", route.params.id, "subproducts"))
+            if (q) {
 
-            onSnapshot(q, (querySnapshot) => {
-                const fetchedProducts = [];
-                // Videz le tableau calculAreaMeters
-                calculAreaMeters.length = 0;
+                onSnapshot(q, (querySnapshot) => {
+                    const fetchedProducts = [];
+                    calculAreaMeters.length = 0;
 
-                querySnapshot.forEach((doc) => {
-                    fetchedProducts.push({ id: doc.id, ...doc.data() })
-                    const totalMeters = doc.data().total
-                    const areaMeters = doc.data().areameters
+                    querySnapshot.forEach((doc) => {
+                        fetchedProducts.push({ id: doc.id, ...doc.data() })
+                        const totalMeters = doc.data().total
+                        const areaMeters = doc.data().areameters
 
-                    calculAreaMeters.push(totalMeters * areaMeters)
-                })
-                subProducts.value = fetchedProducts
-                totalAreaMeters.value = calculAreaMeters.reduce((acc, curr) => acc + curr, 0)
-                totalAmount.value = subProducts.value.reduce((acc, curr) => acc + curr.total, 0)
-            });
+                        calculAreaMeters.push(totalMeters * areaMeters)
+                    })
+                    subProducts.value = fetchedProducts
+                    totalAreaMeters.value = calculAreaMeters.reduce((acc, curr) => acc + curr, 0)
+                    totalAmount.value = subProducts.value.reduce((acc, curr) => acc + curr.total, 0)
+                });
+            } else {
+                toast.warning("Document non trouver ! veuillez appelez votre developeur.")
+            }
         }
 
 
         const addSubCollection = async () => {
             const stockQ = doc(db, "products", route.params.id);
             try {
-                await addDoc(collection(db, "products", route.params.id, "subproducts"), {
-                    title: addTitleRef.value,
-                    total: addTotalRef.value,
-                    areameters: addAreaMeters.value
-                });
 
-                await updateDoc(stockQ, {
-                    stock: totalAmount.value,
-                    stockAreaMeters: totalAreaMeters.value
-                });
+                if (route.params.category === wood) {
+
+                    await addDoc(collection(db, "products", route.params.id, "subproducts"), {
+                        title: addTitleRef.value,
+                        total: addTotalRef.value,
+                        areameters: addAreaMeters.value
+                    });
+
+                    await updateDoc(stockQ, {
+                        stock: totalAmount.value,
+                        stockMeters: totalAreaMeters.value
+                    });
+                } else {
+                    await addDoc(collection(db, "products", route.params.id, "subproducts"), {
+                        title: addTitleRef.value,
+                        total: addTotalRef.value,
+                    });
+
+                    await updateDoc(stockQ, {
+                        stock: totalAmount.value,
+                    });
+                }
 
                 toast.success('Fourniture ajoutée')
 
@@ -167,7 +175,6 @@ export default {
             productsName,
             totalAreaMeters,
             calculAreaMeters,
-            testeur
 
         }
     },

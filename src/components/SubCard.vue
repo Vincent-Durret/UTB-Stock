@@ -6,10 +6,10 @@
                 <input v-model="inputStock" type="number" placeholder="Quantités" />
                 <button @click="updateStocks()" class="bouton-subpage">Envoyer</button>
                 <h3 class="restant-stock">Stock :</h3>
-                <div v-if="isAdmin">
+                <div v-if="isAdmin && sub.areameters">
                     <p class="total-stock"> {{ sub.total }} {{ unitValue }} </p>
-                    <p v-if="sub.areameters" class="subcard__total-stock"> {{ sub.areameters }} m²</p>
-                    <!-- <p class="total-stock">{{ areaMeter }}</p> -->
+                    <p v-if="sub.areameters" class="subcard__total-stock"> {{ totalMeters }} m²</p>
+                    <p>{{ areaMeter }}</p>
                 </div>
                 <p v-else class="total-stock"> {{ sub.total }} {{ unitValue }} </p>
             </div>
@@ -100,29 +100,48 @@ export default {
         totalMeters.value = calculMeters
 
 
-
         const updateStocks = async () => {
             const stockQ = doc(db, "products", route.params.id, "subproducts", props.sub.id);
             const stockT = doc(db, "products", route.params.id);
 
             try {
-                await updateDoc(stockT, {
-                    stock: props.total - parseInt(inputStock.value),
-                });
+                const updatedTotal = Math.max(0, props.sub.total - parseInt(inputStock.value));
+                const updatedTotalMeters = totalMeters.value;
+                if (route.params.category === "bois") {
+                    await updateDoc(stockQ, {
+                        total: updatedTotal,
+                        totalMeters: updatedTotalMeters,
+                    });
 
-                await updateDoc(stockQ, {
-                    total: Math.max(0, props.sub.total - parseInt(inputStock.value))
-                });
+                    // Mettre à jour le stock total en fonction des changements du sous-produit
+                    await updateDoc(stockT, {
+                        stock: props.total - (props.sub.total - updatedTotal),
+                        stockMeters: props.areaMeter + (updatedTotalMeters - props.sub.totalMeters),
+                    });
 
-                toast.success(" Vous avez retirer " + inputStock.value + " " + props.unitValue)
+                    toast.success(" Vous avez retirer " + inputStock.value + " " + props.unitValue);
+                    inputStock.value = '';
+                } else {
 
-                inputStock.value = ''
+                    await updateDoc(stockQ, {
+                        total: updatedTotal,
+                    });
+
+                    // Mettre à jour le stock total en fonction des changements du sous-produit
+                    await updateDoc(stockT, {
+                        stock: props.total - (props.sub.total - updatedTotal),
+                    });
+                }
+
+                toast.success(" Vous avez retirer " + inputStock.value + " " + props.unitValue);
+                inputStock.value = '';
 
             } catch (error) {
-                toast.error('Une erreur est survenue')
-                console.log(error)
+                toast.error('Une erreur est survenue');
+                console.log(error);
             }
-        }
+        };
+
 
         const updateProduct = async () => {
             const productQ = doc(db, "products", route.params.id, "subproducts", props.sub.id);

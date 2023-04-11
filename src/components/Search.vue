@@ -1,9 +1,10 @@
 <template>
     <div class="search__wrap">
         <input v-model="user_search_item" type="search" placeholder="Rechercher">
+
         <div class="search">
             <router-link class="search__link" v-for="(product, i) in search_item" :key="i"
-            :to="`/${product.category}/${product.id}`">
+                :to="`/${product.category}/${product.id}`">
                 <div class="search__box-wrap">
                     <p class="search__name"> {{ product.name.replace(/(?:^|\s|-)\S/g, x => x.toUpperCase()) }} </p>
                 </div>
@@ -11,17 +12,13 @@
         </div>
     </div>
     <div class="closed" @click="isClosed"></div>
-
-
 </template>
 
 <script>
 import { onMounted, ref, watch } from 'vue';
-
 import { collection, onSnapshot, query } from 'firebase/firestore'
 import { db } from '../Firebase/firebase.js'
-
-
+import { useToast } from 'vue-toastification'
 
 
 export default {
@@ -32,20 +29,28 @@ export default {
         const user_search_item = ref('')
         const search_item = ref([])
 
-        onMounted(async () => {
-            const q = query(collection(db, 'products'))
+
+        const productItems = () => {
+            const toast = useToast()
+
+            const docSnap = query(collection(db, 'products'))
 
 
-            onSnapshot(q, (querySnapshot) => {
-                const fetchedProducts = [];
+            if (docSnap) {
 
-                querySnapshot.forEach((doc) => {
-                    fetchedProducts.push({ id: doc.id, ...doc.data() })
+                onSnapshot(docSnap, (querySnapshot) => {
+                    const fetchedProducts = [];
+
+                    querySnapshot.forEach((doc) => {
+                        fetchedProducts.push({ id: doc.id, ...doc.data() })
+                    })
+                    allitem.value = fetchedProducts
                 })
-                allitem.value = fetchedProducts
-            })
+            } else {
+                toast.warning("Document non trouver ! veuillez appelez votre developeur.")
+            }
+        }
 
-        })
 
         watch(user_search_item, new_value => {
 
@@ -60,14 +65,18 @@ export default {
 
         const isClosed = () => {
             user_search_item.value = ''
+            search_item.value = []
+            console.log('tu as clicker')
         }
-        
+
+        onMounted(productItems)
+
 
 
         return {
             user_search_item,
             search_item,
-            isClosed
+            isClosed,
         }
 
     },
@@ -179,7 +188,7 @@ export default {
 }
 
 .closed {
-    position:fixed;
+    position: fixed;
     top: 0;
     height: 100%;
     width: 94vw;
