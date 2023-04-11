@@ -4,7 +4,7 @@
     <div class="wrap-title">
       <h1> {{ $route.params.category.replace(/(?:^|\s|-)\S/g, x => x.toUpperCase()) }} </h1>
     </div>
-    <div v-if="auth === king" class="products__add-sub">
+    <div v-if="isAdmin" class="products__add-sub">
       <BtnAdd @click="openForm = !openForm" />
     </div>
     <Search />
@@ -38,17 +38,17 @@
 </template>
 
 <script>
-import { onMounted, ref } from 'vue';
+import { onMounted, ref, computed } from 'vue';
 import { useRoute } from "vue-router"
+import { collection, query, where, onSnapshot, addDoc } from 'firebase/firestore';
+import { db } from '../Firebase/firebase.js'
+import { useToast } from 'vue-toastification'
+import { useStore } from "vuex";
+import Search from '../components/Search.vue';
 import Card from '../components/Card.vue';
 import BtnReturn from '../components/button/BtnReturn.vue';
 import BtnAdd from '../components/button/BtnAdd.vue';
 import BtnClose from '../components/button/BtnClose.vue';
-import { collection, query, where, onSnapshot, addDoc } from 'firebase/firestore'
-import { db } from '../Firebase/firebase.js'
-import Search from '../components/Search.vue';
-import { useToast } from 'vue-toastification'
-import { admin, id } from '../admin_auth/index'
 
 
 export default {
@@ -61,6 +61,10 @@ export default {
     Search,
   },
   setup() {
+    const store = useStore();
+    const user = computed(() => store.state.user);
+    const userRole = computed(() => store.state.userRole);
+    const isAdmin = computed(() => userRole.value === "admin");
     const openForm = ref(false);
     const products = ref([]);
     const addCategory = ref('');
@@ -68,8 +72,6 @@ export default {
     const addImage = ref('');
     const addUnit = ref('');
 
-    const king = admin;
-    const auth = id.value;
 
     const addProducts = async () => {
       await addDoc(collection(db, "products"), {
@@ -106,17 +108,18 @@ export default {
     };
 
     onMounted(fetchProducts);
-
     return {
+      user,
+      userRole,
+      isAdmin,
       openForm,
       products,
       addCategory,
       addName,
       addImage,
       addUnit,
-      king,
-      auth,
-      addProducts
+      addProducts,
+
     };
   }
 }

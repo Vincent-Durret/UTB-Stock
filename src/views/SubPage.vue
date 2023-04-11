@@ -6,7 +6,7 @@
         </div>
         <!-- <p> {{ totalAreaMeters }}</p> -->
 
-        <div v-if="auth === king" class="subpage__add-sub">
+        <div v-if="isAdmin" class="subpage__add-sub">
             <BtnAdd @click="openFormSub = !openFormSub" />
         </div>
         <div v-if="openFormSub" class="app__forms-wrap">
@@ -42,9 +42,9 @@ import BtnClose from '../components/button/BtnClose.vue';
 import { useRoute } from "vue-router"
 import { collection, query, onSnapshot, addDoc, updateDoc, doc, getDoc } from 'firebase/firestore'
 import { db } from '../Firebase/firebase.js'
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, computed } from 'vue';
+import { useStore } from "vuex";
 import { useToast } from 'vue-toastification'
-import { admin, id } from '../admin_auth/index'
 
 export default {
     name: "SubPage",
@@ -56,6 +56,11 @@ export default {
     },
 
     setup() {
+
+        const store = useStore();
+        const user = computed(() => store.state.user);
+        const userRole = computed(() => store.state.userRole);
+        const isAdmin = computed(() => userRole.value === "admin");
         const route = useRoute()
         const toast = useToast()
         const openFormSub = ref(false)
@@ -70,8 +75,6 @@ export default {
         const calculAreaMeters = []
         const totalAreaMeters = ref(0)
 
-        const king = admin
-        const auth = id.value
 
         const testeur = () => {
             console.log("tu as cliquer")
@@ -149,6 +152,9 @@ export default {
 
 
         return {
+            user,
+            userRole,
+            isAdmin,
             openFormSub,
             addTitleRef,
             addTotalRef,
@@ -161,8 +167,6 @@ export default {
             productsName,
             totalAreaMeters,
             calculAreaMeters,
-            king,
-            auth,
             testeur
 
         }

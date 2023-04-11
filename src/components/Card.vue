@@ -4,13 +4,10 @@
 			<router-link class="button" :to="`/${card.category}/${card.id}`">
 				<div :style="{ backgroundImage: `url(${card.image})` }" class="image"></div>
 				<span class="text">{{ card.name }}</span>
-				<!-- <div v-if="card.category === 'bois'">
-					<h3 v-if="auth === king" class="card__total"> {{ card.stock }} m²</h3>
-				</div> -->
 				<h3 class="total">{{ card.stock }} {{ card.unit }} </h3>
 				<h3 class="total"> {{ card.stockAreaMeters }}</h3>
 			</router-link>
-			<div v-if="auth === king" class="wrap-edit">
+			<div v-if="isAdmin" class="wrap-edit">
 				<BtnEdit @click="isOpen = !isOpen" />
 			</div>
 			<div v-if="isOpen" class="wrap-icon">
@@ -60,7 +57,8 @@
 </template>
 
 <script>
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
+import { useStore } from "vuex";
 import { doc, deleteDoc, updateDoc } from "firebase/firestore";
 import BtnEdit from '../components/button/button-edit/BtnEdit.vue';
 import BtnUpdate from '../components/button/button-edit/BtnUpdate.vue';
@@ -68,7 +66,6 @@ import BtnDelete from '../components/button/button-edit/BtnDelete.vue';
 import BtnClose from '../components/button/BtnClose.vue';
 import { db } from '../Firebase/firebase.js'
 import { useToast } from 'vue-toastification'
-import { admin, id } from '../admin_auth/index'
 
 export default {
 	name: "Card",
@@ -83,6 +80,10 @@ export default {
 	},
 
 	setup(props) {
+		const store = useStore();
+		const user = computed(() => store.state.user);
+		const userRole = computed(() => store.state.userRole);
+		const isAdmin = computed(() => userRole.value === "admin");
 		const toast = useToast()
 		const isOpen = ref(false)
 		const openUpdate = ref(false)
@@ -92,8 +93,7 @@ export default {
 		const updateImage = ref('')
 		const updateUnit = ref('')
 
-		const king = admin
-		const auth = id.value
+
 
 		const updateProducts = async () => {
 			const stockQ = doc(db, "products", props.card.id);
@@ -132,6 +132,9 @@ export default {
 		}
 
 		return {
+			user,
+			userRole,
+			isAdmin,
 			isOpen,
 			openUpdate,
 			openDeleteModal,
@@ -141,8 +144,6 @@ export default {
 			updateUnit,
 			updateProducts,
 			deleteProduct,
-			auth,
-			king
 		}
 	}
 }

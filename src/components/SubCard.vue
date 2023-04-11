@@ -6,7 +6,7 @@
                 <input v-model="inputStock" type="number" placeholder="Quantités" />
                 <button @click="updateStocks()" class="bouton-subpage">Envoyer</button>
                 <h3 class="restant-stock">Stock :</h3>
-                <div v-if="auth === king">
+                <div v-if="isAdmin">
                     <p class="total-stock"> {{ sub.total }} {{ unitValue }} </p>
                     <p v-if="sub.areameters" class="subcard__total-stock"> {{ sub.areameters }} m²</p>
                     <!-- <p class="total-stock">{{ areaMeter }}</p> -->
@@ -14,7 +14,7 @@
                 <p v-else class="total-stock"> {{ sub.total }} {{ unitValue }} </p>
             </div>
         </div>
-        <div v-if="auth === king" class="wrap-edit">
+        <div v-if="isAdmin" class="wrap-edit">
             <BtnEdit @click="isOpen = !isOpen" />
         </div>
         <div v-if="isOpen" class="wrap-icon">
@@ -49,7 +49,8 @@
 
 
 <script>
-import { ref } from 'vue'
+import { ref, computed } from 'vue';
+import { useStore } from "vuex";
 import { doc, updateDoc, deleteDoc } from "firebase/firestore";
 import BtnEdit from './button/button-edit/BtnEdit.vue';
 import BtnUpdate from './button/button-edit/BtnUpdate.vue';
@@ -58,7 +59,6 @@ import BtnClose from './button/BtnClose.vue';
 import { useRoute } from "vue-router"
 import { useToast } from 'vue-toastification'
 import { db } from '../Firebase/firebase.js'
-import { admin, id } from '../admin_auth/index'
 
 
 export default {
@@ -78,6 +78,10 @@ export default {
     },
 
     setup(props) {
+        const store = useStore();
+        const user = computed(() => store.state.user);
+        const userRole = computed(() => store.state.userRole);
+        const isAdmin = computed(() => userRole.value === "admin");
         const route = useRoute()
         const toast = useToast()
         const inputStock = ref()
@@ -95,8 +99,6 @@ export default {
         const calculMeters = props.sub.total * props.sub.areameters
         totalMeters.value = calculMeters
 
-        const auth = id.value
-        const king = admin
 
 
         const updateStocks = async () => {
@@ -160,6 +162,9 @@ export default {
         }
 
         return {
+            user,
+            userRole,
+            isAdmin,
             isOpen,
             openUpdate,
             openDeleteModal,
@@ -171,8 +176,6 @@ export default {
             updateProduct,
             deleteProduct,
             totalMeters,
-            king,
-            auth,
         }
     }
 }

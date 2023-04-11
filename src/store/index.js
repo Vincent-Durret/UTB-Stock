@@ -1,6 +1,8 @@
 import { createStore } from "vuex";
 import router from "../router";
 import { auth } from "../firebase/firebase.js";
+import { collection, query, where, getDocs } from "firebase/firestore";
+import { db } from "../firebase/firebase.js";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -13,19 +15,23 @@ const toast = useToast();
 export default createStore({
   state: {
     user: null,
-    loggedIn: false
+    loggedIn: false,
+    userRole: null,
   },
   mutations: {
     SET_USER(state, user) {
       state.user = user;
+    },
+    SET_USER_ROLE(state, role) {
+      state.userRole = role;
     },
 
     CLEAR_USER(state) {
       state.user = null;
     },
     AUTH_PERCISTANCE(state, loggedIn) {
-      state.loggedIn = loggedIn
-    }
+      state.loggedIn = loggedIn;
+    },
   },
   actions: {
     async login({ commit }, details) {
@@ -58,8 +64,26 @@ export default createStore({
       const { email, password } = details;
 
       try {
-        await createUserWithEmailAndPassword(auth, email, password);
+        const userCredential = await createUserWithEmailAndPassword(
+          auth,
+          email,
+          password
+        );
+        const user = userCredential.user;
+
+        await addDoc(collection(db, "users"), {
+          uid: user.uid,
+          email: user.email,
+          role: "standard",
+        });
+
+        console.log("Document utilisateur ajouté avec succès");
       } catch (error) {
+        console.error(
+          "Erreur lors de la création de l'utilisateur ou de l'ajout du document utilisateur: ",
+          error
+        );
+
         switch (error.code) {
           case "auth/email-already-in-use":
             alert("Email already in use");
@@ -82,7 +106,31 @@ export default createStore({
 
       commit("SET_USER", auth.currentUser);
 
-      router.push("/");
+      router.push("/connexion");
+    },
+
+    async setUser({ commit }, user) {
+      if (user) {
+        commit("SET_USER", user);
+
+        const userQuery = query(
+          collection(db, "users"),
+          where("uid", "==", user.uid)
+        );
+        const querySnapshot = await getDocs(userQuery);
+
+        if (!querySnapshot.empty) {
+          const userDocSnap = querySnapshot.docs[0];
+          const userData = userDocSnap.data();
+          commit("SET_USER_ROLE", userData.role);
+        } else {
+          console.log("Aucun document utilisateur trouvé");
+          toast.error("Aucun utilisateur trouver !");
+        }
+      } else {
+        commit("SET_USER", null);
+        commit("SET_USER_ROLE", null);
+      }
     },
 
     async logout({ commit }) {
@@ -95,12 +143,12 @@ export default createStore({
       router.push("/connexion");
     },
 
-    fetchUser({ commit }) {
+    fetchUser({ dispatch }) {
       auth.onAuthStateChanged(async (user) => {
         if (user === null) {
-          commit("CLEAR_USER");
+          dispatch("setUser", null);
         } else {
-          commit("SET_USER", user);
+          dispatch("setUser", user);
 
           if (
             router.isReady() &&
