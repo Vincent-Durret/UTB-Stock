@@ -127,6 +127,7 @@ export default {
 			try {
 				await deleteDoc(doc(db, "products", props.card.id));
 				toast.success("Produit supprimé avec succès")
+				openDeleteModal.value = false
 
 			} catch (error) {
 				toast.error('Un problème est survenu')

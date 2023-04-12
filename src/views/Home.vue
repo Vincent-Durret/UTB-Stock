@@ -15,7 +15,7 @@
 
 <script>
 import { onMounted, ref } from 'vue';
-import { collection, getDocs } from 'firebase/firestore';
+import { collection, query, onSnapshot } from 'firebase/firestore';
 import { db } from '../Firebase/firebase.js';
 import Card from '../components/Card.vue';
 import Search from '../components/Search.vue';
@@ -32,15 +32,27 @@ export default {
   setup() {
     const allproducts = ref([]);
 
-    const fetchProducts = async () => {
-      try {
-        const querySnapshot = await getDocs(collection(db, 'products'));
-        allproducts.value = querySnapshot.docs.map((doc) => {
-          return { id: doc.id, ...doc.data() };
+    // const fetchProducts = async () => {
+    //   try {
+    //     const querySnapshot = await getDocs(collection(db, 'products'));
+    //     allproducts.value = querySnapshot.docs.map((doc) => {
+    //       return { id: doc.id, ...doc.data() };
+    //     });
+    //   } catch (error) {
+    //     console.log('Erreur lors de la récupération des produits', error);
+    //   }
+    // };
+    const fetchProducts = () => {
+
+      const q = query(collection(db, "products"));
+      onSnapshot(q, (querySnapshot) => {
+        const fetchedProducts = [];
+
+        querySnapshot.forEach((doc) => {
+          fetchedProducts.push({ id: doc.id, ...doc.data() })
         });
-      } catch (error) {
-        console.log('Erreur lors de la récupération des produits', error);
-      }
+        allproducts.value = fetchedProducts;
+      });
     };
 
 
