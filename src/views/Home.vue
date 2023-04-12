@@ -15,7 +15,7 @@
 
 <script>
 import { onMounted, ref } from 'vue';
-import { collection, query, onSnapshot } from 'firebase/firestore';
+import { collection, query, onSnapshot, orderBy } from 'firebase/firestore';
 import { db } from '../Firebase/firebase.js';
 import Card from '../components/Card.vue';
 import Search from '../components/Search.vue';
@@ -44,7 +44,7 @@ export default {
     // };
     const fetchProducts = () => {
 
-      const q = query(collection(db, "products"));
+      const q = query(collection(db, "products"), orderBy("stock", "desc"));
       onSnapshot(q, (querySnapshot) => {
         const fetchedProducts = [];
 
