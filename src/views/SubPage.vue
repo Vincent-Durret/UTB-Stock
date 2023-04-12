@@ -77,12 +77,18 @@ export default {
 
             const docRef = doc(db, "products", route.params.id);
             const docSnap = await getDoc(docRef);
+            try {
+                if (docSnap.exists()) {
+                    productsInfo.value = docSnap.data()
+                    productsName.value = docSnap.data().name.replace(/(?:^|\s|-)\S/g, x => x.toUpperCase())
+                } else {
+                    toast.warning("Document non trouver ! veuillez appelez votre developeur.")
+                }
 
-            if (docSnap.exists()) {
-                productsInfo.value = docSnap.data()
-                productsName.value = docSnap.data().name.replace(/(?:^|\s|-)\S/g, x => x.toUpperCase())
-            } else {
+            } catch (error) {
+                console.log(error)
                 toast.warning("Document non trouver ! veuillez appelez votre developeur.")
+
             }
         }
 
@@ -90,6 +96,7 @@ export default {
         const makeDataSubProducts = () => {
             const q = query(collection(db, "products", route.params.id, "subproducts"))
             if (q) {
+
 
                 onSnapshot(q, (querySnapshot) => {
                     const fetchedProducts = [];
@@ -103,6 +110,7 @@ export default {
                         calculAreaMeters.push(totalMeters * areaMeters)
                     })
                     subProducts.value = fetchedProducts
+
                     totalAreaMeters.value = calculAreaMeters.reduce((acc, curr) => acc + curr, 0)
                     totalAmount.value = subProducts.value.reduce((acc, curr) => acc + curr.total, 0)
                 });

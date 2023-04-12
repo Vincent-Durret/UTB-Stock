@@ -49,7 +49,7 @@
 
 
 <script>
-import { ref, computed } from 'vue';
+import { ref, computed, watchEffect } from 'vue';
 import { useStore } from "vuex";
 import { doc, updateDoc, deleteDoc } from "firebase/firestore";
 import BtnEdit from './button/button-edit/BtnEdit.vue';
@@ -74,7 +74,8 @@ export default {
         total: Number,
         unitValue: String,
         areameter: Number,
-        areaMeter: Number
+        areaMeter: Number,
+        testing: Number,
     },
 
     setup(props) {
@@ -96,8 +97,10 @@ export default {
 
         const totalMeters = ref(0)
 
-        const calculMeters = props.sub.total * props.sub.areameters
-        totalMeters.value = calculMeters
+        watchEffect(() => {
+            const calculMeters = props.sub.total * props.sub.areameters;
+            totalMeters.value = calculMeters;
+        });
 
 
         const updateStocks = async () => {
@@ -106,21 +109,20 @@ export default {
 
             try {
                 const updatedTotal = Math.max(0, props.sub.total - parseInt(inputStock.value));
-                const updatedTotalMeters = totalMeters.value;
+                const updatedTotalMeters = updatedTotal * props.sub.areameters;
                 if (route.params.category === "bois") {
                     await updateDoc(stockQ, {
                         total: updatedTotal,
                         totalMeters: updatedTotalMeters,
                     });
-
                     // Mettre à jour le stock total en fonction des changements du sous-produit
                     await updateDoc(stockT, {
                         stock: props.total - (props.sub.total - updatedTotal),
                         stockMeters: props.areaMeter + (updatedTotalMeters - props.sub.totalMeters),
                     });
 
-                    toast.success(" Vous avez retirer " + inputStock.value + " " + props.unitValue);
-                    inputStock.value = '';
+
+
                 } else {
 
                     await updateDoc(stockQ, {
@@ -179,6 +181,8 @@ export default {
                 console.log(error)
             }
         }
+
+
 
         return {
             user,
