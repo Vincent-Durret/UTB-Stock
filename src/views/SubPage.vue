@@ -21,9 +21,6 @@
             </div>
         </div>
 
-
-
-
         <div class="wrap-card">
             <SubCard v-for="product in subProducts" :sub="product" :unitValue="productsInfo.unit" :total="totalAmount"
                 :areaMeter="totalAreaMeters" :key="product.id" />

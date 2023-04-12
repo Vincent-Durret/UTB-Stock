@@ -121,8 +121,6 @@ export default {
                         stockMeters: props.areaMeter + (updatedTotalMeters - props.sub.totalMeters),
                     });
 
-
-
                 } else {
 
                     await updateDoc(stockQ, {
