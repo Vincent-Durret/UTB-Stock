@@ -34,6 +34,7 @@
       </div>
     </div>
 
+
   </main>
 </template>
 
@@ -51,6 +52,7 @@ import BtnAdd from '../components/button/BtnAdd.vue';
 import BtnClose from '../components/button/BtnClose.vue';
 
 
+
 export default {
   name: 'Products',
   components: {
@@ -59,6 +61,7 @@ export default {
     BtnClose,
     Card,
     Search,
+
   },
   setup() {
     const store = useStore();

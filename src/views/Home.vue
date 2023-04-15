@@ -9,7 +9,6 @@
     <div class="wrap-card">
       <Card v-for="product in allproducts" :card="product" :key="product.id" />
     </div>
-    <Footer />
   </main>
 </template>
 
@@ -19,29 +18,17 @@ import { collection, query, onSnapshot, orderBy } from 'firebase/firestore';
 import { db } from '../Firebase/firebase.js';
 import Card from '../components/Card.vue';
 import Search from '../components/Search.vue';
-import Footer from '../components/Footer.vue';
 
 export default {
   name: 'Accueil',
   components: {
     Card,
     Search,
-    Footer
   },
 
   setup() {
     const allproducts = ref([]);
 
-    // const fetchProducts = async () => {
-    //   try {
-    //     const querySnapshot = await getDocs(collection(db, 'products'));
-    //     allproducts.value = querySnapshot.docs.map((doc) => {
-    //       return { id: doc.id, ...doc.data() };
-    //     });
-    //   } catch (error) {
-    //     console.log('Erreur lors de la récupération des produits', error);
-    //   }
-    // };
     const fetchProducts = () => {
 
       const q = query(collection(db, "products"), orderBy("stock", "desc"));

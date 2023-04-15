@@ -1,20 +1,52 @@
 <template>
-    <footer>
-        <div class="wrap-title">
-            <h3> Made by Vincent.D</h3>
-        </div>
+    <footer ref="footer" class="footer">
         <div class="wrap">
-            <p>© {{currentYear}} Univers Terrasses Bois Stock</p>
+            <p class="year" ref="year">© {{ currentYear }} Univers Terrasses Bois Stock</p>
+        </div>
+        <div class="wrap-title">
+            <h3 class="title" ref="title"> Made by Vincent.D</h3>
         </div>
     </footer>
 </template>
 
 <script>
+import { ref, onMounted, onUnmounted } from 'vue';
 export default {
     name: "Footer",
     data() {
         return {
-            currentYear: new Date().getFullYear(), 
+            currentYear: new Date().getFullYear(),
+        };
+    },
+    setup() {
+        const footer = ref(null);
+        const year = ref(null)
+        const title = ref(null)
+
+        const handleScroll = () => {
+            const scrollPosition = window.pageYOffset;
+            if (scrollPosition > 50) {
+                footer.value.style.padding = '0.3rem'; // Réduire la hauteur ici
+                year.value.style.padding = '0.2rem';
+
+            } else {
+                footer.value.style.padding = '0.5rem'; // Hauteur initiale ici
+                year.value.style.padding = '1rem';
+            }
+        };
+
+        onMounted(() => {
+            window.addEventListener('scroll', handleScroll);
+        });
+
+        onUnmounted(() => {
+            window.removeEventListener('scroll', handleScroll);
+        });
+
+        return {
+            footer,
+            year,
+            title
         };
     }
 
@@ -22,44 +54,50 @@ export default {
 </script>
 
 <style lang="scss">
-footer {
-    position: relative;
+.footer {
+    position: fixed;
+    width: 100%;
     bottom: 0;
+    left: 0;
+    z-index: 4;
     background-color: var(--black-alt);
     padding: 1rem;
-    margin-top: 2rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    flex-direction: row-reverse;
-    overflow: auto;
+    transition: all 0.3s ease-in;
 
-    .wrap-title {
-
-
-        h3 {
-            color: var(--light);
-        }
-
-        @media (max-width: 760px) {
-            margin-left: 1rem;;
-        }
-    }
 
     .wrap {
+        margin-left: 4rem;
 
-
-        p {
+        .year {
             background-color: var(--logo-letters);
             padding: 1rem;
             color: var(--black);
             border-radius: 5px;
             font-weight: bold;
+            transition: all 0.3s ease-in;
 
             @media (max-width: 760px) {
-                padding: 0.5rem;
+                padding: 0.9rem;
             }
 
+        }
+    }
+
+    .wrap-title {
+
+
+        .title {
+            color: var(--light);
+            transition: all 0.3s ease-in;
+            font-size: 1rem;
+        }
+
+        @media (max-width: 760px) {
+            margin-left: 1rem;
+            ;
         }
     }
 

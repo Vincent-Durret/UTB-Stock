@@ -3,14 +3,17 @@
     <SideBar />
     <router-view :key="$route.fullPath">
     </router-view>
+    <Footer />
   </div>
 </template>
 
 <script>
 import SideBar from '../src/components/SideBar.vue';
+import Footer from './components/Footer.vue';
 export default {
   components: {
     SideBar,
+    Footer
   },
 }
 
@@ -86,11 +89,13 @@ button {
     flex: 1 1 0;
     padding-left: 4rem;
     padding-top: 2rem;
+    margin-bottom: 3rem;
 
 
     @media (max-width: 760px) {
       padding-left: 3.8rem;
       padding-top: 2rem;
+      margin-bottom: 4.5rem;
     }
 
     .wrap-edit {
