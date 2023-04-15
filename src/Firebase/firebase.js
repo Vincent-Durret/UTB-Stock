@@ -1,31 +1,25 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
-import { getAuth, setPersistence, signInWithEmailAndPassword, browserSessionPersistence } from "firebase/auth";
-
+import {
+  getAuth,
+  setPersistence,
+  signInWithEmailAndPassword,
+  browserSessionPersistence,
+} from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCyRyUyuuVCs6eEs-U1l3h09R11LQtU-VM",
-  authDomain: "utb-stock.firebaseapp.com",
-  projectId: "utb-stock",
-  storageBucket: "utb-stock.appspot.com",
-  messagingSenderId: "1017476624667",
-  appId: "1:1017476624667:web:3ff490257dcb33505c23be",
-  measurementId: "G-MZCJEL5WNJ",
+  apiKey: "AIzaSyCLTG2xEzh34HiOqew2uRY6_REBJw77Ltw",
+  authDomain: "utb-stock-3850e.firebaseapp.com",
+  projectId: "utb-stock-3850e",
+  storageBucket: "utb-stock-3850e.appspot.com",
+  messagingSenderId: "481647239273",
+  appId: "1:481647239273:web:0d4e557c30cce3e827c2f8",
 };
 
 const app = initializeApp(firebaseConfig);
 
-
 const db = getFirestore(app);
 
 const auth = getAuth(app);
-
-// setPersistence(firebase.auth.Auth.Persistence.LOCAL)
-// .then(function() {
-// return signInWithEmailAndPassword(auth, email, password);
-// })
-// .catch(function(error) {
-// console.error(error);
-// });
 
 export { db, auth };
