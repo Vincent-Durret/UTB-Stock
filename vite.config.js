@@ -10,4 +10,7 @@ export default defineConfig({
       path: "path-browserify",
     },
   },
+  build: {
+    chunkSizeWarningLimit: 1600,
+  },
 });
