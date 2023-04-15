@@ -9,7 +9,7 @@
                 <div v-if="isAdmin && sub.areameters">
                     <p class="total-stock"> {{ sub.total }} {{ unitValue }} </p>
                     <p v-if="sub.areameters" class="subcard__total-stock"> {{ totalMeters }} m²</p>
-                    <p>{{ areaMeter }}</p>
+
                 </div>
                 <p v-else class="total-stock"> {{ sub.total }} {{ unitValue }} </p>
             </div>
