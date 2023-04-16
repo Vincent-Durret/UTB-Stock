@@ -8,7 +8,7 @@
                 <h3 class="restant-stock">Stock :</h3>
                 <div v-if="isAdmin && sub.areameters">
                     <p class="total-stock"> {{ sub.total }} {{ unitValue }} </p>
-                    <p v-if="sub.areameters" class="subcard__total-stock"> {{ totalMeters }} m²</p>
+                    <p v-if="sub.areameters" class="subcard__total-stock"> {{ totalMeters.toFixed(3) }} m²</p>
 
                 </div>
                 <p v-else class="total-stock"> {{ sub.total }} {{ unitValue }} </p>
@@ -51,7 +51,8 @@
 <script>
 import { ref, computed, watchEffect } from 'vue';
 import { useStore } from "vuex";
-import { doc, updateDoc, deleteDoc, getDoc } from "firebase/firestore";
+import { doc, updateDoc, deleteDoc } from "firebase/firestore";
+import { runTransaction } from "firebase/firestore";
 import BtnEdit from './button/button-edit/BtnEdit.vue';
 import BtnUpdate from './button/button-edit/BtnUpdate.vue';
 import BtnDelete from './button/button-edit/BtnDelete.vue';
@@ -121,6 +122,7 @@ export default {
                         stockMeters: props.areaMeter + (updatedTotalMeters - props.sub.totalMeters),
                     });
 
+
                 } else {
 
                     await updateDoc(stockQ, {
@@ -131,6 +133,7 @@ export default {
                     await updateDoc(stockT, {
                         stock: props.total - (props.sub.total - updatedTotal),
                     });
+
                 }
 
                 toast.success(" Vous avez retirer " + inputStock.value + " " + props.unitValue);
@@ -166,39 +169,91 @@ export default {
             }
         }
 
+        // const deleteProduct = async () => {
+        //     try {
+        //         const stockT = doc(db, "products", route.params.id);
+        //         const stockQ = doc(db, "products", route.params.id, "subproducts", props.sub.id);
+        //         const updatedTotal = Math.max(0, props.sub.total - parseInt(inputStock.value));
+        //         const updatedTotalMeters = updatedTotal * props.sub.areameters;
+        //         // Mettre à jour le stock total en fonction de la suppression du sous-produit
+        //         if (route.params.category === "bois") {
+        //             await updateDoc(stockT, {
+        //                 stock: props.total - props.sub.total,
+        //                 stockMeters: props.areaMeter - props.sub.totalMeters,
+        //             });
+
+        //             await updateDoc(stockQ, {
+        //                 totalMeters: updatedTotalMeters,
+        //             });
+        //             console.log("Bonne route")
+        //         } else {
+        //             await updateDoc(stockT, {
+        //                 stock: props.total - props.sub.total,
+        //             });
+        //         }
+
+        //         await deleteDoc(doc(db, "products", route.params.id, "subproducts", props.sub.id));
+        //         toast.success(props.sub.title + " supprimé avec succès ");
+
+        //         openDeleteModal.value = false;
+        //     } catch (error) {
+        //         toast.error('Un problème est survenu');
+        //         openDeleteModal.value = false;
+        //         console.log(error);
+        //     }
+        // };
+
+        // const deleteProduct = async () => {
+        //     try {
+        //         await deleteDoc(doc(db, "products", route.params.id, "subproducts", props.sub.id));
+        //         toast.success(props.sub.title + " supprimé avec succès ")
+
+        //         openDeleteModal.value = false
+
+        //     } catch (error) {
+        //         toast.error('Un problème est survenu')
+        //         openDeleteModal.value = false
+        //         console.log(error)
+        //     }
+        // }
+
         const deleteProduct = async () => {
-            const productRef = doc(db, "products", route.params.id);
-            const subProductRef = doc(db, "products", route.params.id, "subproducts", props.sub.id);
-
             try {
-                // Récupérer le sous-produit
-                const subProductSnap = await getDoc(subProductRef);
-                const subProductData = subProductSnap.data();
+                const stockT = doc(db, "products", route.params.id);
+                const stockQ = doc(db, "products", route.params.id, "subproducts", props.sub.id);
 
-                // Récupérer le produit principal
-                const productSnap = await getDoc(productRef);
-                const productData = productSnap.data();
+                await runTransaction(db, async (transaction) => {
+                    const stockTDoc = await transaction.get(stockT);
 
-                // Mettre à jour le stock total du produit principal
-                const updatedStock = productData.stock - subProductData.total;
-                const updatedStockMeters = productData.stockMeters - subProductData.totalMeters;
-                await updateDoc(productRef, {
-                    stock: updatedStock,
-                    stockMeters: updatedStockMeters,
+                    if (!stockTDoc.exists()) {
+                        throw new Error("Document not found");
+                    }
+
+                    const newStock = props.total - props.sub.total;
+                    const newStockMeters = props.areaMeter - props.sub.totalMeters;
+
+                    if (route.params.category === "bois") {
+                        transaction.update(stockT, {
+                            stock: newStock,
+                            stockMeters: newStockMeters,
+                        });
+                    } else {
+                        transaction.update(stockT, {
+                            stock: newStock,
+                        });
+                    }
+
+                    transaction.delete(stockQ);
                 });
 
-                // Supprimer le sous-produit
-                await deleteDoc(subProductRef);
-
-                toast.success("Le sous-produit a été supprimé avec succès");
+                toast.success(props.sub.title + " supprimé avec succès ");
                 openDeleteModal.value = false;
-
             } catch (error) {
-                toast.error("Une erreur est survenue lors de la suppression du sous-produit");
-                console.error(error);
+                toast.error('Un problème est survenu');
+                openDeleteModal.value = false;
+                console.log(error);
             }
         };
-
 
 
         return {

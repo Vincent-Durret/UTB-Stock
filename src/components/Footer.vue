@@ -26,11 +26,15 @@ export default {
         const handleScroll = () => {
             const scrollPosition = window.pageYOffset;
             if (scrollPosition > 50) {
-                footer.value.style.padding = '0.3rem'; // Réduire la hauteur ici
+                footer.value.style.display = 'none';
+                footer.value.style.padding = '0.3rem';
                 year.value.style.padding = '0.2rem';
 
             } else {
-                footer.value.style.padding = '0.5rem'; // Hauteur initiale ici
+                footer.value.style.display = 'flex'; // Réduire la hauteur ici
+
+                footer.value.style.padding = '0.5rem';
+
                 year.value.style.padding = '1rem';
             }
         };

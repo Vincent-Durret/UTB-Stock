@@ -6,7 +6,7 @@
 				<span class="text">{{ card.name }}</span>
 				<h3 class="total">{{ card.stock }} {{ card.unit }} </h3>
 				<div v-if="isAdmin && card.stockMeters" class="wrap__total-meters">
-					<h3 class="total__meters"> {{ card.stockMeters }} m2</h3>
+					<h3 class="total__meters"> {{ card.stockMeters.toFixed(3) }} m2</h3>
 				</div>
 			</router-link>
 			<div v-if="isAdmin" class="wrap-edit">
