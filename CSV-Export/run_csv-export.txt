@@ -1,0 +1,4 @@
+@echo off
+node CSV-Export\export-csv.mjs
+pause
+

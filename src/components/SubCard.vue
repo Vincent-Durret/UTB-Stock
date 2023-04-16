@@ -51,7 +51,7 @@
 <script>
 import { ref, computed, watchEffect } from 'vue';
 import { useStore } from "vuex";
-import { doc, updateDoc, deleteDoc } from "firebase/firestore";
+import { doc, updateDoc, deleteDoc, getDoc } from "firebase/firestore";
 import BtnEdit from './button/button-edit/BtnEdit.vue';
 import BtnUpdate from './button/button-edit/BtnUpdate.vue';
 import BtnDelete from './button/button-edit/BtnDelete.vue';
@@ -167,18 +167,37 @@ export default {
         }
 
         const deleteProduct = async () => {
-            try {
-                await deleteDoc(doc(db, "products", route.params.id, "subproducts", props.sub.id));
-                toast.success(props.sub.title + " supprimé avec succès ")
+            const productRef = doc(db, "products", route.params.id);
+            const subProductRef = doc(db, "products", route.params.id, "subproducts", props.sub.id);
 
-                openDeleteModal.value = false
+            try {
+                // Récupérer le sous-produit
+                const subProductSnap = await getDoc(subProductRef);
+                const subProductData = subProductSnap.data();
+
+                // Récupérer le produit principal
+                const productSnap = await getDoc(productRef);
+                const productData = productSnap.data();
+
+                // Mettre à jour le stock total du produit principal
+                const updatedStock = productData.stock - subProductData.total;
+                const updatedStockMeters = productData.stockMeters - subProductData.totalMeters;
+                await updateDoc(productRef, {
+                    stock: updatedStock,
+                    stockMeters: updatedStockMeters,
+                });
+
+                // Supprimer le sous-produit
+                await deleteDoc(subProductRef);
+
+                toast.success("Le sous-produit a été supprimé avec succès");
+                openDeleteModal.value = false;
 
             } catch (error) {
-                toast.error('Un problème est survenu')
-                openDeleteModal.value = false
-                console.log(error)
+                toast.error("Une erreur est survenue lors de la suppression du sous-produit");
+                console.error(error);
             }
-        }
+        };
 
 
 
