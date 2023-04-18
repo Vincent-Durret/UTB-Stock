@@ -32,9 +32,7 @@ async function sendEmail() {
   }
 }
 
-// const cronSchedule = "0 0 1,15 * *"; // Exécuter la tâche le 1er et le 15 du mois à 00:00
-
-const cronSchedule = "* * * * *"; // Exécuter la tâche toutes les minutes
+const cronSchedule = "0 0 30 * *"; // Exécuter la tâche à minuit (00:00) le 30e jour de chaque mois
 
 cron.schedule(cronSchedule, () => {
   console.log("Exécution de la tâche programmée");

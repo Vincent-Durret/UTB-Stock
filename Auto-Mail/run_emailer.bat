@@ -1,1 +1,3 @@
-node email-sender.mjs
+@echo off
+ node email-sender.mjs
+pause
