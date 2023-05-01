@@ -7,9 +7,11 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "seed": "node src/DB/seed.js"
+    "seed": "node src/DB/seed.js",
+    "mail": "node Mail + CSV/csv-auto-mail.js"
   },
   "dependencies": {
+    "cron-parser": "^4.8.1",
     "csv-writer": "^1.6.0",
     "firebase": "^9.9.2",
     "firebase-admin": "^11.6.0",

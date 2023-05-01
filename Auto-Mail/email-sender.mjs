@@ -1,6 +1,7 @@
 // email-sender.mjs
 import nodemailer from "nodemailer";
 import cron from "node-cron";
+import fs from "fs/promises";
 
 const transporter = nodemailer.createTransport({
   service: "gmail",
@@ -10,7 +11,7 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-async function sendEmail() {
+export async function sendCSVEmail() {
   const mailOptions = {
     from: "vincent.durret@gmail.com", // Remplacez par votre adresse e-mail
     to: "universterrassesbois@gmail.com", // Remplacez par l'adresse e-mail du destinataire
@@ -19,7 +20,7 @@ async function sendEmail() {
     attachments: [
       {
         filename: "stockUTB.csv",
-        path: "../CSV-Export/stockUTB.csv", // Chemin du fichier CSV sur votre disque local
+        path: "./stockUTB.csv", // Chemin du fichier CSV sur votre disque local
       },
     ],
   };
@@ -31,10 +32,3 @@ async function sendEmail() {
     console.error("Erreur lors de l'envoi de l'e-mail:", error);
   }
 }
-
-const cronSchedule = "0 0 30 * *"; // Exécuter la tâche à minuit (00:00) le 30e jour de chaque mois
-
-cron.schedule(cronSchedule, () => {
-  console.log("Exécution de la tâche programmée");
-  sendEmail();
-});
