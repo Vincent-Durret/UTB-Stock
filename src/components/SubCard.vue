@@ -146,15 +146,21 @@ export default {
         };
 
 
+
         const updateProduct = async () => {
             const productQ = doc(db, "products", route.params.id, "subproducts", props.sub.id);
 
+            let updateData = {
+                title: updateTitleRef.value,
+                total: updateTotalRef.value
+            };
+
+            if (updateAreaMetersRef.value !== undefined) {
+                updateData.areameters = updateAreaMetersRef.value;
+            }
+
             try {
-                await updateDoc(productQ, {
-                    title: updateTitleRef.value,
-                    total: updateTotalRef.value,
-                    areameters: updateAreaMetersRef.value
-                });
+                await updateDoc(productQ, updateData);
 
                 toast.success("La fourniture a etait mis a jour")
 
@@ -166,56 +172,10 @@ export default {
             } catch (error) {
                 console.log(error)
                 toast.error('Une erreur est survenue')
+                console.log("Error updating document: ", error)
             }
         }
 
-        // const deleteProduct = async () => {
-        //     try {
-        //         const stockT = doc(db, "products", route.params.id);
-        //         const stockQ = doc(db, "products", route.params.id, "subproducts", props.sub.id);
-        //         const updatedTotal = Math.max(0, props.sub.total - parseInt(inputStock.value));
-        //         const updatedTotalMeters = updatedTotal * props.sub.areameters;
-        //         // Mettre à jour le stock total en fonction de la suppression du sous-produit
-        //         if (route.params.category === "bois") {
-        //             await updateDoc(stockT, {
-        //                 stock: props.total - props.sub.total,
-        //                 stockMeters: props.areaMeter - props.sub.totalMeters,
-        //             });
-
-        //             await updateDoc(stockQ, {
-        //                 totalMeters: updatedTotalMeters,
-        //             });
-        //             console.log("Bonne route")
-        //         } else {
-        //             await updateDoc(stockT, {
-        //                 stock: props.total - props.sub.total,
-        //             });
-        //         }
-
-        //         await deleteDoc(doc(db, "products", route.params.id, "subproducts", props.sub.id));
-        //         toast.success(props.sub.title + " supprimé avec succès ");
-
-        //         openDeleteModal.value = false;
-        //     } catch (error) {
-        //         toast.error('Un problème est survenu');
-        //         openDeleteModal.value = false;
-        //         console.log(error);
-        //     }
-        // };
-
-        // const deleteProduct = async () => {
-        //     try {
-        //         await deleteDoc(doc(db, "products", route.params.id, "subproducts", props.sub.id));
-        //         toast.success(props.sub.title + " supprimé avec succès ")
-
-        //         openDeleteModal.value = false
-
-        //     } catch (error) {
-        //         toast.error('Un problème est survenu')
-        //         openDeleteModal.value = false
-        //         console.log(error)
-        //     }
-        // }
 
         const deleteProduct = async () => {
             try {
@@ -277,7 +237,7 @@ export default {
 </script>
 
 
-<style lang="scss" >
+<style lang="scss">
 .subpage {
     position: relative;
 

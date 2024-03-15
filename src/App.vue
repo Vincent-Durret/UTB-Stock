@@ -3,17 +3,14 @@
     <SideBar />
     <router-view :key="$route.fullPath">
     </router-view>
-    <Footer />
   </div>
 </template>
 
 <script>
 import SideBar from '../src/components/SideBar.vue';
-import Footer from './components/Footer.vue';
 export default {
   components: {
     SideBar,
-    Footer
   },
 }
 
