@@ -4,7 +4,7 @@
             <div class="sub-wrap">
                 <h2 class="title-subpage">{{ sub.title }} : </h2>
                 <input v-model="inputStock" type="number" placeholder="Quantités" />
-                <button @click="updateStocks()" class="bouton-subpage">Envoyer</button>
+                <button @click="updateStocks()" :disabled="!inputStock" class="bouton-subpage">Envoyer</button>
                 <h3 class="restant-stock">Stock :</h3>
                 <div v-if="isAdmin && sub.areameters">
                     <p class="total-stock"> {{ sub.total }} {{ unitValue }} </p>
@@ -27,7 +27,7 @@
                     <BtnClose @click="openUpdate = !openUpdate" />
                 </div>
                 <h3 class="app__forms-title">Modifier le produit "{{ sub.title }}"</h3>
-                <input v-model="updateTitleRef" type="text" list="nom" :placeholder=sub.title>
+                <input v-model="updateTitleRef" type="text" list="nom">
                 <input v-model="updateTotalRef" type="number" :placeholder=sub.total>
                 <input v-if="$route.params.category === 'bois'" v-model="updateAreaMetersRef" type="number"
                     :placeholder="sub.areameters">
@@ -92,7 +92,7 @@ export default {
         const openUpdate = ref(false)
         const openDeleteModal = ref(false)
 
-        const updateTitleRef = ref('')
+        const updateTitleRef = ref(props.sub.title)
         const updateTotalRef = ref()
         const updateAreaMetersRef = ref()
 
@@ -107,6 +107,8 @@ export default {
         const updateStocks = async () => {
             const stockQ = doc(db, "products", route.params.id, "subproducts", props.sub.id);
             const stockT = doc(db, "products", route.params.id);
+
+
 
             try {
                 const updatedTotal = Math.max(0, props.sub.total - parseInt(inputStock.value));
@@ -123,6 +125,8 @@ export default {
                     });
 
 
+
+
                 } else {
 
                     await updateDoc(stockQ, {
@@ -133,6 +137,7 @@ export default {
                     await updateDoc(stockT, {
                         stock: props.total - (props.sub.total - updatedTotal),
                     });
+
 
                 }
 
@@ -258,14 +263,12 @@ export default {
             flex-direction: column;
             transition: border 0.2s ease-in;
             border: 2px solid var(--black);
-            // filter: drop-shadow(0px 0px 15px var(--logo-letters));
 
 
 
             .title-subpage {
                 font-size: 2rem;
                 color: var(--black-alt);
-                // line-height: 3.5rem;
             }
 
 
@@ -332,19 +335,10 @@ export default {
             border-radius: 5px;
             width: 400px;
 
-            // @media (max-width: 768px) {
-            // 	left: 20.5%;
-            // 	width: 18rem;
-            // }
-
-            // @media (min-width: 768px) {
-            // 	left: 25%;
-            // }
 
 
             .wrap-close {
 
-                // margin-top: 1rem;
                 .close {
                     position: relative;
                     float: right;
@@ -357,7 +351,6 @@ export default {
 
                     &:hover {
                         color: red;
-                        // transform: scale(1.1, 1.1);
 
                         transition: 0.2s ease-out;
                     }
@@ -365,7 +358,6 @@ export default {
             }
 
             h3 {
-                // margin-top: 1rem;
                 display: flex;
                 justify-content: center;
                 color: var(--light);
