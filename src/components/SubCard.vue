@@ -4,12 +4,15 @@
             <div class="sub-wrap">
                 <h2 class="title-subpage">{{ sub.title }} : </h2>
                 <input v-model="inputStock" type="number" placeholder="Quantités" />
-                <button @click="updateStocks()" :disabled="!inputStock" class="bouton-subpage">Envoyer</button>
+                <div class="wrap__bouton-subpage">
+                    <button @click="updateStocks(false)" :disabled="!inputStock" class="bouton-subpage">-</button>
+                    <button @click="updateStocks(true)" :disabled="!inputStock" class="bouton-subpage">+</button>
+
+                </div>
                 <h3 class="restant-stock">Stock :</h3>
                 <div v-if="isAdmin && sub.areameters">
                     <p class="total-stock"> {{ sub.total }} {{ unitValue }} </p>
                     <p v-if="sub.areameters" class="subcard__total-stock"> {{ totalMeters.toFixed(3) }} m²</p>
-
                 </div>
                 <p v-else class="total-stock"> {{ sub.total }} {{ unitValue }} </p>
             </div>
@@ -29,8 +32,7 @@
                 <h3 class="app__forms-title">Modifier le produit "{{ sub.title }}"</h3>
                 <input v-model="updateTitleRef" type="text" list="nom">
                 <input v-model="updateTotalRef" type="number" :placeholder=sub.total>
-                <input v-if="$route.params.category === 'bois'" v-model="updateAreaMetersRef" type="number"
-                    :placeholder="sub.areameters">
+                <input v-if="$route.params.category === 'bois'" v-model="updateAreaMetersRef" type="number">
                 <button class="app__btn" @click="updateProduct()">Mettre a jour</button>
             </div>
         </div>
@@ -94,7 +96,7 @@ export default {
 
         const updateTitleRef = ref(props.sub.title)
         const updateTotalRef = ref()
-        const updateAreaMetersRef = ref()
+        const updateAreaMetersRef = ref(props.sub.areameters)
 
         const totalMeters = ref(0)
 
@@ -104,46 +106,42 @@ export default {
         });
 
 
-        const updateStocks = async () => {
+        const updateStocks = async (increment) => {
             const stockQ = doc(db, "products", route.params.id, "subproducts", props.sub.id);
             const stockT = doc(db, "products", route.params.id);
 
-
-
             try {
-                const updatedTotal = Math.max(0, props.sub.total - parseInt(inputStock.value));
+                const changeAmount = parseInt(inputStock.value);
+                const updatedTotal = increment
+                    ? props.sub.total + changeAmount
+                    : Math.max(0, props.sub.total - changeAmount);
                 const updatedTotalMeters = updatedTotal * props.sub.areameters;
+
                 if (route.params.category === "bois") {
                     await updateDoc(stockQ, {
                         total: updatedTotal,
                         totalMeters: updatedTotalMeters,
                     });
-                    // Mettre à jour le stock total en fonction des changements du sous-produit
+
+                    const stockChange = props.sub.total - updatedTotal;
                     await updateDoc(stockT, {
-                        stock: props.total - (props.sub.total - updatedTotal),
+                        stock: increment ? props.total + changeAmount : props.total - stockChange,
                         stockMeters: props.areaMeter + (updatedTotalMeters - props.sub.totalMeters),
                     });
-
-
-
-
                 } else {
-
                     await updateDoc(stockQ, {
                         total: updatedTotal,
                     });
 
-                    // Mettre à jour le stock total en fonction des changements du sous-produit
+                    const stockChange = props.sub.total - updatedTotal;
                     await updateDoc(stockT, {
-                        stock: props.total - (props.sub.total - updatedTotal),
+                        stock: increment ? props.total + changeAmount : props.total - stockChange,
                     });
-
-
                 }
 
-                toast.success(" Vous avez retirer " + inputStock.value + " " + props.unitValue);
+                const action = increment ? "ajouté" : "retiré";
+                toast.success(`Vous avez ${action} ${inputStock.value} ${props.unitValue}`);
                 inputStock.value = '';
-
             } catch (error) {
                 toast.error('Une erreur est survenue');
                 console.log(error);
@@ -271,21 +269,26 @@ export default {
                 color: var(--black-alt);
             }
 
+            .wrap__bouton-subpage {
+                display: flex;
+                justify-content: space-around;
+                width: 50%;
 
+                .bouton-subpage {
+                    margin-top: 10px;
+                    border-radius: 5px;
+                    background-color: var(--black);
+                    padding: 10px;
+                    color: var(--light);
+                    transition: background 0.2s ease;
+                    font-size: 1rem;
+                    font-weight: 700;
 
-            .bouton-subpage {
-                margin-top: 10px;
-                border-radius: 5px;
-                background-color: var(--black);
-                padding: 10px;
-                color: var(--light);
-                transition: background 0.2s ease;
-                font-size: 1rem;
-                font-weight: 700;
-
-                &:hover {
-                    color: var(--logo-letters);
+                    &:hover {
+                        color: var(--logo-letters);
+                    }
                 }
+
             }
 
             .restant-stock {
